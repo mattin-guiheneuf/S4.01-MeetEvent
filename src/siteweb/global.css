@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins-Regular", Helvetica;
+}
+
+.nav-bar {
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-gap: 10px;
+    position: relative;
+    height: 71px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    padding-top: 1%;
+}
+
+.logo-mtvnt {
+    grid-column: 3;
+    font-weight: 400;
+    color: #000000;
+    font-size: 18px;
+    letter-spacing: 0;
+}
+
+.contact {
+    grid-column: 9;
+    font-weight: 400;
+    color: #000000;
+    font-size: 18px;
+    letter-spacing: 0;
+}
+
+.connexion {
+    grid-column: 10;
+}
+
+.hero{
+   height: auto;
+   display: grid;
+   grid-template-columns: 1fr 7fr 1fr;
+}
+
+footer {
+    position: relative;
+    height: 727px;
+    background-color: transparent;
+}
