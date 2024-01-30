@@ -7,6 +7,7 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
+        $data = htmlentities($data);
         return $data;
     }
 
@@ -20,43 +21,45 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
 
     //Vérification de l'adresse mail
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: connexion.php?error=valid email is required");
+        header("Location: connexion.php?sign-up_error&error=Une adresse mail valide est requise");
         exit();
     }
     //Vérification du pseudo
     else if (empty($pseudo)) {
-        header("Location: connexion.php?error=Pseudo is required");
+        header("Location: connexion.php?sign-up_error&error=Votre pseudo est requis");
         exit();
     }
     //Vérification de la date de naissance
     else if (empty($dateNaiss)) {
-        header("Location: connexion.php?error=Date de Naissance is required");
+        header("Location: connexion.php?sign-up_error&error=Votre date de Naissance est requise");
         exit();
     }
     //Vérification de la ville
     else if (empty($ville)) {
-        header("Location: connexion.php?error=Ville is required");
+        header("Location: connexion.php?sign-up_error&error=Votre ville est requise");
         exit();
     }
     //Vérification du code postal
     else if (empty($cp)) {
-        header("Location: connexion.php?error=Code postal is required");
+        header("Location: connexion.php?sign-up_error&error=Votre code postal est requis");
         exit();
     }
     //Vérification du mot de passe
     else if (strlen($mdp) < 8) {
-        header("Location: connexion.php?error=Password must be at least 8 characters");
+        header("Location: connexion.php?sign-up_error&error=Votre mot de passe doit contenir au moins 8 caractères");
         exit();
     } else if (!preg_match("/[a-z]/i", $mdp)) {
-        header("Location: connexion.php?error=Password must contain at least one letter");
+        header("Location: connexion.php?sign-up_error&error=Votre mot de passe doit contenir au moins 1 lettre");
         exit();
     } else if (!preg_match("/[0-9]/i", $mdp)) {
-        header("Location: connexion.php?error=Password must contain at least one number");
+        header("Location: connexion.php?sign-up_error&error=Votre mot de passe doit contenir au moins 1 chiffre");
         exit();
     }
     else {
         /* $password_hash = password_hash($_POST["mdp"], PASSWORD_DEFAULT); */
-
+        // Clé de chiffrement (la clé doit être sécurisée et confidentielle)
+        $crypt_key = "MaCleSecrete123";
+        
         $mysqli = require "../gestionBD/database.php";
         //Insérer dans la base de donnée
         $sql = "INSERT INTO Utilisateur(nom,prenom, adrMail, trancheAge, description, situation, MotDePasse) VALUES (?,'Dupont', ?, '> 45', 'NULL', 'NULL',?)";
@@ -67,14 +70,15 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
             die("SQL error: " . $mysqli->error);
         }
 
+        $passwd = openssl_encrypt($_POST["mdp"], "AES-256-CBC", $crypt_key, 0, "1234567890123456");
 
-        $stmt->bind_param("sss", $_POST["pseudo"], $_POST["email"], $_POST["mdp"]);
+        $stmt->bind_param("sss", $_POST["pseudo"], $_POST["email"], $passwd);
         if ($stmt->execute()) {
             header("Location: connexion.php");
             exit;
         } else {
             if ($mysqli->errno === 80) {
-                die("email already taken");
+                die("Pseudo déjà utilisé");
             } else {
                 die($mysqli->error . " " . $mysqli->errno);
             }

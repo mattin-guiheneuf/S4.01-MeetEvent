@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $data = trim($data);
             $data = stripslashes($data);
             $data = htmlspecialchars($data);
+            $data = htmlentities($data);
             return $data;
         }
 
@@ -16,12 +17,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mdp = validate($_POST["mdp"]);
 
         if(empty($email)){
-            header("Location: connexion.php?error=Email is required");
+            header("Location: connexion.php?error=L'addresse mail est requise");
             exit();
         }else if (empty($mdp)){
-            header("Location: connexion.php?error=Mot de passe is required");
+            header("Location: connexion.php?error=Le mot de passe est requis");
             exit();
         }else{
+
+            // Clé de chiffrement (la clé doit être sécurisée et confidentielle)
+            $crypt_key = "MaCleSecrete123";
+
             $mysqli = require "../gestionBD/database.php";
 
             $sql = sprintf("SELECT * FROM Utilisateur WHERE adrMail = '%s'", $mysqli->real_escape_string($_POST["email"]));
@@ -31,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $user = $result->fetch_assoc();
 
             if ($user) {
-                /* if(password_verify($_POST["mdp"], $user["MotDePasse"])){ */if($_POST["mdp"]===$user["MotDePasse"]){
+                if($_POST["mdp"]===openssl_decrypt($user["MotDePasse"], "AES-256-CBC", $crypt_key, 0, "1234567890123456")){/* if(password_verify($_POST["mdp"], $user["MotDePasse"])){ *//* if($_POST["mdp"]===$user["MotDePasse"]){ */
 
                     session_start();
 
@@ -73,19 +78,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <p class="error"><?php echo $_GET['error']; ?></p>
     <?php } ?>
 
-    <div class="container <?php if(isset($_POST["sign-up"])) { echo "active"; } ?>" id="container">
+    <div class="container <?php if(isset($_GET["sign-up_error"])) { echo "active"; } ?>" id="container">
         <div class="form-container sign-up">
             <form action="enregistrement.php" method="post" novalidate>
                 <h1>Rejoignez nous</h1>
                 <input type="email" placeholder="Email" name="email" value="<?= htmlspecialchars( $_POST["email"] ?? "") ?>">
-                <input type="text" placeholder="Identifiant" name="pseudo" value="<?= htmlspecialchars( $_POST["pseudo"] ?? "") ?>">
+                <input type="text" placeholder="Pseudo" name="pseudo" value="<?= htmlspecialchars( $_POST["pseudo"] ?? "") ?>">
                 <input type="datetime" placeholder="Date de Naissance (dd/mm/aaaa)" name="dateNaiss" value="<?= htmlspecialchars( $_POST["dateNaiss"] ?? "") ?>">
                 <div style="display: flex;gap:10px;">
                     <span><input type="text" placeholder="Ville" name="ville" value="<?= htmlspecialchars( $_POST["ville"] ?? "") ?>"></span>
                     <span><input type="text" placeholder="Code Postal" name="cp" value="<?= htmlspecialchars( $_POST["cp"] ?? "") ?>"></span>
                 </div>
                 <input type="password" placeholder="Mot de passe" name="mdp" value="<?= htmlspecialchars( $_POST["mdp"] ?? "") ?>">
-                <input type="hidden" name="sign-up">
+                
                 <button type="submit">Je m'inscrit</button>
             </form>
         </div>

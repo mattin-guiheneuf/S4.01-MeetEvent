@@ -195,3 +195,13 @@ body{
 .container.active .toggle-right{
     transform: translateX(200%);
 }
+
+.error{
+    position: absolute;
+    top: 3%;
+    left:45%;
+    color: #ff0000;
+    background-color: #ffc0c0;
+    padding: 20px 25px;
+    border-radius: 20px;
+}
