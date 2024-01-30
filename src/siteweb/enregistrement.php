@@ -1,5 +1,15 @@
 <?php
 session_start();
+
+/* // Définit les paramètres de cookie de session
+$cookieParams = session_get_cookie_params();
+session_set_cookie_params(
+    $cookieParams["lifetime"] = 3600, 
+    $cookieParams["path"] = "/", 
+    $cookieParams["secure"] = true, // Secure : true pour envoyer uniquement sur HTTPS
+    $cookieParams["httponly"] = true  // HttpOnly : true pour empêcher l'accès via JavaScript
+); */
+
 // Vérifier si le jeton CSRF est présent et valide
 if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
     // Jeton CSRF invalide, traitement de l'erreur

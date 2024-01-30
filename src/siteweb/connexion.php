@@ -1,5 +1,39 @@
 <?php
 session_start();
+/* // Définit les paramètres de cookie de session
+$cookieParams = session_get_cookie_params();
+session_set_cookie_params(
+    $cookieParams["lifetime"] = 3600, 
+    $cookieParams["path"] = "/", 
+    $cookieParams["secure"] = true, // Secure : true pour envoyer uniquement sur HTTPS
+    $cookieParams["httponly"] = true  // HttpOnly : true pour empêcher l'accès via JavaScript
+); */
+
+/*////////////////////////////////////////////
+    Mis en place de protection force brute
+/////////////////////////////////////////// */
+
+$maxAttempts = 15; // Nombre maximum de tentatives de connexion autorisées
+$lockoutDuration = 300; // Durée de verrouillage en secondes (15 minutes)
+if (isset($_SESSION['login_attempts'])) {
+    // Vérifie si l'utilisateur a dépassé le nombre maximal de tentatives
+    if ($_SESSION['login_attempts'] >= $maxAttempts) {
+        // Vérifie si le verrouillage a expiré
+        if (time() - $_SESSION['last_login_attempt'] < $lockoutDuration) {
+            // Compte verrouillé, rediriger vers une page d'attente ou afficher un message d'erreur
+            header("Location: account_locked.php");
+            exit();
+        } else {
+            // Réinitialiser le compteur de tentatives après l'expiration du verrouillage
+            $_SESSION['login_attempts'] = 0;
+        }
+    }
+}
+
+/*////////////////////////////////////////////
+         Génération de jeton CSRF
+/////////////////////////////////////////// */
+
 // Génération du jeton CSRF
 function generate_csrf_token() {
     return bin2hex(random_bytes(32));
@@ -11,7 +45,9 @@ if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = generate_csrf_token();
 }
 
-
+/*////////////////////////////////////////////
+      Code de vérification de la connexion
+/////////////////////////////////////////// */
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -50,20 +86,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($user) {
                 if($_POST["mdp"]===openssl_decrypt($user["MotDePasse"], "AES-256-CBC", $crypt_key, 0, "1234567890123456")){/* if(password_verify($_POST["mdp"], $user["MotDePasse"])){ *//* if($_POST["mdp"]===$user["MotDePasse"]){ */
 
+                    // Connexion réussie, réinitialiser le compteur de tentatives
+                    $_SESSION['login_attempts'] = 0;
+
                     session_start();
-
                     session_regenerate_id();
-
                     $_SESSION["user_id"] = $user["idUtilisateur"];
                     
                     header("Location: pageSuggestion.php");
                     exit();
                 }
                 else{
+                    // Identifiants invalides, incrémenter le compteur de tentatives
+                    $_SESSION['login_attempts']++;
+
+                    // Enregistrer l'heure de la dernière tentative de connexion
+                    $_SESSION['last_login_attempt'] = time();
+
                     header("Location: connexion.php?error=Email ou Mot de passe Incorrect");
                     exit();
                 }
             }else{
+                // Identifiants invalides, incrémenter le compteur de tentatives
+                $_SESSION['login_attempts']++;
+
+                // Enregistrer l'heure de la dernière tentative de connexion
+                $_SESSION['last_login_attempt'] = time();
+
                 header("Location: connexion.php?error=Email ou Mot de passe Incorrect");
                 exit();
             }
@@ -104,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
                 <input type="password" placeholder="Mot de passe" name="mdp" value="<?= htmlspecialchars( $_POST["mdp"] ?? "") ?>">
                 
-                <button type="submit">Je m'inscrit</button>
+                <button type="submit">Je m'inscris</button>
             </form>
         </div>
 
