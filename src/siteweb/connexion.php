@@ -1,4 +1,16 @@
 <?php
+session_start();
+// Génération du jeton CSRF
+function generate_csrf_token() {
+    return bin2hex(random_bytes(32));
+}
+
+// Stockage du jeton CSRF dans une session
+
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = generate_csrf_token();
+}
+
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -44,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                     $_SESSION["user_id"] = $user["idUtilisateur"];
                     
-                    header("Location: pageSuggestion.html");
+                    header("Location: pageSuggestion.php");
                     exit();
                 }
                 else{
@@ -81,6 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="container <?php if(isset($_GET["sign-up_error"])) { echo "active"; } ?>" id="container">
         <div class="form-container sign-up">
             <form action="enregistrement.php" method="post" novalidate>
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
                 <h1>Rejoignez nous</h1>
                 <input type="email" placeholder="Email" name="email" value="<?= htmlspecialchars( $_POST["email"] ?? "") ?>">
                 <input type="text" placeholder="Pseudo" name="pseudo" value="<?= htmlspecialchars( $_POST["pseudo"] ?? "") ?>">
@@ -96,7 +109,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
 
         <div class="form-container sign-in">
-            <form method="post">            
+            <form method="post">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?> ">            
                 <h1>Connexion</h1>
                 <input type="email" placeholder="Email" name="email" value="<?= htmlspecialchars( $_POST["email"] ?? "") ?>">
                 <input type="password" placeholder="Mot de passe" name="mdp">

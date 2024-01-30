@@ -1,4 +1,10 @@
 <?php
+session_start();
+// Vérifier si le jeton CSRF est présent et valide
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    // Jeton CSRF invalide, traitement de l'erreur
+    die('Erreur CSRF : jeton CSRF invalide');
+}
 
 if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss"]) || isset($_POST["ville"]) || isset($_POST["cp"]) || isset($_POST["mdp"])) {
 
@@ -18,6 +24,14 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
     $cp = validate($_POST["cp"]);
     $mdp = validate($_POST["mdp"]);
 
+    // Expression régulière pour valider une date au format DD/MM/YYYY
+    $dateRegex = '/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/';
+    /**
+     * (0[1-9]|[12][0-9]|3[01]) pour le jour de 01 à 31
+     * (0[1-9]|1[0-2])          pour le mois de 01 à 12
+     * d{4}                     pour les 4 chiffres de l'année
+     */
+
 
     //Vérification de l'adresse mail
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -30,7 +44,7 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
         exit();
     }
     //Vérification de la date de naissance
-    else if (empty($dateNaiss)) {
+    else if (empty($dateNaiss) || !filter_var($dateNaiss, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>$dateRegex)))) {
         header("Location: connexion.php?sign-up_error&error=Votre date de Naissance est requise");
         exit();
     }
@@ -40,7 +54,7 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
         exit();
     }
     //Vérification du code postal
-    else if (empty($cp)) {
+    else if (empty($cp) || !filter_var($cp, FILTER_VALIDATE_INT)) {
         header("Location: connexion.php?sign-up_error&error=Votre code postal est requis");
         exit();
     }
