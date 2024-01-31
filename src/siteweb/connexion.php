@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     session_regenerate_id();
                     $_SESSION["user_id"] = $user["idUtilisateur"];
                     
-                    header("Location: pageSuggestion.php");
+                    header("Location: ./algorithme/index.php");
                     exit();
                 }
                 else{
