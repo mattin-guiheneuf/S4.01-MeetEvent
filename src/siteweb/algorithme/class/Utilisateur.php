@@ -262,6 +262,7 @@ class Utilisateur {
     /**
      * @brief Attribuer la liste de Mots à un utilisateur en fonction des mots saisis.
      * @param array
+     * @param array
      */
     public function definirDescription($dicoSynTag,$liste_mot) {
 

@@ -200,15 +200,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Variables pour les nouvelles données de l'utilisateur
                 $nouvelle_description = $user_courrant->getMots();
 
+                $mots_str ="";
+                foreach ($nouvelle_description as $id_mot) {
+                    $mots_str .=  $id_mot->getLibelle() . " "; 
+                }
+
                 // Requête SQL pour mettre à jour la description de l'utilisateur
                 $sql = "UPDATE Utilisateur SET description = ? WHERE idUtilisateur = ?";
                 $stmt = $connexion->prepare($sql);
-                $stmt->bind_param("ii", $nouvelle_description, $id_utilisateur);
+                $stmt->bind_param("si", $mots_str, $id_utilisateur);
 
-                $mots_str ="";
-                foreach ($nouvelle_description as $id_mot) {
-                    $mots_str +=  $id_mot . ", "; 
-                }
+                
                 // Exécution de la requête
                 if ($stmt->execute()) {
                     echo "Description mise à jour avec succès.";
@@ -217,6 +219,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
                 /*| Mettre a jour les tags |*/
+                // Fonction pour récupérer l'ID d'un tag à partir de son libellé
+                function getTagId($conn, $tag) {
+                    $sql = "SELECT idTag FROM Tag WHERE libelle = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("s", $tag);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        return $row['idTag'];
+                    }
+                }
                 // Variable pour les nouvelles données de l'utilisateur
                 $nouveaux_tags = $user_courrant->getTags();
 
@@ -231,7 +245,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt_insert = $connexion->prepare($sql_insert);
                 $stmt_insert->bind_param("ii", $id_utilisateur, $id_tag);
 
-                foreach ($nouveaux_tags as $id_tag) {
+                foreach ($nouveaux_tags as $tag) {
+                    $id_tag = getTagId($connexion, $tag);
                     $stmt_insert->execute();
                 }
 
@@ -243,7 +258,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
 
-
+                header("Location: ../pageSuggestion.php");
                 break;
 
 
