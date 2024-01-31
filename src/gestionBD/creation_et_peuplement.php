@@ -10,12 +10,7 @@
 include_once "database.php";
 
 
-
-
-
-
-
-/*  // Requête pour récupérer le nom de toutes les tables
+/* // Requête pour récupérer le nom de toutes les tables
 $tables_query = "SHOW TABLES";
 $tables_result = $connexion->query($tables_query);
 
@@ -32,7 +27,7 @@ if ($tables_result) {
     }
 } else {
     echo "Erreur lors de la récupération des tables : " . $connexion->error;
-}  */
+} */
 
 
 
@@ -304,19 +299,19 @@ if ($totalLignes == 0) {
     // La table est vide
     // Requête d'insertion de données dans la table Utilisateur
     $sql = "INSERT INTO $nomTable_User VALUES
-    ( 1 , 'Jean' , 'jean' , 'jean.jean64@gmail.com' , '> 45', 'vieux, laid, ennuyeux',  'sourd' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."' ),
-    ( 2 , 'Dupont' , 'joseph' , 'dupont.jos64@gmail.com' , '26-45', 'vieux, laid, ennuyeux',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 3 , 'Dupouille' , 'rodric' , 'dup.rodric40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 4 , 'Capdet' , 'stephane' , 'steph40@gmail.com' , '< 18', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 5 , 'Duvignau' , 'yannis' , 'yaya.dudu40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 6 , 'Mourgue' , 'clement' , 'clement.mg40@gmail.com' , '18-25', 'jeune, beau, drole',  'autiste' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 7 , 'Victoras' , 'dylan' , 'vivicto.dy64@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 8 , 'Guiheuneuf' , 'mattin' , 'guigui64@gmail.com' , '18-25', 'jeune, beau, drole', 'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 9 , 'Marot' , 'lucas' , 'lulu64@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 10 , 'Palassin' , 'adrien' , 'ad40@gmail.com' , '< 18', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 11 , 'Pierre' , 'Suzon' , 'suzonpierre@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 12 , 'Irastorza' , 'Pierre' , 'pirastorza@gmail.com' , '26-45', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 13 , 'Moulin' , 'Thibault' , 'thibmoulin@gmail.com' , '26-45', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."')
+    ( 1 , 'Jean' , 'jean' , 'jean.jean64@gmail.com' , '> 45', 'vieux, laid, ennuyeux',  'sourd' , 'cestSecret123'),
+    ( 2 , 'Dupont' , 'joseph' , 'dupont.jos64@gmail.com' , '26-45', 'vieux, laid, ennuyeux',  'aucun' , 'cestSecret123'),
+    ( 3 , 'Dupouille' , 'rodric' , 'dup.rodric40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
+    ( 4 , 'Capdet' , 'stephane' , 'steph40@gmail.com' , '< 18', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
+    ( 5 , 'Duvignau' , 'yannis' , 'yaya.dudu40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', 'cestSecret123'),
+    ( 6 , 'Mourgue' , 'clement' , 'clement.mg40@gmail.com' , '18-25', 'jeune, beau, drole',  'autiste' , 'cestSecret123'),
+    ( 7 , 'Victoras' , 'dylan' , 'vivicto.dy64@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
+    ( 8 , 'Guiheuneuf' , 'mattin' , 'guigui64@gmail.com' , '18-25', 'jeune, beau, drole', 'aucun' , 'cestSecret123'),
+    ( 9 , 'Marot' , 'lucas' , 'lulu64@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
+    ( 10 , 'Palassin' , 'adrien' , 'ad40@gmail.com' , '< 18', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
+    ( 11 , 'Pierre' , 'Suzon' , 'suzonpierre@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
+    ( 12 , 'Irastorza' , 'Pierre' , 'pirastorza@gmail.com' , '26-45', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
+    ( 13 , 'Moulin' , 'Thibault' , 'thibmoulin@gmail.com' , '26-45', 'jeune, beau, drole',  'aucun' , 'cestSecret123')
     ";
 
     if ($connexion->query($sql) === TRUE) {
@@ -343,25 +338,25 @@ if ($totalLignes == 0) {
     // La table est vide
     // Requête d'insertion de données dans la table Evenement
     $sql = "INSERT INTO $nomTable_Event VALUES
-    ( 1 , 'Grosse soiree' , 'Grosse soiree chez moi !' , '15/12/2024' , 10,  0 , 0.00 , 1 , 1 ),
-    ( 2 , 'Soiree FIFA' , 'Tournoi de fou sur FIFA. 3-0, tu lâche la manette !' , '20/11/2024' , 15,  0 , 0.00 , 1 , 2 ),
-    ( 3 , 'Soiree au WOK' , 'Il faut rentabiliser le prix.' , '14/11/2024' , 20,  0 , 0.00 , 1 , 3 ),
-    ( 4 , 'Aquaman 2 au cine' , 'Venez on regarde Aquaman 2 !' , '10/10/2024' , 30,  1 , 0.00 , 1 , 4 ),
-    ( 5 , 'Bowling' , 'Soiree chill au bowling' , '25/10/2024' , 5,  0 , 0.00 , 2 , 5 ),
-    ( 6 , 'Billard' , 'Un entrainement au billard' , '25/10/2024' , 3,  0 , 0.00 , 3 , 6 ),
-    ( 7 , 'Laser game' , 'Venez jouer a Call of Duty dans la vraie vie' , '30/10/2024' , 19,  0 , 0.00 , 3 , 7 ),
-    ( 8 , 'Atelier de poterie' , 'Venez apprendre la poterie' , '06/10/2024' , 18,  1 , 5.50 , 4 , 8 ),
-    ( 9 , 'Réunion litteraire' , 'Parlons de livre !' , '11/10/2024' , 16,  1 , 9.99 , 4 , 9 ),
-    ( 10 , 'Foot salle' , '9 contre 9 sur un terrain !' , '14/11/2024' , 18,  0 , 0.00 , 5 , 10 ),
-    ( 11 , 'Soirée jeux de société', 'Venez jouer à vos jeux préférés !', '22/12/2024', 12, 0, 0.00, 1, 12 ),
-    ( 12 , 'Cours de cuisine' , 'Apprenons à cuisiner ensemble !' , '14/11/2024' , 25,  1 , 15.00 , 4 , 13 ),
-    ( 13,  'Concert live', 'Profitez d''un concert en direct !', '05/10/2024', 40, 1, 20.00, 4, 11 ),
-    ( 14 , 'Soirée karaoké', 'Montrez vos talents de chanteur !', '12/10/2024', 15, 1, 0.00, 1, 11 ),
-    ( 15,  'Randonnée nature', 'Explorer la nature ensemble !', '08/11/2024', 8, 1, 0.00, 3, 1 ),
-    ( 16 , 'Projection de films', 'Cinéma à la maison !', '30/11/2024', 20, 0, 5.00, 4, 5 ),
-    ( 17, 'Séance de méditation', 'Relaxation et bien-être', '17/11/2024', 10, 1, 3.99, 5, 1 ),
-    ( 18 , 'Tournoi de ping-pong', 'Compétition amicale de ping-pong', '03/12/2024', 16, 1, 7.50, 5, 8 ),
-    ( 19 , 'Banquet des fêtes', 'Repas convivial pour profiter des fêtes du village', '11/07/2024', 50, 1, 8.00, 2, 8 )
+    ( 1 , 'Grosse soiree' , 'Grosse soiree chez moi !' , '2024-12-15' , 10,  0 , 0.00 , 1 , 1 ),
+    ( 2 , 'Soiree FIFA' , 'Tournoi de fou sur FIFA. 3-0, tu lâche la manette !' , '2024-11-20' , 15,  0 , 0.00 , 1 , 2 ),
+    ( 3 , 'Soiree au WOK' , 'Il faut rentabiliser le prix.' , '2024-11-14' , 20,  0 , 0.00 , 1 , 3 ),
+    ( 4 , 'Aquaman 2 au cine' , 'Venez on regarde Aquaman 2 !' , '2024-10-10' , 30,  1 , 0.00 , 1 , 4 ),
+    ( 5 , 'Bowling' , 'Soiree chill au bowling' , '2024-10-25' , 5,  0 , 0.00 , 2 , 5 ),
+    ( 6 , 'Billard' , 'Un entrainement au billard' , '2024-10-25' , 3,  0 , 0.00 , 3 , 6 ),
+    ( 7 , 'Laser game' , 'Venez jouer a Call of Duty dans la vraie vie' , '2024-10-30' , 19,  0 , 0.00 , 3 , 7 ),
+    ( 8 , 'Atelier de poterie' , 'Venez apprendre la poterie' , '2024-10-06' , 18,  1 , 5.50 , 4 , 8 ),
+    ( 9 , 'Réunion litteraire' , 'Parlons de livre !' , '2024-10-11' , 16,  1 , 9.99 , 4 , 9 ),
+    ( 10 , 'Foot salle' , '9 contre 9 sur un terrain !' , '2024-11-14' , 18,  0 , 0.00 , 5 , 10 ),
+    ( 11 , 'Soirée jeux de société', 'Venez jouer à vos jeux préférés !', '2024-12-22', 12, 0, 0.00, 1, 12 ),
+    ( 12 , 'Cours de cuisine' , 'Apprenons à cuisiner ensemble !' , '2024-11-14' , 25,  1 , 15.00 , 4 , 13 ),
+    ( 13,  'Concert live', 'Profitez d''un concert en direct !', '2024-10-05', 40, 1, 20.00, 4, 11 ),
+    ( 14 , 'Soirée karaoké', 'Montrez vos talents de chanteur !', '2024-10-12', 15, 1, 0.00, 1, 11 ),
+    ( 15,  'Randonnée nature', 'Explorer la nature ensemble !', '2024-11-08', 8, 1, 0.00, 3, 1 ),
+    ( 16 , 'Projection de films', 'Cinéma à la maison !', '2024-11-30', 20, 0, 5.00, 4, 5 ),
+    ( 17, 'Séance de méditation', 'Relaxation et bien-être', '2024-11-17', 10, 1, 3.99, 5, 1 ),
+    ( 18 , 'Tournoi de ping-pong', 'Compétition amicale de ping-pong', '2024-12-03', 16, 1, 7.50, 5, 8 ),
+    ( 19 , 'Banquet des fêtes', 'Repas convivial pour profiter des fêtes du village', '2024-07-11', 50, 1, 8.00, 2, 8 )
     ";
 
     if ($connexion->query($sql) === TRUE) {

@@ -88,7 +88,8 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
 
         $stmt->bind_param("sss", $_POST["pseudo"], $_POST["email"], $passwd);
         if ($stmt->execute()) {
-            header("Location: connexion.php");
+            //header("Location: connexion.php");
+            echo '<script>window.location = "connexion.php";</script>';
             exit;
         } else {
             if ($mysqli->errno === 80) {

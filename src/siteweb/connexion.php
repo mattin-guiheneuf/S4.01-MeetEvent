@@ -29,10 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mdp = validate($_POST["mdp"]);
 
         if(empty($email)){
-            header("Location: connexion.php?error=L'addresse mail est requise");
+            //header("Location: connexion.php?error=L'addresse mail est requise");
+            echo '<script>window.location = "connexion.php?error=L\'addresse mail est requise";</script>';
             exit();
         }else if (empty($mdp)){
-            header("Location: connexion.php?error=Le mot de passe est requis");
+            //header("Location: connexion.php?error=Le mot de passe est requis");
+            echo '<script>window.location = "connexion.php?error=Le mot de passe est requis";</script>';
             exit();
         }else{
 
@@ -50,21 +52,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($user) {
                 if($_POST["mdp"]===openssl_decrypt($user["MotDePasse"], "AES-256-CBC", $crypt_key, 0, "1234567890123456")){/* if(password_verify($_POST["mdp"], $user["MotDePasse"])){ *//* if($_POST["mdp"]===$user["MotDePasse"]){ */
 
-                    session_start();
+                    //session_start();
 
                     session_regenerate_id();
 
                     $_SESSION["user_id"] = $user["idUtilisateur"];
                     
-                    header("Location: pageSuggestion.php");
+                    //header("Location: pageSuggestion.php");
+                    echo '<script>window.location = "pageSuggestion.php";</script>';
                     exit();
                 }
                 else{
-                    header("Location: connexion.php?error=Email ou Mot de passe Incorrect");
+                    //header("Location: connexion.php?error=Email ou Mot de passe Incorrect");
+                    echo '<script>window.location = "connexion.php?error=Email ou Mot de passe Incorrect";</script>';
                     exit();
                 }
             }else{
-                header("Location: connexion.php?error=Email ou Mot de passe Incorrect");
+                //header("Location: connexion.php?error=Email ou Mot de passe Incorrect");
+                echo '<script>window.location = "connexion.php?error=Email ou Mot de passe Incorrect";</script>';
                 exit();
             }
 

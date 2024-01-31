@@ -7,7 +7,7 @@
 
 <?php
 //Pour YANNIS
-$bdname = 'projetME';
+/* $bdname = 'projetME';
 $host = 'localhost';
 $username = 'root';
 $password = '';
@@ -16,12 +16,12 @@ $connexion = new mysqli(hostname : $host, username : $username, password : $pass
 
 if($connexion->connect_errno){
     die("Connection error:" . $connexion->connect_error);
-} 
+}  */
 
 
 
 // Pour Clément
-/*$bdname = 'cmourgue_bd';
+$bdname = 'cmourgue_bd';
 $host = 'lakartxela.iutbayonne.univ-pau.fr';
 $username = 'cmourgue_bd';
 $password = 'cmourgue_bd';
@@ -30,7 +30,7 @@ $connexion = new mysqli($host, $username, $password, $bdname); // or die ...
 
 if($connexion->connect_errno){
     die("Connection error : " . $connexion->connect_error);
-}*/
+}
 
 
 
