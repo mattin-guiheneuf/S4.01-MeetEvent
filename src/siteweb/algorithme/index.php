@@ -1,4 +1,12 @@
-<?php session_start(); echo $_SESSION["user_id"];?>
+<?php session_start(); 
+// Vérifiez si l'utilisateur est connecté en vérifiant la présence de ses informations d'identification dans la session
+if (!isset($_SESSION['user_id'])) {
+    // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+    header("Location: ../connexion.php");
+    exit; // Assurez-vous de terminer le script après la redirection
+}
+echo $_SESSION["user_id"];
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -83,7 +91,7 @@
     <h2>Ajouter la description de l'utilisateur</h2>
     <!-- Formulaire avec champ pour saisir l'inscription d'un utilisateur -->
     <?php if(isset($_SESSION["user_id"])){
-    echo '<form action="main.php" method="post">
+    echo '<form action="CreationTag.php" method="post">
     
         <label for="mot">Mot :</label>
         <input type="text" id="mot" name="mot">
@@ -99,7 +107,7 @@
     <h2>Créer un Evenement</h2>
     <!-- Formulaire avec champ pour saisir l'inscription d'un utilisateur -->
     <?php if(isset($_SESSION["event_id"])){
-    echo `<form action="main.php" method="post">
+    echo `<form action="CreationTag.php" method="post">
         <label for="titre">Titre :</label>
         <input type="text" id="titre" name="titre">
 

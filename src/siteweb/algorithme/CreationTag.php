@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+// Vérifiez si l'utilisateur est connecté en vérifiant la présence de ses informations d'identification dans la session
+if (!isset($_SESSION['user_id'])) {
+    // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+    header("Location: ../connexion.php");
+    exit; // Assurez-vous de terminer le script après la redirection
+}
+
 /**
  * Nom du fichier : test_script.php
  * Description : Test de l'algorithme et affichages pour vérification
@@ -20,21 +28,21 @@ session_start();
 //____________________________________________________________________________________//
 
 //On récupére les classes Evenement, Utilisateur, Recommandation, Tag et Mot 
-require_once "./class/Synonyme.php";
-require_once "./class/ApiDeTraduction.php";
-require_once "./class/ApiDictionnaireFr.php";
-require_once "./class/ApiSynonyme.php";
-require_once "./class/Corpus.php";
-require_once "./class/DicoSynTags.php";
-require_once "./class/Evenement.php";
-require_once "./class/Mot.php";
-require_once "./class/Recommandation.php";
-require_once "./class/Tag.php";
-require_once "./class/Utilisateur.php";
+require_once "class/Synonyme.php";
+require_once "class/ApiDeTraduction.php";
+require_once "class/ApiDictionnaireFr.php";
+require_once "class/ApiSynonyme.php";
+require_once "class/Corpus.php";
+require_once "class/DicoSynTags.php";
+require_once "class/Evenement.php";
+require_once "class/Mot.php";
+require_once "class/Recommandation.php";
+require_once "class/Tag.php";
+require_once "class/Utilisateur.php";
 
-// Lire le contenu JSON depuis le fichier
-$contenuJSON = file_get_contents('./data/donnees.json');
-$donnees = json_decode($contenuJSON, true);
+//Faire la connection avec la base de données
+require_once "../gestionBD/database.php";
+
 
 //____________________________________________________________________________________//
 //____________________________________________________________________________________//
@@ -44,77 +52,11 @@ $donnees = json_decode($contenuJSON, true);
 //____________________________________________________________________________________//
 //____________________________________________________________________________________//
 
-//Transformer les tags en objet Tag
-$liste = [
-    "Cuisine", "Art",
-    "Musique", "Dessin", "Sport", "Entraînement", "Social",
-    "Discussion", "Méditation", "Détente", "Lecture", "Écoute","Rire",
-    "Divertissement", "Fête", "Exploration", "Voyage", "Découverte", 
-    "Enseignement", "Travail", "Créativité", "Construction",
-    "Jardinage", "Photographie", "Film", "Danse", "Chant", 
-    "Instrument", "Collection", "Informatique", "Réflexion",
-    "Engagement", "Volontariat", "Organisation",
-    "Exercice", "Expérience", "Test",
-    "Développement", "Amélioration", "Innovation", "Économie",
-    "Partage", "Influence", "Motivation",
-    "Inspiration", "Amusement",
-    "Célébration", "Changement",
-    "Imagination", "Jeux", "Festival",
-    "Culture", "Concert", "Repas", "Aperitif", "Alcool",
-    "Association", "Rencontre",
-    "Marche", "Amical",
-    "Plaisir", "Jeu de société", "Animaux",
-    "Soiree", "Nature", "Paysages", "Atelier", 
-    "Gastronomie", "Dégustation", "Exposition", "Musee",
-    "Dîner", "Caritatif", "Solidarité", "Loisir",
-    "Competition", "Tournoi", "Montagne",
-    "Finance", "Formation","Océan"];
-foreach ($liste as $tag) {
-    $list_tag_corpus[] = new Tag(strtolower($tag));
-}
-//Création du corpus de Tag
-$corpusTag = new Corpus(1, $list_tag_corpus);
 
 // Récupération du dicoSynTag
 $jsonDicoSynTag = file_get_contents('./data/dicoSynTag.json');
 $dicoSynTag = json_decode($jsonDicoSynTag, true);
 
-
-
-//Liste utilisé pour l'ACM
-$eventsAndUserPreferences = [];
-
-//-------------------------------------------------------------//
-//                      Partie Evenement                       //
-//-------------------------------------------------------------//
-
-//Recuperer tous les evenement des données et les affecter dans objetEvenement
-$objetEvenement = [];
-//Affichage des événement et de leur tag
-//echo "</br>" . "///////////////////////////////////////////" . "</br>" . "/// Evenement et leurs Tags ///" . "</br>" . "///////////////////////////////////////////" . "</br>";
-//$n = 0;
-foreach ($donnees['evenements'] as $element) {
-    foreach ($element['tags'] as $tag) {
-        $list_tags[] = new Tag($tag);
-    }
-    $objetEvenement[] = new Evenement($element['id'], $list_tags);
-    $list_tags = [];
-}
-
-// Transformation de tous les evenements
-//On parcours tous les evenements existant
-foreach ($objetEvenement as $event) {
-    $eventsB = [];  //Liste pour UN evenement
-    //Pour tous les tags de L'evenement
-    $objetEvenementElement = $event->getTags();
-
-    //On regarde si ils sont present dans le corpus tag et on y attribut un 1 sinon 0
-    foreach ($corpusTag->getMesTags() as $corpusTagElement) {
-        $eventsB[] = (int) in_array($corpusTagElement, $objetEvenementElement);
-    }
-    //On ajoute l'evenement (avec valeurs binaires) à l'ensemble des évènements
-    $eventsAndUserPreferences[] = $eventsB;
-}
 
 //____________________________________________________________________________________//
 //____________________________________________________________________________________//
@@ -124,49 +66,10 @@ foreach ($objetEvenement as $event) {
 //____________________________________________________________________________________//
 //____________________________________________________________________________________//
 
-//Récupérer la liste de tous les utilisateurs pour vérifier si celui saisi existe
-$listeIdUtilisateur = [];
-foreach ($donnees['utilisateurs'] as $user) {
-    $listeIdUtilisateur[] = $user['id'];
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if (isset($_POST["idUser"]) && in_array($_POST["idUser"], $listeIdUtilisateur)) {
-        $idUserConnected = $_POST["idUser"];
-
-        //Dico avec tous les utilisateurs et leurs tags associés
-        $dicoUser = [];
-        foreach ($donnees['utilisateurs'] as $element) {
-            foreach ($element['tags'] as $tag) {
-                $list_tag_user[] = new Tag($tag);
-            }
-            $dicoUser[$element['id']] = $list_tag_user;
-            $list_tag_user = [];
-        }
-
-        //créer l'utilisateur connecté
-        $userConnected = new Utilisateur($idUserConnected, $dicoUser[$idUserConnected]);
-
-        //On créé l'utilisateur à ajouter en dernier
-        $user = [];
-        foreach ($corpusTag->getMesTags() as $tagElement) {
-            $user[] = (int) in_array($tagElement, $userConnected->getTags());
-        }
-        //On ajoute l'utilisateur (avec valeurs binaires) à l'ensemble des évènements
-        $eventsAndUserPreferences[] = $user;
-
-
-        // Resultat Recommandation
-        // Initialisation d'un objet Recommandation
-        $recommandation = new Recommandation($userConnected);
-         //Calcul de la suggestion entre tous les événements et l'utilisateur
-        $recommandation->calculerSuggestion($eventsAndUserPreferences, $objetEvenement);
-
-        //Création de la liste des événements à suggérer en fonction de l'utilisateur
-        $listEventaRecommander = $userConnected->creerListeSuggest();
-
-    } elseif (isset($_POST["action"])) {
+    if (isset($_POST["action"])) {
         $action = $_POST['action'];
         // Inclure la logique pour chaque action
         switch ($action) {
@@ -177,9 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Récupère la liste de mots envoyée par le formulaire
                 $motsListe = isset($_POST['motsListe']) ? json_decode($_POST['motsListe']) : [];
 
-                //on crée ajout l'utilisateur dans la BD
-                /* $user_courrant->setId($id_user);
-                $user_courrant->setNom($nom); */
                 //Création liste de mot objet
                 $listeMot_objet = array();
                 foreach($motsListe as $motX){
@@ -192,7 +92,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 /*| Mettre a jour la base de données |*/
                 /*| -------------------------------- |*/
 
-                require_once "../../gestionBD/database.php";
                 $id_utilisateur = $user_courrant->getId(); // L'ID de l'utilisateur dont vous souhaitez mettre à jour la description
 
                 /*| Mettre a jour la description |*/
@@ -263,7 +162,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-            case 'creerEvenement':
+/* A FAIRE */
+            case 'creerEvenement':          
                 // Logique pour créer un événement
                 $titre = $_POST['titre'];
                 $date = $_POST['date'];

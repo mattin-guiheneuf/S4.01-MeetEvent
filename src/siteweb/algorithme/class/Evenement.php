@@ -183,6 +183,11 @@ class Evenement {
         $this->mesMots = $mots;
     }
 
+    public function addTag(Tag $tag){
+        $liste_tag = $this->getTags();
+        $liste_tag[] = $tag;
+        $this->setTags($liste_tag);
+    }
     /** Methode */
     /**
      * @brief Attribuer la liste de Tags à un évenement en fonction des mots saisis.

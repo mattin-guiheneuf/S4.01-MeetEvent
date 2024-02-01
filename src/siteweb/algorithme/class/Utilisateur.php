@@ -305,11 +305,11 @@ class Utilisateur {
         }
     
         // Si le nombre d'événements recommandés est inférieur à 5, prendre les 5 premiers basés sur le pourcentage
-        /*if (count($evenementsARecommander) < 5) {
+        if (count($evenementsARecommander) < 5) {
             for ($i = 0; $i < 5 && $i < count($reco); $i++) {
                 $evenementsARecommander[] = $reco[$i]['evenement'];
             }
-        }*/
+        }
     
         return $evenementsARecommander;
     }
