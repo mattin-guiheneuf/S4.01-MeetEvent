@@ -108,7 +108,7 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
             $_SESSION["user_id"] = $user["idUtilisateur"];
                     
             //header("Location: ./algorithme/index.php");
-            echo '<script>window.location = "connexion.php";</script>';
+            echo '<script>window.location = "algorithme/index.php";</script>';
             exit;
         } else {
             if ($mysqli->errno === 80) {

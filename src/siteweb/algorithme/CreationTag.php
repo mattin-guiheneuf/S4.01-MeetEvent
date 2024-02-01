@@ -41,7 +41,7 @@ require_once "class/Tag.php";
 require_once "class/Utilisateur.php";
 
 //Faire la connection avec la base de données
-require_once "../gestionBD/database.php";
+require_once "../../gestionBD/database.php";
 
 
 //____________________________________________________________________________________//
