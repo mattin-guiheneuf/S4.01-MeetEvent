@@ -10,7 +10,9 @@
 include_once "database.php";
 
 
-/* // Requête pour récupérer le nom de toutes les tables
+
+
+// Requête pour récupérer le nom de toutes les tables
 $tables_query = "SHOW TABLES";
 $tables_result = $connexion->query($tables_query);
 
@@ -27,7 +29,7 @@ if ($tables_result) {
     }
 } else {
     echo "Erreur lors de la récupération des tables : " . $connexion->error;
-} */
+} 
 
 
 
@@ -228,22 +230,88 @@ if ($totalLignes == 0) {
     // La table est vide
     // Requête d'insertion de données dans la table tag
     $sql = "INSERT INTO $nomTable_Tag (idTag, libelle, description) VALUES 
-    ( 1 , 'Tournoi' , 'On aime la competition' ),
-    ( 2 , 'Gastronomie' , 'On aime manger' ),
-    ( 3 , 'Ambiance' , 'On aime quand il y a de l''ambiance' ),
-    ( 4 , 'Atelier' , 'On aime quand il y a des ateliers' ),
-    ( 5 , 'Film' , 'On aime regarder des films' ),
-    ( 6 , 'Formation' , 'On aime apprendre de nouvelles choses' ),
-    ( 7 , 'Cinema' , 'On aime aller au cinema' ),
-    ( 8 , 'Musique' , 'On aime la musique' ),
-    ( 9 , 'Solidarite' , 'On est solidaire ici' ),
-    ( 10 , 'Detente' , 'On aime quand c''est chill' ),
-    ( 11 , 'Festival' , 'On aime la fete' ),
-    ( 12 , 'Loisir' , 'On aime le loisir' ),
-    ( 13 , 'Finance' , 'On aime l''argent' ),
-    ( 14 , 'Soiree' , 'On aime sortir le soir' ),
-    ( 15 , 'Aventure' , 'On veut devenir Indiana Jones' ),
-    ( 16 , 'Sport' , 'On mange du sport' )";
+    ( 1 , 'Cuisine' , ' ' ),
+    ( 2 , 'Art' , ' ' ),
+    ( 3 , 'Musique' , ' ' ),
+    ( 4 , 'Dessin' , ' ' ),
+    ( 5 , 'Sport' , ' ' ),
+    ( 6 , 'Entraînement' , ' ' ),
+    ( 7 , 'Social' , ' ' ),
+    ( 8 , 'Discussion' , ' ' ),
+    ( 9 , 'Méditation' , ' ' ),
+    ( 10 , 'Détente' , ' ' ),
+    ( 11 , 'Lecture' , ' ' ),
+    ( 12 , 'Écoute' , ' ' ),
+    ( 13 , 'Rire' , ' ' ),
+    ( 14 , 'Divertissement' , ' ' ),
+    ( 15 , 'Fête' , ' ' ),
+    ( 16 , 'Exploration' , ' ' ),
+    ( 17 , 'Voyage' , ' ' ),
+    ( 18 , 'Découverte' , ' ' ),
+    ( 19 , 'Enseignement' , ' ' ),
+    ( 20 , 'Travail' , ' ' ),
+    ( 21 , 'Créativité' , ' ' ),
+    ( 22 , 'Construction' , ' ' ),
+    ( 23 , 'Jardinage' , ' ' ),
+    ( 24 , 'Photographie' , ' ' ),
+    ( 25 , 'Film' , ' ' ),
+    ( 26 , 'Danse' , ' ' ),
+    ( 27 , 'Chant' , ' ' ),
+    ( 28 , 'Instrument' , ' ' ),
+    ( 29 , 'Collection' , ' ' ),
+    ( 30 , 'Informatique' , ' ' ),
+    ( 31 , 'Réflexion' , ' ' ),
+    ( 32 , 'Engagement' , ' ' ),
+    ( 33 , 'Volontariat' , ' ' ),
+    ( 34 , 'Organisation' , ' ' ),
+    ( 35 , 'Exercice' , ' ' ),
+    ( 36 , 'Expérience' , ' ' ),
+    ( 37 , 'Test' , ' ' ),
+    ( 38 , 'Développement' , ' ' ),
+    ( 39 , 'Amélioration' , ' ' ),
+    ( 40 , 'Innovation' , ' ' ),
+    ( 41 , 'Économie' , ' ' ),
+    ( 42 , 'Partage' , ' ' ),
+    ( 43 , 'Influence' , ' ' ),
+    ( 44 , 'Motivation' , ' ' ),
+    ( 45 , 'Inspiration' , ' ' ),
+    ( 46 , 'Amusement' , ' ' ),
+    ( 47 , 'Célébration' , ' ' ),
+    ( 48 , 'Changement' , ' ' ),
+    ( 49 , 'Imagination' , ' ' ),
+    ( 50 , 'Jeux' , ' ' ),
+    ( 51 , 'Festival' , ' ' ),
+    ( 52 , 'Culture' , ' ' ),
+    ( 53 , 'Concert' , ' ' ),
+    ( 54 , 'Repas' , ' ' ),
+    ( 55 , 'Aperitif' , ' ' ),
+    ( 56 , 'Alcool' , ' ' ),
+    ( 57 , 'Association' , ' ' ),
+    ( 58 , 'Rencontre' , ' ' ),
+    ( 59 , 'Marche' , ' ' ),
+    ( 60 , 'Amical' , ' ' ),
+    ( 61 , 'Plaisir' , ' ' ),
+    ( 62 , 'Jeu de société' , ' ' ),
+    ( 63 , 'Animaux' , ' ' ),
+    ( 64 , 'Soiree' , ' ' ),
+    ( 65 , 'Nature' , ' ' ),
+    ( 66 , 'Paysages' , ' ' ),
+    ( 67 , 'Atelier' , ' ' ),
+    ( 68 , 'Gastronomie' , ' ' ),
+    ( 69 , 'Dégustation' , ' ' ),
+    ( 70 , 'Exposition' , ' ' ),
+    ( 71 , 'Musee' , ' ' ),
+    ( 72 , 'Dîner' , ' ' ),
+    ( 73 , 'Caritatif' , ' ' ),
+    ( 74 , 'Solidarité' , ' ' ),
+    ( 75 , 'Loisir' , ' ' ),
+    ( 76 , 'Competition' , ' ' ),
+    ( 77 , 'Tournoi' , ' ' ),
+    ( 78 , 'Montagne' , ' ' ),
+    ( 79 , 'Finance' , ' ' ),
+    ( 80 , 'Formation' , ' ' ),
+    ( 81 , 'Océan' , ' ' )";
+
 
     if ($connexion->query($sql) === TRUE) {
         echo '<script type="text/javascript">console.log("Données ajoutées avec succès");</script>';

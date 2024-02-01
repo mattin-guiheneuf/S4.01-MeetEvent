@@ -1,3 +1,10 @@
+<?php 
+// Affichier la recommandation
+require_once 'algorithme/Suggestion.php';
+ 
+echo $_SESSION["user_id"];
+
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -5,7 +12,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="globals.css" />
+        <!-- <link rel="stylesheet" href="globals.css" /> -->
         <link rel="stylesheet" href="style4.css" />
     </head>
     <body>
@@ -41,8 +48,8 @@
                         </div>
                         <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
                         <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="img/3914353-1-7.png" alt="img"/>
-                        <img class="img" src="img/3917272-1.png" alt="img"/>
+                        <img class="element" src="#" alt="img"/>
+                        <img class="img" src="#" alt="img"/>
                     </div>
                     <div class="vnement">
                         <div class="overlap">
@@ -64,8 +71,8 @@
                         </div>
                         <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
                         <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="img/3914353-1.png" alt="img"/>
-                        <img class="img" src="img/3917272-1-3.png" alt="img"/>
+                        <img class="element" src="#" alt="img"/>
+                        <img class="img" src="#" alt="img"/>
                     </div>
                     <div class="vnement">
                         <div class="overlap">
@@ -87,8 +94,8 @@
                         </div>
                         <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
                         <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="img/3914353-1-4.png" alt="img"/>
-                        <img class="img" src="img/image.png" alt="img"/>
+                        <img class="element" src="#" alt="img"/>
+                        <img class="img" src="#" alt="img"/>
                     </div>
                     <div class="vnement">
                         <div class="overlap">
@@ -110,8 +117,8 @@
                         </div>
                         <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
                         <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="img/3914353-1-5.png" alt="img"/>
-                        <img class="img" src="img/3917272-1-7.png" alt="img"/>
+                        <img class="element" src="#" alt="img"/>
+                        <img class="img" src="#" alt="img"/>
                     </div>
                     <div class="vnement">
                         <div class="overlap">
@@ -133,8 +140,8 @@
                         </div>
                         <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
                         <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="img/3914353-1-3.png" alt="img"/>
-                        <img class="img" src="img/3917272-1-5.png" alt="img"/>
+                        <img class="element" src="#" alt="img"/>
+                        <img class="img" src="#" alt="img"/>
                     </div>
                     <div class="vnement">
                         <div class="overlap">
@@ -156,8 +163,8 @@
                         </div>
                         <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
                         <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="img/3914353-1-8.png" alt="img"/>
-                        <img class="img" src="img/3917272-1-6.png" alt="img"/>
+                        <img class="element" src="#" alt="img"/>
+                        <img class="img" src="#" alt="img"/>
                     </div>
                     <div class="vnement">
                         <div class="overlap">
@@ -179,8 +186,8 @@
                         </div>
                         <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
                         <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="img/3914353-1-6.png" alt="img"/>
-                        <img class="img" src="img/3917272-1-2.png" alt="img"/>
+                        <img class="element" src="#" alt="img"/>
+                        <img class="img" src="#" alt="img"/>
                     </div>
                     <div class="vnement">
                         <div class="overlap">
@@ -202,8 +209,8 @@
                         </div>
                         <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
                         <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="img/3914353-1-2.png" alt="img"/>
-                        <img class="img" src="img/3917272-1-4.png" alt="img"/>
+                        <img class="element" src="#" alt="img"/>
+                        <img class="img" src="#" alt="img"/>
                     </div>
                 </div>
                 <p class="accroche">
@@ -224,9 +231,9 @@
                         <div class="intitulle-categories">Bal de promo</div>
                         <div class="intitulle-categories-2">Date (jj/mm/aaaa)</div>
                         <div class="intitulle-categories-3">Ville</div>
-                        <img class="element-2" src="img/9247151-1.png" alt="img"/>
-                        <img class="element-3" src="img/14246644-1.png" alt="img"/>
-                        <img class="element-4" src="img/9586287-1.png" alt="img"/>
+                        <img class="element-2" src="#" alt="img"/>
+                        <img class="element-3" src="#" alt="img"/>
+                        <img class="element-4" src="#" alt="img"/>
                     </div>
                 </div>
             </div>
