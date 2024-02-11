@@ -1,242 +1,347 @@
 <?php 
 // Affichier la recommandation
-require_once 'algorithme/Suggestion.php';
+//require_once 'algorithme/Suggestion.php';
  
-echo $_SESSION["user_id"];
+//echo $_SESSION["user_id"];
 
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <!-- <link rel="stylesheet" href="globals.css" /> -->
-        <link rel="stylesheet" href="style4.css" />
-    </head>
+
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>ME</title>
+      <link rel="stylesheet" href="CSS/global.css" />
+      <link rel="stylesheet" href="CSS/style4.css" />
+      <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </head>
     <body>
-        <div class="page-rsultats">
-            <div class="div">
-                <p class="intitulle">Evenements correspondant à “Bal de promo”</p>
-                <div class="nav-bar">
-                    <div class="text-wrapper">LOGO</div>
-                    <div class="btns">
-                        <div class="btn-mes-v-nements">Gérer mes événements</div>
-                        <div class="btn-contact">Contact</div>
-                        <div class="logo-login"></div>
+        <div style="background-color:#6040fe;">
+            <!-- Barre de Navigation -->
+            <nav class="navbar sticky-top navbar-expand-lg" style="background-color: transparent;padding : 1%;">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="img/MeetEvent_Logo (1).png" alt="Bootstrap" width="50" height="40">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item" style="padding-left: 30px;padding-right: 30px;">
+                            <a class="nav-link" href="#" style="color: white;font-size: 18px;">Contact</a>
+                        </li>
+                        <li class="nav-item" style="padding-left: 30px;padding-right: 30px;">
+                            <a class="nav-link" href="#" style="color: white;font-size: 18px;">Gérer mes événements</a>
+                        </li>
+                        </ul>
+                        <span class="navbar-text">
+                        <a class="nav-link" href="connexion.php"><i class="fi fi-sr-user" style="font-size: 28px;color: white;" ></i></a>
+                        </span>
                     </div>
                 </div>
-                <div class="vnements">
-                    <div class="vnement">
-                        <div class="overlap">
-                            <div class="rectangle"></div>
-                            <div class="rectangle-2"></div>
-                            <div class="text-wrapper-2">CATEGORIE</div>
-                        </div>
-                        <div class="overlap-group">
-                            <div class="overlap-group-2">
-                                <div class="text-wrapper-3">Créateur</div>
-                                <div class="text-wrapper-4">Nom du créateur</div>
+            </nav>
+            <!-- Contenu principal -->
+            <div class="hero">
+                <!-- 1ere section -->
+                <div class="section1">
+                    <p class="accroche1">
+                        <span>Rechercher des événements qui VOUS correspondent</span>
+                    </p>
+                    <!-- Barre de Recherche -->
+                    <p class="lb-exemple">
+                        ex. : “Bal de promo 2024”,&nbsp;&nbsp;le“25/05/2024”&nbsp;&nbsp; à “Anglet”
+                    </p>
+                    <div class="barre-de-recherche">
+                        <div class="items">
+                            <div class="item">
+                                <img class="i-evenement" src="img/i-evenement.png" />
+                                <input type="text" name="nomEvenement" placeholder="Nom de l’événement" class="lb-event"/>
                             </div>
-                            <div class="text-wrapper-5">Numéro de téléphone</div>
-                            <div class="ellipse"></div>
+                            <div class="item">
+                                <img class="i-date" src="img/i-date.png" />
+                                <input type="text" name="nomEvenement" placeholder="Date (jj/mm/aaaa)" class="lb-date"/>
+                            </div>
+                            <div class="item">
+                                <img class="i-ville" src="img/i-ville.png" />
+                                <input type="text" name="nomEvenement" placeholder="Ville" class="lb-ville"/>                        
+                            </div>
                         </div>
-                        <div class="overlap-2">
-                            <div class="text-wrapper-6">Nom de l’événement</div>
-                            <div class="text-wrapper-7">Localisation</div>
-                        </div>
-                        <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
-                        <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="#" alt="img"/>
-                        <img class="img" src="#" alt="img"/>
+                        <a class="btn_search" href="#">RECHERCHER</a>
                     </div>
-                    <div class="vnement">
-                        <div class="overlap">
-                            <div class="rectangle"></div>
-                            <div class="rectangle-2"></div>
-                            <div class="text-wrapper-2">CATEGORIE</div>
+                </div>    
+                <!-- 2eme section -->
+                <div class="catgorie">
+                    <div class="titre-cat-gorie">Catégories</div>
+                    <div class="catgories">
+                        <div class="cat">
+                            CATÉGORIE 1
                         </div>
-                        <div class="overlap-group">
-                            <div class="overlap-group-2">
-                                <div class="text-wrapper-3">Créateur</div>
-                                <div class="text-wrapper-4">Nom du créateur</div>
-                            </div>
-                            <div class="text-wrapper-5">Numéro de téléphone</div>
-                            <div class="ellipse"></div>
+                        <div class="cat">
+                            CATÉGORIE 2
                         </div>
-                        <div class="overlap-2">
-                            <div class="text-wrapper-6">Nom de l’événement</div>
-                            <div class="text-wrapper-7">Localisation</div>
+                        <div class="cat">
+                            CATÉGORIE 3
                         </div>
-                        <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
-                        <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="#" alt="img"/>
-                        <img class="img" src="#" alt="img"/>
-                    </div>
-                    <div class="vnement">
-                        <div class="overlap">
-                            <div class="rectangle"></div>
-                            <div class="rectangle-2"></div>
-                            <div class="text-wrapper-2">CATEGORIE</div>
+                        <div class="cat">
+                            CATÉGORIE 4
                         </div>
-                        <div class="overlap-group">
-                            <div class="overlap-group-2">
-                                <div class="text-wrapper-3">Créateur</div>
-                                <div class="text-wrapper-4">Nom du créateur</div>
-                            </div>
-                            <div class="text-wrapper-5">Numéro de téléphone</div>
-                            <div class="ellipse"></div>
+                        <div class="cat">
+                            CATÉGORIE 5
                         </div>
-                        <div class="overlap-2">
-                            <div class="text-wrapper-6">Nom de l’événement</div>
-                            <div class="text-wrapper-7">Localisation</div>
+                        <div class="cat">
+                            CATÉGORIE 6
                         </div>
-                        <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
-                        <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="#" alt="img"/>
-                        <img class="img" src="#" alt="img"/>
-                    </div>
-                    <div class="vnement">
-                        <div class="overlap">
-                            <div class="rectangle"></div>
-                            <div class="rectangle-2"></div>
-                            <div class="text-wrapper-2">CATEGORIE</div>
+                        <div class="cat">
+                            CATÉGORIE 7
                         </div>
-                        <div class="overlap-group">
-                            <div class="overlap-group-2">
-                                <div class="text-wrapper-3">Créateur</div>
-                                <div class="text-wrapper-4">Nom du créateur</div>
-                            </div>
-                            <div class="text-wrapper-5">Numéro de téléphone</div>
-                            <div class="ellipse"></div>
+                        <div class="cat">
+                            CATÉGORIE 8
                         </div>
-                        <div class="overlap-2">
-                            <div class="text-wrapper-6">Nom de l’événement</div>
-                            <div class="text-wrapper-7">Localisation</div>
+                        <div class="cat">
+                            CATÉGORIE 9
                         </div>
-                        <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
-                        <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="#" alt="img"/>
-                        <img class="img" src="#" alt="img"/>
-                    </div>
-                    <div class="vnement">
-                        <div class="overlap">
-                            <div class="rectangle"></div>
-                            <div class="rectangle-2"></div>
-                            <div class="text-wrapper-2">CATEGORIE</div>
+                        <div class="cat">
+                            CATÉGORIE 10
                         </div>
-                        <div class="overlap-group">
-                            <div class="overlap-group-2">
-                                <div class="text-wrapper-3">Créateur</div>
-                                <div class="text-wrapper-4">Nom du créateur</div>
-                            </div>
-                            <div class="text-wrapper-5">Numéro de téléphone</div>
-                            <div class="ellipse"></div>
-                        </div>
-                        <div class="overlap-2">
-                            <div class="text-wrapper-6">Nom de l’événement</div>
-                            <div class="text-wrapper-7">Localisation</div>
-                        </div>
-                        <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
-                        <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="#" alt="img"/>
-                        <img class="img" src="#" alt="img"/>
-                    </div>
-                    <div class="vnement">
-                        <div class="overlap">
-                            <div class="rectangle"></div>
-                            <div class="rectangle-2"></div>
-                            <div class="text-wrapper-2">CATEGORIE</div>
-                        </div>
-                        <div class="overlap-group">
-                            <div class="overlap-group-2">
-                                <div class="text-wrapper-3">Créateur</div>
-                                <div class="text-wrapper-4">Nom du créateur</div>
-                            </div>
-                            <div class="text-wrapper-5">Numéro de téléphone</div>
-                            <div class="ellipse"></div>
-                        </div>
-                        <div class="overlap-2">
-                            <div class="text-wrapper-6">Nom de l’événement</div>
-                            <div class="text-wrapper-7">Localisation</div>
-                        </div>
-                        <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
-                        <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="#" alt="img"/>
-                        <img class="img" src="#" alt="img"/>
-                    </div>
-                    <div class="vnement">
-                        <div class="overlap">
-                            <div class="rectangle"></div>
-                            <div class="rectangle-2"></div>
-                            <div class="text-wrapper-2">CATEGORIE</div>
-                        </div>
-                        <div class="overlap-group">
-                            <div class="overlap-group-2">
-                                <div class="text-wrapper-3">Créateur</div>
-                                <div class="text-wrapper-4">Nom du créateur</div>
-                            </div>
-                            <div class="text-wrapper-5">Numéro de téléphone</div>
-                            <div class="ellipse"></div>
-                        </div>
-                        <div class="overlap-2">
-                            <div class="text-wrapper-6">Nom de l’événement</div>
-                            <div class="text-wrapper-7">Localisation</div>
-                        </div>
-                        <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
-                        <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="#" alt="img"/>
-                        <img class="img" src="#" alt="img"/>
-                    </div>
-                    <div class="vnement">
-                        <div class="overlap">
-                            <div class="rectangle"></div>
-                            <div class="rectangle-2"></div>
-                            <div class="text-wrapper-2">CATEGORIE</div>
-                        </div>
-                        <div class="overlap-group">
-                            <div class="overlap-group-2">
-                                <div class="text-wrapper-3">Créateur</div>
-                                <div class="text-wrapper-4">Nom du créateur</div>
-                            </div>
-                            <div class="text-wrapper-5">Numéro de téléphone</div>
-                            <div class="ellipse"></div>
-                        </div>
-                        <div class="overlap-2">
-                            <div class="text-wrapper-6">Nom de l’événement</div>
-                            <div class="text-wrapper-7">Localisation</div>
-                        </div>
-                        <div class="text-wrapper-8">dd/mm/aaaa - hh:mm</div>
-                        <div class="text-wrapper-9">x/n</div>
-                        <img class="element" src="#" alt="img"/>
-                        <img class="img" src="#" alt="img"/>
-                    </div>
-                </div>
-                <p class="accroche">
-                    <span class="span">Rechercher des événements qui </span>
-                    <span class="text-wrapper-10">VOUS</span>
-                    <span class="span"> correspondent</span>
-                </p>
-                <div class="group">
-                    <div class="overlap-3">
-                        <div class="barre-de-recherche">
-                            <div class="overlap-group-3">
-                                <div class="container"></div>
-                                <div class="container-2"></div>
-                                <div class="container-3"></div>
-                                <div class="text-wrapper-11">RECHERCHER</div>
-                            </div>
-                        </div>
-                        <div class="intitulle-categories">Bal de promo</div>
-                        <div class="intitulle-categories-2">Date (jj/mm/aaaa)</div>
-                        <div class="intitulle-categories-3">Ville</div>
-                        <img class="element-2" src="#" alt="img"/>
-                        <img class="element-3" src="#" alt="img"/>
-                        <img class="element-4" src="#" alt="img"/>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Suggestion -->
+        <div class="part_suggest">
+            <div class="suggestion">
+                <div class="titre-suggestion">Suggestion d’événement</div>
+                <div class="events">
+                    <!-- Event 1 -->
+                    <div class="event">
+                        <div class="part1">
+                            <a href="#" class="btn_join">REJOINDRE</a>
+                            <div class="categorie">CATEGORIE</div>
+                            
+                        </div>
+                        <div class="part2">
+                            <div class="titre_event">Nom de l’événement</div>
+                            <div>Localisation</div>
+
+                            <div class="modalite">
+                                <div class="calendrier">
+                                    <img src="img/3914353-1-5.png" width="26px"/>
+                                    <div class="infos">
+                                        <div style="font-weight:bold;">Calendrier</div>
+                                        <div>dd/mm/aaaa - hh:mm</div>
+                                    </div>    
+                                </div>
+                                <div class="places">
+                                    <img src="img/3917272-1-4.png" width="26px"/>
+                                    <div class="infos">
+                                        <div style="font-weight:bold;">Places restantes</div>
+                                        <div>nombre</div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>    
+                        <div class="part3">
+                            <div class="ellipse"></div>
+                            <div class="infos_createur">
+                                <div style="font-weight:bold;">Créateur</div>
+                                <div>Nom du créateur</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Event 2 -->
+                    <div class="event">
+                        <div class="part1">
+                            <a href="#" class="btn_join">REJOINDRE</a>
+                            <div class="categorie">CATEGORIE</div>
+                            
+                        </div>
+                        <div class="part2">
+                            <div class="titre_event">Nom de l’événement</div>
+                            <div>Localisation</div>
+
+                            <div class="modalite">
+                                <div class="calendrier">
+                                    <img src="img/3914353-1-5.png" width="26px"/>
+                                    <div class="infos">
+                                        <div style="font-weight:bold;">Calendrier</div>
+                                        <div>dd/mm/aaaa - hh:mm</div>
+                                    </div>    
+                                </div>
+                                <div class="places">
+                                    <img src="img/3917272-1-4.png" width="26px"/>
+                                    <div class="infos">
+                                        <div style="font-weight:bold;">Places restantes</div>
+                                        <div>nombre</div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>    
+                        <div class="part3">
+                            <div class="ellipse"></div>
+                            <div class="infos_createur">
+                                <div style="font-weight:bold;">Créateur</div>
+                                <div>Nom du créateur</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Event 3 -->
+                    <div class="event">
+                        <div class="part1">
+                            <a href="#" class="btn_join">REJOINDRE</a>
+                            <div class="categorie">CATEGORIE</div>
+                            
+                        </div>
+                        <div class="part2">
+                            <div class="titre_event">Nom de l’événement</div>
+                            <div>Localisation</div>
+
+                            <div class="modalite">
+                                <div class="calendrier">
+                                    <img src="img/3914353-1-5.png" width="26px"/>
+                                    <div class="infos">
+                                        <div style="font-weight:bold;">Calendrier</div>
+                                        <div>dd/mm/aaaa - hh:mm</div>
+                                    </div>    
+                                </div>
+                                <div class="places">
+                                    <img src="img/3917272-1-4.png" width="26px"/>
+                                    <div class="infos">
+                                        <div style="font-weight:bold;">Places restantes</div>
+                                        <div>nombre</div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>    
+                        <div class="part3">
+                            <div class="ellipse"></div>
+                            <div class="infos_createur">
+                                <div style="font-weight:bold;">Créateur</div>
+                                <div>Nom du créateur</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Event 4 -->
+                    <div class="event">
+                        <div class="part1">
+                            <a href="#" class="btn_join">REJOINDRE</a>
+                            <div class="categorie">CATEGORIE</div>
+                            
+                        </div>
+                        <div class="part2">
+                            <div class="titre_event">Nom de l’événement</div>
+                            <div>Localisation</div>
+
+                            <div class="modalite">
+                                <div class="calendrier">
+                                    <img src="img/3914353-1-5.png" width="26px"/>
+                                    <div class="infos">
+                                        <div style="font-weight:bold;">Calendrier</div>
+                                        <div>dd/mm/aaaa - hh:mm</div>
+                                    </div>    
+                                </div>
+                                <div class="places">
+                                    <img src="img/3917272-1-4.png" width="26px"/>
+                                    <div class="infos">
+                                        <div style="font-weight:bold;">Places restantes</div>
+                                        <div>nombre</div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>    
+                        <div class="part3">
+                            <div class="ellipse"></div>
+                            <div class="infos_createur">
+                                <div style="font-weight:bold;">Créateur</div>
+                                <div>Nom du créateur</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Event 5 -->
+                    <div class="event">
+                        <div class="part1">
+                            <a href="#" class="btn_join">REJOINDRE</a>
+                            <div class="categorie">CATEGORIE</div>
+                            
+                        </div>
+                        <div class="part2">
+                            <div class="titre_event">Nom de l’événement</div>
+                            <div>Localisation</div>
+
+                            <div class="modalite">
+                                <div class="calendrier">
+                                    <img src="img/3914353-1-5.png" width="26px"/>
+                                    <div class="infos">
+                                        <div style="font-weight:bold;">Calendrier</div>
+                                        <div>dd/mm/aaaa - hh:mm</div>
+                                    </div>    
+                                </div>
+                                <div class="places">
+                                    <img src="img/3917272-1-4.png" width="26px"/>
+                                    <div class="infos">
+                                        <div style="font-weight:bold;">Places restantes</div>
+                                        <div>nombre</div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>    
+                        <div class="part3">
+                            <div class="ellipse"></div>
+                            <div class="infos_createur">
+                                <div style="font-weight:bold;">Créateur</div>
+                                <div>Nom du créateur</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Event 6 -->
+                    <div class="event">
+                        <div class="part1">
+                            <a href="#" class="btn_join">REJOINDRE</a>
+                            <div class="categorie">CATEGORIE</div>
+                            
+                        </div>
+                        <div class="part2">
+                            <div class="titre_event">Nom de l’événement</div>
+                            <div>Localisation</div>
+
+                            <div class="modalite">
+                                <div class="calendrier">
+                                    <img src="img/3914353-1-5.png" width="26px"/>
+                                    <div class="infos">
+                                        <div style="font-weight:bold;">Calendrier</div>
+                                        <div>dd/mm/aaaa - hh:mm</div>
+                                    </div>    
+                                </div>
+                                <div class="places">
+                                    <img src="img/3917272-1-4.png" width="26px"/>
+                                    <div class="infos">
+                                        <div style="font-weight:bold;">Places restantes</div>
+                                        <div>nombre</div>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>    
+                        <div class="part3">
+                            <div class="ellipse"></div>
+                            <div class="infos_createur">
+                                <div style="font-weight:bold;">Créateur</div>
+                                <div>Nom du créateur</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Btn de Retour -->
+        <div class="retourEnHaut">
+            <a href="#" class="btn-retour">
+                <span>REVENEZ EN HAUT POUR FAIRE UNE RECHERCHE</span>
+                <img class="i-retour" src="img/i-retour.png" />
+            </a>
+        </div>    
     </body>
 </html>
