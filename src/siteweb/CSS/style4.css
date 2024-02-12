@@ -57,7 +57,14 @@
     gap:  10px;
 }
 
-
+.vertical-line{
+    border-left: 2px solid #6040fe;
+    border-radius: 30px;
+    display: inline-block;
+    margin-top: 20px;
+    top :50%;
+    height: 20px;
+  }
 
 .lb-ville {
     position: relative;
@@ -114,6 +121,7 @@
     width: 25px;
     height: 25px;
     object-fit: cover;
+    color: #dbdbdb;
 }
 
 .btn_search
@@ -238,7 +246,7 @@
     border-radius: 20px;
     position: absolute;
     top: 20px;
-    left: 350px;
+    right: 80px;
 }
 
 .part2{

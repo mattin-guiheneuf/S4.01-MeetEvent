@@ -1,0 +1,239 @@
+/*************/
+/* Au propre */
+/*************/
+
+/* Section 1*/
+.section1{
+    padding-top: 2%;
+    grid-column: 2/12;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 5%;
+}
+
+.accroche1 {
+    height: auto;
+    align-items: center;
+    /*   padding-left: 10%;
+    padding-right: 10%; */
+    color: black;
+    margin-top: 8%;
+    margin-bottom: 7%;
+    font-weight: 800;
+    font-size: 50px;
+    text-align: center;
+    letter-spacing: 0;
+}
+
+.btns{
+    position:relative;
+}
+
+.btn-consulter{
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 19.3px;
+    font-weight: bold;
+
+    background-color: white;
+    border: 2px solid  #6040fe;
+    color: #6040fe;
+    
+}
+
+.btn-creation{
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 19.3px;
+    font-weight: bold;
+
+    background-color: #6040fe;
+    border: none;
+    color: white;
+}
+
+/* Section 2*/
+.section2{
+    padding-top: 5%;
+    grid-column: 2/12;
+}
+
+.titre_event {
+    position: relative;
+    font-family: "Poppins-Bold", Helvetica;
+    font-weight: 700;
+    color: black;
+    font-size: 30px;
+    letter-spacing: 0;
+    margin-bottom: 20px;
+}
+
+.events{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 40px;
+    padding-bottom: 15%;
+}
+
+.event {
+    position: relative;
+    max-width: 528px;
+    background-color: #a1a1a1;
+    border-radius: 20px;
+}
+
+ .overlap {
+    position: relative;
+    width: 600px;
+    height: 605px;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+}
+
+.part1 {
+    position: relative;
+    width: 600px;
+    height: 276px;
+    background-color: #f3f3f38f;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.categorie{
+    color: #ffffff;
+    background-color: #4093fe;
+    padding: 10px 35px;
+    border-radius: 10px;
+    position: absolute;
+    top: 250px;
+    left: 40px;
+}
+
+.les_boutons{
+    position: absolute;
+    top: 20px;
+    right: 80px;
+}
+
+.btn_qrcode{
+    color: #6040fe;
+    background-color: #ffffff;
+    border:  2px solid #6040fe;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 20px; 
+}
+
+.btn_quit{
+    color: #ff0000;
+    background-color: #ffffff;
+    border:  2px solid #ff0000;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 20px; 
+}
+
+.btn_scan{
+    color: #6040fe;
+    background-color: #ffffff;
+    border:  2px solid #6040fe;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 20px; 
+}
+
+.btn_supp{
+    color: #ff0000;
+    background-color: #ffffff;
+    border:  2px solid #ff0000;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 20px; 
+}
+
+.part2{
+    background-color: #d9d9d9;
+    padding: 20px 40px;
+}
+
+
+.modalite{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.calendrier{
+    display: flex;
+    flex-direction: row;
+}
+
+.places{
+    display: flex;
+    flex-direction: row;
+}
+
+.part3{
+    padding: 20px 40px;
+    display: flex;
+    gap: 50px;
+}
+
+
+.ellipse {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    background-color: #000000;
+    border-radius: 30px;
+}
+
+
+
+.part3_cree{
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************/
+/* Au propre */
+/*************/
+

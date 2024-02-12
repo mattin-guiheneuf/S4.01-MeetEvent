@@ -1,24 +1,24 @@
 <?php 
 // Affichier la recommandation
-//require_once 'algorithme/Suggestion.php';
+/* require_once 'algorithme/Suggestion.php';
  
-//echo $_SESSION["user_id"];
+echo $_SESSION["user_id"]; */
 
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 
-  <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>ME</title>
-      <link rel="stylesheet" href="CSS/global.css" />
-      <link rel="stylesheet" href="CSS/style4.css" />
-      <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  </head>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ME</title>
+        <link rel="stylesheet" href="CSS/global.css" />
+        <link rel="stylesheet" href="CSS/style4.css" />
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </head>
     <body>
         <div style="background-color:#6040fe;">
             <!-- Barre de Navigation -->
@@ -36,7 +36,7 @@
                             <a class="nav-link" href="#" style="color: white;font-size: 18px;">Contact</a>
                         </li>
                         <li class="nav-item" style="padding-left: 30px;padding-right: 30px;">
-                            <a class="nav-link" href="#" style="color: white;font-size: 18px;">Gérer mes événements</a>
+                            <a class="nav-link" href="MesEvent.html" style="color: white;font-size: 18px;">Gérer mes événements</a>
                         </li>
                         </ul>
                         <span class="navbar-text">
@@ -59,15 +59,17 @@
                     <div class="barre-de-recherche">
                         <div class="items">
                             <div class="item">
-                                <img class="i-evenement" src="img/i-evenement.png" />
+                                <img class="i-evenement" src="img/semaine-calendaire.png" />
                                 <input type="text" name="nomEvenement" placeholder="Nom de l’événement" class="lb-event"/>
                             </div>
+                            <span class="vertical-line"></span>
                             <div class="item">
-                                <img class="i-date" src="img/i-date.png" />
+                                <img class="i-date" src="img/horloge-deux-heures-et-demie.png" />
                                 <input type="text" name="nomEvenement" placeholder="Date (jj/mm/aaaa)" class="lb-date"/>
                             </div>
+                            <span class="vertical-line"></span>
                             <div class="item">
-                                <img class="i-ville" src="img/i-ville.png" />
+                                <img class="i-ville" src="img/localisation-du-terrain.png" />
                                 <input type="text" name="nomEvenement" placeholder="Ville" class="lb-ville"/>                        
                             </div>
                         </div>
@@ -130,14 +132,14 @@
 
                             <div class="modalite">
                                 <div class="calendrier">
-                                    <img src="img/3914353-1-5.png" width="26px"/>
+                                    <i class="fi fi-sr-calendar" style="font-size: 28px"></i>
                                     <div class="infos">
                                         <div style="font-weight:bold;">Calendrier</div>
                                         <div>dd/mm/aaaa - hh:mm</div>
                                     </div>    
                                 </div>
                                 <div class="places">
-                                    <img src="img/3917272-1-4.png" width="26px"/>
+                                    <i class="fi fi-sr-users-alt" style="font-size: 28px"></i>
                                     <div class="infos">
                                         <div style="font-weight:bold;">Places restantes</div>
                                         <div>nombre</div>
@@ -238,7 +240,7 @@
 
                             <div class="modalite">
                                 <div class="calendrier">
-                                    <img src="img/3914353-1-5.png" width="26px"/>
+                                <i class="fi fi-rr-calendar" style="font-size: 28px"></i>
                                     <div class="infos">
                                         <div style="font-weight:bold;">Calendrier</div>
                                         <div>dd/mm/aaaa - hh:mm</div>
