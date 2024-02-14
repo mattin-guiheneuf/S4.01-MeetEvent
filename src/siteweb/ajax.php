@@ -28,7 +28,7 @@ if(isset($_POST['eventName']) or isset($_POST['eventDate']) or isset($_POST['eve
     $eventCity = isset($_POST['eventCity']) ? $_POST['eventCity'] : '';
 
     // Construire la requête SQL paramétrée en fonction des critères de recherche fournis
-    $sql = "SELECT e.*, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces 
+    $sql = "SELECT e.*,u.chemImage as chemImage, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces 
             FROM evenement e 
             JOIN categorie c ON e.idCategorie = c.idCategorie 
             JOIN utilisateur u ON e.idOrganisateur = u.idUtilisateur 
@@ -89,7 +89,7 @@ if(isset($_POST['listeEvent'])){
     // Pour chaque événement dans la liste
     foreach ($listeEvent as $eventId) {
         // Construire la requête SQL paramétrée en fonction des critères de recherche fournis
-        $sql = "SELECT e.*, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces 
+        $sql = "SELECT e.*,u.chemImage as chemImage, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces 
                 FROM evenement e 
                 JOIN categorie c ON e.idCategorie = c.idCategorie 
                 JOIN utilisateur u ON e.idOrganisateur = u.idUtilisateur 

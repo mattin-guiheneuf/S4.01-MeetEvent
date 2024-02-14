@@ -31,6 +31,9 @@ if ($connexion->connect_error) {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Inclure les styles de Slick Slider -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
     </head>
     <body>
         <div style="background-color:#6040fe;">
@@ -154,7 +157,7 @@ if ($connexion->connect_error) {
 <!--                 <img class="i-retour" src="img/i-retour.png" />
  -->            </a>
         </div>    
-    </body>
+    
     <script>
         /* Afficher au chargement de la page les suggestion de l'individu */
         $(document).ready(function() {
@@ -282,29 +285,32 @@ if ($connexion->connect_error) {
                 // Construction de la structure HTML pour afficher les résultats
                 html = "";
                 for (var i = 0; i < results.length; i++) {
+
+
                     html += '<div class="event">';
-                    html += '<div class="part1">';
+                    html += '<div class="part1" style="background-image:url(\''+results[i].chemImages+'\');">';
                     /* if(results[i].idEvenement == results2[0].idEvenement){
                         html += '<a href="#" class="btn_join" style="border-color:green;color:green;display:flex;gap:5px;align-items:center;">ADMIS <img src="img/verifier (3).png" width="15px" height="15px"/> </a>';
                     }else{
                         html += '<a href="#" class="btn_join">REJOINDRE</a>';
                     } */
+
                     html += '<a href="#" class="btn_join">REJOINDRE</a>';
                     html += '<div class="categorie">'+ results[i].libCat +'</div>';      
                     html += '</div>';
                     html += '<div class="part2">';
                     html += '<div class="titre_event">'+ results[i].nom +'</div>';
-                    html += '<div>Localisation</div>';
+                    html += '<div>'+ results[i].adresse +'</div>';
                     html += '<div class="modalite">';
                     html += '<div class="calendrier">';
-                    html += '<i class="fi fi-sr-calendar" style="font-size: 28px"></i>';
+                    html += '<i class="fi fi-sr-calendar" style="font-size: 40px"></i>';
                     html += '<div class="infos">';
                     html += '<div style="font-weight:bold;">Calendrier</div>';
-                    html += '<div>'+ formatDate(results[i].dateEvent) +' - hh:mm</div>';
+                    html += '<div>'+ formatDate(results[i].dateEvent) +' - '+ results[i].heure +'</div>';
                     html += '</div> ';   
                     html += '</div>';
                     html += '<div class="places">';
-                    html += '<i class="fi fi-sr-users-alt" style="font-size: 28px"></i>';
+                    html += '<i class="fi fi-sr-users-alt" style="font-size: 40px"></i>';
                     html += '<div class="infos">';
                     html += '<div style="font-weight:bold;">Places restantes</div>';
                     html += '<div>'+ results[i].nbPlaces +'</div>';
@@ -313,7 +319,7 @@ if ($connexion->connect_error) {
                     html += '</div>';
                     html += '</div> ';   
                     html += '<div class="part3">';
-                    html += '<div class="ellipse"></div>';
+                    html += '<img src="'+ results[i].chemImage +'" alt="icone utilisateur" class="icon"/>';
                     html += '<div class="infos_createur">';
                     html += '<div style="font-weight:bold;">Créateur</div>';
                     html += '<div>'+ results[i].nom_organisateur + " " + results[i].prenom_organisateur +'</div>';
@@ -322,10 +328,13 @@ if ($connexion->connect_error) {
                     html += '</div>'
                 }
                 searchResultsDiv.innerHTML = html;
+
             } else {
                 searchResultsDiv.innerHTML = "Aucun résultat trouvé.";
             }
         }
 
     </script>
+    </body>
+
 </html>

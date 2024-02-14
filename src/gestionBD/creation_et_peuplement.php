@@ -85,6 +85,7 @@ $sql = "CREATE TABLE IF NOT EXISTS $nomTable_User (
     trancheAge varchar(10) not null,
     description varchar(200) not null,
     situation varchar(50) not null,
+    chemImage varchar(200) not null,
     MotDePasse varchar(50) not null,
     constraint verif_mail check(adrMail like '%@%.%'),
     constraint verif_trancheAge check (trancheAge in ('< 18', '18-25', '26-45', '> 45'))
@@ -105,6 +106,9 @@ $sql = "CREATE TABLE IF NOT EXISTS $nomTable_Event (
     effMax integer not null,
     statut integer not null,
     prix decimal not null,
+    heure varchar(10) not null,
+    adresse varchar(200) not null,
+    chemImages varchar(200) not null,
     idCategorie integer not null,
     idOrganisateur integer not null,
     foreign key(idCategorie) references Categorie(idCategorie),
@@ -369,19 +373,19 @@ if ($totalLignes == 0) {
     // La table est vide
     // Requête d'insertion de données dans la table Utilisateur
     $sql = "INSERT INTO $nomTable_User VALUES
-    ( 1 , 'Jean' , 'jean' , 'jean.jean64@gmail.com' , '> 45', 'vieux, laid, ennuyeux',  'sourd' , 'cestSecret123'),
-    ( 2 , 'Dupont' , 'joseph' , 'dupont.jos64@gmail.com' , '26-45', 'vieux, laid, ennuyeux',  'aucun' , 'cestSecret123'),
-    ( 3 , 'Dupouille' , 'rodric' , 'dup.rodric40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
-    ( 4 , 'Capdet' , 'stephane' , 'steph40@gmail.com' , '< 18', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
-    ( 5 , 'Duvignau' , 'yannis' , 'yaya.dudu40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', 'cestSecret123'),
-    ( 6 , 'Mourgue' , 'clement' , 'clement.mg40@gmail.com' , '18-25', 'jeune, beau, drole',  'autiste' , 'cestSecret123'),
-    ( 7 , 'Victoras' , 'dylan' , 'vivicto.dy64@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
-    ( 8 , 'Guiheuneuf' , 'mattin' , 'guigui64@gmail.com' , '18-25', 'jeune, beau, drole', 'aucun' , 'cestSecret123'),
-    ( 9 , 'Marot' , 'lucas' , 'lulu64@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
-    ( 10 , 'Palassin' , 'adrien' , 'ad40@gmail.com' , '< 18', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
-    ( 11 , 'Pierre' , 'Suzon' , 'suzonpierre@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
-    ( 12 , 'Irastorza' , 'Pierre' , 'pirastorza@gmail.com' , '26-45', 'jeune, beau, drole',  'aucun' , 'cestSecret123'),
-    ( 13 , 'Moulin' , 'Thibault' , 'thibmoulin@gmail.com' , '26-45', 'jeune, beau, drole',  'aucun' , 'cestSecret123')
+    ( 1 , 'Jean' , 'jean' , 'jean.jean64@gmail.com' , '> 45', 'vieux, laid, ennuyeux',  'sourd' , './img/iconUser1' ,'cestSecret123'),
+    ( 2 , 'Dupont' , 'joseph' , 'dupont.jos64@gmail.com' , '26-45', 'vieux, laid, ennuyeux',  'aucun', './img/iconUser4' , 'cestSecret123'),
+    ( 3 , 'Dupouille' , 'rodric' , 'dup.rodric40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', './img/iconUser2' , 'cestSecret123'),
+    ( 4 , 'Capdet' , 'stephane' , 'steph40@gmail.com' , '< 18', 'jeune, beau, drole',  'aucun', './img/iconUser1' , 'cestSecret123'),
+    ( 5 , 'Duvignau' , 'yannis' , 'yaya.dudu40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', './img/iconUser3' , 'cestSecret123'),
+    ( 6 , 'Mourgue' , 'clement' , 'clement.mg40@gmail.com' , '18-25', 'jeune, beau, drole',  'autiste', './img/iconUser1' , 'cestSecret123'),
+    ( 7 , 'Victoras' , 'dylan' , 'vivicto.dy64@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', './img/iconUser5' , 'cestSecret123'),
+    ( 8 , 'Guiheuneuf' , 'mattin' , 'guigui64@gmail.com' , '18-25', 'jeune, beau, drole', 'aucun', './img/iconUser3' , 'cestSecret123'),
+    ( 9 , 'Marot' , 'lucas' , 'lulu64@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', './img/iconUser4' , 'cestSecret123'),
+    ( 10 , 'Palassin' , 'adrien' , 'ad40@gmail.com' , '< 18', 'jeune, beau, drole',  'aucun', './img/iconUser1' , 'cestSecret123'),
+    ( 11 , 'Pierre' , 'Suzon' , 'suzonpierre@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', './img/iconUser6' , 'cestSecret123'),
+    ( 12 , 'Irastorza' , 'Pierre' , 'pirastorza@gmail.com' , '26-45', 'jeune, beau, drole',  'aucun', './img/iconUser5' , 'cestSecret123'),
+    ( 13 , 'Moulin' , 'Thibault' , 'thibmoulin@gmail.com' , '26-45', 'jeune, beau, drole',  'aucun', './img/iconUser4' , 'cestSecret123')
     ";
 
     if ($connexion->query($sql) === TRUE) {
@@ -408,25 +412,25 @@ if ($totalLignes == 0) {
     // La table est vide
     // Requête d'insertion de données dans la table Evenement
     $sql = "INSERT INTO $nomTable_Event VALUES
-    ( 1 , 'Grosse soiree' , 'Grosse soiree chez moi !' , '2024-12-15' , 10,  0 , 0.00 , 1 , 1 ),
-    ( 2 , 'Soiree FIFA' , 'Tournoi de fou sur FIFA. 3-0, tu lâche la manette !' , '2024-11-20' , 15,  0 , 0.00 , 1 , 2 ),
-    ( 3 , 'Soiree au WOK' , 'Il faut rentabiliser le prix.' , '2024-11-14' , 20,  0 , 0.00 , 1 , 3 ),
-    ( 4 , 'Aquaman 2 au cine' , 'Venez on regarde Aquaman 2 !' , '2024-10-10' , 30,  1 , 0.00 , 1 , 4 ),
-    ( 5 , 'Bowling' , 'Soiree chill au bowling' , '2024-10-25' , 5,  0 , 0.00 , 2 , 5 ),
-    ( 6 , 'Billard' , 'Un entrainement au billard' , '2024-10-25' , 3,  0 , 0.00 , 3 , 6 ),
-    ( 7 , 'Laser game' , 'Venez jouer a Call of Duty dans la vraie vie' , '2024-10-30' , 19,  0 , 0.00 , 3 , 7 ),
-    ( 8 , 'Atelier de poterie' , 'Venez apprendre la poterie' , '2024-10-06' , 18,  1 , 5.50 , 4 , 8 ),
-    ( 9 , 'Réunion litteraire' , 'Parlons de livre !' , '2024-10-11' , 16,  1 , 9.99 , 4 , 9 ),
-    ( 10 , 'Foot salle' , '9 contre 9 sur un terrain !' , '2024-11-14' , 18,  0 , 0.00 , 5 , 10 ),
-    ( 11 , 'Soirée jeux de société', 'Venez jouer à vos jeux préférés !', '2024-12-22', 12, 0, 0.00, 1, 12 ),
-    ( 12 , 'Cours de cuisine' , 'Apprenons à cuisiner ensemble !' , '2024-11-14' , 25,  1 , 15.00 , 4 , 13 ),
-    ( 13,  'Concert live', 'Profitez d''un concert en direct !', '2024-10-05', 40, 1, 20.00, 4, 11 ),
-    ( 14 , 'Soirée karaoké', 'Montrez vos talents de chanteur !', '2024-10-12', 15, 1, 0.00, 1, 11 ),
-    ( 15,  'Randonnée nature', 'Explorer la nature ensemble !', '2024-11-08', 8, 1, 0.00, 3, 1 ),
-    ( 16 , 'Projection de films', 'Cinéma à la maison !', '2024-11-30', 20, 0, 5.00, 4, 5 ),
-    ( 17, 'Séance de méditation', 'Relaxation et bien-être', '2024-11-17', 10, 1, 3.99, 5, 1 ),
-    ( 18 , 'Tournoi de ping-pong', 'Compétition amicale de ping-pong', '2024-12-03', 16, 1, 7.50, 5, 8 ),
-    ( 19 , 'Banquet des fêtes', 'Repas convivial pour profiter des fêtes du village', '2024-07-11', 50, 1, 8.00, 2, 8 )
+    ( 1 , 'Grosse soiree' , 'Grosse soiree chez moi !' , '2024-12-15' , 10,  0 , 0.00 , '15:30' , '3 rue de Cassou, 64600 Anglet','./img/event1' , 1 , 1 ),
+    ( 2 , 'Soiree FIFA' , 'Tournoi de fou sur FIFA. 3-0, tu lâche la manette !' , '2024-11-20' , 15,  0 , 0.00, '15:30' , '3 rue de Cassou, 64600 Anglet','./img/event2' , 1 , 2 ),
+    ( 3 , 'Soiree au WOK' , 'Il faut rentabiliser le prix.' , '2024-11-14' , 20,  0 , 0.00, '15:30' , '3 rue de Cassou, 64600 Anglet','./img/event3' , 1 , 3 ),
+    ( 4 , 'Aquaman 2 au cine' , 'Venez on regarde Aquaman 2 !' , '2024-10-10' , 30,  1 , 0.00, '15:30','3 rue de Cassou, 64600 Anglet','./img/event4' , 1 , 4 ),
+    ( 5 , 'Bowling' , 'Soiree chill au bowling' , '2024-10-25' , 5,  0 , 0.00,'15:30', '3 rue de Cassou, 64600 Anglet','./img/event5' , 2 , 5 ),
+    ( 6 , 'Billard' , 'Un entrainement au billard' , '2024-10-25' , 3,  0 , 0.00,'15:30', '3 rue de Cassou, 64600 Anglet','./img/event1' , 3 , 6 ),
+    ( 7 , 'Laser game' , 'Venez jouer a Call of Duty dans la vraie vie' , '2024-10-30' , 19,  0 , 0.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event2' , 3 , 7 ),
+    ( 8 , 'Atelier de poterie' , 'Venez apprendre la poterie' , '2024-10-06' , 18,  1 , 5.50,'15:30','3 rue de Cassou, 64600 Anglet','./img/event3' , 4 , 8 ),
+    ( 9 , 'Réunion litteraire' , 'Parlons de livre !' , '2024-10-11' , 16,  1 , 9.99,'15:30','3 rue de Cassou, 64600 Anglet','./img/event2' , 4 , 9 ),
+    ( 10 , 'Foot salle' , '9 contre 9 sur un terrain !' , '2024-11-14' , 18,  0 , 0.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event4' , 5 , 10 ),
+    ( 11 , 'Soirée jeux de société', 'Venez jouer à vos jeux préférés !', '2024-12-22', 12, 0, 0.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event2', 1, 12 ),
+    ( 12 , 'Cours de cuisine' , 'Apprenons à cuisiner ensemble !' , '2024-11-14' , 25,  1 , 15.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event5' , 4 , 13 ),
+    ( 13,  'Concert live', 'Profitez d''un concert en direct !', '2024-10-05', 40, 1, 20.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event2', 4, 11 ),
+    ( 14 , 'Soirée karaoké', 'Montrez vos talents de chanteur !', '2024-10-12', 15, 1, 0.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event5', 1, 11 ),
+    ( 15,  'Randonnée nature', 'Explorer la nature ensemble !', '2024-11-08', 8, 1, 0.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event1', 3, 1 ),
+    ( 16 , 'Projection de films', 'Cinéma à la maison !', '2024-11-30', 20, 0, 5.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event2', 4, 5 ),
+    ( 17, 'Séance de méditation', 'Relaxation et bien-être', '2024-11-17', 10, 1, 3.99,'15:30','3 rue de Cassou, 64600 Anglet','./img/event3', 5, 1 ),
+    ( 18 , 'Tournoi de ping-pong', 'Compétition amicale de ping-pong', '2024-12-03', 16, 1, 7.50,'15:30','3 rue de Cassou, 64600 Anglet','./img/event4', 5, 8 ),
+    ( 19 , 'Banquet des fêtes', 'Repas convivial pour profiter des fêtes du village', '2024-07-11', 50, 1, 8.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event5', 2, 8 )
     ";
 
     if ($connexion->query($sql) === TRUE) {
