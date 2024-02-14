@@ -120,3 +120,22 @@ if(isset($_POST['listeEvent'])){
     echo $json_results;
 }
 
+/* ----------------------------------------------------------- */
+/* Si la requete AJAX provient de la l'adhésion à un événement */
+/* ----------------------------------------------------------- */
+
+if(isset($_POST['eventSelected'])){
+    // Récupérer les données envoyées par AJAX et les valider
+    $eventSelected = isset($_POST['eventSelected']) ? $_POST['eventSelected'] : '';
+    $idUtilisateur = $_SESSION['user_id'];
+
+    //Faire la requète d'insertion
+    $sql = "INSERT INTO participer VALUES ($idUtilisateur, $eventSelected,'lienQRCode',0)";
+    // Exécuter la requête SQL
+    $result = $connexion->query($sql);
+    // Fermer la connexion à la base de données
+    $connexion->close();
+    
+    echo "Evenement rejoins avec succès";
+}
+

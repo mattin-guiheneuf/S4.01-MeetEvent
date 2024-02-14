@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 // Vérifiez si l'utilisateur est connecté en vérifiant la présence de ses informations d'identification dans la session
 /* if (!isset($_SESSION['user_id'])) {
     // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
@@ -156,7 +156,20 @@ if ($connexion->connect_error) {
                 <span>REVENEZ EN HAUT POUR FAIRE UNE RECHERCHE</span>
 <!--                 <img class="i-retour" src="img/i-retour.png" />
  -->            </a>
-        </div>    
+        </div>   
+        
+        <!-- Fenetre modale -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <h3>Voulez-vous vraiment rejoindre cet événement ?</h3>
+                <p>Vous allez vous incrire pour cet événement. Vous ouvez vous désinscrire à tout moment via l'onglet "Gérer mes Evenements".</p>
+                <div class="container-btn">
+                    <input type="hidden" class="modalRecupEvent" value="">
+                    <button class="btn_modal" style="color:white;background-color:#6040fe;" onclick="rejoindreEvent()">Oui, je rejoins</button>
+                    <button class="btn_modal" style="color:#6040fe;background-color:white;border:2px solid #6040fe;" onclick="document.getElementById('myModal').style.display = 'none'">Non</button>
+                </div>    
+            </div>
+        </div>
     
     <script>
         /* Afficher au chargement de la page les suggestion de l'individu */
@@ -230,6 +243,10 @@ if ($connexion->connect_error) {
             var suggestionSection = document.getElementsByClassName("part_suggest")[0];
             suggestionSection.style.display = "none";
 
+            // Masquer la section catégorie
+            var catSection = document.getElementsByClassName("catgorie")[0];
+            catSection.style.display = "none";
+
             // Exemple d'affichage des résultats (remplacez avec votre logique de rendu des résultats)
             var searchResultsDiv = document.getElementById("titre_result");
             searchResultsDiv.innerHTML = ""; // Efface les résultats précédents
@@ -254,6 +271,7 @@ if ($connexion->connect_error) {
             } else {
                 // Montrer la section de suggestion lorsque la recherche est effectuée
                 suggestionSection.style.display = "grid";
+                catSection.style.display = "block";
             }
             searchResultsDiv.innerHTML = searchQuery;
 
@@ -295,7 +313,7 @@ if ($connexion->connect_error) {
                         html += '<a href="#" class="btn_join">REJOINDRE</a>';
                     } */
 
-                    html += '<a href="#" class="btn_join">REJOINDRE</a>';
+                    html += '<button id="openModalBtn" onclick="openModal('+ results[i].idEvenement +')" class="btn_join">REJOINDRE</button>';
                     html += '<div class="categorie">'+ results[i].libCat +'</div>';      
                     html += '</div>';
                     html += '<div class="part2">';
@@ -333,6 +351,44 @@ if ($connexion->connect_error) {
                 searchResultsDiv.innerHTML = "Aucun résultat trouvé.";
             }
         }
+
+        // Fonction à exécuter lorsque le bouton est cliqué pour ouvrir la modal
+        function openModal(idEvenement) {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+
+            var eventSelected = document.getElementsByClassName("modalRecupEvent")[0];
+            eventSelected.value=idEvenement;
+        }
+
+        // Fermer la modal si l'utilisateur clique en dehors de la modal
+        window.onclick = function(event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        /* Fonction pour rejoindre l'evenement sélectionné */
+        function rejoindreEvent(){
+            var eventSelected = document.getElementsByClassName("modalRecupEvent")[0].value;
+            // Requête AJAX vers le serveur pour récupérer les événements correspondants à la recherche
+            $.ajax({
+                type: 'POST',
+                url: 'ajax.php',
+                data: {
+                    eventSelected: eventSelected
+                },
+                success: function(response) {
+                    console.log(response);
+                    window.location.href="MesEvent.html";
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erreur lors de la requête AJAX:', error);
+                }
+            });
+        }
+
 
     </script>
     </body>
