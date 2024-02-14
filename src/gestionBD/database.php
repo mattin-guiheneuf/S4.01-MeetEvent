@@ -1,13 +1,11 @@
-<!--
-/**
+<?php
+/* *
     Auteurs : Equipe MeetEvent
     Description : Création de la connection vers la base de données
-*/
--->
+ */
 
-<?php
 //Pour YANNIS
-$bdname = 'projetME';
+$bdname = 'projetme';
 $host = 'localhost';
 $username = 'root';
 $password = '';
@@ -62,4 +60,3 @@ if($connexion->connect_errno){
 
 return $connexion;
 
-?>

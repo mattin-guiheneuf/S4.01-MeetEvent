@@ -1,6 +1,6 @@
 /* Zoning de la page dans la zone hero définie dans le global.css */
 .contenuFormCrea {
-  grid-column: 2;
+  grid-column: 2/12;
 
   /* Zoning */
   grid-template: 

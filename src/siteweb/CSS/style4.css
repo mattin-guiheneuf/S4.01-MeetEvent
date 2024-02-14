@@ -55,6 +55,7 @@
     display: flex;
     margin: 20px;
     gap:  10px;
+    flex-grow: 3;
 }
 
 .vertical-line{
@@ -66,15 +67,31 @@
     height: 20px;
   }
 
+  @media (max-width: 780px) {
+    .vertical-line {
+        display: none;
+    }
+}
+
+@media (max-width: 1162px) {
+    .vertical-line:nth-last-child(2) {
+        display: none;
+    }
+}
+
 .lb-ville {
     position: relative;
     font-family: "Poppins-Light", Helvetica;
     font-weight: 300;
-    color: #a1a1a1;
     font-size: 19.3px;
     border: none;
     letter-spacing: 0;
     line-height: normal;
+}
+
+input{
+    outline: none;
+    color: #000000;
 }
 
 .i-ville {
@@ -89,7 +106,6 @@
     position: relative;
     font-family: "Poppins-Light", Helvetica;
     font-weight: 300;
-    color: #a1a1a1;
     font-size: 19.3px;
     border: none;
     letter-spacing: 0;
@@ -108,7 +124,6 @@
     position: relative;
     font-family: "Poppins-Light", Helvetica;
     font-weight: 300;
-    color: #a1a1a1;
     font-size: 19.3px;
     border: none;
     text-decoration: none;
@@ -134,6 +149,8 @@
     border-radius: 20px;
     text-align: center;
     width: max-content;
+    border: none;
+    flex-grow: 3;
 }
 
 /* Catégories */
@@ -159,6 +176,7 @@
  .catgories {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
     gap: 24px 20px;
     margin-bottom: 60px;
 }
@@ -220,7 +238,7 @@
 
 .part1 {
     position: relative;
-    width: 600px;
+    width: 528px;
     height: 276px;
     background-color: #f3f3f38f;
     border-radius: 20px 20px 0px 0px;
@@ -246,7 +264,7 @@
     border-radius: 20px;
     position: absolute;
     top: 20px;
-    right: 80px;
+    right: 20px;
 }
 
 .part2{
@@ -290,6 +308,28 @@
     height: 60px;
     background-color: #000000;
     border-radius: 30px;
+}
+
+/* Partie suggestion */
+
+.part_suggest{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-gap: 24px;
+}
+
+.suggestion {
+    position: relative;
+    grid-column: 2/12;
+}
+
+#searchResults{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 40px;
 }
 
 

@@ -1,8 +1,20 @@
 <?php 
-// Affichier la recommandation
-/* require_once 'algorithme/Suggestion.php';
- 
-echo $_SESSION["user_id"]; */
+
+// Vérifiez si l'utilisateur est connecté en vérifiant la présence de ses informations d'identification dans la session
+/* if (!isset($_SESSION['user_id'])) {
+    // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+    header("Location: connexion.php");
+    exit; // Assurez-vous de terminer le script après la redirection
+} */
+
+// Faire la connexion avec la base de données
+include_once "../gestionBD/database.php";
+
+// Vérifier la connexion
+if ($connexion->connect_error) {
+    die("La connexion a échoué : " . $connexion->connect_error);
+}
+
 
 ?>
 
@@ -18,6 +30,7 @@ echo $_SESSION["user_id"]; */
         <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
         <div style="background-color:#6040fe;">
@@ -60,20 +73,20 @@ echo $_SESSION["user_id"]; */
                         <div class="items">
                             <div class="item">
                                 <img class="i-evenement" src="img/semaine-calendaire.png" />
-                                <input type="text" name="nomEvenement" placeholder="Nom de l’événement" class="lb-event"/>
+                                <input type="text" name="nomEvenement" placeholder="Nom de l’événement" class="lb-event" id="eventName"/>
                             </div>
                             <span class="vertical-line"></span>
                             <div class="item">
                                 <img class="i-date" src="img/horloge-deux-heures-et-demie.png" />
-                                <input type="text" name="nomEvenement" placeholder="Date (jj/mm/aaaa)" class="lb-date"/>
+                                <input type="text" name="nomEvenement" placeholder="Date (jj/mm/aaaa)" class="lb-date" id="eventDate"/>
                             </div>
                             <span class="vertical-line"></span>
                             <div class="item">
                                 <img class="i-ville" src="img/localisation-du-terrain.png" />
-                                <input type="text" name="nomEvenement" placeholder="Ville" class="lb-ville"/>                        
+                                <input type="text" name="nomEvenement" placeholder="Ville" class="lb-ville" id="eventCity"/>                        
                             </div>
                         </div>
-                        <a class="btn_search" href="#">RECHERCHER</a>
+                        <button class="btn_search" onclick="searchEvents()">RECHERCHER</button>
                     </div>
                 </div>    
                 <!-- 2eme section -->
@@ -119,222 +132,18 @@ echo $_SESSION["user_id"]; */
             <div class="suggestion">
                 <div class="titre-suggestion">Suggestion d’événement</div>
                 <div class="events">
-                    <!-- Event 1 -->
-                    <div class="event">
-                        <div class="part1">
-                            <a href="#" class="btn_join">REJOINDRE</a>
-                            <div class="categorie">CATEGORIE</div>
-                            
-                        </div>
-                        <div class="part2">
-                            <div class="titre_event">Nom de l’événement</div>
-                            <div>Localisation</div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Recherche -->
+        <div class="part_suggest">
+            <div class="suggestion">
+                <div id="titre_result">
 
-                            <div class="modalite">
-                                <div class="calendrier">
-                                    <i class="fi fi-sr-calendar" style="font-size: 28px"></i>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Calendrier</div>
-                                        <div>dd/mm/aaaa - hh:mm</div>
-                                    </div>    
-                                </div>
-                                <div class="places">
-                                    <i class="fi fi-sr-users-alt" style="font-size: 28px"></i>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Places restantes</div>
-                                        <div>nombre</div>
-                                    </div>    
-                                </div>
-                            </div>
-                        </div>    
-                        <div class="part3">
-                            <div class="ellipse"></div>
-                            <div class="infos_createur">
-                                <div style="font-weight:bold;">Créateur</div>
-                                <div>Nom du créateur</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Event 2 -->
-                    <div class="event">
-                        <div class="part1">
-                            <a href="#" class="btn_join">REJOINDRE</a>
-                            <div class="categorie">CATEGORIE</div>
-                            
-                        </div>
-                        <div class="part2">
-                            <div class="titre_event">Nom de l’événement</div>
-                            <div>Localisation</div>
+                </div>
+                <div id="searchResults">
 
-                            <div class="modalite">
-                                <div class="calendrier">
-                                    <img src="img/3914353-1-5.png" width="26px"/>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Calendrier</div>
-                                        <div>dd/mm/aaaa - hh:mm</div>
-                                    </div>    
-                                </div>
-                                <div class="places">
-                                    <img src="img/3917272-1-4.png" width="26px"/>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Places restantes</div>
-                                        <div>nombre</div>
-                                    </div>    
-                                </div>
-                            </div>
-                        </div>    
-                        <div class="part3">
-                            <div class="ellipse"></div>
-                            <div class="infos_createur">
-                                <div style="font-weight:bold;">Créateur</div>
-                                <div>Nom du créateur</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Event 3 -->
-                    <div class="event">
-                        <div class="part1">
-                            <a href="#" class="btn_join">REJOINDRE</a>
-                            <div class="categorie">CATEGORIE</div>
-                            
-                        </div>
-                        <div class="part2">
-                            <div class="titre_event">Nom de l’événement</div>
-                            <div>Localisation</div>
-
-                            <div class="modalite">
-                                <div class="calendrier">
-                                    <img src="img/3914353-1-5.png" width="26px"/>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Calendrier</div>
-                                        <div>dd/mm/aaaa - hh:mm</div>
-                                    </div>    
-                                </div>
-                                <div class="places">
-                                    <img src="img/3917272-1-4.png" width="26px"/>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Places restantes</div>
-                                        <div>nombre</div>
-                                    </div>    
-                                </div>
-                            </div>
-                        </div>    
-                        <div class="part3">
-                            <div class="ellipse"></div>
-                            <div class="infos_createur">
-                                <div style="font-weight:bold;">Créateur</div>
-                                <div>Nom du créateur</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Event 4 -->
-                    <div class="event">
-                        <div class="part1">
-                            <a href="#" class="btn_join">REJOINDRE</a>
-                            <div class="categorie">CATEGORIE</div>
-                            
-                        </div>
-                        <div class="part2">
-                            <div class="titre_event">Nom de l’événement</div>
-                            <div>Localisation</div>
-
-                            <div class="modalite">
-                                <div class="calendrier">
-                                <i class="fi fi-rr-calendar" style="font-size: 28px"></i>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Calendrier</div>
-                                        <div>dd/mm/aaaa - hh:mm</div>
-                                    </div>    
-                                </div>
-                                <div class="places">
-                                    <img src="img/3917272-1-4.png" width="26px"/>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Places restantes</div>
-                                        <div>nombre</div>
-                                    </div>    
-                                </div>
-                            </div>
-                        </div>    
-                        <div class="part3">
-                            <div class="ellipse"></div>
-                            <div class="infos_createur">
-                                <div style="font-weight:bold;">Créateur</div>
-                                <div>Nom du créateur</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Event 5 -->
-                    <div class="event">
-                        <div class="part1">
-                            <a href="#" class="btn_join">REJOINDRE</a>
-                            <div class="categorie">CATEGORIE</div>
-                            
-                        </div>
-                        <div class="part2">
-                            <div class="titre_event">Nom de l’événement</div>
-                            <div>Localisation</div>
-
-                            <div class="modalite">
-                                <div class="calendrier">
-                                    <img src="img/3914353-1-5.png" width="26px"/>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Calendrier</div>
-                                        <div>dd/mm/aaaa - hh:mm</div>
-                                    </div>    
-                                </div>
-                                <div class="places">
-                                    <img src="img/3917272-1-4.png" width="26px"/>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Places restantes</div>
-                                        <div>nombre</div>
-                                    </div>    
-                                </div>
-                            </div>
-                        </div>    
-                        <div class="part3">
-                            <div class="ellipse"></div>
-                            <div class="infos_createur">
-                                <div style="font-weight:bold;">Créateur</div>
-                                <div>Nom du créateur</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Event 6 -->
-                    <div class="event">
-                        <div class="part1">
-                            <a href="#" class="btn_join">REJOINDRE</a>
-                            <div class="categorie">CATEGORIE</div>
-                            
-                        </div>
-                        <div class="part2">
-                            <div class="titre_event">Nom de l’événement</div>
-                            <div>Localisation</div>
-
-                            <div class="modalite">
-                                <div class="calendrier">
-                                    <img src="img/3914353-1-5.png" width="26px"/>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Calendrier</div>
-                                        <div>dd/mm/aaaa - hh:mm</div>
-                                    </div>    
-                                </div>
-                                <div class="places">
-                                    <img src="img/3917272-1-4.png" width="26px"/>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Places restantes</div>
-                                        <div>nombre</div>
-                                    </div>    
-                                </div>
-                            </div>
-                        </div>    
-                        <div class="part3">
-                            <div class="ellipse"></div>
-                            <div class="infos_createur">
-                                <div style="font-weight:bold;">Créateur</div>
-                                <div>Nom du créateur</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -342,8 +151,181 @@ echo $_SESSION["user_id"]; */
         <div class="retourEnHaut">
             <a href="#" class="btn-retour">
                 <span>REVENEZ EN HAUT POUR FAIRE UNE RECHERCHE</span>
-                <img class="i-retour" src="img/i-retour.png" />
-            </a>
+<!--                 <img class="i-retour" src="img/i-retour.png" />
+ -->            </a>
         </div>    
     </body>
+    <script>
+        /* Afficher au chargement de la page les suggestion de l'individu */
+        $(document).ready(function() {
+            // Exécuter la requête AJAX au chargement de la page
+            $.ajax({
+                url: 'get_suggestion.php',
+                method: 'GET',
+                success: function(response) {
+                    // Traitement du résultat ici
+                    var response = response.split("<br>");
+                    response.pop();
+                    console.log(response); // Affiche le résultat dans la console
+                    suggestEvent(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erreur lors de la requête AJAX:', error);
+                }
+            });
+        });
+
+        /* Fonction pour changer le format de date */
+        function formatDate(inputDate) {
+            // Séparation de l'année, du mois et du jour
+            var parts = inputDate.split("-");
+            
+            // Création d'un nouvel objet Date avec les parties de la date
+            var date = new Date(parts[0], parts[1] - 1, parts[2]);
+            
+            // Récupération des éléments de la date
+            var day = date.getDate();
+            var month = date.getMonth() + 1; // Les mois commencent à partir de 0
+            var year = date.getFullYear();
+            
+            // Formatage de la date avec des zéros de remplissage si nécessaire
+            var formattedDate = (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + year;
+            
+            // Retourner la date formatée
+            return formattedDate;
+        }
+
+        /* Fonction pour afficher les événements suggérés */
+        function suggestEvent(listeEvent) {
+            // Requête AJAX vers le serveur pour récupérer les événements correspondants à la recherche
+            $.ajax({
+                type: 'POST',
+                url: 'ajax.php',
+                dataType: 'json',
+                data: {
+                    listeEvent: listeEvent
+                },
+                success: function(response) {
+                    displaySearchResults(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erreur lors de la requête AJAX:', error);
+                }
+            });
+        }
+
+        /* Fonction pour afficher la recherche */
+        function searchEvents() {
+            var eventName = document.getElementById("eventName").value;
+            /* console.log(eventName) */
+            var eventDate = document.getElementById("eventDate").value;
+            /* console.log(eventDate) */
+            var eventCity = document.getElementById("eventCity").value;
+            /* console.log(eventCity) */
+
+            // Masquer la section de suggestion lorsque la recherche est effectuée
+            var suggestionSection = document.getElementsByClassName("part_suggest")[0];
+            suggestionSection.style.display = "none";
+
+            // Exemple d'affichage des résultats (remplacez avec votre logique de rendu des résultats)
+            var searchResultsDiv = document.getElementById("titre_result");
+            searchResultsDiv.innerHTML = ""; // Efface les résultats précédents
+
+            searchQuery ="";
+
+            // Vérifier si au moins un champ de recherche est rempli
+            if (eventName || eventDate || eventCity) {
+                var searchQuery = "<div class='titre-suggestion'>Recherche ";
+                if (eventName) {
+                    searchQuery += "pour <span style='color:#4060fe;'> " + eventName + "</span>, ";
+                }
+                if (eventDate) {
+                    searchQuery += "le <span style='color:#4060fe;'> " + eventDate + "</span>, ";
+                }
+                if (eventCity) {
+                    searchQuery += "à <span style='color:#4060fe;'> " + eventCity + "</span></div>, ";
+                }
+                searchQuery = searchQuery.slice(0, -2); // Supprime la virgule finale et l'espace
+                
+
+            } else {
+                // Montrer la section de suggestion lorsque la recherche est effectuée
+                suggestionSection.style.display = "grid";
+            }
+            searchResultsDiv.innerHTML = searchQuery;
+
+            // Requête AJAX vers le serveur pour récupérer les événements correspondants à la recherche
+            $.ajax({
+                type: 'POST',
+                url: 'ajax.php',
+                dataType: 'json',
+                data: {
+                    eventName: eventName,
+                    eventDate: eventDate,
+                    eventCity: eventCity
+                },
+                success: function(response) {
+                    displaySearchResults(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erreur lors de la requête AJAX:', error);
+                }
+            });
+   
+        }
+
+        function displaySearchResults(results,results2) {
+            var searchResultsDiv = document.getElementById("searchResults");
+/*             searchResultsDiv.innerHTML = ""; // Effacer les résultats précédents
+ */
+            if (results.length > 0) {
+                // Construction de la structure HTML pour afficher les résultats
+                html = "";
+                for (var i = 0; i < results.length; i++) {
+                    html += '<div class="event">';
+                    html += '<div class="part1">';
+                    /* if(results[i].idEvenement == results2[0].idEvenement){
+                        html += '<a href="#" class="btn_join" style="border-color:green;color:green;display:flex;gap:5px;align-items:center;">ADMIS <img src="img/verifier (3).png" width="15px" height="15px"/> </a>';
+                    }else{
+                        html += '<a href="#" class="btn_join">REJOINDRE</a>';
+                    } */
+                    html += '<a href="#" class="btn_join">REJOINDRE</a>';
+                    html += '<div class="categorie">'+ results[i].libCat +'</div>';      
+                    html += '</div>';
+                    html += '<div class="part2">';
+                    html += '<div class="titre_event">'+ results[i].nom +'</div>';
+                    html += '<div>Localisation</div>';
+                    html += '<div class="modalite">';
+                    html += '<div class="calendrier">';
+                    html += '<i class="fi fi-sr-calendar" style="font-size: 28px"></i>';
+                    html += '<div class="infos">';
+                    html += '<div style="font-weight:bold;">Calendrier</div>';
+                    html += '<div>'+ formatDate(results[i].dateEvent) +' - hh:mm</div>';
+                    html += '</div> ';   
+                    html += '</div>';
+                    html += '<div class="places">';
+                    html += '<i class="fi fi-sr-users-alt" style="font-size: 28px"></i>';
+                    html += '<div class="infos">';
+                    html += '<div style="font-weight:bold;">Places restantes</div>';
+                    html += '<div>'+ results[i].nbPlaces +'</div>';
+                    html += '</div> ';   
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div> ';   
+                    html += '<div class="part3">';
+                    html += '<div class="ellipse"></div>';
+                    html += '<div class="infos_createur">';
+                    html += '<div style="font-weight:bold;">Créateur</div>';
+                    html += '<div>'+ results[i].nom_organisateur + " " + results[i].prenom_organisateur +'</div>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>'
+                }
+                searchResultsDiv.innerHTML = html;
+            } else {
+                searchResultsDiv.innerHTML = "Aucun résultat trouvé.";
+            }
+        }
+
+    </script>
 </html>

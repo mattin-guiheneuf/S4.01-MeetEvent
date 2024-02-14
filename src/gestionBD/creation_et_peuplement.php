@@ -1,11 +1,13 @@
-<!--
-/**
-    Auteurs : Clement Mourgue et Yannis Duvignau
-    Description : Création et peuplement des données de base dans une base de données créer préalablement
-*/
--->
+
 
 <?php
+
+/* *
+    Auteurs : Clement Mourgue et Yannis Duvignau
+    Description : Création et peuplement des données de base dans une base de données créer préalablement
+ */
+
+
 //connexion
 include_once "database.php";
 
