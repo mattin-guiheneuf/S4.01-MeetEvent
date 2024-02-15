@@ -11,35 +11,7 @@
 //connexion
 include_once "database.php";
 
-
-
-
-// Requête pour récupérer le nom de toutes les tables
-$tables_query = "SHOW TABLES";
-$tables_result = $connexion->query($tables_query);
-
-if ($tables_result) {
-    while ($row = $tables_result->fetch_row()) {
-        $table_name = $row[0];
-        // Requête pour supprimer chaque table
-        $drop_query = "DROP TABLE IF EXISTS $table_name";
-        if ($connexion->query($drop_query) === TRUE) {
-            echo "Table $table_name supprimée avec succès.<br>";
-        } else {
-            echo "Erreur lors de la suppression de la table $table_name : " . $connexion->error . "<br>";
-        }
-    }
-} else {
-    echo "Erreur lors de la récupération des tables : " . $connexion->error;
-} 
-
-
-
-
-//////////////////////////////////////////////
-///          Création des tables          ///
-/////////////////////////////////////////////
-
+// Noms des tables
 $nomTable_Tag = "Tag";
 $nomTable_Cat = "Categorie";
 $nomTable_User = "Utilisateur";
@@ -49,6 +21,36 @@ $nomTable_Participer = "Participer";
 $nomTable_Reco = "Recommander";
 $nomTable_Qualifier = "Qualifier";
 $nomTable_Regrouper = "Regrouper";
+$tabNomsTables = [$nomTable_Regrouper,$nomTable_Qualifier,$nomTable_Reco,$nomTable_Participer,$nomTable_Associer,$nomTable_Event,$nomTable_User,$nomTable_Cat,$nomTable_Tag];
+
+
+
+// Requête pour récupérer le nom de toutes les tables
+/*$tables_query = "SHOW TABLES";
+$tables_result = $connexion->query($tables_query);
+
+if ($tables_result) {
+    while ($row = $tables_result->fetch_row()) {
+        $table_name = $row[0];*/
+	for($i = 0;$i<sizeof($tabNomsTables);$i++){
+        // Requête pour supprimer chaque table
+        $drop_query = "DROP TABLE IF EXISTS ".$tabNomsTables[$i]." CASCADE";
+        if ($connexion->query($drop_query) === TRUE) {
+            echo "Table ".$tabNomsTables[$i]." supprimée avec succès.<br>";
+        } else {
+            echo "Erreur lors de la suppression de la table ".$tabNomsTables[$i]." : " . $connexion->error . "<br>";
+        }
+    } /*
+} else {
+    echo "Erreur lors de la récupération des tables : " . $connexion->error;
+} */
+
+
+
+
+//////////////////////////////////////////////
+///          Création des tables          ///
+/////////////////////////////////////////////
 
 
 // Requête de création de la table Tag
@@ -85,7 +87,7 @@ $sql = "CREATE TABLE IF NOT EXISTS $nomTable_User (
     trancheAge varchar(10) not null,
     description varchar(200) not null,
     situation varchar(50) not null,
-    chemImage varchar(200) not null,
+    chemImage varchar(200),
     MotDePasse varchar(50) not null,
     constraint verif_mail check(adrMail like '%@%.%'),
     constraint verif_trancheAge check (trancheAge in ('< 18', '18-25', '26-45', '> 45'))
@@ -373,8 +375,8 @@ if ($totalLignes == 0) {
     // La table est vide
     // Requête d'insertion de données dans la table Utilisateur
     $sql = "INSERT INTO $nomTable_User VALUES
-    ( 1 , 'Jean' , 'jean' , 'jean.jean64@gmail.com' , '> 45', 'vieux, laid, ennuyeux',  'sourd' , './img/iconUser1' ,'cestSecret123'),
-    ( 2 , 'Dupont' , 'joseph' , 'dupont.jos64@gmail.com' , '26-45', 'vieux, laid, ennuyeux',  'aucun', './img/iconUser4' , 'cestSecret123'),
+    ( 1 , 'Jean' , 'jean' , 'jean.jean64@gmail.com' , '> 45', 'vieux, laid, ennuyeux',  'sourd' , './img/iconUser1.jpg' ,'cestSecret123'),
+    ( 2 , 'Dupont' , 'joseph' , 'dupont.jos64@gmail.com' , '26-45', 'vieux, laid, ennuyeux',  'aucun', './img/iconUser4.png' , 'cestSecret123'),
     ( 3 , 'Dupouille' , 'rodric' , 'dup.rodric40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', './img/iconUser2' , 'cestSecret123'),
     ( 4 , 'Capdet' , 'stephane' , 'steph40@gmail.com' , '< 18', 'jeune, beau, drole',  'aucun', './img/iconUser1' , 'cestSecret123'),
     ( 5 , 'Duvignau' , 'yannis' , 'yaya.dudu40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', './img/iconUser3' , 'cestSecret123'),
@@ -412,8 +414,8 @@ if ($totalLignes == 0) {
     // La table est vide
     // Requête d'insertion de données dans la table Evenement
     $sql = "INSERT INTO $nomTable_Event VALUES
-    ( 1 , 'Grosse soiree' , 'Grosse soiree chez moi !' , '2024-12-15' , 10,  0 , 0.00 , '15:30' , '3 rue de Cassou, 64600 Anglet','./img/event1' , 1 , 1 ),
-    ( 2 , 'Soiree FIFA' , 'Tournoi de fou sur FIFA. 3-0, tu lâche la manette !' , '2024-11-20' , 15,  0 , 0.00, '15:30' , '3 rue de Cassou, 64600 Anglet','./img/event2' , 1 , 2 ),
+    ( 1 , 'Grosse soiree' , 'Grosse soiree chez moi !' , '2024-12-15' , 10,  0 , 0.00 , '15:30' , '3 rue de Cassou, 64600 Anglet','./img/event1.jpg' , 1 , 1 ),
+    ( 2 , 'Soiree FIFA' , 'Tournoi de fou sur FIFA. 3-0, tu lâche la manette !' , '2024-11-20' , 15,  0 , 0.00, '15:30' , '3 rue de Cassou, 64600 Anglet','./img/event2.jpg' , 1 , 2 ),
     ( 3 , 'Soiree au WOK' , 'Il faut rentabiliser le prix.' , '2024-11-14' , 20,  0 , 0.00, '15:30' , '3 rue de Cassou, 64600 Anglet','./img/event3' , 1 , 3 ),
     ( 4 , 'Aquaman 2 au cine' , 'Venez on regarde Aquaman 2 !' , '2024-10-10' , 30,  1 , 0.00, '15:30','3 rue de Cassou, 64600 Anglet','./img/event4' , 1 , 4 ),
     ( 5 , 'Bowling' , 'Soiree chill au bowling' , '2024-10-25' , 5,  0 , 0.00,'15:30', '3 rue de Cassou, 64600 Anglet','./img/event5' , 2 , 5 ),

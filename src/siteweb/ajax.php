@@ -29,10 +29,10 @@ if(isset($_POST['eventName']) or isset($_POST['eventDate']) or isset($_POST['eve
 
     // Construire la requête SQL paramétrée en fonction des critères de recherche fournis
     $sql = "SELECT e.*,u.chemImage as chemImage, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces 
-            FROM evenement e 
-            JOIN categorie c ON e.idCategorie = c.idCategorie 
-            JOIN utilisateur u ON e.idOrganisateur = u.idUtilisateur 
-            JOIN participer p ON e.idEvenement = p.idEvenement 
+            FROM Evenement e 
+            JOIN Categorie c ON e.idCategorie = c.idCategorie 
+            JOIN Utilisateur u ON e.idOrganisateur = u.idUtilisateur 
+            JOIN Participer p ON e.idEvenement = p.idEvenement 
             WHERE 1=1";
 
     // Ajouter les conditions à la requête en fonction des paramètres fournis
@@ -90,10 +90,10 @@ if(isset($_POST['listeEvent'])){
     foreach ($listeEvent as $eventId) {
         // Construire la requête SQL paramétrée en fonction des critères de recherche fournis
         $sql = "SELECT e.*,u.chemImage as chemImage, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces 
-                FROM evenement e 
-                JOIN categorie c ON e.idCategorie = c.idCategorie 
-                JOIN utilisateur u ON e.idOrganisateur = u.idUtilisateur 
-                JOIN participer p ON e.idEvenement = p.idEvenement 
+                FROM Evenement e 
+                JOIN Categorie c ON e.idCategorie = c.idCategorie 
+                JOIN Utilisateur u ON e.idOrganisateur = u.idUtilisateur 
+                JOIN Participer p ON e.idEvenement = p.idEvenement 
                 WHERE e.idEvenement = $eventId
                 GROUP BY p.idEvenement";
         // Exécuter la requête SQL
@@ -130,7 +130,7 @@ if(isset($_POST['eventSelected'])){
     $idUtilisateur = $_SESSION['user_id'];
 
     //Faire la requète d'insertion
-    $sql = "INSERT INTO participer VALUES ($idUtilisateur, $eventSelected,'lienQRCode',0)";
+    $sql = "INSERT INTO Participer VALUES ($idUtilisateur, $eventSelected,'lienQRCode',0)";
     // Exécuter la requête SQL
     $result = $connexion->query($sql);
     // Fermer la connexion à la base de données

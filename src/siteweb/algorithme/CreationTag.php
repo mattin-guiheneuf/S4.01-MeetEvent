@@ -157,7 +157,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
 
-                header("Location: ../pageSuggestion.php");
+                //header("Location: ../pageSuggestion.php");
+				echo '<script>window.location = "../pageSuggestion.php";</script>';
                 break;
 
 

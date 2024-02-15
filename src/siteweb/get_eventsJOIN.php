@@ -18,11 +18,11 @@ if ($connexion->connect_error) {
 
 // Construire la requête SQL paramétrée en fonction des critères de recherche fournis
 $sql = "SELECT DISTINCT(p.idEvenement), e.*, x.chemImage as chemImage,x.nom as nom_organisateur, x.prenom as prenom_organisateur,c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces
-        FROM participer p 
-        JOIN evenement e ON p.idEvenement=e.idEvenement
-        JOIN utilisateur u ON p.idUtilisateur=u.idUtilisateur
-        JOIN utilisateur x ON e.idOrganisateur = x.idUtilisateur
-        JOIN categorie c ON  e.idCategorie=c.idCategorie
+        FROM Participer p 
+        JOIN Evenement e ON p.idEvenement=e.idEvenement
+        JOIN Utilisateur u ON p.idUtilisateur=u.idUtilisateur
+        JOIN Utilisateur x ON e.idOrganisateur = x.idUtilisateur
+        JOIN Categorie c ON  e.idCategorie=c.idCategorie
         WHERE p.idUtilisateur=".$_SESSION['user_id']."
         GROUP BY p.idEvenement";
 // Exécuter la requête SQL
