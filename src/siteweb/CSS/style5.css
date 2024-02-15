@@ -28,6 +28,7 @@
 
 .btns{
     position:relative;
+
 }
 
 .btn-consulter{
@@ -59,7 +60,7 @@
     grid-column: 2/12;
 }
 
-.titre_event {
+.titre_evenement {
     position: relative;
     font-family: "Poppins-Bold", Helvetica;
     font-weight: 700;
@@ -74,7 +75,6 @@
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 40px;
-    padding-bottom: 15%;
 }
 
 .event {
@@ -94,10 +94,11 @@
 
 .part1 {
     position: relative;
-    width: 600px;
+    width: 528px;
     height: 276px;
-    background-color: #f3f3f38f;
     border-radius: 20px 20px 0px 0px;
+    background-size: cover;
+    background-position: center;
 }
 
 .categorie{
@@ -110,10 +111,63 @@
     left: 40px;
 }
 
+
+.part2{
+    background-color: #d9d9d9;
+    padding: 20px 40px;
+}
+
+.titre_event{
+    margin-top: 30px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.modalite{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.calendrier{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.places{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.part3{
+    padding: 20px 40px;
+    display: flex;
+    gap: 50px;
+}
+
+.part3_cree{
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+}
+
 .les_boutons{
     position: absolute;
     top: 20px;
-    right: 80px;
+    right: 20px;
+    display: flex;
+    gap:10px;
 }
 
 .btn_qrcode{
@@ -143,8 +197,20 @@
     text-decoration: none;
     font-weight: bold;
     padding: 10px 25px;
+    border-radius: 20px;
+    margin: 0; 
+}
+
+.btn_modif{
+    color: #66ff00;
+    background-color: #ffffff;
+    border:  2px solid #66ff00;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 25px;
     border-radius: 20px; 
 }
+
 
 .btn_supp{
     color: #ff0000;
@@ -156,77 +222,39 @@
     border-radius: 20px; 
 }
 
-.part2{
-    background-color: #d9d9d9;
-    padding: 20px 40px;
+
+
+/* Fenetre modale */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
 }
 
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+}
 
-.modalite{
-    margin-top: 20px;
+.container-btn{
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    gap:15px;
 }
 
-.calendrier{
-    display: flex;
-    flex-direction: row;
+.btn_modal{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
 }
-
-.places{
-    display: flex;
-    flex-direction: row;
-}
-
-.part3{
-    padding: 20px 40px;
-    display: flex;
-    gap: 50px;
-}
-
-
-.ellipse {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    background-color: #000000;
-    border-radius: 30px;
-}
-
-
-
-.part3_cree{
-    padding-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

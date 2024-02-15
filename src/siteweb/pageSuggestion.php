@@ -1,20 +1,11 @@
 <?php 
 session_start();
 // Vérifiez si l'utilisateur est connecté en vérifiant la présence de ses informations d'identification dans la session
-/* if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id'])) {
     // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
     header("Location: connexion.php");
     exit; // Assurez-vous de terminer le script après la redirection
-} */
-
-// Faire la connexion avec la base de données
-include_once "../gestionBD/database.php";
-
-// Vérifier la connexion
-if ($connexion->connect_error) {
-    die("La connexion a échoué : " . $connexion->connect_error);
 }
-
 
 ?>
 
@@ -52,7 +43,7 @@ if ($connexion->connect_error) {
                             <a class="nav-link" href="#" style="color: white;font-size: 18px;">Contact</a>
                         </li>
                         <li class="nav-item" style="padding-left: 30px;padding-right: 30px;">
-                            <a class="nav-link" href="MesEvent.html" style="color: white;font-size: 18px;">Gérer mes événements</a>
+                            <a class="nav-link" href="MesEvent.php" style="color: white;font-size: 18px;">Gérer mes événements</a>
                         </li>
                         </ul>
                         <span class="navbar-text">
@@ -295,7 +286,7 @@ if ($connexion->connect_error) {
    
         }
 
-        function displaySearchResults(results,results2) {
+        function displaySearchResults(results) {
             var searchResultsDiv = document.getElementById("searchResults");
 /*             searchResultsDiv.innerHTML = ""; // Effacer les résultats précédents
  */
@@ -381,7 +372,7 @@ if ($connexion->connect_error) {
                 },
                 success: function(response) {
                     console.log(response);
-                    window.location.href="MesEvent.html";
+                    window.location.href="MesEvent.php";
                 },
                 error: function(xhr, status, error) {
                     console.error('Erreur lors de la requête AJAX:', error);
