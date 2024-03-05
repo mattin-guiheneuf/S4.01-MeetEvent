@@ -29,10 +29,10 @@ if (!isset($_SESSION['user_id'])) {
     <body>
         <div style="background-color:#6040fe;">
             <!-- Barre de Navigation -->
-            <nav class="navbar sticky-top navbar-expand-lg" style="background-color: transparent;padding : 1%;">
+            <nav class="navbar sticky-top navbar-expand-lg" style="background-color: #6040fe9a;padding : 1%;backdrop-filter:  blur(10px);">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
-                        <img src="img/MeetEvent_Logo (1).png" alt="Bootstrap" width="50" height="40">
+                        <img src="img/MeetEvent_Logo_blanc.png" alt="Bootstrap" width="50" height="40">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -161,6 +161,40 @@ if (!isset($_SESSION['user_id'])) {
                 </div>    
             </div>
         </div>
+
+        <footer class="event-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section about">
+                        <h2>A propos de nous</h2>
+                        <p>Votre contenu à propos de votre application événementielle.</p>
+                    </div>
+                    <div class="footer-section links">
+                        <h2>Liens utiles</h2>
+                        <ul>
+                            <li><a href="#">Accueil</a></li>
+                            <li><a href="#">Événements</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section contact">
+                        <h2>Nous contacter</h2>
+                        <p>Email: contact@example.com</p>
+                    </div>
+                </div>
+                <div class="newsletter-form">
+                    <h2>Abonnez-vous à notre newsletter</h2>
+                    <form action="#" method="post">
+                        <input type="email" name="email" placeholder="Votre adresse email" required>
+                        <button type="submit">S'abonner</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 Votre Application Événementielle. Tous droits réservés.
+            </div>
+        </footer>
+
     
     <script>
         /* Afficher au chargement de la page les suggestion de l'individu */
