@@ -119,6 +119,14 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </div>
 
+        <!-- Fenetre modale -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <h3><strong>Scannez le <span style="color:#6040fe;">QRcode</span> avec votre Smartphone</strong></h3>
+                <img id="qrImage" alt="QR Code">   
+            </div>
+        </div>
+
         <footer class="event-footer">
             <div class="container">
                 <div class="footer-content">
@@ -212,8 +220,8 @@ if (!isset($_SESSION['user_id'])) {
                     } */
                     if(nb==1){
                         html += '<div class="les_boutons">';
-                        html += '<a href="#" class="btn_quit">QUITTER</a>';
-                        html += '<a href="#" class="btn_qrcode">QRCODE</a><img src="" alt="">';
+                        html += '<a class="btn_quit">QUITTER</a>';
+                        html += '<a class="btn_qrcode" onclick="openQRModal('+ results[i].idEvenement +',\''+ results[i].nom +'\',\''+ results[i].nom_organisateur +'\',\''+ results[i].prenom_organisateur +'\','+results[i].statut+')">QRCODE</a><img src="" alt="">';
                         html += '</div>';
                     } else {
                         html += '<div class="les_boutons">';
@@ -291,5 +299,31 @@ if (!isset($_SESSION['user_id'])) {
             // Retourner la date formatée
             return formattedDate;
         }
+
+        /* Fonction pour afficher le QRCODE */
+        function openQRModal(eventId,eventName,eventCreatorName,eventCreatorSurname,eventStatut) {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+            eventCreator = eventCreatorName + " " + eventCreatorSurname;
+            var qrImage = document.getElementById('qrImage');
+            qrImage.src = 'generate_qr.php?eventId=' + eventId + '&eventName=' + eventName + '&eventCreator=' + eventCreator + '&eventStatut=' + eventStatut;
+        }
+
+        // Fermer la modal si l'utilisateur clique en dehors de la modal
+        window.onclick = function(event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Fonctionnalité de suppression d'un événement rejoin
+        document.getElementsByClassName("btn_quit").addEventListener("click", function() {
+            // Utilisation de Fetch pour envoyer une requête GET vers le serveur
+            fetch("quitEvent.php")
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error("Erreur:", error));
+        });
     </script>
 </html>
