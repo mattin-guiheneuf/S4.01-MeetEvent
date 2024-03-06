@@ -100,10 +100,23 @@ if (!isset($_SESSION['user_id'])) {
         <div id="myModalForQuit" class="modal">
             <div class="modal-content">
                 <h3>Voulez-vous vraiment quitter cet événement ?</h3>
-                <p>Vous allez vous désincrire de cet événement. Vous ouvez vous ré-inscrire à tout moment (si il reste de la place) via la recherche d'événement.</p>
+                <p>Vous allez vous désincrire de cet événement. Vous pouvez vous ré-inscrire à tout moment (si il reste de la place) via la recherche d'événement.</p>
                 <div class="container-btn">
                     <input type="hidden" class="modalRecupEvent" value="">
                     <button class="btn_modal" style="color:white;background-color:#6040fe;" onclick="quitterEvent()">Oui, je le quitte</button>
+                    <button class="btn_modal" style="color:#6040fe;background-color:white;border:2px solid #6040fe;" onclick="document.getElementById('myModalForQuit').style.display = 'none'">Non</button>
+                </div>    
+            </div>
+        </div>
+
+        <!-- Fenetre modale -->
+        <div id="myModalForSup" class="modal">
+            <div class="modal-content">
+                <h3>Voulez-vous vraiment supprimer cet événement ?</h3>
+                <p>Vous allez supprimer votre événement. Cette action ne possède pas de possibilité de retour arrière. Votre événement sera perdu et les participants enlevés.</p>
+                <div class="container-btn">
+                    <input type="hidden" class="modalRecupEvent" value="">
+                    <button class="btn_modal" style="color:white;background-color:#6040fe;" onclick="supprimerEvent()">Oui, je supprime</button>
                     <button class="btn_modal" style="color:#6040fe;background-color:white;border:2px solid #6040fe;" onclick="document.getElementById('myModalForQuit').style.display = 'none'">Non</button>
                 </div>    
             </div>
@@ -208,12 +221,12 @@ if (!isset($_SESSION['user_id'])) {
                     } */
                     if(nb==1){
                         html += '<div class="les_boutons">';
-                        html += '<a class="btn_quit" id="openModalBtn" onclick="openModal('+ results[i].idEvenement +')">QUITTER</a>';
+                        html += '<a class="btn_quit" id="openModalBtn" onclick="openModalQuit('+ results[i].idEvenement +')">QUITTER</a>';
                         html += '<a class="btn_qrcode" onclick="openQRModal('+ results[i].idEvenement +',\''+ results[i].nom +'\',\''+ results[i].nom_organisateur +'\',\''+ results[i].prenom_organisateur +'\','+results[i].statut+')">QRCODE</a><img src="" alt="">';
                         html += '</div>';
                     } else {
                         html += '<div class="les_boutons">';
-                        html += '<a href="#" class="btn_quit" >SUPPRIMER</a>';
+                        html += '<a href="#" class="btn_quit" id="openModalBtn" onclick="openModalSup('+ results[i].idEvenement +')">SUPPRIMER</a>';
                         html += '<a href="#" class="btn_modif">MODIFIER</a>';
                         html += '<a href="#" class="btn_qrcode">SCANNER<img src="" alt=""></a>';
                         html += '</div>';
@@ -302,8 +315,17 @@ if (!isset($_SESSION['user_id'])) {
         }
 
         // Fonction à exécuter lorsque le bouton est cliqué pour ouvrir la modal
-        function openModal(idEvenement) {
+        function openModalQuit(idEvenement) {
             var modal = document.getElementById("myModalForQuit");
+            modal.style.display = "block";
+
+            var eventSelected = document.getElementsByClassName("modalRecupEvent")[0];
+            eventSelected.value=idEvenement;
+        }
+
+        // Fonction à exécuter lorsque le bouton est cliqué pour ouvrir la modal
+        function openModalSup(idEvenement) {
+            var modal = document.getElementById("myModalForSup");
             modal.style.display = "block";
 
             var eventSelected = document.getElementsByClassName("modalRecupEvent")[0];
@@ -313,6 +335,12 @@ if (!isset($_SESSION['user_id'])) {
 
         // Fermer la modal si l'utilisateur clique en dehors de la modal
         window.onclick = function(event) {
+            //Pour la modale de supprimer un event
+            var modalQuit = document.getElementById("myModalForSup");
+            if (event.target == modalQuit) {
+                modalQuit.style.display = "none";
+            }
+
             //Pour la modale de quitter un event
             var modalQuit = document.getElementById("myModalForQuit");
             if (event.target == modalQuit) {
@@ -326,7 +354,7 @@ if (!isset($_SESSION['user_id'])) {
             }
         }
 
-        /* Fonction pour rejoindre l'evenement sélectionné */
+        /* Fonction pour quitter l'evenement sélectionné */
         function quitterEvent(){
             var eventSelected = document.getElementsByClassName("modalRecupEvent")[0].value;
             // Requête AJAX vers le serveur pour récupérer les événements correspondants à la recherche
@@ -336,6 +364,27 @@ if (!isset($_SESSION['user_id'])) {
                 data: {
                     eventSelected: eventSelected,
                     type : "quitter"
+                },
+                success: function(response) {
+                    console.log(response);
+                    window.location.href="MesEvent.php";
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erreur lors de la requête AJAX:', error);
+                }
+            });
+        }
+
+        /* Fonction pour supprimer l'evenement sélectionné */
+        function supprimerEvent(){
+            var eventSelected = document.getElementsByClassName("modalRecupEvent")[0].value;
+            // Requête AJAX vers le serveur pour récupérer les événements correspondants à la recherche
+            $.ajax({
+                type: 'POST',
+                url: 'ajax.php',
+                data: {
+                    eventSelected: eventSelected,
+                    type : "supprimer"
                 },
                 success: function(response) {
                     console.log(response);

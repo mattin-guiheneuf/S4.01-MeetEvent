@@ -153,7 +153,7 @@ if(isset($_POST['eventSelected'])){
         $connexion->close();
         
         echo "Evenement rejoins avec succès";
-    }else{
+    }elseif($_POST['type']=="quitter"){
         // Récupérer les données envoyées par AJAX et les valider
         $eventSelected = isset($_POST['eventSelected']) ? $_POST['eventSelected'] : '';
         $idUtilisateur = $_SESSION['user_id'];
@@ -166,6 +166,31 @@ if(isset($_POST['eventSelected'])){
         $connexion->close();
         
         echo "Evenement quitter avec succès";
+    }else{
+        // Récupérer les données envoyées par AJAX et les valider
+        $eventSelected = isset($_POST['eventSelected']) ? $_POST['eventSelected'] : '';
+
+        $sql_evenement = "DELETE FROM evenement WHERE idEvenement = $eventSelected";
+
+        if ($connexion->query($sql_evenement) === TRUE) {
+            echo "Événement supprimé avec succès";
+        } else {
+            echo "Erreur lors de la suppression de l'événement : " . $connexion->error;
+        }
+
+        // Suppression des relations dans la table participer
+        $sql_participer = "DELETE FROM participer WHERE idEvenement = $eventSelected";
+
+        if ($connexion->query($sql_participer) === TRUE) {
+            echo "Relations supprimées avec succès";
+        } else {
+            echo "Erreur lors de la suppression des relations : " . $connexion->error;
+        }
+
+        // Fermeture de la connexion
+        $connexion->close();
+
+        echo "Evenement et ses relations supprimés avec succès";
     }
     
 }
