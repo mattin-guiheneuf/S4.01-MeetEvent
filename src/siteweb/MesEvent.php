@@ -63,24 +63,24 @@ if (!isset($_SESSION['user_id'])) {
                 </p>
                 <div class="btns">
                     <button class="btn-consulter">
-                            CONSULTEZ
+                            CONSULTEZ VOS EVENEMENTS
                             <img src="img/angle-petit-droit.png" alt="consulter" width="28px" height="28px" style="color: #6040fe;"/>
                     </button>
                     <button class="btn-creation">
-                        CREER VOTRE EVENEMENT
+                        CREEZ VOTRE EVENEMENT
                     </button>
                 </div>
             </div>
             <!-- Section 2 -->
             <div class="section2">
                 <!-- Les événements participants -->
-                <div class="titre_evenement">Evenements auquels je participe</div>
+                <div class="titre_evenement">Evenements auxquels je participe</div>
                 <div class="events">
                     
                 </div>
 
                 <!-- Les événements participants -->
-                <div class="titre_evenement">Mes événements crées</div>
+                <div class="titre_evenement">Mes événements créés</div>
                 <div class="events">
                     
                        
@@ -278,7 +278,7 @@ if (!isset($_SESSION['user_id'])) {
 
             } else {
                 if (nb==1) {
-                    searchResultsDiv.innerHTML = "Aucun événement rejoin";
+                    searchResultsDiv.innerHTML = "Aucun événement rejoint";
                 } else {
                     searchResultsDiv.innerHTML = "Aucun événement créé";
                 }

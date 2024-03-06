@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt_delete->execute();
 
                 // Insérer les nouveaux tags de l'utilisateur dans la table d'association
-                $sql_insert = "INSERT INTO Associer (idUtilisateur, idTag) VALUES (?, ?)";
+                $sql_insert = "INSERT INTO Associer VALUES (?, ?)";
                 $stmt_insert = $connexion->prepare($sql_insert);
                 $stmt_insert->bind_param("ii", $id_utilisateur, $id_tag);
 

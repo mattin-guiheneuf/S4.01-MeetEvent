@@ -124,7 +124,7 @@ if (!isset($_SESSION['user_id'])) {
         <!-- Suggestion -->
         <div class="part_suggest">
             <div class="suggestion">
-                <div class="titre-suggestion">Suggestion d’événement</div>
+                <div class="titre-suggestion">Suggestion d’événements</div>
                 <div class="events">
                     
                 </div>
