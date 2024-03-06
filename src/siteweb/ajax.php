@@ -16,6 +16,7 @@ if ($connexion->connect_error) {
     die("La connexion a échoué : " . $connexion->connect_error);
 }
 
+$userConnected = $_SESSION['user_id'];
 /* ------------------------------------------- */
 /* Si la requete AJAX provient de la recherche */
 /* ------------------------------------------- */
@@ -28,7 +29,7 @@ if(isset($_POST['eventName']) or isset($_POST['eventDate']) or isset($_POST['eve
     $eventCity = isset($_POST['eventCity']) ? $_POST['eventCity'] : '';
 
     // Construire la requête SQL paramétrée en fonction des critères de recherche fournis
-    $sql = "SELECT e.*,u.chemImage as chemImage, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces 
+    $sql = "SELECT e.*,u.chemImage as chemImage, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces,(SELECT CASE WHEN COUNT(*)>0 THEN 1 ELSE 0 END from participer where idUtilisateur=$userConnected AND idEvenement = $eventId AND participationAnnulee = 0) as est_deja_admis
             FROM Evenement e 
             JOIN Categorie c ON e.idCategorie = c.idCategorie 
             JOIN Utilisateur u ON e.idOrganisateur = u.idUtilisateur 
@@ -89,7 +90,7 @@ if(isset($_POST['listeEvent'])){
     // Pour chaque événement dans la liste
     foreach ($listeEvent as $eventId) {
         // Construire la requête SQL paramétrée en fonction des critères de recherche fournis
-        $sql = "SELECT e.*,u.chemImage as chemImage, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces 
+        $sql = "SELECT e.*,u.chemImage as chemImage, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces, (SELECT CASE WHEN COUNT(*)>0 THEN 1 ELSE 0 END from participer where idUtilisateur=$userConnected AND idEvenement = $eventId AND participationAnnulee = 0) as est_deja_admis
                 FROM Evenement e 
                 JOIN Categorie c ON e.idCategorie = c.idCategorie 
                 JOIN Utilisateur u ON e.idOrganisateur = u.idUtilisateur 
@@ -125,17 +126,46 @@ if(isset($_POST['listeEvent'])){
 /* ----------------------------------------------------------- */
 
 if(isset($_POST['eventSelected'])){
-    // Récupérer les données envoyées par AJAX et les valider
-    $eventSelected = isset($_POST['eventSelected']) ? $_POST['eventSelected'] : '';
-    $idUtilisateur = $_SESSION['user_id'];
+    if($_POST['type']=="rejoindre"){
+        // Récupérer les données envoyées par AJAX et les valider
+        $eventSelected = isset($_POST['eventSelected']) ? $_POST['eventSelected'] : '';
+        $idUtilisateur = $_SESSION['user_id'];
 
-    //Faire la requète d'insertion
-    $sql = "INSERT INTO Participer VALUES ($idUtilisateur, $eventSelected,'lienQRCode',0)";
-    // Exécuter la requête SQL
-    $result = $connexion->query($sql);
-    // Fermer la connexion à la base de données
-    $connexion->close();
+        // Vérifier si le couple (idUtilisateur, idEvenement) existe déjà
+        $sql_check = "SELECT * FROM Participer WHERE idUtilisateur=$idUtilisateur AND idEvenement=$eventSelected";
+        $result_check = $connexion->query($sql_check);
+
+        if ($result_check->num_rows > 0) {
+            // Si le couple existe déjà, effectuer une mise à jour
+            $sql_update = "UPDATE Participer SET participationAnnulee=0 WHERE idUtilisateur=$idUtilisateur AND idEvenement=$eventSelected";
+            $result_update = $connexion->query($sql_update);
+            
+            echo "Evenement rejoint avec succès";
+        } else {
+            // Si le couple n'existe pas, effectuer une insertion
+            $sql_insert = "INSERT INTO Participer VALUES ($idUtilisateur, $eventSelected, 'lienQRCode', 0)";
+            $result_insert = $connexion->query($sql_insert);
+            
+            echo "Evenement rejoint avec succès";
+        }
+        // Fermer la connexion à la base de données
+        $connexion->close();
+        
+        echo "Evenement rejoins avec succès";
+    }else{
+        // Récupérer les données envoyées par AJAX et les valider
+        $eventSelected = isset($_POST['eventSelected']) ? $_POST['eventSelected'] : '';
+        $idUtilisateur = $_SESSION['user_id'];
+
+        //Faire la requète d'insertion
+        $sql = "UPDATE Participer SET participationAnnulee=1 WHERE idUtilisateur=$idUtilisateur AND idEvenement=$eventSelected";
+        // Exécuter la requête SQL
+        $result = $connexion->query($sql);
+        // Fermer la connexion à la base de données
+        $connexion->close();
+        
+        echo "Evenement quitter avec succès";
+    }
     
-    echo "Evenement rejoins avec succès";
 }
 

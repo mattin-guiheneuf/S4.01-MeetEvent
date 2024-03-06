@@ -109,7 +109,44 @@
           </div>
 
       </div>
-
+      <footer class="event-footer">
+        <div class="footer-top">
+            <div class="adresse">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="email">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="tel">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div class="container_footer">
+            <div class="footer-section logo">
+                <img src="img/MeetEvent_Logo_blanc.png" alt="logo" width="20%" height="auto">
+            </div>
+            <div class="footer-section navigation">
+                <h2>Navigation</h2>
+                <ul>
+                    <li>Page d'accueil</li>
+                    <li>Page de recherche d'événement</li>
+                    <li>Page contact</li>
+                </ul>
+            </div>
+            <div class="footer-section aPropos">
+                <h2>A Propos</h2>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 MeetEvent. Tous droits réservés.
+        </div>
+    </footer>
   </body>
 
 </html>

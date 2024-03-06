@@ -84,7 +84,7 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                 </div>    
                 <!-- 2eme section -->
-                <div class="catgorie">
+                <!-- <div class="catgorie">
                     <div class="titre-cat-gorie">Catégories</div>
                     <div class="catgories">
                         <div class="cat">
@@ -118,7 +118,7 @@ if (!isset($_SESSION['user_id'])) {
                             CATÉGORIE 10
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- Suggestion -->
@@ -163,35 +163,41 @@ if (!isset($_SESSION['user_id'])) {
         </div>
 
         <footer class="event-footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-section about">
-                        <h2>A propos de nous</h2>
-                        <p>Votre contenu à propos de votre application événementielle.</p>
-                    </div>
-                    <div class="footer-section links">
-                        <h2>Liens utiles</h2>
-                        <ul>
-                            <li><a href="#">Accueil</a></li>
-                            <li><a href="#">Événements</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section contact">
-                        <h2>Nous contacter</h2>
-                        <p>Email: contact@example.com</p>
-                    </div>
+            <div class="footer-top">
+                <div class="adresse">
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
-                <div class="newsletter-form">
-                    <h2>Abonnez-vous à notre newsletter</h2>
-                    <form action="#" method="post">
-                        <input type="email" name="email" placeholder="Votre adresse email" required>
-                        <button type="submit">S'abonner</button>
-                    </form>
+                <div class="email">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="tel">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="container_footer">
+                <div class="footer-section logo">
+                    <img src="img/MeetEvent_Logo_blanc.png" alt="logo" width="20%" height="auto">
+                </div>
+                <div class="footer-section navigation">
+                    <h2>Navigation</h2>
+                    <ul>
+                        <li>Page d'accueil</li>
+                        <li>Page de recherche d'événement</li>
+                        <li>Page contact</li>
+                    </ul>
+                </div>
+                <div class="footer-section aPropos">
+                    <h2>A Propos</h2>
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2024 Votre Application Événementielle. Tous droits réservés.
+                &copy; 2024 MeetEvent. Tous droits réservés.
             </div>
         </footer>
 
@@ -337,8 +343,13 @@ if (!isset($_SESSION['user_id'])) {
                     }else{
                         html += '<a href="#" class="btn_join">REJOINDRE</a>';
                     } */
-
-                    html += '<button id="openModalBtn" onclick="openModal('+ results[i].idEvenement +')" class="btn_join">REJOINDRE</button>';
+                    console.log(results[i].est_deja_admis + " " + results[i].nom);
+                    if (results[i].est_deja_admis == 1) {
+                        html += '<a href="#" class="btn_join" style="border-color:green;color:green;display:flex;gap:5px;align-items:center;">ADMIS <img src="img/verifier (3).png" width="15px" height="15px"/> </a>';
+                    } else {
+                        html += '<button id="openModalBtn" onclick="openModal('+ results[i].idEvenement +')" class="btn_join">REJOINDRE</button>';
+                    }
+                    
                     html += '<div class="categorie">'+ results[i].libCat +'</div>';      
                     html += '</div>';
                     html += '<div class="part2">';
@@ -402,7 +413,8 @@ if (!isset($_SESSION['user_id'])) {
                 type: 'POST',
                 url: 'ajax.php',
                 data: {
-                    eventSelected: eventSelected
+                    eventSelected: eventSelected,
+                    type : "rejoindre"
                 },
                 success: function(response) {
                     console.log(response);

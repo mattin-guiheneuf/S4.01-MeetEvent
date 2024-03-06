@@ -75,6 +75,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 40px;
+    padding-bottom: 5%;
 }
 
 .event {
@@ -276,7 +277,17 @@
     border: 1px solid #888;
     width: 80%;
     max-width: 400px;
+}
+
+.modal-content-QRcode{
+    background-color: #fefefe;
+    margin: 8% auto 0;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 20px;
 }
