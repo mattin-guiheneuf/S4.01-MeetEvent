@@ -22,14 +22,15 @@ nav {
 .event-footer {
     background-color: #6040fe;
     color: #fff;
-    padding: 50px 0;
+    padding: 50px 0 0;
 }
 
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
+.container_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
 
 .footer-content {
     display: flex;
@@ -59,33 +60,9 @@ nav {
     text-decoration: none;
 }
 
-.newsletter-form {
-    flex: 1;
-}
-
-.newsletter-form h2 {
-    margin-bottom: 10px;
-}
-
-.newsletter-form form input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.newsletter-form form button {
-    background-color: #4833c1;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-.newsletter-form form button:hover {
-    background-color: #6040fe;
-}
 
 .footer-bottom {
+    margin-top: 20px;
     padding-top: 20px;
     text-align: center;
     background-color: #4833c1;

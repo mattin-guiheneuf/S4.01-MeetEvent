@@ -23,6 +23,7 @@ $sql = "SELECT DISTINCT(p.idEvenement), e.*, c.libelle as libCat, e.effMax-COUNT
         JOIN utilisateur u ON p.idUtilisateur=u.idUtilisateur
         JOIN categorie c ON  e.idCategorie=c.idCategorie
         WHERE e.idOrganisateur=".$_SESSION['user_id']."
+        AND p.participationAnnulee=0
         GROUP BY p.idEvenement";
 // Exécuter la requête SQL
 $result = $connexion->query($sql);

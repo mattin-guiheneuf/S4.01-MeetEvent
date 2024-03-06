@@ -24,6 +24,7 @@ $sql = "SELECT DISTINCT(p.idEvenement), e.*, x.chemImage as chemImage,x.nom as n
         JOIN Utilisateur x ON e.idOrganisateur = x.idUtilisateur
         JOIN Categorie c ON  e.idCategorie=c.idCategorie
         WHERE p.idUtilisateur=".$_SESSION['user_id']."
+        AND p.participationAnnulee=0
         GROUP BY p.idEvenement";
 // Exécuter la requête SQL
 $result = $connexion->query($sql);

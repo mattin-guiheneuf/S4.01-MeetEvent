@@ -80,83 +80,71 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
 
                 <!-- Les événements participants -->
-                <div class="titre_evenement">Mes événements</div>
+                <div class="titre_evenement">Mes événements crées</div>
                 <div class="events">
                     
-                        <div class="part1">
-                            <div class="les_boutons">
-                                <a href="#" class="btn_supp">SUPPRIMER</a>
-                                <a href="#" class="btn_scan">SCANNER</a><img src="" alt="">
-                            </div>    
-                            <div class="categorie">CATEGORIE</div>
-                        </div>
-                        <div class="part2">
-                            <div class="titre_event">Nom de l’événement</div>
-                            <div>Localisation</div>
-
-                            <div class="modalite">
-                                <div class="calendrier">
-                                    <i class="fi fi-sr-calendar" style="font-size: 28px"></i>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Calendrier</div>
-                                        <div>dd/mm/aaaa - hh:mm</div>
-                                    </div>    
-                                </div>
-                                <div class="places">
-                                    <i class="fi fi-sr-users-alt" style="font-size: 28px"></i>
-                                    <div class="infos">
-                                        <div style="font-weight:bold;">Places restantes</div>
-                                        <div>nombre</div>
-                                    </div>    
-                                </div>
-                            </div>
-                        </div>    
-                        <div class="part3_cree">
-                            <p style="font-weight: bold;">Type d'événement</p>
-                        </div>
-                    </div>
+                       
                 </div>
             </div>
         </div>
 
         <!-- Fenetre modale -->
-        <div id="myModal" class="modal">
-            <div class="modal-content">
+        <div id="myModalForQrcode" class="modal">
+            <div class="modal-content-QRcode">
                 <h3><strong>Scannez le <span style="color:#6040fe;">QRcode</span> avec votre Smartphone</strong></h3>
                 <img id="qrImage" alt="QR Code">   
             </div>
         </div>
 
+        <!-- Fenetre modale -->
+        <div id="myModalForQuit" class="modal">
+            <div class="modal-content">
+                <h3>Voulez-vous vraiment quitter cet événement ?</h3>
+                <p>Vous allez vous désincrire de cet événement. Vous ouvez vous ré-inscrire à tout moment (si il reste de la place) via la recherche d'événement.</p>
+                <div class="container-btn">
+                    <input type="hidden" class="modalRecupEvent" value="">
+                    <button class="btn_modal" style="color:white;background-color:#6040fe;" onclick="quitterEvent()">Oui, je le quitte</button>
+                    <button class="btn_modal" style="color:#6040fe;background-color:white;border:2px solid #6040fe;" onclick="document.getElementById('myModalForQuit').style.display = 'none'">Non</button>
+                </div>    
+            </div>
+        </div>
+
         <footer class="event-footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-section about">
-                        <h2>A propos de nous</h2>
-                        <p>Votre contenu à propos de votre application événementielle.</p>
-                    </div>
-                    <div class="footer-section links">
-                        <h2>Liens utiles</h2>
-                        <ul>
-                            <li><a href="#">Accueil</a></li>
-                            <li><a href="#">Événements</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section contact">
-                        <h2>Nous contacter</h2>
-                        <p>Email: contact@example.com</p>
-                    </div>
+            <div class="footer-top">
+                <div class="adresse">
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
-                <div class="newsletter-form">
-                    <h2>Abonnez-vous à notre newsletter</h2>
-                    <form action="#" method="post">
-                        <input type="email" name="email" placeholder="Votre adresse email" required>
-                        <button type="submit">S'abonner</button>
-                    </form>
+                <div class="email">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="tel">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="container_footer">
+                <div class="footer-section logo">
+                    <img src="img/MeetEvent_Logo_blanc.png" alt="logo" width="20%" height="auto">
+                </div>
+                <div class="footer-section navigation">
+                    <h2>Navigation</h2>
+                    <ul>
+                        <li>Page d'accueil</li>
+                        <li>Page de recherche d'événement</li>
+                        <li>Page contact</li>
+                    </ul>
+                </div>
+                <div class="footer-section aPropos">
+                    <h2>A Propos</h2>
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2024 Votre Application Événementielle. Tous droits réservés.
+                &copy; 2024 MeetEvent. Tous droits réservés.
             </div>
         </footer>
 
@@ -220,12 +208,12 @@ if (!isset($_SESSION['user_id'])) {
                     } */
                     if(nb==1){
                         html += '<div class="les_boutons">';
-                        html += '<a class="btn_quit">QUITTER</a>';
+                        html += '<a class="btn_quit" id="openModalBtn" onclick="openModal('+ results[i].idEvenement +')">QUITTER</a>';
                         html += '<a class="btn_qrcode" onclick="openQRModal('+ results[i].idEvenement +',\''+ results[i].nom +'\',\''+ results[i].nom_organisateur +'\',\''+ results[i].prenom_organisateur +'\','+results[i].statut+')">QRCODE</a><img src="" alt="">';
                         html += '</div>';
                     } else {
                         html += '<div class="les_boutons">';
-                        html += '<a href="#" class="btn_quit">SUPPRIMER</a>';
+                        html += '<a href="#" class="btn_quit" >SUPPRIMER</a>';
                         html += '<a href="#" class="btn_modif">MODIFIER</a>';
                         html += '<a href="#" class="btn_qrcode">SCANNER<img src="" alt=""></a>';
                         html += '</div>';
@@ -276,7 +264,11 @@ if (!isset($_SESSION['user_id'])) {
                 searchResultsDiv.innerHTML = html;
 
             } else {
-                searchResultsDiv.innerHTML = "Aucun résultat trouvé.";
+                if (nb==1) {
+                    searchResultsDiv.innerHTML = "Aucun événement rejoin";
+                } else {
+                    searchResultsDiv.innerHTML = "Aucun événement créé";
+                }
             }
         }
 
@@ -302,28 +294,57 @@ if (!isset($_SESSION['user_id'])) {
 
         /* Fonction pour afficher le QRCODE */
         function openQRModal(eventId,eventName,eventCreatorName,eventCreatorSurname,eventStatut) {
-            var modal = document.getElementById("myModal");
+            var modal = document.getElementById("myModalForQrcode");
             modal.style.display = "block";
             eventCreator = eventCreatorName + " " + eventCreatorSurname;
             var qrImage = document.getElementById('qrImage');
             qrImage.src = 'generate_qr.php?eventId=' + eventId + '&eventName=' + eventName + '&eventCreator=' + eventCreator + '&eventStatut=' + eventStatut;
         }
 
+        // Fonction à exécuter lorsque le bouton est cliqué pour ouvrir la modal
+        function openModal(idEvenement) {
+            var modal = document.getElementById("myModalForQuit");
+            modal.style.display = "block";
+
+            var eventSelected = document.getElementsByClassName("modalRecupEvent")[0];
+            eventSelected.value=idEvenement;
+        }
+
+
         // Fermer la modal si l'utilisateur clique en dehors de la modal
         window.onclick = function(event) {
-            var modal = document.getElementById("myModal");
-            if (event.target == modal) {
-                modal.style.display = "none";
+            //Pour la modale de quitter un event
+            var modalQuit = document.getElementById("myModalForQuit");
+            if (event.target == modalQuit) {
+                modalQuit.style.display = "none";
+            }
+
+            //Pour la modale de QRCODE d'un event
+            var modalQRCODE = document.getElementById("myModalForQrcode");
+            if (event.target == modalQRCODE) {
+                modalQRCODE.style.display = "none";
             }
         }
 
-        // Fonctionnalité de suppression d'un événement rejoin
-        document.getElementsByClassName("btn_quit").addEventListener("click", function() {
-            // Utilisation de Fetch pour envoyer une requête GET vers le serveur
-            fetch("quitEvent.php")
-                .then(response => response.text())
-                .then(data => console.log(data))
-                .catch(error => console.error("Erreur:", error));
-        });
+        /* Fonction pour rejoindre l'evenement sélectionné */
+        function quitterEvent(){
+            var eventSelected = document.getElementsByClassName("modalRecupEvent")[0].value;
+            // Requête AJAX vers le serveur pour récupérer les événements correspondants à la recherche
+            $.ajax({
+                type: 'POST',
+                url: 'ajax.php',
+                data: {
+                    eventSelected: eventSelected,
+                    type : "quitter"
+                },
+                success: function(response) {
+                    console.log(response);
+                    window.location.href="MesEvent.php";
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erreur lors de la requête AJAX:', error);
+                }
+            });
+        }
     </script>
 </html>
