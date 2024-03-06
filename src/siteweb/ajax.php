@@ -29,7 +29,7 @@ if(isset($_POST['eventName']) or isset($_POST['eventDate']) or isset($_POST['eve
     $eventCity = isset($_POST['eventCity']) ? $_POST['eventCity'] : '';
 
     // Construire la requête SQL paramétrée en fonction des critères de recherche fournis
-    $sql = "SELECT e.*,u.chemImage as chemImage, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces,(SELECT CASE WHEN COUNT(*)>0 THEN 1 ELSE 0 END from participer where idUtilisateur=$userConnected AND idEvenement = $eventId AND participationAnnulee = 0) as est_deja_admis
+    $sql = "SELECT e.*,u.chemImage as chemImage, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces, (SELECT CASE WHEN COUNT(*)>0 THEN 1 ELSE 0 END from participer p where e.idEvenement=p.idEvenement and p.idUtilisateur=$userConnected AND p.participationAnnulee = 0) as est_deja_admis
             FROM Evenement e 
             JOIN Categorie c ON e.idCategorie = c.idCategorie 
             JOIN Utilisateur u ON e.idOrganisateur = u.idUtilisateur 
@@ -59,6 +59,7 @@ if(isset($_POST['eventName']) or isset($_POST['eventDate']) or isset($_POST['eve
     if ($result) {
         // Récupérer les résultats de la requête
         $results = $result->fetch_all(MYSQLI_ASSOC);
+        /* echo $results; */
 
     } else {
         // En cas d'erreur, renvoyer une erreur au format JSON
