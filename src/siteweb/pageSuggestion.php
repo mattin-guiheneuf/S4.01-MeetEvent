@@ -264,19 +264,19 @@ if (!isset($_SESSION['user_id'])) {
         /* Fonction pour afficher la recherche */
         function searchEvents() {
             var eventName = document.getElementById("eventName").value;
-            /* console.log(eventName) */
+            console.log(eventName)
             var eventDate = document.getElementById("eventDate").value;
-            /* console.log(eventDate) */
+            console.log(eventDate)
             var eventCity = document.getElementById("eventCity").value;
-            /* console.log(eventCity) */
+            console.log(eventCity)
 
             // Masquer la section de suggestion lorsque la recherche est effectuée
             var suggestionSection = document.getElementsByClassName("part_suggest")[0];
             suggestionSection.style.display = "none";
 
             // Masquer la section catégorie
-            var catSection = document.getElementsByClassName("catgorie")[0];
-            catSection.style.display = "none";
+            /* var catSection = document.getElementsByClassName("catgorie")[0];
+            catSection.style.display = "none"; */
 
             // Exemple d'affichage des résultats (remplacez avec votre logique de rendu des résultats)
             var searchResultsDiv = document.getElementById("titre_result");
@@ -302,7 +302,7 @@ if (!isset($_SESSION['user_id'])) {
             } else {
                 // Montrer la section de suggestion lorsque la recherche est effectuée
                 suggestionSection.style.display = "grid";
-                catSection.style.display = "block";
+                /* catSection.style.display = "block"; */
             }
             searchResultsDiv.innerHTML = searchQuery;
 
