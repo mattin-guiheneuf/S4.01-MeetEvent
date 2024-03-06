@@ -1,0 +1,291 @@
+/* Zoning de la page dans la zone hero définie dans le global.css */
+.contenuFormCrea {
+  grid-column: 2;
+
+  /* Zoning */
+  grid-template: 
+    "titre" 50px
+    "mentionOblig" 10px
+    "formulaire" 1fr;
+  padding: 0;
+  margin: 0;
+}
+
+.titre {
+  /* Positionnement */
+  grid-area: titre;
+  text-align: center;
+  width: 100%;  
+  padding: 0;
+  margin: 0;
+  font-size: 25px;
+  height: auto;
+}
+
+/* .titre h1{
+  margin:0;
+} */
+
+.obligatoire {
+  /* Positionnement */
+  grid-area: mentionOblig;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  color: red;
+  width: 100%;
+  height: auto;
+}
+
+.formulaire {
+  /* Positionnement */
+  grid-area: formulaire;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  width: 100%;
+  height: auto;
+
+  /* Découpage */
+  grid-gap: 30px;
+  grid-template-columns: 1fr 20px 1fr;
+  
+}
+
+/* Différentes parties dans le .formulaire */
+.gauche {
+  /* Positionnement */
+  grid-column: 1;
+
+  /* Zoning */
+  display: grid;
+  grid-gap: 15px;
+  grid-template-rows: 2fr 3fr 4fr 3fr 2fr;
+}
+
+.separateur{
+  grid-column: 2;
+  margin-left: 9px;
+  margin-right: 9px;
+  /* background-color: black; */
+}
+
+.droite {
+  /* Positionnement */
+  grid-column: 3;
+
+  /* Zoning */
+  display: grid;
+  grid-gap: 25px;
+  grid-template-rows: 4fr 2fr 3fr 2fr;
+}
+
+
+/* Éléments */
+input{
+  background-color: #dedede;
+  border-radius: 20px;
+  border: 0;
+  font-family: "Inter-Regular", Helvetica;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0;
+  padding-left: 10%;
+  padding-right: 5%;
+}
+
+input::placeholder{
+  font-family: "Inter-Regular", Helvetica;
+  font-weight: 400;
+  color: #00000052;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+/* input[type=radio]{
+  background-color: #dedede;
+  border: 0;
+  padding-left: 10%;
+} */
+
+.starOblig {
+  color: red;
+  grid-row: 1;
+}
+
+label{
+  font-family: "Inter-Regular", Helvetica;
+}
+
+
+/* Partie gauche */
+.inputTitre {
+  /* Positionnement */
+  grid-row: 1;
+
+  /* Zoning */
+  display: grid;
+  grid-template-rows: 1fr 3fr;
+}
+
+.inputDateHeure {
+  /* Positionnement */
+  grid-row: 2;
+
+  /* Zoning */
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+}
+
+.inputLieu {
+  /* Positionnement */
+  grid-row: 3;
+
+  /* Zoning */
+  display: grid;
+  grid-template-rows: 1fr 2fr 2fr;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.inputType {
+  /* Positionnement */
+  grid-row: 4;
+
+  /* Zoning */
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  grid-row-gap: 5px;
+}
+
+.radiobox{
+  /* Positionnement */
+  grid-row: 2;
+
+  /* Zoning */
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr 1fr 1fr 2fr 1fr;
+  grid-template-columns: 1fr 5fr;
+  grid-column-gap: 5px;
+}
+
+/* ou en découpant .radiobox en
+
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 5fr;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+
+.radiobox label {
+  margin-top: 1.5%;
+} */
+
+.inputNbParticip {
+  /* Positionnement */
+  grid-row: 5;
+
+  /* Zoning */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3,1fr);
+  grid-column-gap: 5px;
+}
+
+/* Partie droite */
+.inputPhotos{
+  /* Positionnement */
+  grid-row: 1;
+
+  /* Zoning */
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 2fr 1fr 2fr;
+
+  /* Attributs */
+  background-color: #dedede;
+  border-radius: 20px;
+  border: 0;
+  font-family: "Inter-Regular", Helvetica;
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.inputPhotos input{
+  /* Placement */
+  grid-row: 1/-1;
+  grid-column: 1/-1;
+
+  /* Attributs */
+  height: 100%;
+  width: 100;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.inputParticip{
+  /* Positionnement */
+  grid-row: 2;
+
+  /* Zoning */
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  grid-gap: 10px;
+}
+
+.inputMsgInvit{
+  /* Positionnement */
+  grid-row: 3;
+
+  /* Zoning */
+  display: grid;
+  grid-template-rows: 1fr 4fr;
+  grid-gap: 10px;
+}
+
+.btnFin{
+  /* Positionnement */
+  grid-row: 4;
+
+  /* Zoning */
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr 1fr 4fr 1fr;
+  grid-template-rows: 1fr 3fr;
+}
+
+.btnFin .btnAnnuler{
+  /* Positionnement */
+  grid-row: 2;
+  grid-column: 2;
+
+  /* Attributs */
+  border: 3px solid #6040fe;
+  color: #6040fe;
+  background-color: #ffffff00;
+  text-align: center;
+  cursor: pointer;
+  font-family: "Inter-Regular", Helvetica;
+  font-weight: 400;
+  font-size: 22px;
+  border-radius: 20px;
+}
+
+.btnFin .btnCreer{
+  /* Positionnement */
+  grid-row: 2;
+  grid-column: 5;
+
+  /* Attributs */
+  border: 3px solid #6040fe;
+  color: white;
+  background-color: #6040fe;
+  text-align: center;
+  cursor: pointer;
+  font-family: "Inter-Regular", Helvetica;
+  font-weight: 400;
+  font-size: 22px;
+  border-radius: 20px;
+}

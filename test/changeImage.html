@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carousel d'images</title>
+<!-- Inclure les styles de Slick Slider -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+<style>
+  .slick-slide img {
+    width: 100%;
+    height: auto;
+  }
+  .custom-navigation {
+    text-align: center;
+  }
+  .custom-navigation button {
+    margin: 10px;
+    background: #ccc;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="slider">
+  <div><img src="image1.jpg" alt="Image 1"></div>
+  <div><img src="image2.jpg" alt="Image 2"></div>
+  <div><img src="image3.jpg" alt="Image 3"></div>
+</div>
+<div class="custom-navigation">
+  <button class="prev">Précédent</button>
+  <button class="next">Suivant</button>
+</div>
+<div class="slider">
+  <div><img src="image4.jpg" alt="Image 4"></div>
+  <div><img src="image5.jpg" alt="Image 5"></div>
+  <div><img src="image6.jpg" alt="Image 6"></div>
+</div>
+<div class="custom-navigation">
+  <button class="prev">Précédent</button>
+  <button class="next">Suivant</button>
+</div>
+
+<!-- Inclure le script de jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Inclure le script de Slick Slider -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.slider').each(function(){
+      var $slider = $(this);
+      var $customNav = $slider.next('.custom-navigation');
+      $slider.slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+      });
+
+      $customNav.find('.prev').click(function(){
+        $slider.slick('slickPrev');
+      });
+
+      $customNav.find('.next').click(function(){
+        $slider.slick('slickNext');
+      });
+    });
+  });
+</script>
+</body>
+</html>

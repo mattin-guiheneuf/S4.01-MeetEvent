@@ -1,46 +1,17 @@
-<!--
-/**
-    Auteurs : Clement Mourgue et Yannis Duvignau
-    Description : Création et peuplement des données de base dans une base de données créer préalablement
-*/
--->
+
 
 <?php
+
+/* *
+    Auteurs : Clement Mourgue et Yannis Duvignau
+    Description : Création et peuplement des données de base dans une base de données créer préalablement
+ */
+
+
 //connexion
 include_once "database.php";
 
-
-
-
-
-
-
-/*  // Requête pour récupérer le nom de toutes les tables
-$tables_query = "SHOW TABLES";
-$tables_result = $connexion->query($tables_query);
-
-if ($tables_result) {
-    while ($row = $tables_result->fetch_row()) {
-        $table_name = $row[0];
-        // Requête pour supprimer chaque table
-        $drop_query = "DROP TABLE IF EXISTS $table_name";
-        if ($connexion->query($drop_query) === TRUE) {
-            echo "Table $table_name supprimée avec succès.<br>";
-        } else {
-            echo "Erreur lors de la suppression de la table $table_name : " . $connexion->error . "<br>";
-        }
-    }
-} else {
-    echo "Erreur lors de la récupération des tables : " . $connexion->error;
-}  */
-
-
-
-
-//////////////////////////////////////////////
-///          Création des tables          ///
-/////////////////////////////////////////////
-
+// Noms des tables
 $nomTable_Tag = "Tag";
 $nomTable_Cat = "Categorie";
 $nomTable_User = "Utilisateur";
@@ -50,6 +21,36 @@ $nomTable_Participer = "Participer";
 $nomTable_Reco = "Recommander";
 $nomTable_Qualifier = "Qualifier";
 $nomTable_Regrouper = "Regrouper";
+$tabNomsTables = [$nomTable_Regrouper,$nomTable_Qualifier,$nomTable_Reco,$nomTable_Participer,$nomTable_Associer,$nomTable_Event,$nomTable_User,$nomTable_Cat,$nomTable_Tag];
+
+
+
+// Requête pour récupérer le nom de toutes les tables
+/*$tables_query = "SHOW TABLES";
+$tables_result = $connexion->query($tables_query);
+
+if ($tables_result) {
+    while ($row = $tables_result->fetch_row()) {
+        $table_name = $row[0];*/
+	for($i = 0;$i<sizeof($tabNomsTables);$i++){
+        // Requête pour supprimer chaque table
+        $drop_query = "DROP TABLE IF EXISTS ".$tabNomsTables[$i]." CASCADE";
+        if ($connexion->query($drop_query) === TRUE) {
+            echo "Table ".$tabNomsTables[$i]." supprimée avec succès.<br>";
+        } else {
+            echo "Erreur lors de la suppression de la table ".$tabNomsTables[$i]." : " . $connexion->error . "<br>";
+        }
+    } /*
+} else {
+    echo "Erreur lors de la récupération des tables : " . $connexion->error;
+} */
+
+
+
+
+//////////////////////////////////////////////
+///          Création des tables          ///
+/////////////////////////////////////////////
 
 
 // Requête de création de la table Tag
@@ -86,6 +87,7 @@ $sql = "CREATE TABLE IF NOT EXISTS $nomTable_User (
     trancheAge varchar(10) not null,
     description varchar(200) not null,
     situation varchar(50) not null,
+    chemImage varchar(200),
     MotDePasse varchar(50) not null,
     constraint verif_mail check(adrMail like '%@%.%'),
     constraint verif_trancheAge check (trancheAge in ('< 18', '18-25', '26-45', '> 45'))
@@ -106,6 +108,9 @@ $sql = "CREATE TABLE IF NOT EXISTS $nomTable_Event (
     effMax integer not null,
     statut integer not null,
     prix decimal not null,
+    heure varchar(10) not null,
+    adresse varchar(200) not null,
+    chemImages varchar(200) not null,
     idCategorie integer not null,
     idOrganisateur integer not null,
     foreign key(idCategorie) references Categorie(idCategorie),
@@ -233,22 +238,88 @@ if ($totalLignes == 0) {
     // La table est vide
     // Requête d'insertion de données dans la table tag
     $sql = "INSERT INTO $nomTable_Tag (idTag, libelle, description) VALUES 
-    ( 1 , 'Tournoi' , 'On aime la competition' ),
-    ( 2 , 'Gastronomie' , 'On aime manger' ),
-    ( 3 , 'Ambiance' , 'On aime quand il y a de l''ambiance' ),
-    ( 4 , 'Atelier' , 'On aime quand il y a des ateliers' ),
-    ( 5 , 'Film' , 'On aime regarder des films' ),
-    ( 6 , 'Formation' , 'On aime apprendre de nouvelles choses' ),
-    ( 7 , 'Cinema' , 'On aime aller au cinema' ),
-    ( 8 , 'Musique' , 'On aime la musique' ),
-    ( 9 , 'Solidarite' , 'On est solidaire ici' ),
-    ( 10 , 'Detente' , 'On aime quand c''est chill' ),
-    ( 11 , 'Festival' , 'On aime la fete' ),
-    ( 12 , 'Loisir' , 'On aime le loisir' ),
-    ( 13 , 'Finance' , 'On aime l''argent' ),
-    ( 14 , 'Soiree' , 'On aime sortir le soir' ),
-    ( 15 , 'Aventure' , 'On veut devenir Indiana Jones' ),
-    ( 16 , 'Sport' , 'On mange du sport' )";
+    ( 1 , 'Cuisine' , ' ' ),
+    ( 2 , 'Art' , ' ' ),
+    ( 3 , 'Musique' , ' ' ),
+    ( 4 , 'Dessin' , ' ' ),
+    ( 5 , 'Sport' , ' ' ),
+    ( 6 , 'Entraînement' , ' ' ),
+    ( 7 , 'Social' , ' ' ),
+    ( 8 , 'Discussion' , ' ' ),
+    ( 9 , 'Méditation' , ' ' ),
+    ( 10 , 'Détente' , ' ' ),
+    ( 11 , 'Lecture' , ' ' ),
+    ( 12 , 'Écoute' , ' ' ),
+    ( 13 , 'Rire' , ' ' ),
+    ( 14 , 'Divertissement' , ' ' ),
+    ( 15 , 'Fête' , ' ' ),
+    ( 16 , 'Exploration' , ' ' ),
+    ( 17 , 'Voyage' , ' ' ),
+    ( 18 , 'Découverte' , ' ' ),
+    ( 19 , 'Enseignement' , ' ' ),
+    ( 20 , 'Travail' , ' ' ),
+    ( 21 , 'Créativité' , ' ' ),
+    ( 22 , 'Construction' , ' ' ),
+    ( 23 , 'Jardinage' , ' ' ),
+    ( 24 , 'Photographie' , ' ' ),
+    ( 25 , 'Film' , ' ' ),
+    ( 26 , 'Danse' , ' ' ),
+    ( 27 , 'Chant' , ' ' ),
+    ( 28 , 'Instrument' , ' ' ),
+    ( 29 , 'Collection' , ' ' ),
+    ( 30 , 'Informatique' , ' ' ),
+    ( 31 , 'Réflexion' , ' ' ),
+    ( 32 , 'Engagement' , ' ' ),
+    ( 33 , 'Volontariat' , ' ' ),
+    ( 34 , 'Organisation' , ' ' ),
+    ( 35 , 'Exercice' , ' ' ),
+    ( 36 , 'Expérience' , ' ' ),
+    ( 37 , 'Test' , ' ' ),
+    ( 38 , 'Développement' , ' ' ),
+    ( 39 , 'Amélioration' , ' ' ),
+    ( 40 , 'Innovation' , ' ' ),
+    ( 41 , 'Économie' , ' ' ),
+    ( 42 , 'Partage' , ' ' ),
+    ( 43 , 'Influence' , ' ' ),
+    ( 44 , 'Motivation' , ' ' ),
+    ( 45 , 'Inspiration' , ' ' ),
+    ( 46 , 'Amusement' , ' ' ),
+    ( 47 , 'Célébration' , ' ' ),
+    ( 48 , 'Changement' , ' ' ),
+    ( 49 , 'Imagination' , ' ' ),
+    ( 50 , 'Jeux' , ' ' ),
+    ( 51 , 'Festival' , ' ' ),
+    ( 52 , 'Culture' , ' ' ),
+    ( 53 , 'Concert' , ' ' ),
+    ( 54 , 'Repas' , ' ' ),
+    ( 55 , 'Aperitif' , ' ' ),
+    ( 56 , 'Alcool' , ' ' ),
+    ( 57 , 'Association' , ' ' ),
+    ( 58 , 'Rencontre' , ' ' ),
+    ( 59 , 'Marche' , ' ' ),
+    ( 60 , 'Amical' , ' ' ),
+    ( 61 , 'Plaisir' , ' ' ),
+    ( 62 , 'Jeu de société' , ' ' ),
+    ( 63 , 'Animaux' , ' ' ),
+    ( 64 , 'Soiree' , ' ' ),
+    ( 65 , 'Nature' , ' ' ),
+    ( 66 , 'Paysages' , ' ' ),
+    ( 67 , 'Atelier' , ' ' ),
+    ( 68 , 'Gastronomie' , ' ' ),
+    ( 69 , 'Dégustation' , ' ' ),
+    ( 70 , 'Exposition' , ' ' ),
+    ( 71 , 'Musee' , ' ' ),
+    ( 72 , 'Dîner' , ' ' ),
+    ( 73 , 'Caritatif' , ' ' ),
+    ( 74 , 'Solidarité' , ' ' ),
+    ( 75 , 'Loisir' , ' ' ),
+    ( 76 , 'Competition' , ' ' ),
+    ( 77 , 'Tournoi' , ' ' ),
+    ( 78 , 'Montagne' , ' ' ),
+    ( 79 , 'Finance' , ' ' ),
+    ( 80 , 'Formation' , ' ' ),
+    ( 81 , 'Océan' , ' ' )";
+
 
     if ($connexion->query($sql) === TRUE) {
         echo '<script type="text/javascript">console.log("Données ajoutées avec succès");</script>';
@@ -304,19 +375,19 @@ if ($totalLignes == 0) {
     // La table est vide
     // Requête d'insertion de données dans la table Utilisateur
     $sql = "INSERT INTO $nomTable_User VALUES
-    ( 1 , 'Jean' , 'jean' , 'jean.jean64@gmail.com' , '> 45', 'vieux, laid, ennuyeux',  'sourd' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."' ),
-    ( 2 , 'Dupont' , 'joseph' , 'dupont.jos64@gmail.com' , '26-45', 'vieux, laid, ennuyeux',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 3 , 'Dupouille' , 'rodric' , 'dup.rodric40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 4 , 'Capdet' , 'stephane' , 'steph40@gmail.com' , '< 18', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 5 , 'Duvignau' , 'yannis' , 'yaya.dudu40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 6 , 'Mourgue' , 'clement' , 'clement.mg40@gmail.com' , '18-25', 'jeune, beau, drole',  'autiste' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 7 , 'Victoras' , 'dylan' , 'vivicto.dy64@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 8 , 'Guiheuneuf' , 'mattin' , 'guigui64@gmail.com' , '18-25', 'jeune, beau, drole', 'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 9 , 'Marot' , 'lucas' , 'lulu64@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 10 , 'Palassin' , 'adrien' , 'ad40@gmail.com' , '< 18', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 11 , 'Pierre' , 'Suzon' , 'suzonpierre@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 12 , 'Irastorza' , 'Pierre' , 'pirastorza@gmail.com' , '26-45', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."'),
-    ( 13 , 'Moulin' , 'Thibault' , 'thibmoulin@gmail.com' , '26-45', 'jeune, beau, drole',  'aucun' , '".password_hash('cestSecret123', PASSWORD_DEFAULT)."')
+    ( 1 , 'Jean' , 'jean' , 'jean.jean64@gmail.com' , '> 45', 'vieux, laid, ennuyeux',  'sourd' , './img/iconUser1.jpg' ,'cestSecret123'),
+    ( 2 , 'Dupont' , 'joseph' , 'dupont.jos64@gmail.com' , '26-45', 'vieux, laid, ennuyeux',  'aucun', './img/iconUser4.png' , 'cestSecret123'),
+    ( 3 , 'Dupouille' , 'rodric' , 'dup.rodric40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', './img/iconUser2' , 'cestSecret123'),
+    ( 4 , 'Capdet' , 'stephane' , 'steph40@gmail.com' , '< 18', 'jeune, beau, drole',  'aucun', './img/iconUser1' , 'cestSecret123'),
+    ( 5 , 'Duvignau' , 'yannis' , 'yaya.dudu40@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', './img/iconUser3' , 'cestSecret123'),
+    ( 6 , 'Mourgue' , 'clement' , 'clement.mg40@gmail.com' , '18-25', 'jeune, beau, drole',  'autiste', './img/iconUser1' , 'cestSecret123'),
+    ( 7 , 'Victoras' , 'dylan' , 'vivicto.dy64@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', './img/iconUser5' , 'cestSecret123'),
+    ( 8 , 'Guiheuneuf' , 'mattin' , 'guigui64@gmail.com' , '18-25', 'jeune, beau, drole', 'aucun', './img/iconUser3' , 'cestSecret123'),
+    ( 9 , 'Marot' , 'lucas' , 'lulu64@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', './img/iconUser4' , 'cestSecret123'),
+    ( 10 , 'Palassin' , 'adrien' , 'ad40@gmail.com' , '< 18', 'jeune, beau, drole',  'aucun', './img/iconUser1' , 'cestSecret123'),
+    ( 11 , 'Pierre' , 'Suzon' , 'suzonpierre@gmail.com' , '18-25', 'jeune, beau, drole',  'aucun', './img/iconUser6' , 'cestSecret123'),
+    ( 12 , 'Irastorza' , 'Pierre' , 'pirastorza@gmail.com' , '26-45', 'jeune, beau, drole',  'aucun', './img/iconUser5' , 'cestSecret123'),
+    ( 13 , 'Moulin' , 'Thibault' , 'thibmoulin@gmail.com' , '26-45', 'jeune, beau, drole',  'aucun', './img/iconUser4' , 'cestSecret123')
     ";
 
     if ($connexion->query($sql) === TRUE) {
@@ -343,25 +414,25 @@ if ($totalLignes == 0) {
     // La table est vide
     // Requête d'insertion de données dans la table Evenement
     $sql = "INSERT INTO $nomTable_Event VALUES
-    ( 1 , 'Grosse soiree' , 'Grosse soiree chez moi !' , '15/12/2024' , 10,  0 , 0.00 , 1 , 1 ),
-    ( 2 , 'Soiree FIFA' , 'Tournoi de fou sur FIFA. 3-0, tu lâche la manette !' , '20/11/2024' , 15,  0 , 0.00 , 1 , 2 ),
-    ( 3 , 'Soiree au WOK' , 'Il faut rentabiliser le prix.' , '14/11/2024' , 20,  0 , 0.00 , 1 , 3 ),
-    ( 4 , 'Aquaman 2 au cine' , 'Venez on regarde Aquaman 2 !' , '10/10/2024' , 30,  1 , 0.00 , 1 , 4 ),
-    ( 5 , 'Bowling' , 'Soiree chill au bowling' , '25/10/2024' , 5,  0 , 0.00 , 2 , 5 ),
-    ( 6 , 'Billard' , 'Un entrainement au billard' , '25/10/2024' , 3,  0 , 0.00 , 3 , 6 ),
-    ( 7 , 'Laser game' , 'Venez jouer a Call of Duty dans la vraie vie' , '30/10/2024' , 19,  0 , 0.00 , 3 , 7 ),
-    ( 8 , 'Atelier de poterie' , 'Venez apprendre la poterie' , '06/10/2024' , 18,  1 , 5.50 , 4 , 8 ),
-    ( 9 , 'Réunion litteraire' , 'Parlons de livre !' , '11/10/2024' , 16,  1 , 9.99 , 4 , 9 ),
-    ( 10 , 'Foot salle' , '9 contre 9 sur un terrain !' , '14/11/2024' , 18,  0 , 0.00 , 5 , 10 ),
-    ( 11 , 'Soirée jeux de société', 'Venez jouer à vos jeux préférés !', '22/12/2024', 12, 0, 0.00, 1, 12 ),
-    ( 12 , 'Cours de cuisine' , 'Apprenons à cuisiner ensemble !' , '14/11/2024' , 25,  1 , 15.00 , 4 , 13 ),
-    ( 13,  'Concert live', 'Profitez d''un concert en direct !', '05/10/2024', 40, 1, 20.00, 4, 11 ),
-    ( 14 , 'Soirée karaoké', 'Montrez vos talents de chanteur !', '12/10/2024', 15, 1, 0.00, 1, 11 ),
-    ( 15,  'Randonnée nature', 'Explorer la nature ensemble !', '08/11/2024', 8, 1, 0.00, 3, 1 ),
-    ( 16 , 'Projection de films', 'Cinéma à la maison !', '30/11/2024', 20, 0, 5.00, 4, 5 ),
-    ( 17, 'Séance de méditation', 'Relaxation et bien-être', '17/11/2024', 10, 1, 3.99, 5, 1 ),
-    ( 18 , 'Tournoi de ping-pong', 'Compétition amicale de ping-pong', '03/12/2024', 16, 1, 7.50, 5, 8 ),
-    ( 19 , 'Banquet des fêtes', 'Repas convivial pour profiter des fêtes du village', '11/07/2024', 50, 1, 8.00, 2, 8 )
+    ( 1 , 'Grosse soiree' , 'Grosse soiree chez moi !' , '2024-12-15' , 10,  0 , 0.00 , '15:30' , '3 rue de Cassou, 64600 Anglet','./img/event1.jpg' , 1 , 1 ),
+    ( 2 , 'Soiree FIFA' , 'Tournoi de fou sur FIFA. 3-0, tu lâche la manette !' , '2024-11-20' , 15,  0 , 0.00, '15:30' , '3 rue de Cassou, 64600 Anglet','./img/event2.jpg' , 1 , 2 ),
+    ( 3 , 'Soiree au WOK' , 'Il faut rentabiliser le prix.' , '2024-11-14' , 20,  0 , 0.00, '15:30' , '3 rue de Cassou, 64600 Anglet','./img/event3' , 1 , 3 ),
+    ( 4 , 'Aquaman 2 au cine' , 'Venez on regarde Aquaman 2 !' , '2024-10-10' , 30,  1 , 0.00, '15:30','3 rue de Cassou, 64600 Anglet','./img/event4' , 1 , 4 ),
+    ( 5 , 'Bowling' , 'Soiree chill au bowling' , '2024-10-25' , 5,  0 , 0.00,'15:30', '3 rue de Cassou, 64600 Anglet','./img/event5' , 2 , 5 ),
+    ( 6 , 'Billard' , 'Un entrainement au billard' , '2024-10-25' , 3,  0 , 0.00,'15:30', '3 rue de Cassou, 64600 Anglet','./img/event1' , 3 , 6 ),
+    ( 7 , 'Laser game' , 'Venez jouer a Call of Duty dans la vraie vie' , '2024-10-30' , 19,  0 , 0.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event2' , 3 , 7 ),
+    ( 8 , 'Atelier de poterie' , 'Venez apprendre la poterie' , '2024-10-06' , 18,  1 , 5.50,'15:30','3 rue de Cassou, 64600 Anglet','./img/event3' , 4 , 8 ),
+    ( 9 , 'Réunion litteraire' , 'Parlons de livre !' , '2024-10-11' , 16,  1 , 9.99,'15:30','3 rue de Cassou, 64600 Anglet','./img/event2' , 4 , 9 ),
+    ( 10 , 'Foot salle' , '9 contre 9 sur un terrain !' , '2024-11-14' , 18,  0 , 0.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event4' , 5 , 10 ),
+    ( 11 , 'Soirée jeux de société', 'Venez jouer à vos jeux préférés !', '2024-12-22', 12, 0, 0.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event2', 1, 12 ),
+    ( 12 , 'Cours de cuisine' , 'Apprenons à cuisiner ensemble !' , '2024-11-14' , 25,  1 , 15.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event5' , 4 , 13 ),
+    ( 13,  'Concert live', 'Profitez d''un concert en direct !', '2024-10-05', 40, 1, 20.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event2', 4, 11 ),
+    ( 14 , 'Soirée karaoké', 'Montrez vos talents de chanteur !', '2024-10-12', 15, 1, 0.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event5', 1, 11 ),
+    ( 15,  'Randonnée nature', 'Explorer la nature ensemble !', '2024-11-08', 8, 1, 0.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event1', 3, 1 ),
+    ( 16 , 'Projection de films', 'Cinéma à la maison !', '2024-11-30', 20, 0, 5.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event2', 4, 5 ),
+    ( 17, 'Séance de méditation', 'Relaxation et bien-être', '2024-11-17', 10, 1, 3.99,'15:30','3 rue de Cassou, 64600 Anglet','./img/event3', 5, 1 ),
+    ( 18 , 'Tournoi de ping-pong', 'Compétition amicale de ping-pong', '2024-12-03', 16, 1, 7.50,'15:30','3 rue de Cassou, 64600 Anglet','./img/event4', 5, 8 ),
+    ( 19 , 'Banquet des fêtes', 'Repas convivial pour profiter des fêtes du village', '2024-07-11', 50, 1, 8.00,'15:30','3 rue de Cassou, 64600 Anglet','./img/event5', 2, 8 )
     ";
 
     if ($connexion->query($sql) === TRUE) {

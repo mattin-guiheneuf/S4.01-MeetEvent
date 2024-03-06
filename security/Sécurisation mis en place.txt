@@ -1,0 +1,6 @@
+- Injection SQL : Mise en place d'un PDO et de requêtes préparées
+- Injection XSS : Mis en place d'une fonction validate qui vérifie les données entrées
+- Mis en place de la validité des données d'entrées avec des fonctions comme : filter_var($email, FILTER_VALIDATE_EMAIL)
+- Mise en place de jeon CSRF
+- Mise en place de protection contre les attaques par force brute : limiter les tentatives de connexion
+- Mise en place d'un système de backup pour la sauvegarde des données

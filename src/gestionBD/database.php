@@ -1,13 +1,11 @@
-<!--
-/**
+<?php
+/* *
     Auteurs : Equipe MeetEvent
     Description : Création de la connection vers la base de données
-*/
--->
+ */
 
-<?php
 //Pour YANNIS
-$bdname = 'projetME';
+$bdname = 'projetme';
 $host = 'localhost';
 $username = 'root';
 $password = '';
@@ -21,7 +19,7 @@ if($connexion->connect_errno){
 
 
 // Pour Clément
-/*$bdname = 'cmourgue_bd';
+/* $bdname = 'cmourgue_bd';
 $host = 'lakartxela.iutbayonne.univ-pau.fr';
 $username = 'cmourgue_bd';
 $password = 'cmourgue_bd';
@@ -30,7 +28,7 @@ $connexion = new mysqli($host, $username, $password, $bdname); // or die ...
 
 if($connexion->connect_errno){
     die("Connection error : " . $connexion->connect_error);
-}*/
+} */
 
 
 
@@ -62,4 +60,3 @@ if($connexion->connect_errno){
 
 return $connexion;
 
-?>

@@ -1,5 +1,15 @@
 <?php
 session_start();
+
+/* // Définit les paramètres de cookie de session
+$cookieParams = session_get_cookie_params();
+session_set_cookie_params(
+    $cookieParams["lifetime"] = 3600, 
+    $cookieParams["path"] = "/", 
+    $cookieParams["secure"] = true, // Secure : true pour envoyer uniquement sur HTTPS
+    $cookieParams["httponly"] = true  // HttpOnly : true pour empêcher l'accès via JavaScript
+); */
+
 // Vérifier si le jeton CSRF est présent et valide
 if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
     // Jeton CSRF invalide, traitement de l'erreur
@@ -88,7 +98,17 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
 
         $stmt->bind_param("sss", $_POST["pseudo"], $_POST["email"], $passwd);
         if ($stmt->execute()) {
-            header("Location: connexion.php");
+            /* session_start(); */
+            session_regenerate_id();
+            $sql = sprintf("SELECT idUtilisateur FROM Utilisateur WHERE adrMail = '%s'", $mysqli->real_escape_string($_POST["email"]));
+
+            $result = $mysqli->query($sql);
+
+            $user = $result->fetch_assoc();
+            $_SESSION["user_id"] = $user["idUtilisateur"];
+                    
+            //header("Location: ./algorithme/index.php");
+            echo '<script>window.location = "algorithme/index.php";</script>';
             exit;
         } else {
             if ($mysqli->errno === 80) {
