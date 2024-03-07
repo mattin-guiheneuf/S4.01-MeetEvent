@@ -74,30 +74,30 @@ if (!isset($_SESSION['user_id'])) {
             </p>
             <div class="btns">
                 <button class="btn-consulter">
-                    CONSULTEZ
+                    CONSULTEZ VOS EVENEMENTS
                     <img src="img/angle-petit-droit.png" alt="consulter" width="28px" height="28px" style="color: #6040fe;" />
                 </button>
                 <button class="btn-creation">
-                    CREER VOTRE EVENEMENT
+                    CREEZ VOTRE EVENEMENT
                 </button>
             </div>
         </div>
         <!-- Section 2 -->
         <div class="section2">
             <!-- Les événements participants -->
-            <div class="titre_evenement">Evenements auquels je participe</div>
+            <div class="titre_evenement">Evenements auxquels je participe</div>
             <div class="events">
 
             </div>
 
-            <!-- Les événements participants -->
-            <div class="titre_evenement">Mes événements crées</div>
-            <div class="events">
-
-
+                <!-- Les événements participants -->
+                <div class="titre_evenement">Mes événements créés</div>
+                <div class="events">
+                    
+                       
+                </div>
             </div>
         </div>
-    </div>
 
     <!-- Fenetre modale -->
     <div id="myModalForQrcode" class="modal">
@@ -291,64 +291,14 @@ if (!isset($_SESSION['user_id'])) {
             }
             searchResultsDiv.innerHTML = html;
 
-        } else {
-            if (nb == 1) {
-                searchResultsDiv.innerHTML = "Aucun événement rejoins";
             } else {
-                searchResultsDiv.innerHTML = "Aucun événement créé";
+                if (nb==1) {
+                    searchResultsDiv.innerHTML = "Aucun événement rejoint";
+                } else {
+                    searchResultsDiv.innerHTML = "Aucun événement créé";
+                }
             }
         }
-    }
-
-    // Fonction pour formater la date et l'heure dans le format requis par Google Calendar
-    function formatDateTimeForGoogleCalendar(dateTime) {
-        // Vérifier si la date et l'heure sont définies
-        if (!dateTime) {
-            console.error('La date et l\'heure ne sont pas définies.');
-            return null;
-        }
-
-        // Diviser la chaîne de date et d'heure en date et heure
-        var parts = dateTime.split(' ');
-
-        // Vérifier si la chaîne a été correctement divisée
-        if (parts.length !== 2) {
-            console.error('La chaîne de date et d\'heure est invalide : ' + dateTime);
-            return null;
-        }
-
-        var datePart = parts[0];
-        var timePart = parts[1];
-
-        // Diviser la date en jour, mois et année
-        var dateParts = datePart.split('/');
-        var day = dateParts[0];
-        var month = dateParts[1];
-        var year = dateParts[2];
-
-        // Diviser l'heure en heures et minutes
-        var timeParts = timePart.split(':');
-        var hour = timeParts[0];
-        var minute = timeParts[1];
-
-        // Formater la date et l'heure dans le format YYYYMMDDTHHMMSSZ
-        var formattedDateTime = year + month + day + 'T' + hour + minute + '00Z';
-        
-        return formattedDateTime;
-    }
-
-    // Fonction pour ouvrir l'agenda Google dans une nouvelle fenêtre
-    function openGoogleCalendar(dateTime) {
-        // Formater la date et l'heure pour Google Calendar
-        var formattedDateTime = formatDateTimeForGoogleCalendar(dateTime);
-        
-        // Créer l'URL de l'agenda Google avec la date et l'heure spécifiques
-        var googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&dates=' + encodeURIComponent(formattedDateTime) + '/' + encodeURIComponent(formattedDateTime);
-        
-        // Ouvrir l'agenda Google dans une nouvelle fenêtre
-        window.open(googleCalendarUrl, '_blank');
-    }
-
 
     /* Fonction pour changer le format de date */
     function formatDate(inputDate) {

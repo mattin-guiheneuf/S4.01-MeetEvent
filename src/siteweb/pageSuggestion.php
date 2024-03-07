@@ -132,21 +132,21 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                     </div>
                 </div> -->
-        </div>
-    </div>
-    <!-- Suggestion -->
-    <div class="part_suggest">
-        <div class="suggestion">
-            <div class="titre-suggestion">Suggestion d’événement</div>
-            <div class="events">
-
             </div>
         </div>
-    </div>
-    <!-- Recherche -->
-    <div class="part_suggest">
-        <div class="suggestion">
-            <div id="titre_result">
+        <!-- Suggestion -->
+        <div class="part_suggest">
+            <div class="suggestion">
+                <div class="titre-suggestion">Suggestion d’événements</div>
+                <div class="events">
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Recherche -->
+        <div class="part_suggest">
+            <div class="suggestion">
+                <div id="titre_result">
 
             </div>
             <div id="searchResults">

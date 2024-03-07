@@ -74,33 +74,27 @@ if (isset($_SESSION['user_id'])) {
     <!-- 1ere section -->
     <div class="section1">
 
-      <p class="accroche1">
-        <span>L’application événementielle qui </span>
-        <span style="color: #6040fe;">facilite la création d’événements personnalisée</span>
-      </p>
-
-      <p class="falicilite-la-cr">
-        Falicilite la création de <strong>votre événement</strong> qu’il soit public (ouvert à tous) ou privé. <strong>MeetEvent vous accompagne</strong> dans la création mais également dans <strong>la recherche d’événement</strong> à rejoindre !
-      </p>
-      <div style="display:flex;gap: 10px;align-items: left;align-self: flex-start;padding-left: 10%;">
-        <div class="btn-services">
-          <a class="services" href="#">DECOUVREZ NOS SERVICES</a>
-        </div>
-
-        <?php if (!isset($_SESSION['user_id'])) : ?>
-          <div class="btn-connexion">
-            <a class="connexion" href="connexion.php">JE ME CONNECTE</a>
+              <p class="accroche1">
+                  <span>L’application événementielle qui </span>
+                  <span style="color: #6040fe;">facilite la création d’événements personnalisée</span>
+              </p>
+ 
+              <p class="facilite-la-cr">
+                  Facilite la création de <strong>votre événement</strong> qu’il soit public (ouvert à tous) ou privé. <strong>MeetEvent vous accompagne</strong> dans la création mais également dans <strong>la recherche d’événement</strong> à rejoindre !
+              </p>
+              <div style="display:flex;gap: 10px;align-items: left;align-self: flex-start;padding-left: 10%;">
+                  <div class="btn-services">
+                      <a class="services" href="#">DECOUVREZ NOS SERVICES</a>
+                  </div>
+                  
+                  <div class="btn-connexion">
+                      <a class="connexion" href="connexion.php">JE ME CONNECTE</a>
+                  </div>
+              </div>    
+              <img class="image_pres" alt="image présentation"/>
           </div>
-        <?php else : ?>
-          <div class="btn-connexion">
-            <a class="connexion" href="pageSuggestion.php">JE ME LANCE</a>
-          </div>
-        <?php endif; ?>
-      </div>
-      <img class="image_pres" alt="image présentation" />
-    </div>
-    <!-- barre de séparation -->
-    <div class="barre-de-separation"></div>
+          <!-- barre de séparation -->
+          <div class="barre-de-separation"></div>
 
     <!-- 2eme section -->
     <div class="section2">
