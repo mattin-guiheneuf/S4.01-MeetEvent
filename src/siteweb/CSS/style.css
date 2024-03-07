@@ -20,52 +20,57 @@
   margin-top: 8%;
   margin-bottom: 7%;
   font-weight: 800;
-  font-size: 50px;
+  font-size: 3.5vw;
   text-align: center;
   letter-spacing: 0;
 }
 
 
-.falicilite-la-cr {
+.facilite-la-cr {
   max-width: 100%;
   font-weight: 400;
   color: #000000;
   align-self: flex-start;
-  font-size: 19.3px;
+  font-size: 1.5vw;
   letter-spacing: 0;
   padding-left: 10%;
   padding-right: 10%;
 }
 
 .btn-services{
-  padding: 15px 30px;
+  width: 100%;
+  padding: 1vw 3vw;
   background-color: #6040fe;
-  border-radius: 20px;
+  border-radius: 20vw;
   margin-bottom: 5%;
-}
+  text-align: center;
 
-.services {
   text-decoration: none;
+  border:0.1vw solid #6040fe;
   font-weight: 700;
   color: #ffffff;
-  font-size: 19.3px;
+  font-size: 1vw;
   letter-spacing: 0;
+  white-space: nowrap;
 }
+
+
 
 .btn-connexion{
-  padding: 15px 30px;
+  width: 100%;
+  padding: 1vw 3vw;
   background-color: #ffffff;
-  border-radius: 20px;
+  border-radius: 20vw;
   margin-bottom: 5%;
-  border: 2px solid #6040fe;
-}
+  border: 0.1vw solid #6040fe;
+  text-align: center;
 
-.connexion {
   text-decoration: none;
   font-weight: 700;
   color: #6040fe;
-  font-size: 19.3px;
+  font-size: 1.5vw;
   letter-spacing: 0;
+  white-space: nowrap;
 }
 
 .image_pres {
