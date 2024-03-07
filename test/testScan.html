@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan QR Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #videoContainer {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<button id="scanButton">Scan QR Code</button>
+<div id="videoContainer">
+    <video id="video" playsinline></video>
+</div>
+
+<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#scanButton').click(function () {
+            $('#videoContainer').toggle();
+            if ($('#videoContainer').is(':visible')) {
+                startScan();
+            } else {
+                stopScan();
+            }
+        });
+    });
+
+    function startScan() {
+        var scanner = new Instascan.Scanner({ video: document.getElementById('video') });
+        scanner.addListener('scan', function (content) {
+            alert('QR code scanné : ' + content);
+            stopScan();
+        });
+        Instascan.Camera.getCameras().then(function (cameras) {
+            if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+            } else {
+                alert('Aucune caméra trouvée');
+                stopScan();
+            }
+        }).catch(function (e) {
+            console.error(e);
+            stopScan();
+        });
+    }
+
+    function stopScan() {
+        $('#videoContainer').hide();
+        Instascan.stop();
+    }
+</script>
+
+</body>
+</html>

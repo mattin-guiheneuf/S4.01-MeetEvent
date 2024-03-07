@@ -34,7 +34,7 @@ if(isset($_POST['eventName']) or isset($_POST['eventDate']) or isset($_POST['eve
             JOIN Categorie c ON e.idCategorie = c.idCategorie 
             JOIN Utilisateur u ON e.idOrganisateur = u.idUtilisateur 
             JOIN Participer p ON e.idEvenement = p.idEvenement 
-            WHERE 1=1";
+            WHERE u.idUtilisateur != $userConnected";
 
     // Ajouter les conditions à la requête en fonction des paramètres fournis
     if ($eventName != '') {
@@ -91,12 +91,12 @@ if(isset($_POST['listeEvent'])){
     // Pour chaque événement dans la liste
     foreach ($listeEvent as $eventId) {
         // Construire la requête SQL paramétrée en fonction des critères de recherche fournis
-        $sql = "SELECT e.*,u.chemImage as chemImage, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces, (SELECT CASE WHEN COUNT(*)>0 THEN 1 ELSE 0 END from participer where idUtilisateur=$userConnected AND idEvenement = $eventId AND participationAnnulee = 0) as est_deja_admis
+        $sql = "SELECT e.*, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces, (SELECT CASE WHEN COUNT(*)>0 THEN 1 ELSE 0 END from participer where idUtilisateur=$userConnected AND idEvenement = $eventId AND participationAnnulee = 0) as est_deja_admis
                 FROM Evenement e 
                 JOIN Categorie c ON e.idCategorie = c.idCategorie 
                 JOIN Utilisateur u ON e.idOrganisateur = u.idUtilisateur 
                 JOIN Participer p ON e.idEvenement = p.idEvenement 
-                WHERE e.idEvenement = $eventId
+                WHERE e.idEvenement = $eventId AND u.idUtilisateur != $userConnected
                 GROUP BY p.idEvenement";
         // Exécuter la requête SQL
         $result = $connexion->query($sql);

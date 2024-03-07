@@ -18,6 +18,119 @@ nav {
    grid-gap: 24px;
 }
 
+
+
+
+
+
+
+
+a.nav-link_MesEvent:hover{
+    color: #6040fe !important;
+}
+
+.nav-link-transition_Suggest{
+    position: relative;
+    color: white; /* Couleur de texte par défaut */
+    text-decoration: none; /* Supprime le soulignement par défaut */
+    overflow: hidden; /* Cache le dépassement des pseudo-éléments */
+}
+
+.nav-link-transition  {
+    position: relative;
+    color: black; /* Couleur de texte par défaut */
+    text-decoration: none; /* Supprime le soulignement par défaut */
+    overflow: hidden; /* Cache le dépassement des pseudo-éléments */
+}
+.nav-link-transition_Suggest::before,
+.nav-link-transition_Suggest::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: white; /* Couleur du soulignement */
+    transition: width 0.3s ease; /* Animation de la largeur */
+}
+
+.nav-link-transition::before,
+.nav-link-transition::after
+ {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: #6040fe; /* Couleur du soulignement */
+    transition: width 0.3s ease; /* Animation de la largeur */
+}
+
+.nav-link-transition::before {
+    right: 100%; /* Déplace le début du soulignement hors de la vue */
+}
+
+.nav-link-transition::after {
+    left: 100%; /* Déplace la fin du soulignement hors de la vue */
+}
+
+.nav-link-transition:hover::before {
+    width: 100%; /* Animation de la largeur de droite à gauche */
+}
+
+.nav-link-transition:hover::after {
+    left: 0; /* Animation de la fin de droite à gauche */
+    width: 100%; /* Animation de la largeur de droite à gauche */
+}
+
+.nav-link-transition:not(:hover)::before,
+.nav-link-transition:not(:hover)::after {
+    width: 0; /* Réinitialise la largeur lorsque le curseur n'est pas sur le lien */
+}
+
+
+/*  */
+
+.nav-link-transition_Suggest::before,
+.nav-link-transition_Suggest::after
+ {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: white; /* Couleur du soulignement */
+    transition: width 0.3s ease; /* Animation de la largeur */
+}
+
+.nav-link-transition_Suggest::before {
+    right: 100%; /* Déplace le début du soulignement hors de la vue */
+}
+
+.nav-link-transition_Suggest::after {
+    left: 100%; /* Déplace la fin du soulignement hors de la vue */
+}
+
+.nav-link-transition_Suggest:hover::before {
+    width: 100%; /* Animation de la largeur de droite à gauche */
+}
+
+.nav-link-transition_Suggest:hover::after {
+    left: 0; /* Animation de la fin de droite à gauche */
+    width: 100%; /* Animation de la largeur de droite à gauche */
+}
+
+.nav-link-transition_Suggest:not(:hover)::before,
+.nav-link-transition_Suggest:not(:hover)::after {
+    width: 0; /* Réinitialise la largeur lorsque le curseur n'est pas sur le lien */
+}
+
+
+
+
+
+
+
+
 /* FOOTER */
 .event-footer {
     background-color: #6040fe;

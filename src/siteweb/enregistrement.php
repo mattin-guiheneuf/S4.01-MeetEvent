@@ -86,7 +86,7 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
         
         $mysqli = require "../gestionBD/database.php";
         //Insérer dans la base de donnée
-        $sql = "INSERT INTO Utilisateur(nom,prenom, adrMail, trancheAge, description, situation, MotDePasse) VALUES (?,'Dupont', ?, '> 45', 'NULL', 'NULL',?)";
+        $sql = "INSERT INTO Utilisateur(nom,prenom, adrMail, trancheAge, description, situation, MotDePasse, token) VALUES (?,'Dupont', ?, '> 45', 'NULL', 'NULL',?,?)";
 
         $stmt = $mysqli->stmt_init();
 
@@ -95,8 +95,10 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
         }
 
         $passwd = openssl_encrypt($_POST["mdp"], "AES-256-CBC", $crypt_key, 0, "1234567890123456");
+        $token = password_hash(uniqid(rand(), true), PASSWORD_DEFAULT);
 
-        $stmt->bind_param("sss", $_POST["pseudo"], $_POST["email"], $passwd);
+
+        $stmt->bind_param("ssss", $_POST["pseudo"], $_POST["email"], $passwd, $token);
         if ($stmt->execute()) {
             /* session_start(); */
             session_regenerate_id();

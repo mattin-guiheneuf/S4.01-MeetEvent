@@ -17,7 +17,7 @@ if ($connexion->connect_error) {
 }
 
 // Construire la requête SQL paramétrée en fonction des critères de recherche fournis
-$sql = "SELECT DISTINCT(p.idEvenement), e.*, x.chemImage as chemImage,x.nom as nom_organisateur, x.prenom as prenom_organisateur,c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces
+$sql = "SELECT DISTINCT(p.idEvenement), e.*, x.chemImage as chemImage,x.nom as nom_organisateur, x.prenom as prenom_organisateur,c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces, p.idUtilisateur as user_id, p.idEvenement as event_id, u.token as token_user, e.token as token_event
         FROM Participer p 
         JOIN Evenement e ON p.idEvenement=e.idEvenement
         JOIN Utilisateur u ON p.idUtilisateur=u.idUtilisateur

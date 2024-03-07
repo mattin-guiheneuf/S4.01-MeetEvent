@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemples de cartes d'événements</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            width: 300px;
+            height: 200px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+        }
+
+        /* Texture de fond - Dégradé */
+        .card.gradient {
+            background: linear-gradient(to bottom, #6040fe, #b0a8ff);
+        }
+
+        /* Texture de fond - Motif géométrique */
+        .card.pattern {
+            background-image: repeating-linear-gradient(45deg, #6040fe, #6040fe 10px, #b0a8ff 10px, #b0a8ff 20px);
+        }
+
+        /* Texture de fond - Motif abstrait */
+        .card.abstract {
+            background: url('https://www.transparenttextures.com/patterns/brick-wall.png');
+            background-size: cover;
+            background-blend-mode: overlay;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Carte avec dégradé de couleur -->
+    <div class="card gradient">
+        Dégradé de couleur
+    </div>
+
+    <!-- Carte avec motif géométrique -->
+    <div class="card pattern">
+        Motif géométrique
+    </div>
+
+    <!-- Carte avec motif abstrait -->
+    <div class="card abstract">
+        Motif abstrait
+    </div>
+</div>
+
+</body>
+</html>

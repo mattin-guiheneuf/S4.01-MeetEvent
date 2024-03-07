@@ -8,21 +8,14 @@ if (!isset($_GET['eventId'])) {
 }
 
 // Récupérer les modalités unique servant à la création d'un QRcode
+$userId = $_GET['userId'];
 $eventId = $_GET['eventId'];
-$eventName = $_GET['eventName'];
-$eventCreator = $_GET['eventCreator'];
-$eventStatut = $_GET['eventStatut'];
+$tokenUser = $_GET['tokenUser'];
+$tokenEvent = $_GET['tokenEvent'];
 
 // Concaténer les données pour former le contenu du QR code
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : "Unknown"; // Si l'utilisateur n'est pas connecté, afficher "Unknown"
-$qr_content = "L'utilisateur ". $_SESSION['user_id'] . " s'est bien inscrit à l'événement ";
-if($eventStatut===0){
-    $qr_content .= " privé ";
-}
-else {
-    $qr_content .= " public ";
-}
-$qr_content .= " intitulé " . $eventName . " que tu as créé (" . $eventCreator .")";
+$qr_content = "localhost/testSitME/S4.01-MeetEvent/src/siteweb/verifQRCode.php?userId=$userId&eventId=$eventId&tokenUser=$tokenUser&tokenEvent=$tokenEvent";
 
 // Générer l'URL de l'API QR Code de Google
 $api_url = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" . urlencode($qr_content);
