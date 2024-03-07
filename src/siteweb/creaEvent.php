@@ -22,7 +22,7 @@
           <div class="obligatoire">
             <h3>* champs obligatoires</h3>
           </div>
-          <div class="formulaire">
+          <form class="formulaire" action="/algorithme/CreationTag.php">
             <div class="gauche">
               <div class="inputTitre">
                 <label style="grid-row: 1;"><b>Titre</b> <span class="starOblig">*</span></label>
@@ -72,7 +72,7 @@
                 <button class="btnCreer">Créer</button>
               </div>
             </div>
-          </div>
+          </form>
       </div>
     </div>
     <!-- <footer> -->

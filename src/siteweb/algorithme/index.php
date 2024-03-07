@@ -106,7 +106,7 @@ echo $_SESSION["user_id"];
     <hr>
     <h2>Créer un Evenement</h2>
     <!-- Formulaire avec champ pour saisir l'inscription d'un utilisateur -->
-    <?php if(isset($_SESSION["event_id"])){
+    <?php //if(isset($_SESSION["event_id"])){
     echo `<form action="CreationTag.php" method="post">
         <label for="titre">Titre :</label>
         <input type="text" id="titre" name="titre">
@@ -129,7 +129,8 @@ echo $_SESSION["user_id"];
 
         <button type="submit" name="action" value="creerEvenement">Création d'un événement</button>
     </form>`;
-    }?>
+    //}
+    ?>
 
 	<?php 
         // Récupération du dicoMotsFr pour la saisieVerif des mots

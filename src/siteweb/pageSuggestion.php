@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
     $conn = require "../gestionBD/database.php";
     // L'utilisateur est connecté
     $user_id = $_SESSION['user_id'];
-    $query = "SELECT nom FROM Utilisateur WHERE idUtilisateur = '$user_id'";
+    $query = "SELECT nom FROM Utilisateur WHERE idUtilisateur = $user_id";
 
     $result = $conn->query($query);
     $row = $result->fetch_assoc();
@@ -74,7 +74,7 @@ if (!isset($_SESSION['user_id'])) {
                 </p>
                 <!-- Barre de Recherche -->
                 <p class="lb-exemple">
-                    ex. : “Bal de promo 2024”,&nbsp;&nbsp;le“25/05/2024”&nbsp;&nbsp; à “Anglet”
+                    ex. : “Bal de promo 2024”,&nbsp;le “25/05/2024”,&nbsp;à “Anglet”
                 </p>
                 <div class="barre-de-recherche">
                     <div class="items">
@@ -166,7 +166,7 @@ if (!isset($_SESSION['user_id'])) {
     <div id="myModal" class="modal">
         <div class="modal-content">
             <h3>Voulez-vous vraiment rejoindre cet événement ?</h3>
-            <p>Vous allez vous incrire pour cet événement. Vous ouvez vous désinscrire à tout moment via l'onglet "Gérer mes Evenements".</p>
+            <p>Vous allez vous incrire à cet événement. Vous pouvez vous désinscrire à tout moment via l'onglet "Gérer mes Evenements".</p>
             <div class="container-btn">
                 <input type="hidden" class="modalRecupEvent" value="">
                 <button class="btn_modal" style="color:white;background-color:#6040fe;" onclick="rejoindreEvent()">Oui, je rejoins</button>
