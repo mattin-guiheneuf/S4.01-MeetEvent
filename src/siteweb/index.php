@@ -46,23 +46,23 @@ if (isset($_SESSION['user_id'])) {
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <?php if (isset($_SESSION['user_id'])) : ?>
             <li class="nav-item" style="padding-left: 30px;padding-right: 30px;">
-              <a class="nav-link nav-link-transition nav-link_MesEvent" href="pageSuggestion.php" style="color: black;font-size: 18px;">Rechercher des événements</a>
+              <a class="nav-link nav-link-transition nav-link_MesEvent" href="pageSuggestion.php" style="color: black;font-size: 1.5vw;">Rechercher des événements</a>
             </li>
           <?php endif; ?>
         </ul>
         <?php if (!isset($_SESSION['user_id'])) : ?>
           <span class="navbar-text">
-            <a class="nav-link nav-link_MesEvent" href="connexion.php" style="color: black;font-size: 18px;">Se connecter</a>
+            <a class="nav-link nav-link_MesEvent" href="connexion.php" style="color: black;font-size: 1.5vw;">Se connecter</a>
           </span>
           <span class="navbar-text">
-            <i class="fi fi-sr-user" style="font-size: 28px;color: black;"></i>
+            <i class="fi fi-sr-user" style="color: black;"></i>
           </span>
         <?php else : ?>
           <span class="navbar-text">
-            <a class="nav-link nav-link_MesEvent" href="#" style="color: black;font-size: 18px;"><?php echo $user_name; ?></a>
+            <a class="nav-link nav-link_MesEvent" href="#" style="color: black;font-size: 1.5vw;"><?php echo $user_name; ?></a>
           </span>
           <span class="navbar-text">
-            <i class="fi fi-sr-user" style="font-size: 28px;color: black;"></i>
+            <i class="fi fi-sr-user" style="font-size: 1.5vw;color: black;"></i>
           </span>
         <?php endif; ?>
 
@@ -82,14 +82,20 @@ if (isset($_SESSION['user_id'])) {
               <p class="facilite-la-cr">
                   Facilite la création de <strong>votre événement</strong> qu’il soit public (ouvert à tous) ou privé. <strong>MeetEvent vous accompagne</strong> dans la création mais également dans <strong>la recherche d’événement</strong> à rejoindre !
               </p>
-              <div style="display:flex;gap: 10px;align-items: left;align-self: flex-start;padding-left: 10%;">
-                  <div class="btn-services">
-                      <a class="services" href="#">DECOUVREZ NOS SERVICES</a>
-                  </div>
+              <div style="display:flex;gap: 10px;align-items: left;align-self: flex-start;margin-left: 10%;">
+                  <button class="btn-services" onclick="window.location.href='#'">
+                      DECOUVREZ NOS SERVICES
+                  </button>
                   
+                  <?php if (!isset($_SESSION['user_id'])) : ?>
                   <div class="btn-connexion">
                       <a class="connexion" href="connexion.php">JE ME CONNECTE</a>
                   </div>
+                  <?php else :?>
+                    <button class="btn-connexion" onclick="window.location.href='pageSuggestion.php'">
+                      JE ME LANCE
+                    </button>
+                  <?php endif; ?>
               </div>    
               <img class="image_pres" alt="image présentation"/>
           </div>

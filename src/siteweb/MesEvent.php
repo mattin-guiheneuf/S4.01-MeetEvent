@@ -38,7 +38,7 @@ if (!isset($_SESSION['user_id'])) {
     <!-- Barre de Navigation -->
     <nav class="navbar sticky-top navbar-expand-lg" style="background-color: white;padding : 1%;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand"  href="index.php">
                 <img src="img/MeetEvent_Logo (1).png" alt="Bootstrap" width="50" height="40">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +75,6 @@ if (!isset($_SESSION['user_id'])) {
             <div class="btns">
                 <button class="btn-consulter">
                     CONSULTEZ VOS EVENEMENTS
-                    <img src="img/angle-petit-droit.png" alt="consulter" width="28px" height="28px" style="color: #6040fe;" />
                 </button>
                 <button class="btn-creation">
                     CREEZ VOTRE EVENEMENT
@@ -248,22 +247,22 @@ if (!isset($_SESSION['user_id'])) {
                 html += '<div class="part2">';
                 html += '<div class="titre_event">' + results[i].nom + '</div>';
                 html += '<div style="display:flex;align-items:center;gap:10px">';
-                html += '<i class="fi fi-sr-marker" style="font-size: 20px;"></i>';
+                html += '<i class="fi fi-sr-marker localisation_logo" style="font-size: 1.5vw;"></i>';
                 html += '<div onclick="window.open(\'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(results[i].adresse) + '\', \'_blank\')" style="cursor:pointer;">' + results[i].adresse + '</div>';
                 html += '</div>';
                 html += '<div class="modalite">';
                 html += '<div class="calendrier">';
-                html += '<i class="fi fi-sr-invite-alt" style="font-size: 40px;"></i>';
+                html += '<i class="fi fi-sr-invite-alt" style="font-size: 2.8vw;"></i>';
                 html += '<div class="infos">';
                 html += '<div style="font-weight:bold;">Calendrier</div>';
-                html += '<div onclick="openGoogleCalendar(\'' + formatDate(results[i].dateEvent) + ' ' + results[i].heure + '\')" style="cursor:pointer;">' + formatDate(results[i].dateEvent) + ' - ' + results[i].heure + '</div>';
+                html += '<div class="txt_infos" onclick="openGoogleCalendar(\'' + formatDate(results[i].dateEvent) + ' ' + results[i].heure + '\')" style="cursor:pointer;">' + formatDate(results[i].dateEvent) + ' - ' + results[i].heure + '</div>';
                 html += '</div> ';
                 html += '</div>';
                 html += '<div class="places">';
-                html += '<i class="fi fi-sr-users" style="font-size: 40px;"></i>';
+                html += '<i class="fi fi-sr-users" style="font-size: 2.8vw;"></i>';
                 html += '<div class="infos">';
                 html += '<div style="font-weight:bold;">Places restantes</div>';
-                html += '<div>' + results[i].nbPlaces + '</div>';
+                html += '<div class="txt_infos">' + results[i].nbPlaces + '</div>';
                 html += '</div> ';
                 html += '</div>';
                 html += '</div>';
@@ -273,8 +272,8 @@ if (!isset($_SESSION['user_id'])) {
                     html += '<div class="part3">';
                     html += '<img src="' + results[i].chemImage + '" alt="icone utilisateur" class="icon"/>';
                     html += '<div class="infos_createur">';
-                    html += '<div style="font-weight:bold;">Créateur</div>';
-                    html += '<div>' + results[i].nom_organisateur + " " + results[i].prenom_organisateur + '</div>';
+                    html += '<div class="crea" style="font-weight:bold;">Créateur</div>';
+                    html += '<div class="nom_crea">' + results[i].nom_organisateur + " " + results[i].prenom_organisateur + '</div>';
                 } else {
                     html += '<div class="part3_cree">';
                     if (results[i].statut == 0) {

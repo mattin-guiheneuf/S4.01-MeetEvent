@@ -40,7 +40,7 @@ if (!isset($_SESSION['user_id'])) {
 <body>
     <div style="background-color:#6040fe;">
         <!-- Barre de Navigation -->
-        <nav class="navbar sticky-top navbar-expand-lg" style="background-color: #6040fe9a;padding : 1%;backdrop-filter:  blur(10px);">
+        <nav class="navbar sticky-top navbar-expand-lg" style="background-color: #6040fe;padding : 1%;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.php">
                     <img src="img/MeetEvent_Logo_blanc.png" alt="Bootstrap" width="50" height="40">
@@ -50,7 +50,6 @@ if (!isset($_SESSION['user_id'])) {
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
                         <li class="nav-item" style="padding-left: 30px;padding-right: 30px;">
                             <a class="nav-link nav-link-transition_Suggest" href="MesEvent.php" style="color: white;font-size: 18px;">Gérer mes événements</a>
                         </li>
@@ -61,7 +60,6 @@ if (!isset($_SESSION['user_id'])) {
                     <span class="navbar-text">
                         <i class="fi fi-sr-user" style="font-size: 28px;color: white;"></i>
                     </span>
-
                 </div>
             </div>
         </nav>
@@ -368,22 +366,22 @@ if (!isset($_SESSION['user_id'])) {
                     html += '<div class="part2">';
                     html += '<div class="titre_event">' + results[i].nom + '</div>';
                     html += '<div style="display:flex;align-items:center;gap:10px">';
-                    html += '<i class="fi fi-sr-marker" style="font-size: 20px;"></i>';
-                    html += '<div onclick="window.open(\'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(results[i].adresse) + '\', \'_blank\')" style="cursor:pointer;">' + results[i].adresse + '</div>';
+                    html += '<i class="fi fi-sr-marker localisation_logo" style="font-size: 1.5vw;"></i>';
+                    html += '<div onclick="window.open(\'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(results[i].adresse) + '\', \'_blank\')" style="cursor:pointer;" class="adresse">' + results[i].adresse + '</div>';
                     html += '</div>';
                     html += '<div class="modalite">';
                     html += '<div class="calendrier">';
-                    html += '<i class="fi fi-sr-invite-alt" style="font-size: 40px"></i>';
+                    html += '<i class="fi fi-sr-invite-alt" style="font-size: 2.8vw"></i>';
                     html += '<div class="infos">';
-                    html += '<div style="font-weight:bold;">Calendrier</div>';
-                    html += '<div onclick="openGoogleCalendar(\'' + formatDate(results[i].dateEvent) + ' ' + results[i].heure + '\')" style="cursor:pointer;">' + formatDate(results[i].dateEvent) + ' - ' + results[i].heure + '</div>';
+                    html += '<div  style="font-weight:bold;">Calendrier</div>';
+                    html += '<div class="txt_infos" onclick="openGoogleCalendar(\'' + formatDate(results[i].dateEvent) + ' ' + results[i].heure + '\')" style="cursor:pointer;">' + formatDate(results[i].dateEvent) + ' - ' + results[i].heure + '</div>';
                     html += '</div> ';
                     html += '</div>';
                     html += '<div class="places">';
-                    html += '<i class="fi fi-sr-users" style="font-size: 40px"></i>';
+                    html += '<i class="fi fi-sr-users" style="font-size: 2.8vw;"></i>';
                     html += '<div class="infos">';
                     html += '<div style="font-weight:bold;">Places restantes</div>';
-                    html += '<div>' + results[i].nbPlaces + '</div>';
+                    html += '<div class="txt_infos">' + results[i].nbPlaces + '</div>';
                     html += '</div> ';
                     html += '</div>';
                     html += '</div>';
@@ -392,8 +390,8 @@ if (!isset($_SESSION['user_id'])) {
                     html += '<div class="part3">';
                     html += '<img src="' + results[i].chemImage + '" alt="icone utilisateur" class="icon"/>';
                     html += '<div class="infos_createur">';
-                    html += '<div style="font-weight:bold;">Créateur</div>';
-                    html += '<div>' + results[i].nom_organisateur + " " + results[i].prenom_organisateur + '</div>';
+                    html += '<div class="crea" style="font-weight:bold;">Créateur</div>';
+                    html += '<div class="nom_crea">' + results[i].nom_organisateur + " " + results[i].prenom_organisateur + '</div>';
                     html += '</div>';
                     html += '</div>';
                     html += '</div>';
@@ -492,6 +490,29 @@ if (!isset($_SESSION['user_id'])) {
             });
         }
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var navbarToggler = document.querySelector('.navbar-toggler');
+            var navbarCollapse = document.querySelector('.navbar-collapse');
+
+            navbarToggler.addEventListener('click', function() {
+                navbarCollapse.classList.toggle('show');
+                document.body.classList.toggle('fullscreen-nav-active');
+            });
+
+            // Ajouter un événement de clic pour fermer le menu en plein écran
+            var closeMenuButton = document.createElement('span');
+            closeMenuButton.classList.add('close-menu');
+            closeMenuButton.innerHTML = '&times;';
+            navbarCollapse.appendChild(closeMenuButton);
+            closeMenuButton.addEventListener('click', function() {
+                navbarCollapse.classList.remove('show');
+                document.body.classList.remove('fullscreen-nav-active');
+            });
+        });
+
+    </script>
+
 </body>
 
 </html>

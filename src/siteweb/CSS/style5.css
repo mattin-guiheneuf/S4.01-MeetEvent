@@ -21,7 +21,7 @@
     margin-top: 8%;
     margin-bottom: 7%;
     font-weight: 800;
-    font-size: 50px;
+    font-size: 6vw;
     text-align: center;
     letter-spacing: 0;
 }
@@ -32,26 +32,28 @@
 }
 
 .btn-consulter{
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 19.3px;
+    padding: 2vw 4vw;
+    border-radius: 20vw;
+    font-size: 2vw;
     font-weight: bold;
 
     background-color: white;
-    border: 2px solid  #6040fe;
+    border: 0.1vw solid  #6040fe;
     color: #6040fe;
+    margin-bottom: 1%;
     
 }
 
 .btn-creation{
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 19.3px;
+    padding: 2vw 4vw;
+    border-radius: 20vw;
+    font-size: 2vw;
     font-weight: bold;
 
     background-color: #6040fe;
-    border: none;
+    border: 0.1vw solid  #6040fe;
     color: white;
+    
 }
 
 /* Section 2*/
@@ -80,7 +82,8 @@
 
 .event {
     position: relative;
-    max-width: 528px;
+    width: 100%;
+    max-width: 578px;
     /* background-color: #a1a1a1; */
     border-radius: 20px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
@@ -88,8 +91,9 @@
 
 .part1 {
     position: relative;
-    width: 528px;
-    height: 276px;
+    width: 100%;
+    height: 30vw;
+    max-height: 256px;
     border-radius: 20px 20px 0px 0px;
     background-size: cover;
     background-position: center;
@@ -101,32 +105,42 @@
     -webkit-backdrop-filter: blur(2px);
     color: #ffffff;
     background-color: #4092febb;
-    padding: 10px 35px;
-    border-radius: 10px;
+    padding: 1vw 3vw;
+    border-radius: 10vw;
     position: absolute;
-    top: 250px;
-    left: 40px;
+    top: 93%;
+    left: 10%;
+    font-size: 2vw;
 }
 
 
 .part2{
     z-index: -1;
     background-color: #fff;
-    padding: 20px 40px;
+    padding: 2vw 4vw;
 }
 
 .titre_event{
-    margin-top: 28px;
-    font-size: 28px;
+    margin-top: 8%;
+    font-size: 4.5vw;
     font-weight: bold;
 }
 
+.adresse{
+    font-size: 2.5vw;
+}
+
 .modalite{
-    margin-top: 40px;
-    /* margin-bottom: 20px; */
+    margin-top: 8%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    gap: 3%;
+    font-size: 2.8vw;
+}
+
+.txt_infos{
+    font-size: 2.5vw;
 }
 
 .calendrier{
@@ -142,15 +156,22 @@
 }
 
 .part3{
-    padding: 20px 40px;
+    padding: 4vw 6vw;
     display: flex;
-    gap: 50px;
+    gap: 10%;
     background-color: #fff;
     border-radius:0 0 20px 20px ;
 }
 
+.crea{
+    font-size: 2.8vw;
+}
+.nom_crea{
+    font-size: 2.5vw;
+}
+
 .part3_cree{
-    padding-top: 20px;
+    padding-top: 4vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -158,9 +179,9 @@
 
 .icon {
     position: relative;
-    width: 60px;
-    height: 60px;
-    border-radius: 30px;
+    width: 10vw;
+    height: 10vw;
+    border-radius: 100%;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
 }
 
@@ -175,53 +196,64 @@
 .btn_qrcode{
     color: #6040fe;
     background-color: #ffffff;
-    border:  2px solid #6040fe;
+    border: 0.1vw solid #6040fe;
     text-decoration: none;
     font-weight: bold;
-    padding: 10px 25px;
-    border-radius: 20px; 
+    padding: 1vw 3vw;
+    font-size: 2vw;
+    border-radius: 20vw;
+    cursor: pointer;
+ 
 }
 
 .btn_quit{
     color: #ff0000;
     background-color: #ffffff;
-    border:  2px solid #ff0000;
+    border: 0.1vw solid #ff0000;
     text-decoration: none;
     font-weight: bold;
-    padding: 10px 25px;
-    border-radius: 20px; 
+    padding: 1vw 3vw;
+    font-size: 2vw;
+    border-radius: 20vw;
+    cursor: pointer;
 }
 
 .btn_scan{
     color: #6040fe;
     background-color: #ffffff;
-    border:  2px solid #6040fe;
+    border: 0.1vw solid #6040fe;
     text-decoration: none;
     font-weight: bold;
-    padding: 10px 25px;
-    border-radius: 20px;
-    margin: 0; 
+    padding: 1vw 3vw;
+    font-size: 2vw;
+    border-radius: 20vw;
+    margin: 0;
+    cursor: pointer;
 }
 
 .btn_modif{
     color: #66ff00;
     background-color: #ffffff;
-    border:  2px solid #66ff00;
+    border: 0.1vw solid #66ff00;
     text-decoration: none;
     font-weight: bold;
-    padding: 10px 25px;
-    border-radius: 20px; 
+    padding: 1vw 3vw;
+    font-size: 2vw;
+    border-radius: 20vw;
+    cursor: pointer; 
 }
 
 
 .btn_supp{
     color: #ff0000;
     background-color: #ffffff;
-    border:  2px solid #ff0000;
+    border: 0.1vw solid #ff0000;
     text-decoration: none;
     font-weight: bold;
-    padding: 10px 25px;
-    border-radius: 20px; 
+    padding: 1vw 3vw;
+    font-size: 2vw;
+    border-radius: 20vw;
+    cursor: pointer;
 }
 
 
@@ -301,3 +333,73 @@
 /* Au propre */
 /*************/
 
+/* Ajouter une taille de police maximale pour les grands écrans */
+@media screen and (min-width: 600px) {
+    .btn_qrcode {
+        font-size: 15px; /* Taille de la police maximale pour les grands écrans */
+        padding: 10px 35px;
+    }
+    .btn_quit {
+        font-size: 15px; /* Taille de la police maximale pour les grands écrans */
+        padding: 10px 35px;
+    }
+    .btn-consulter {
+        font-size: 19.3px; /* Taille de la police maximale pour les grands écrans */
+        padding: 10px 35px;
+    }
+    .btn-creation {
+        font-size: 19.3px; /* Taille de la police maximale pour les grands écrans */
+        padding: 10px 35px;
+    }
+    .btn_supp {
+        font-size: 15px; /* Taille de la police maximale pour les grands écrans */
+        padding: 10px 35px;
+    }
+    .btn_modif {
+        font-size: 15px; /* Taille de la police maximale pour les grands écrans */
+        padding: 10px 35px;
+    }
+    .btn_supp {
+        font-size: 15px; /* Taille de la police maximale pour les grands écrans */
+        padding: 10px 35px;
+    }
+    .categorie{
+        font-size: 15px; /* Taille de la police maximale pour les grands écrans */
+        padding: 10px 35px;
+        border-radius: 10px;
+    }
+    .titre_event{
+        font-size: 28px;
+    }
+    .adresse{
+        font-size: 15px;
+    }
+    .modalite{
+        font-size: 19px;
+    }
+    .txt_infos{
+        font-size: 15px;
+    }
+    .part2{
+        padding: 20px 40px;
+    }
+    .part3{
+        padding: 20px 40px;
+    }
+    .crea{
+        font-size: 19px;
+    }
+    .nom_crea{
+        font-size: 15px;
+    }
+    .icon{
+        width: 60px;
+        height: 60px;
+    }
+    .accroche1 {
+        font-size: 50px;
+    }
+    .lb-exemple{
+        font-size: 19.3px;
+    }
+}
