@@ -2,6 +2,14 @@
 /* Au propre */
 /*************/
 
+.fullscreen-nav-active .navbar-collapse {
+    background-color: #fff;
+  }
+  
+  .fullscreen-nav-active .close-menu {
+    color: #6040fe;
+  }
+
 /* Section 1*/
 .section1{
     padding-top: 2%;

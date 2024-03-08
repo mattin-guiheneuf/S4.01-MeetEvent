@@ -1,6 +1,14 @@
 /*************/
 /* Au propre */
 /*************/
+.fullscreen-nav-active .navbar-collapse {
+  background-color: #fff;
+}
+
+.fullscreen-nav-active .close-menu {
+  color: #6040fe;
+}
+
 
 /* Section 1*/
 .section1{
@@ -49,7 +57,7 @@
   border:0.1vw solid #6040fe;
   font-weight: 700;
   color: #ffffff;
-  font-size: 1vw;
+  font-size: 1.5vw;
   letter-spacing: 0;
   white-space: nowrap;
 }
