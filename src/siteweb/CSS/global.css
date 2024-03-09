@@ -24,7 +24,6 @@ nav {
 
 
 
-
 a.nav-link_MesEvent:hover{
     color: #6040fe !important;
 }
@@ -127,58 +126,223 @@ a.nav-link_MesEvent:hover{
 
 
 
+/* Styles pour le menu en plein écran */
+.fullscreen-nav-active .navbar-collapse {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #6040fe;
+    padding: 10vh 10vw; /* Vous pouvez ajuster ces valeurs selon vos besoins */
+    z-index: 1000; /* Pour s'assurer que le menu est au-dessus du contenu */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Aligner les éléments au centre verticalement */
+}
+
+.fullscreen-nav-active .navbar-nav {
+    margin: 0 auto; /* Centrer la liste ul */
+}
+
+.fullscreen-nav-active body {
+    overflow: hidden; /* Bloque le défilement en arrière-plan */
+}
+
+.fullscreen-nav-active .close-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Ajuster la taille des éléments de menu pour les rendre plus gros */
+.fullscreen-nav-active .navbar-nav .nav-link {
+    font-size: 32px; /* Taille de police plus grande */
+    padding: 20px; /* Rembourrage plus important */
+}
+
+.fullscreen-nav-active .fi {
+    font-size: 36px; /* Ajuster la taille de l'icône */
+}
+
+/* Masquer la croix lorsque le menu est en mode plein écran */
+.navbar-collapse:not(.show) .close-menu {
+    display: none;
+}
+
+/* Afficher la croix lorsque le menu est en mode plein écran */
+.navbar-collapse.show .close-menu {
+    display: block;
+}
 
 
 
 
 /* FOOTER */
+/* Styles pour le footer */
 .event-footer {
-    background-color: #6040fe;
-    color: #fff;
-    padding: 50px 0 0;
+    background-color: #170088;
+    color: black;
 }
 
-.container_footer {
+.footer-top {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    align-items: center;
+    /* padding: 10px 60px; */
+    padding: 1vw 6vw;
+    /* margin-bottom: 20px; */
+    margin-bottom: 2vw;
+    background-color: #6040fe;
+    color: #fff;
+}
+
+.item{
+    display:flex;
+    /* gap:10px; */
+    gap:1vw;
+    align-items:center;
+}
+
+.fas{
+    /* font-size:25px; */
+    font-size:2.5vw;
+}
+
+.text_item{
+    /* font-size: 15px; */
+    font-size: 1.5vw;
+}
+
+.footer-top .contact-info {
+    display: flex;
     align-items: center;
 }
 
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
+.contact-info div {
+    /* margin-left: 10px; */
+    margin-left: 1vw;
 }
 
-.footer-section {
-    flex: 1;
-    padding: 0 2%;
+.contact-info div:first-child {
+    margin-left: 0;
 }
+
+.footer-top p{
+    margin: 0;
+}
+
+/* .footer-section {
+    padding: 0 20px;
+    margin-bottom: 20px;
+} */
 
 .footer-section h2 {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
+    margin-bottom: 1vw;
 }
 
 .footer-section ul {
-    list-style-type: none;
+    list-style-type:none;
     padding: 0;
+    font-size: 1.6vw;
 }
 
 .footer-section ul li {
-    margin-bottom: 10px;
+    /* margin-bottom: 5px; */
+    margin-bottom: 0.5vw;
 }
-
-.footer-section ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
 
 .footer-bottom {
-    margin-top: 20px;
-    padding-top: 20px;
     text-align: center;
-    background-color: #4833c1;
+    /* padding: 10px 0; */
+    padding: 1vw 0;
+    color:#ffffff
+}
+
+form{
+    /* border: 1px solid #ffffff;
+    border-radius: 20px;
+    padding-left: 25px; */
+    border: 0.1vw solid #ffffff;
+    border-radius: 2vw;
+    padding-left: 2.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* margin-bottom:15px; */
+    margin-bottom:1.5vw;
+    background-color: #ffffff;
+}
+
+input, button{
+    border: none;
+}
+
+button{
+    /* padding: 10px 25px; */
+    padding: 1vw 2.5vw;
     color: #fff;
-    padding: 10px 0;
+    background-color: #6040fe;
+    /* border-radius: 20px !important; */
+    border-radius: 2vw !important;
+    font-size: 1.5vw !important;
+}
+
+input{
+    /* padding-right: 15px;
+    font-size: 15px; */
+    padding-right: 1.5vw;
+    font-size: 1.5vw !important;
+}
+
+input::placeholder{
+    font-size: 1.5vw;
+}
+
+.section_infos{
+    display: flex;
+    align-items: center;
+    /* gap: 10px; */
+    gap: 1vw;
+    justify-content: center;
+    font-weight: bold;
+    /* padding-bottom: 30px;
+    padding-left: 60px;
+    padding-right: 60px;
+    font-size: 10px; */
+    padding-bottom: 3vw;
+    padding-left: 6vw;
+    padding-right: 6vw;
+    font-size: 1vw;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-icons a {
+    color: #fff;
+    /* font-size: 24px;
+    margin: 0 10px; */
+    font-size: 2.4vw;
+    margin: 0 1vw;
+}
+
+
+/* RESPONSIVE */
+/* Ajouter une taille de police maximale pour les grands écrans */
+@media screen and (min-width: 992px) {
+    a.nav-link{
+        font-size: 19.3px !important;
+    }
+    .fi {
+        font-size: 20px !important; /* Ajuster la taille de l'icône */
+    }
 }

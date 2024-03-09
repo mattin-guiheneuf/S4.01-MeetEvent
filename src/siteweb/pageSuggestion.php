@@ -45,20 +45,20 @@ if (!isset($_SESSION['user_id'])) {
                 <a class="navbar-brand" href="index.php">
                     <img src="img/MeetEvent_Logo_blanc.png" alt="Bootstrap" width="50" height="40">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="outline: 1px solid white;">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item" style="padding-left: 30px;padding-right: 30px;">
-                            <a class="nav-link nav-link-transition_Suggest" href="MesEvent.php" style="color: white;font-size: 18px;">Gérer mes événements</a>
+                            <a class="nav-link nav-link-transition_Suggest" href="MesEvent.php" style="color: white;font-size: 5vw;">Gérer mes événements</a>
                         </li>
                     </ul>
                     <span class="navbar-text">
-                        <a class="nav-link" href="#" style="color: white;font-size: 18px;"><?php echo $user_name; ?></a>
+                        <a class="nav-link" href="logout.php" style="color: white;font-size: 5vw;"><?php echo $user_name; ?></a>
                     </span>
                     <span class="navbar-text">
-                        <i class="fi fi-sr-user" style="font-size: 28px;color: white;"></i>
+                        <i class="fi fi-sr-user" style="font-size: 5vw;color: white;"></i>
                     </span>
                 </div>
             </div>

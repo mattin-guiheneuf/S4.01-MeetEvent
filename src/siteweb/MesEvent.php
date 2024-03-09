@@ -47,17 +47,17 @@ if (!isset($_SESSION['user_id'])) {
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item" style="padding-left: 30px;padding-right: 30px;">
-                        <a class="nav-link nav-link-transition nav-link_MesEvent" href="creaEvent.php" style="color: black;font-size: 18px;">Créer votre événement</a>
+                        <a class="nav-link nav-link-transition nav-link_MesEvent" href="creaEvent.php" style="color: black;font-size: 5vw;">Créer votre événement</a>
                     </li>
                     <li class="nav-item" style="padding-left: 30px;padding-right: 30px;">
-                        <a class="nav-link nav-link-transition nav-link_MesEvent" href="pageSuggestion.php" style="color: black;font-size: 18px;">Rechercher des événements</a>
+                        <a class="nav-link nav-link-transition nav-link_MesEvent" href="pageSuggestion.php" style="color: black;font-size: 5vw;">Rechercher des événements</a>
                     </li>
                 </ul>
                 <span class="navbar-text">   
-                    <a class="nav-link nav-link_MesEvent" href="#" style="color: black;font-size: 18px;"><?php echo $user_name; ?></a>
+                    <a class="nav-link nav-link_MesEvent" href="#" style="color: black;font-size: 5vw;"><?php echo $user_name; ?></a>
                 </span>
                 <span class="navbar-text"> 
-                    <i class="fi fi-sr-user" id="icon_MesEvents" style="font-size: 28px;color: black;"></i>
+                    <i class="fi fi-sr-user" id="icon_MesEvents" style="font-size: 5vw;color: black;"></i>
                 </span>
             </div>
         </div>
@@ -413,5 +413,27 @@ if (!isset($_SESSION['user_id'])) {
         });
     }
 </script>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var navbarToggler = document.querySelector('.navbar-toggler');
+            var navbarCollapse = document.querySelector('.navbar-collapse');
+
+            navbarToggler.addEventListener('click', function() {
+                navbarCollapse.classList.toggle('show');
+                document.body.classList.toggle('fullscreen-nav-active');
+            });
+
+            // Ajouter un événement de clic pour fermer le menu en plein écran
+            var closeMenuButton = document.createElement('span');
+            closeMenuButton.classList.add('close-menu');
+            closeMenuButton.innerHTML = '&times;';
+            navbarCollapse.appendChild(closeMenuButton);
+            closeMenuButton.addEventListener('click', function() {
+                navbarCollapse.classList.remove('show');
+                document.body.classList.remove('fullscreen-nav-active');
+            });
+        });
+
+    </script>
 
 </html>
