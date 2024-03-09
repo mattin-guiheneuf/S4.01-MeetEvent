@@ -107,28 +107,28 @@ echo $_SESSION["user_id"];
     <h2>Créer un Evenement</h2>
     <!-- Formulaire avec champ pour saisir l'inscription d'un utilisateur -->
     <?php //if(isset($_SESSION["event_id"])){
-    echo `<form action="CreationTag.php" method="post">
-        <label for="titre">Titre :</label>
-        <input type="text" id="titre" name="titre">
+    echo '<form action="CreationTag.php" method="post">
+            <label for="titre">Titre :</label>
+            <input type="text" id="titre" name="titre">
 
-        <label for="date">Date :</label>
-        <input type="text" id="date" name="date">
+            <label for="date">Date :</label>
+            <input type="text" id="date" name="date">
 
-        <label for="heure">Heure :</label>
-        <input type="text" id="heure" name="heure">
+            <label for="heure">Heure :</label>
+            <input type="text" id="heure" name="heure">
 
-        <label for="lieu">Lieu :</label>
-        <input type="text" id="lieu" name="lieu">
+            <label for="lieu">Lieu :</label>
+            <input type="text" id="lieu" name="lieu">
 
-        <label for="motEvenement">Mot :</label>
-        <input type="text" id="motEvenement" name="motEvenement">
-        <button type="button" onclick="ajouterMotEvenement()">Ajouter</button>
-        <div id="listeMotsEvenement"></div>
+            <label for="motEvenement">Mot :</label>
+            <input type="text" id="motEvenement" name="motEvenement">
+            <button type="button" onclick="ajouterMotEvenement()">Ajouter</button>
+            <div id="listeMotsEvenement"></div>
 
-        <input type="hidden" id="motsListeEvenementInput" name="motsListeEvenement" value="">
+            <input type="hidden" id="motsListeEvenementInput" name="motsListeEvenement" value="">
 
-        <button type="submit" name="action" value="creerEvenement">Création d'un événement</button>
-    </form>`;
+            <button type="submit" name="action" value="creerEvenement">Création d\'un événement</button>
+        </form>';
     //}
     ?>
 

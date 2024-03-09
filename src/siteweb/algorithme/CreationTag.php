@@ -170,14 +170,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $date = $_POST['date'];
                 $heure = $_POST['heure'];
                 $lieu = $_POST['lieu'];
-                $id_event = $donnees['evenements'][count($donnees['evenements']) - 1]['id'] + 1;
-                $event_courrant = new Evenement($id_event,[]);
+
+                $req_idEvent = "SELECT idEvenement FROM evenement ORDER BY idEvenement DESC LIMIT 1";
+                $res_reqIdEvent = $connexion->query($req_idEvent);
+                if($res_reqIdEvent) {
+                    $row = $res_reqIdEvent->fetch_assoc();
+                    if($row){
+                        $id_event = $row['idEvenement'] + 1;
+                    }
+                    else {
+                        echo "Aucun évènement trouvé dans la base de données";
+                    }
+                }
+                else {
+                    echo "Erreur dans l'exécution de la requête : " . $connexion->error;
+                }
+                
+                $req_insertEvent = "INSERT INTO evenement (idEvenement) VALUES (?)";
+                $exec_insertEvent = $connexion->prepare($req_insertEvent);
+                $exec_insertEvent->bind_param("i", $id_event);
+                if ($exec_insertEvent->execute()) {
+                    echo "Insertion de l'évènement dans la BD";
+                } else {
+                    echo "Erreur lors de l'insertion dans la BD";
+                }
+
+                //$id_event = $donnees['evenements'][count($donnees['evenements']) - 1]['id'] + 1;
+                //$event_courrant = new Evenement($id_event,[]);
 
                 // Récupère la liste de mots envoyée par le formulaire
-                $motsListe = isset($_POST['motsListeEvenement']) ? json_decode($_POST['motsListeEvenement']) : [];
+                //$motsListe = isset($_POST['motsListeEvenement']) ? json_decode($_POST['motsListeEvenement']) : [];
 
                 //on crée ajout l'utilisateur dans la BD
-                $event_courrant->setId($id_event);
+                /*$event_courrant->setId($id_event);
                 $event_courrant->setTitre($titre);
                 $event_courrant->setDate($date);
                 $event_courrant->setHeure($heure);
@@ -187,8 +212,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 foreach($motsListe as $motX){
                     $listeMot_objet[]= new Mot($motX);
                 }
-                $event_courrant->setMots($listeMot_objet);
-                $event_courrant->definirDescription($dicoSynTag);
+                //$event_courrant->setMots($listeMot_objet);
+                //$event_courrant->definirDescription($dicoSynTag);
+
+                // Mettre à jour la base de données
+                $event_id = $event_courrant->getId(); // Id de l'évènement
+
+                $sql_insert = "INSERT INTO Evenement VALUES (?)";
+                $stmt_insert = $connexion->prepare($sql_insert);
+                $stmt_insert->bind_param("i", $event_id);
+
+
+                /*
+                //| Mettre a jour la description |
+
+                // Variables pour les nouvelles données de l'utilisateur
+                $nouvelle_description = $user_courrant->getMots();
+
+                $mots_str ="";
+                foreach ($nouvelle_description as $id_mot) {
+                    $mots_str .=  $id_mot->getLibelle() . " "; 
+                }
+
+                // Requête SQL pour mettre à jour la description de l'utilisateur
+                $sql = "UPDATE Utilisateur SET description = ? WHERE idUtilisateur = ?";
+                $stmt = $connexion->prepare($sql);
+                $stmt->bind_param("si", $mots_str, $id_utilisateur);
+
+                
+                // Exécution de la requête
+                if ($stmt->execute()) {
+                    echo "Description mise à jour avec succès.";
+                } else {
+                    echo "Erreur lors de la mise à jour de la description ";
+                }
+
+                // | Mettre a jour les tags |
+                // Fonction pour récupérer l'ID d'un tag à partir de son libellé
+                function getTagId($conn, $tag) {
+                    $sql = "SELECT idTag FROM Tag WHERE libelle = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("s", $tag);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        return $row['idTag'];
+                    }
+                }
+                // Variable pour les nouvelles données de l'utilisateur
+                $nouveaux_tags = $user_courrant->getTags();
+
+                // Supprimer les anciens tags de l'utilisateur de la table d'association
+                $sql_delete = "DELETE FROM Associer WHERE idUtilisateur = ?";
+                $stmt_delete = $connexion->prepare($sql_delete);
+                $stmt_delete->bind_param("i", $id_utilisateur);
+                $stmt_delete->execute();
+
+                // Insérer les nouveaux tags de l'utilisateur dans la table d'association
+                $sql_insert = "INSERT INTO Associer VALUES (?, ?)";
+                $stmt_insert = $connexion->prepare($sql_insert);
+                $stmt_insert->bind_param("ii", $id_utilisateur, $id_tag);
+
+                foreach ($nouveaux_tags as $tag) {
+                    $id_tag = getTagId($connexion, $tag);
+                    $stmt_insert->execute();
+                }
+
+                // Vérifier si les opérations se sont déroulées avec succès
+                if ($stmt_delete->affected_rows > 0 || $stmt_insert->affected_rows > 0) {
+                    echo "Tags mis à jour avec succès.";
+                } else {
+                    echo "Erreur lors de la mise à jour des tags ";
+                }
+
+
+                //header("Location: ../pageSuggestion.php");
+				echo '<script>window.location = "../pageSuggestion.php";</script>';
+                */
+
                 break;
             default:
                 // Action non reconnue
