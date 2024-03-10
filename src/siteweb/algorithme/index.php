@@ -107,7 +107,7 @@ echo $_SESSION["user_id"];
     <h2>Créer un Evenement</h2>
     <!-- Formulaire avec champ pour saisir l'inscription d'un utilisateur -->
     <?php //if(isset($_SESSION["event_id"])){
-    echo `<form action="CreationTag.php" method="post">
+    echo '<form action="CreationTag.php" method="post">
         <label for="titre">Titre :</label>
         <input type="text" id="titre" name="titre">
 
@@ -127,8 +127,8 @@ echo $_SESSION["user_id"];
 
         <input type="hidden" id="motsListeEvenementInput" name="motsListeEvenement" value="">
 
-        <button type="submit" name="action" value="creerEvenement">Création d'un événement</button>
-    </form>`;
+        <button type="submit" name="action" value="creerEvenement">Création d\'un événement</button>
+    </form>';
     //}
     ?>
 

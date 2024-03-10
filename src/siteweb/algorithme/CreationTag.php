@@ -164,31 +164,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 /* A FAIRE */
-            case 'creerEvenement':          
+            case 'creerEvenement':
+                // Requête pour récupérer la valeur de idEvenement
+                $req_idEvent = "SELECT idEvenement FROM evenement ORDER BY idEvenement DESC LIMIT 1";
+
+                // Exécution de la requête
+                $prep_reqIdEvent = $connexion->prepare($req_idEvent);
+                if ($prep_reqIdEvent) {
+                    $prep_reqIdEvent->execute();
+                    $res_reqIdEvent = $prep_reqIdEvent->get_result();
+
+                    // Vérifier si la requête a réussi
+                    if ($res_reqIdEvent) {
+                        // Récupérer la première ligne de résultat
+                        $row = $res_reqIdEvent->fetch_assoc();
+                        // Vérifier si une ligne a été retournée
+                        if ($row) {
+                            // Extraire la valeur de idEvenement
+                            $id_event = $row['idEvenement'] + 1;
+                        } else {
+                            // Aucune ligne retournée, donc aucune valeur à récupérer
+                            echo "Aucun événement trouvé dans la base de données.";
+                        }
+                    } 
+                    else {
+                        // La requête a échoué
+                        echo "Erreur lors de l'exécution de la requête: " . $connexion->error;
+                    }
+                }
+                else {
+                    echo "Erreur lors de la préparation de la requête: " . $connexion->error;
+                }
+
                 // Logique pour créer un événement
                 $titre = $_POST['titre'];
                 $date = $_POST['date'];
                 $heure = $_POST['heure'];
                 $lieu = $_POST['lieu'];
-                $id_event = $donnees['evenements'][count($donnees['evenements']) - 1]['id'] + 1;
-                $event_courrant = new Evenement($id_event,[]);
+                $nvl_event = new Evenement($id_event,[]);
 
                 // Récupère la liste de mots envoyée par le formulaire
                 $motsListe = isset($_POST['motsListeEvenement']) ? json_decode($_POST['motsListeEvenement']) : [];
 
                 //on crée ajout l'utilisateur dans la BD
-                $event_courrant->setId($id_event);
-                $event_courrant->setTitre($titre);
-                $event_courrant->setDate($date);
-                $event_courrant->setHeure($heure);
-                $event_courrant->setLieu($lieu);
+                $nvl_event->setId($id_event);
+                $nvl_event->setTitre($titre);
+                $nvl_event->setDate($date);
+                $nvl_event->setHeure($heure);
+                $nvl_event->setLieu($lieu);
                 //Création liste de mot objet
                 $listeMot_objet = array();
                 foreach($motsListe as $motX){
                     $listeMot_objet[]= new Mot($motX);
                 }
-                $event_courrant->setMots($listeMot_objet);
-                $event_courrant->definirDescription($dicoSynTag);
+                $nvl_event->setMots($listeMot_objet);
+                $nvl_event->definirDescription($dicoSynTag);
+                
+                $id_event = $nvl_event->getId();
+                $titre_event = $nvl_event->getTitre();
+                $req_insertEvnt = "INSERT INTO evenement (idEvenement, nom) VALUES (?,?)"; // Correction à apporter sur la requête car pas possible d'insérer sans Catégorie ni Organisateur 
+                $res_insertEvnt = $connexion->prepare($req_insertEvnt);
+                $res_insertEvnt->bind_param("is", $id_event, $titre_event);
+
+                echo "Evènement ajouté";
                 break;
             default:
                 // Action non reconnue
