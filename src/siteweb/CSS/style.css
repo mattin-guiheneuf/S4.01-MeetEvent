@@ -1,6 +1,14 @@
 /*************/
 /* Au propre */
 /*************/
+.fullscreen-nav-active .navbar-collapse {
+  background-color: #fff;
+}
+
+.fullscreen-nav-active .close-menu {
+  color: #6040fe;
+}
+
 
 /* Section 1*/
 .section1{
@@ -31,7 +39,7 @@
   font-weight: 400;
   color: #000000;
   align-self: flex-start;
-  font-size: 1.5vw;
+  font-size: 1.6vw;
   letter-spacing: 0;
   padding-left: 10%;
   padding-right: 10%;
@@ -49,7 +57,7 @@
   border:0.1vw solid #6040fe;
   font-weight: 700;
   color: #ffffff;
-  font-size: 1vw;
+  font-size: 1.5vw;
   letter-spacing: 0;
   white-space: nowrap;
 }
@@ -73,15 +81,19 @@
   white-space: nowrap;
 }
 
+.images{
+  display: flex;
+  margin: 3% 0;
+}
+
 .image_pres {
   margin-top: 5%;
   margin-bottom: 5%;
   width: 100%;
-  height:400px;
-  background-color: #d9d9d9;
-  border-radius: 45px;
-  border: 1px solid #000000;
-
+  height: 20vw;
+  /* background-color: #d9d9d9; */
+  /* border-radius: 45px; */
+  /* border: 1px solid #000000; */
 }
 
 /* barre de séparation */
@@ -89,10 +101,11 @@
   grid-column: 1/13;
   position: relative;
   width: 100%;
-  height: 60px;
+  /* height: 60px; */
+  height: 6vw;
   background-color: #6040fe;
-  border-top: 3px solid #000000;
-  border-bottom: 3px solid #000000;
+  border-top: 0.2vw solid #000000;
+  border-bottom: 0.2vw solid #000000;
   margin-top: 2%;
   margin-bottom: 2%;
 }
@@ -105,8 +118,9 @@
 
 .accroche2 {
   position: relative;
-  font-weight: 600;
-  font-size: 30px;
+  font-weight: bold;
+  /* font-size: 25px; */
+  font-size: 2.5vw;
   letter-spacing: 0;
   line-height: normal;
 }
@@ -114,16 +128,20 @@
 /* Etape 1 */
 
 .etape1 {
-  margin-top: 100px;
+  /* margin-top: 80px; */
+  margin-top: 8vw;
   grid-column: 2;
   display: grid;
-  gap: 20px;
+  /* gap: 20px; */
+  gap: 2vw;
   grid-template-columns: repeat(2,1fr);
-  margin-bottom: 150px;
+  /* margin-bottom: 80px; */
+  margin-bottom: 8vw;
 }
 
 .titre_etape1{
-  font-size: 30px;
+  /* font-size: 30px; */
+  font-size: 3vw;
   font-weight: bold;
   text-align: center;
 }
@@ -132,15 +150,16 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #d9d9d9;
-  border-radius: 45px;
-  border: 1px solid;
-  border-color: #000000;
+  /* background-color: #d9d9d9; */
+  /* border-radius: 45px;
+  border: 1px solid; */
+  /* border-color: #000000; */
 }
 
 .ellipse{
-  padding:10px 15px;
-  border-radius: 50%;
+  /* padding:10px 15px; */
+  padding:1vw 1.7vw;
+  border-radius: 100%;
   /* border:2px solid #6040fe; */
   background-color: #6040fe;
   color: #ffffff;
@@ -150,9 +169,39 @@
 .etapes{
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  /* gap: 15px; */
+  gap: 1.5vw;
 }
 
+.etape1 p{
+  /* font-size: 16px; */
+  font-size: 1.6vw;
+  color: #8d8d8d;
+}
 
+.etapes span{
+  /* font-size: 16px; */
+  font-size: 1.6vw;
+}
 
+.texte_etape{
+  display:flex;
+  flex-direction: column; 
+  /* gap: 40px; */
+  gap: 2.5vw;
+  /* padding: 20px; */
+  padding: 2vw;
+}
+
+.etape{
+  display:flex; 
+  /* gap:10px; */
+  gap:1vw; 
+  align-items:center;
+}
 /* Au propre */
+
+/* Ajouter une taille de police maximale pour les grands écrans */
+@media screen and (min-width: 600px) {
+  
+}

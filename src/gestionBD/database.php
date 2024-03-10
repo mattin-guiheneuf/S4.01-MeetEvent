@@ -4,8 +4,10 @@
     Description : Création de la connection vers la base de données
  */
 
-//Pour YANNIS
-/* $bdname = 'projetme';
+
+/*Pour YANNIS
+$bdname = 'projetme';
+>>>>>>> master
 $host = 'localhost';
 $username = 'root';
 $password = '';
@@ -67,7 +69,7 @@ $connexion = new mysqli(hostname : $host, username : $username, password : $pass
 
 if($connexion->connect_errno){
     die("Connection error:" . $connexion->connect_error);
-}  */
-
+}
+*/
 return $connexion;
 

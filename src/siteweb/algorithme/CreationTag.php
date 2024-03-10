@@ -204,7 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $nvl_event = new Evenement($id_event,[]);
 
                 // Récupère la liste de mots envoyée par le formulaire
-                $motsListe = isset($_POST['motsListeEvenement']) ? json_decode($_POST['motsListeEvenement']) : [];
+                //$motsListe = isset($_POST['motsListeEvenement']) ? json_decode($_POST['motsListeEvenement']) : [];
 
                 //on crée ajout l'utilisateur dans la BD
                 $nvl_event->setId($id_event);
