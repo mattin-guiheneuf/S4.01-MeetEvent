@@ -117,17 +117,12 @@
     ],
     "exp\u00e9rience": [
         "exp\u00e9rience",
-        "enseignement",
-        "changement"
-    ],
-    "test": [
-        "test"
+        "enseignement"
     ],
     "d\u00e9veloppement": [
         "d\u00e9veloppement",
         "exercice",
-        "am\u00e9lioration",
-        "changement"
+        "am\u00e9lioration"
     ],
     "am\u00e9lioration": [
         "am\u00e9lioration"
@@ -156,9 +151,6 @@
     ],
     "c\u00e9l\u00e9bration": [
         "c\u00e9l\u00e9bration"
-    ],
-    "changement": [
-        "changement"
     ],
     "imagination": [
         "imagination",
@@ -1000,8 +992,7 @@
         "lecture"
     ],
     "attraper": [
-        "\u00c9coute",
-        "changement"
+        "\u00c9coute"
     ],
     "accrocher": [
         "\u00c9coute"
@@ -1028,8 +1019,7 @@
         "\u00c9coute",
         "travail",
         "exercice",
-        "exp\u00e9rience",
-        "changement"
+        "exp\u00e9rience"
     ],
     "faites attention": [
         "\u00c9coute"
@@ -1171,8 +1161,7 @@
     ],
     "faire": [
         "f\u00eate",
-        "travail",
-        "changement"
+        "travail"
     ],
     "sociale": [
         "f\u00eate"
@@ -1402,7 +1391,6 @@
     ],
     "voler": [
         "voyage",
-        "changement",
         "marche"
     ],
     "monter": [
@@ -1589,13 +1577,11 @@
         "travail"
     ],
     "courir": [
-        "travail",
-        "changement"
+        "travail"
     ],
     "casser": [
         "travail",
-        "danse",
-        "changement"
+        "danse"
     ],
     "se soucier": [
         "travail"
@@ -1620,8 +1606,7 @@
         "travail"
     ],
     "place": [
-        "travail",
-        "changement"
+        "travail"
     ],
     "rouler": [
         "travail"
@@ -1676,8 +1661,7 @@
         "travail"
     ],
     "\u00e9change": [
-        "travail",
-        "changement"
+        "travail"
     ],
     "performance": [
         "travail"
@@ -2693,8 +2677,7 @@
     ],
     "ensemble": [
         "collection",
-        "exercice",
-        "changement"
+        "exercice"
     ],
     "loi": [
         "collection"
@@ -2729,8 +2712,7 @@
         "collection"
     ],
     "cha\u00eene": [
-        "collection",
-        "changement"
+        "collection"
     ],
     "mail": [
         "collection"
@@ -3142,8 +3124,7 @@
         "organisation"
     ],
     "secouer": [
-        "organisation",
-        "changement"
+        "organisation"
     ],
     "alcooliques anonymes": [
         "organisation"
@@ -3236,8 +3217,7 @@
         "organisation"
     ],
     "jouer": [
-        "exercice",
-        "changement"
+        "exercice"
     ],
     "former": [
         "exercice"
@@ -3412,12 +3392,10 @@
         "motivation"
     ],
     "obtenir": [
-        "exp\u00e9rience",
-        "changement"
+        "exp\u00e9rience"
     ],
     "avoir": [
-        "exp\u00e9rience",
-        "changement"
+        "exp\u00e9rience"
     ],
     "monde": [
         "exp\u00e9rience"
@@ -3456,8 +3434,7 @@
         "exp\u00e9rience"
     ],
     "mourir": [
-        "exp\u00e9rience",
-        "changement"
+        "exp\u00e9rience"
     ],
     "perte": [
         "exp\u00e9rience"
@@ -3579,116 +3556,8 @@
     "ressentir de la fiert\u00e9": [
         "exp\u00e9rience"
     ],
-    "questionnaire": [
-        "test"
-    ],
-    "oral": [
-        "test"
-    ],
-    "raccord": [
-        "test",
-        "am\u00e9lioration"
-    ],
-    "final": [
-        "test"
-    ],
-    "biopsie": [
-        "test"
-    ],
-    "audition": [
-        "test"
-    ],
-    "essayer": [
-        "test"
-    ],
-    "tripos": [
-        "test"
-    ],
-    "mi-parcours": [
-        "test"
-    ],
-    "essai biologique": [
-        "test"
-    ],
-    "pr\u00e9liminaire": [
-        "test"
-    ],
-    "ballon d'essai": [
-        "test"
-    ],
-    "essai sur le terrain": [
-        "test",
-        "competition"
-    ],
-    "test pap": [
-        "test"
-    ],
-    "score d'apgar": [
-        "test"
-    ],
-    "test beta": [
-        "test"
-    ],
-    "sous-test": [
-        "test"
-    ],
-    "test alpha": [
-        "test"
-    ],
-    "test de stress": [
-        "test"
-    ],
-    "examen oral": [
-        "test"
-    ],
-    "test cutan\u00e9": [
-        "test"
-    ],
-    "test routier": [
-        "test"
-    ],
-    "test d'intelligence": [
-        "test"
-    ],
-    "projet pilote": [
-        "test"
-    ],
-    "test de qi": [
-        "test"
-    ],
-    "examen final": [
-        "test"
-    ],
-    "papier test": [
-        "test"
-    ],
-    "programme pilote": [
-        "test"
-    ],
-    "examen pr\u00e9liminaire": [
-        "test"
-    ],
-    "examen de mi-saison": [
-        "test"
-    ],
-    "test de snellen": [
-        "test"
-    ],
-    "essayage": [
-        "test"
-    ],
-    "examen de mi-session": [
-        "test"
-    ],
-    "feuille de questions": [
-        "test"
-    ],
-    "test papanicolaou": [
-        "test"
-    ],
     "tourner": [
         "d\u00e9veloppement",
-        "changement",
         "marche"
     ],
     "ph\u00e9nom\u00e8ne": [
@@ -3861,6 +3730,9 @@
     "restauration": [
         "am\u00e9lioration"
     ],
+    "raccord": [
+        "am\u00e9lioration"
+    ],
     "r\u00e9cup\u00e9ration": [
         "am\u00e9lioration"
     ],
@@ -4003,8 +3875,7 @@
         "influence"
     ],
     "formulaire": [
-        "influence",
-        "changement"
+        "influence"
     ],
     "soutien": [
         "influence"
@@ -4013,19 +3884,16 @@
         "influence"
     ],
     "impact": [
-        "influence",
-        "changement"
+        "influence"
     ],
     "pr\u00e9jug\u00e9": [
         "influence"
     ],
     "couleur": [
-        "influence",
-        "changement"
+        "influence"
     ],
     "balan\u00e7oire": [
-        "influence",
-        "changement"
+        "influence"
     ],
     "pression": [
         "influence"
@@ -4104,7 +3972,7 @@
     "impond\u00e9rable": [
         "influence"
     ],
-    "main morte": [
+    "main mort": [
         "influence"
     ],
     "remodeler": [
@@ -4132,6 +4000,9 @@
         "influence"
     ],
     "atteindre": [
+        "influence"
+    ],
+    "main morte": [
         "influence"
     ],
     "b\u00e2tisseur de moral": [
@@ -4266,230 +4137,6 @@
     "c\u00e9l\u00e9bration de la victoire": [
         "c\u00e9l\u00e9bration"
     ],
-    "aller": [
-        "changement"
-    ],
-    "fin": [
-        "changement"
-    ],
-    "affecter": [
-        "changement"
-    ],
-    "rond": [
-        "changement"
-    ],
-    "dessiner": [
-        "changement"
-    ],
-    "v\u00e9rifier": [
-        "changement"
-    ],
-    "la gr\u00e2ce": [
-        "changement"
-    ],
-    "marque": [
-        "changement"
-    ],
-    "d\u00e9velopper": [
-        "changement"
-    ],
-    "automne": [
-        "changement"
-    ],
-    "partir": [
-        "changement"
-    ],
-    "droite": [
-        "changement"
-    ],
-    "passer": [
-        "changement"
-    ],
-    "clair": [
-        "changement"
-    ],
-    "verre": [
-        "changement"
-    ],
-    "march\u00e9": [
-        "changement"
-    ],
-    "apporter": [
-        "changement"
-    ],
-    "augmenter": [
-        "changement"
-    ],
-    "atterrir": [
-        "changement"
-    ],
-    "mettre": [
-        "changement"
-    ],
-    "supposer": [
-        "changement"
-    ],
-    "sauce": [
-        "changement"
-    ],
-    "tendre": [
-        "changement"
-    ],
-    "baisse": [
-        "changement"
-    ],
-    "donner": [
-        "changement"
-    ],
-    "contracter": [
-        "changement"
-    ],
-    "rendement": [
-        "changement"
-    ],
-    "d\u00e9sordre": [
-        "changement",
-        "repas"
-    ],
-    "cv": [
-        "changement"
-    ],
-    "pense": [
-        "changement"
-    ],
-    "accommoder": [
-        "changement"
-    ],
-    "commerce": [
-        "changement"
-    ],
-    "\u00e9laborer": [
-        "changement"
-    ],
-    "se d\u00e9placer": [
-        "changement"
-    ],
-    "humble": [
-        "changement"
-    ],
-    "cacher": [
-        "changement"
-    ],
-    "touche": [
-        "changement"
-    ],
-    "obscur": [
-        "changement"
-    ],
-    "partie": [
-        "changement"
-    ],
-    "fermer": [
-        "changement",
-        "exposition"
-    ],
-    "la mort": [
-        "changement"
-    ],
-    "mouvement": [
-        "changement"
-    ],
-    "relief": [
-        "changement"
-    ],
-    "grandir": [
-        "changement"
-    ],
-    "pr\u00eater": [
-        "changement"
-    ],
-    "cool": [
-        "changement"
-    ],
-    "saut": [
-        "changement"
-    ],
-    "aveugle": [
-        "changement"
-    ],
-    "changer": [
-        "changement"
-    ],
-    "fissure": [
-        "changement"
-    ],
-    "ascenseur": [
-        "changement"
-    ],
-    "stresser": [
-        "changement"
-    ],
-    "accent": [
-        "changement"
-    ],
-    "camp": [
-        "changement"
-    ],
-    "transition": [
-        "changement"
-    ],
-    "vide": [
-        "changement"
-    ],
-    "parall\u00e8le": [
-        "changement"
-    ],
-    "inverse": [
-        "changement"
-    ],
-    "moule": [
-        "changement"
-    ],
-    "s\u00e9par\u00e9": [
-        "changement"
-    ],
-    "m\u00eame": [
-        "changement"
-    ],
-    "flux": [
-        "changement"
-    ],
-    "exacerber": [
-        "changement"
-    ],
-    "mouill\u00e9": [
-        "changement"
-    ],
-    "preuve": [
-        "changement"
-    ],
-    "informer": [
-        "changement"
-    ],
-    "r\u00e9volution": [
-        "changement"
-    ],
-    "brouiller": [
-        "changement"
-    ],
-    "produire": [
-        "changement"
-    ],
-    "acqu\u00e9rir": [
-        "changement"
-    ],
-    "pli": [
-        "changement"
-    ],
-    "\u00e9mouss\u00e9": [
-        "changement"
-    ],
-    "forme": [
-        "changement"
-    ],
-    "sec": [
-        "changement"
-    ],
     "r\u00eave": [
         "imagination"
     ],
@@ -4606,6 +4253,9 @@
         "d\u00eener"
     ],
     "buffet": [
+        "repas"
+    ],
+    "d\u00e9sordre": [
         "repas"
     ],
     "petit-d\u00e9jeuner": [
@@ -5263,6 +4913,9 @@
     "hologramme": [
         "exposition"
     ],
+    "fermer": [
+        "exposition"
+    ],
     "photo du visage": [
         "exposition"
     ],
@@ -5417,6 +5070,9 @@
         "competition"
     ],
     "favori": [
+        "competition"
+    ],
+    "essai sur le terrain": [
         "competition"
     ],
     "demi-finaliste": [

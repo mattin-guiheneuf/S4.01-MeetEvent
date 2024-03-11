@@ -106,4 +106,53 @@ function genAvecAPI($mot){
     return $gen;
 }
 
+/**
+ * @brief Extraire les antonymes avec l'API
+ * @param string
+ * @return array
+*/
+function antAvecAPI($mot){
+    // Version avec DataMuse
+    $api_url = "https://api.datamuse.com/words?rel_ant=" . urlencode($mot);
+
+    $resApi = file_get_contents($api_url);
+
+    // Le résultat est un JSON, alors nous le décodons
+    $res = json_decode($resApi, true);
+
+    // Extrayez les antonymes du tableau associatif
+    $ant = array_column($res, 'word');
+
+    return $ant;
+}
+
+/**
+ * @brief Comparer deux array
+ * @param array
+ * @return bool
+*/
+function array_equal($a, $b) {
+    return is_array($a) && is_array($b) && count($a) == count($b) && array_diff($a, $b) === array_diff($b, $a);
+}
+
+/**
+ * @brief Récupérer les trg avec l'API
+ * @param string
+ * @return array
+*/
+function trgAvecAPIEtTopics($mot){
+    // Version avec DataMuse
+    $api_url = "https://api.datamuse.com/words?rel_trg=" . urlencode($mot) . "&topics="  . urlencode($mot);
+
+    $resApi = file_get_contents($api_url);
+
+    // Le résultat est un JSON, alors nous le décodons
+    $res = json_decode($resApi, true);
+
+    // Extrayez les mots liés du tableau associatif
+    $trgAvecTopic = array_column($res, 'word');
+
+    return $trgAvecTopic;
+}
+
 ?>
