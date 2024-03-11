@@ -196,15 +196,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "Erreur lors de la préparation de la requête: " . $connexion->error;
                 }
 
-                // Logique pour créer un événement
+                // Récupération et reféfinition des variables pour créer un événement
                 $titre = $_POST['titre'];
+
                 $date = $_POST['date'];
                 $heure = $_POST['heure'];
-                $lieu = $_POST['lieu'];
-                $nvl_event = new Evenement($id_event,[]);
 
+                $ville = $_POST['ville'];
+                $cp = $_POST['cp'];
+                $adresse = $_POST['adresse'];
+                $adresseEvent = $adresse . ', ' . $cp . ' ' . $adresse;
+
+                $type = $_POST['type'];
+                $type == 'public' ? $statut = 0 : $statut = 1;
+
+                // A Revoir
+                $nbParticip = $_POST['nbParticip'];
+                $photos = $_POST['photos'];
+                $participants = $_POST['participants'];
+                $mess_invit = $_POST['mess_invit'];
+
+                $idOrganisateur = $_SESSION['user_id'];
+
+                $nvl_event = new Evenement($id_event,[]);
                 // Récupère la liste de mots envoyée par le formulaire
-                //$motsListe = isset($_POST['motsListeEvenement']) ? json_decode($_POST['motsListeEvenement']) : [];
+                $motsListe = isset($_POST['motsListeEvenement']) ? json_decode($_POST['motsListeEvenement']) : [];
 
                 //on crée ajout l'utilisateur dans la BD
                 $nvl_event->setId($id_event);
@@ -217,16 +233,91 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 foreach($motsListe as $motX){
                     $listeMot_objet[]= new Mot($motX);
                 }
-                $nvl_event->setMots($listeMot_objet);
+                $nvl_event->setMots($listeMot_objet);           // A VERIFIER
                 $nvl_event->definirDescription($dicoSynTag);
                 
                 $id_event = $nvl_event->getId();
                 $titre_event = $nvl_event->getTitre();
-                $req_insertEvnt = "INSERT INTO evenement (idEvenement, nom) VALUES (?,?)"; // Correction à apporter sur la requête car pas possible d'insérer sans Catégorie ni Organisateur 
+                $req_insertEvnt = "INSERT INTO evenement (idEvenement, nom, description, dateEvent, effMax,
+                                   statut, heure, adresse, chemImages, idCategorie, idOrganisateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)"; // Correction à apporter sur la requête car pas possible d'insérer sans Catégorie ni Organisateur 
                 $res_insertEvnt = $connexion->prepare($req_insertEvnt);
-                $res_insertEvnt->bind_param("is", $id_event, $titre_event);
+                $res_insertEvnt->bind_param("isssiisssii", $id_event, $titre_event, $mess_invit, $date, $nbParticip, $statut,
+                                 $heure, $adresseEvent, $chemImages, 1, $idOrganisateur);
 
-                echo "Evènement ajouté";
+                /*
+                //On attributs les mots de l'évènement
+
+                /*| -------------------------------- |*/
+                /*| Mettre a jour la base de données |*/
+                /*| -------------------------------- |*/
+                /*| Mettre a jour la description |*/
+
+                // Variables pour les nouvelles données de l'utilisateur
+                $description_event = $$nvl_event->getMots();
+
+                $mots_str ="";
+                foreach ($description_event as $id_mot) {
+                    $mots_str .=  $id_mot->getLibelle() . " "; 
+                }
+
+                // Requête SQL pour mettre à jour la description de l'utilisateur
+                /*
+                $sql = "UPDATE Evenement SET description = ? WHERE idUtilisateur = ?";
+                $stmt = $connexion->prepare($sql);
+                $stmt->bind_param("si", $mots_str, $$id_event);
+
+                
+                // Exécution de la requête
+                if ($stmt->execute()) {
+                    echo "Description mise à jour avec succès.";
+                } else {
+                    echo "Erreur lors de la mise à jour de la description ";
+                }
+                */
+
+                /*| Mettre a jour les tags |*/
+                // Fonction pour récupérer l'ID d'un tag à partir de son libellé
+                function getTagId($conn, $tag) {
+                    $sql = "SELECT idTag FROM Tag WHERE libelle = ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("s", $tag);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        return $row['idTag'];
+                    }
+                }
+                // Variable pour les nouvelles données de l'utilisateur
+                $tags_event = $nvl_event->getTags();
+
+                // Supprimer les anciens tags de l'utilisateur de la table d'association
+                $sql_delete = "DELETE FROM Qualifier WHERE idEvenement = ?";
+                $stmt_delete = $connexion->prepare($sql_delete);
+                $stmt_delete->bind_param("i", $id_event);
+                $stmt_delete->execute();
+
+                // Insérer les nouveaux tags de l'utilisateur dans la table d'association
+                $sql_insert = "INSERT INTO Qualifier VALUES (?, ?)";
+                $stmt_insert = $connexion->prepare($sql_insert);
+                $stmt_insert->bind_param("ii", $id_event, $id_tag);
+
+                foreach ($tags_event as $tag) {
+                    $id_tag = getTagId($connexion, $tag);
+                    $stmt_insert->execute();
+                }
+
+                // Vérifier si les opérations se sont déroulées avec succès
+                if ($stmt_delete->affected_rows > 0 || $stmt_insert->affected_rows > 0) {
+                    echo "Tags mis à jour avec succès.";
+                } else {
+                    echo "Erreur lors de la mise à jour des tags ";
+                }
+
+
+                //header("Location: ../pageSuggestion.php");
+				echo '<script>window.location = "../pageSuggestion.php";</script>'; //page correspondante ?
+                */
                 break;
             default:
                 // Action non reconnue
