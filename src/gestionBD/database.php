@@ -5,7 +5,7 @@
  */
 
 /*Pour YANNIS
-$bdname = 'projetme';
+/* $bdname = 'projetme';
 $host = 'localhost';
 $username = 'root';
 $password = '';
@@ -19,7 +19,7 @@ if($connexion->connect_errno){
 
 
 // Pour Clément
-/* $bdname = 'cmourgue_bd';
+$bdname = 'cmourgue_bd';
 $host = 'lakartxela.iutbayonne.univ-pau.fr';
 $username = 'cmourgue_bd';
 $password = 'cmourgue_bd';

@@ -159,7 +159,7 @@ if (isset($_SESSION['user_id'])) {
         <!-- Barre supérieure -->
         <div class="footer-top">
             
-              <div class="item">
+              <div class="item_footer">
                 <i class="fas fa-map-marker-alt" ></i>
                 <div class="text_item">
                   <p style="font-weight:bold;">Adresse</p>
@@ -167,7 +167,7 @@ if (isset($_SESSION['user_id'])) {
                 </div>
                 
               </div>
-              <div class="item">
+              <div class="item_footer">
                 <i class="fas fa-envelope" ></i>
                 <div class="text_item">
                   <p style="font-weight:bold;">Email</p>
@@ -175,7 +175,7 @@ if (isset($_SESSION['user_id'])) {
                 </div>
                 
               </div>
-              <div class="item">
+              <div class="item_footer">
                 <i class="fas fa-phone-alt" ></i>
                 <div class="text_item">
                   <p style="font-weight:bold;">Téléphone</p>
@@ -192,9 +192,9 @@ if (isset($_SESSION['user_id'])) {
               <div class="footer-section navigation">
                   <h2 style="font-weight:bold;color:#ffffff">Navigation</h2>
                   <ul style="color:#ababab">
-                      <li>Page d'accueil</li>
-                      <li>Page de recherche d'événement</li>
-                      <li>Page contact</li>
+                      <li><a href="index.php">Page d'accueil</a></li>
+                      <li><a href="pageSuggestion.php">Page de recherche d'événement</li>
+                      <li><a href="MesEvent.php">Page événements (admis/créer)</li>
                   </ul>
               </div>
               <div class="social-icons">
@@ -212,7 +212,7 @@ if (isset($_SESSION['user_id'])) {
             <div class="newsletter" style="display:flex;justify-content:space-between;padding:2vw 6vw;align-items:center;">
                 <div style="font-size:1.6vw;font-weight:bold;text-align:center;white-space: nowrap;color:#ffffff">ABONNEZ-VOUS A NOTRE <br> <span style="color:#6040fe;">NEWSLETTER</span> </div>
                 <div style="padding-left:6vw;">
-                  <form>
+                  <form class="form_newsletter">
                       <input type="email" placeholder="Votre adresse email">
                       <button type="submit">S'abonner</button>
                   </form>
