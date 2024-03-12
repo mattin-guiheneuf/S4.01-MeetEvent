@@ -21,6 +21,7 @@
     function creaDicoSynTag($CORPUS_TAG)
     {
         echo "Lancement création dicoSynTag <br><br>";
+        $CORPUS_TAG = array_map('strtolower',$CORPUS_TAG);
 
         // VARIABLES
         $dicoSynTag = array(); // Dictionnaire résultat de la fonction
@@ -34,8 +35,8 @@
         // Enrichissement au premier degré du dictionnaire avec les synonymes des tags
         foreach ($CORPUS_TAG as $tagCourant) // Pour chaque tag
         {
-            /* // Synonymes
-            $listeSynTagCourant = synAvecAPI(strtolower(tradMotFrToAng($tagCourant))); // On exploite l'API pour récupérer les synonymes du tagCourant
+            // Synonymes
+            /* $listeSynTagCourant = synAvecAPI(strtolower(tradMotFrToAng($tagCourant))); // On exploite l'API pour récupérer les synonymes du tagCourant
             
             foreach($listeSynTagCourant as $synTagCrt) // Pour chaque synonyme du tagCourant
             {
@@ -51,8 +52,8 @@
                 }
             } */
 
-            /* // Mots liés
-            $listeTrgTagCourant = trgAvecAPI(strtolower(tradMotFrToAng($tagCourant))); // On exploite l'API pour récupérer les synonymes du tagCourant
+            // Mots liés
+            /* $listeTrgTagCourant = trgAvecAPIEtTopics(strtolower(tradMotFrToAng($tagCourant))); // On exploite l'API pour récupérer les synonymes du tagCourant
             
             foreach($listeTrgTagCourant as $trgTagCrt) // Pour chaque synonyme du tagCourant
             {
@@ -107,11 +108,11 @@
         "Jardinage", "Photographie", "Film", "Danse", "Chant", 
         "Instrument", "Collection", "Informatique", "Réflexion",
         "Engagement", "Volontariat", "Organisation",
-        "Exercice", "Expérience", "Test",
+        "Exercice", "Expérience",
         "Développement", "Amélioration", "Innovation", "Économie",
         "Partage", "Influence", "Motivation",
         "Inspiration", "Amusement",
-        "Célébration", "Changement",
+        "Célébration",
         "Imagination", "Jeux", "Festival",
         "Culture", "Concert", "Repas", "Aperitif", "Alcool",
         "Association", "Rencontre",
@@ -125,58 +126,6 @@
     ];
 
     //creaDicoSynTag($CORPUS_TAG);
-
-    // Pour optimiser et faciliter la création du dictionnaire, on effectue chaque étape (synonymes, mots liés et mots génériques) séparément (commenter chaque partie dans le code, etc)
-    // Nécéssité de modifier le fichier de destination à chaque fois pour ne pas écraser les données (directement dans le code ou mettre en paramètre)
-    // Il faut donc fusionner les corpus
-    function fusionnerCorpus($corpus1,$corpus2){
-        $jsonCorpus1 = file_get_contents('./data/'.$corpus1.'.json');
-        $Corpus1 = json_decode($jsonCorpus1, true);
-        $jsonCorpus2 = file_get_contents('./data/'.$corpus2.'.json');
-        $Corpus2 = json_decode($jsonCorpus2, true);
-        return array_unique(array_merge($Corpus1,$Corpus2),SORT_REGULAR);
-    }
-
-    // La partie trg étant la plus longue, l'erreur 504 nous empçeche d'exécuter donc soit faire sous python soit diviser le corpus en trois
-    // À mettre dans dicoSynTagTrg1.json
-    $cTTrg1 = [
-        "Cuisine", "Saveur", "Recette", "Ingrédients", "Art", "Création",
-        "Musique", "Dessin", "Sport", "Entraînement", "Socialisation", "Échange",
-        "Discussion", "Méditation", "Détente", "Lecture", "Écoute","Rire",
-        "Divertissement", "Fête", "Exploration", "Voyage", "Découverte", 
-        "Apprentissage", "Enseignement", "Travail", "Créativité", "Construction",
-        "Réparation", "Jardinage", "Photographie", "Film", "Danse", "Chant", 
-        "Instrument", "Collection", "Analyse", "Réflexion",
-        "Résolution", "Engagement", "Volontariat", "Organisation"
-    ];
-
-    // À mettre dans dicoSynTagTrg2.json
-    $cTTrg2 = [
-        "Événement", "Défense", "Exercice", "Expérience", "Test",
-        "Développement", "Amélioration", "Innovation", "Économie",
-        "Investissement", "Gestion", "Partage", "Influence", "Motivation",
-        "Inspiration", "Amusement", "Détente", "Profiter",
-        "Célébration", "Changement", "Réflexion", "Créativité",
-        "Imagination", "Réflexion", "Exploration", "Jeux", "Festival",
-        "Culture", "Concert", "Repas", "Aperitif", "Vin", "Banquet",
-        "Association", "Cafe", "Rencontre", "Renforcement musculaire",
-        "Activite physique", "Course", "Entrainement", "Randonnee"
-    ];
-
-    // À mettre dans dicoSynTagTrg3.json
-    $cTTrg3 = [
-        "Marche", "Balade", "Football", "Amical",
-        "Plaisir", "Jeu de societe", "Convivialite",
-        "Jeu de cartes", "Jeu de Plateau", "Equitation",
-        "Soiree", "Nature", "Paysages", "Atelier", 
-        "Gastronomie", "Oenologie", "Degustation", "Exposition", "Musee",
-        "Diner", "Caritatif", "Solidarite", "Fete", "Handball",
-        "Buvette", "Tennis", "Raquette", "Loisir", "Golf", "Judo",
-        "Competition", "Tournoi", "Peinture", "Cinema", "Montagne",
-        "Finance", "Formation", "Nourriture", "Basket", "Rugby", "Natation"
-    ];
-
-    //creaDicoSynTag($cTTrgX);
 
     // Fonction pour fusionner correctement
     function fusionnerBienCorpus($c1,$c2){
@@ -222,9 +171,60 @@
         return $res;
     }
 
-    // Fusionner pour obtenir dicoSynTagTrg (sur l'entièreté du corpus fonctionne quand-même mais provoque erreur 504)
-    //file_put_contents('./data/dicoSynTagTrgTmp.json',json_encode(fusionnerBienCorpus('dicoSynTagTrg2','dicoSynTagTrg3'),JSON_PRETTY_PRINT));
-    //file_put_contents('./data/dicoSynTagTrgTest.json',json_encode(fusionnerBienCorpus('dicoSynTagTrg1','dicoSynTagTrgTmp'),JSON_PRETTY_PRINT));
+    function retirerAntonymes($CORPUS_TAG){
+        echo "Lancement retrait antonymes dicoSynTag <br><br>";
+        $CORPUS_TAG = array_map('strtolower',$CORPUS_TAG);
+
+        // Lorsqu'on souhaite retirer les antonymes
+        $dicoSynTagJson = file_get_contents('./data/dicoSynTag.json');
+        $dicoSynTag = json_decode($dicoSynTagJson, true, JSON_PRETTY_PRINT);//JSON_UNESCAPED_UNICODE);
+
+        // Retirer les antonymes des tags
+        foreach ($CORPUS_TAG as $tagCourant) // Pour chaque tag
+        {
+            $listeAntTagCourant = antAvecAPI(strtolower(tradMotFrToAng($tagCourant))); // On exploite l'API pour récupérer les antonymes du tagCourant
+            
+            foreach($listeAntTagCourant as $antTagCrt) // Pour chaque antonyme du tagCourant
+            {
+                $antTagCourant = strtolower(tradMotAngToFr($antTagCrt));
+                if(array_key_exists($antTagCourant,$dicoSynTag)){ // Si l'antonyme est présent comme clé
+                    if(array_equal($dicoSynTag[$antTagCourant],array($tagCourant))) // S'il est seulement lié à notre tag
+                    {
+                        if(!(in_array($antTagCourant,$CORPUS_TAG))) // Si l'antonyme n'est pas un tag
+                        {
+                            echo 'Retrait de ' . $antTagCourant . ' du dicoSynTag<br/>';
+                            unset($dicoSynTag[$antTagCourant]); // On le retire
+                        }
+                        
+                    }
+                    else // Sinon on l'enlève seulement de la liste
+                    {
+                        if (sizeof($dicoSynTag[$antTagCourant])==1) { // S'il y a un seul élément
+                            echo 'Retrait de ' . $tagCourant . ' de la liste de tag liée à '. $antTagCourant .' dans dicoSynTag. Liste vide donc retrait de ' . $antTagCourant .' du dicoSynTag.<br/>';
+                            unset($dicoSynTag[$antTagCourant]); // On le retire
+                        }
+                        else { // Sinon
+                            echo 'Retrait de ' . $tagCourant . ' de la liste de tag liée à '. $antTagCourant .' dans dicoSynTag<br/>';
+                            unset($dicoSynTag[$antTagCourant][array_search(strtolower($tagCourant),$dicoSynTag[$antTagCourant])]);
+                            $dicoSynTag[$antTagCourant] = array_values($dicoSynTag[$antTagCourant]); // Pour remettre les indexs dans le bonne ordre
+                            //$dicoSynTag[$antTagCourant] = array_merge(array_slice($dicoSynTag[$antTagCourant],0,array_search(strtolower($tagCourant),$dicoSynTag[$antTagCourant])),
+                            //                                          array_slice($dicoSynTag[$antTagCourant]),array_search(strtolower($tagCourant),$dicoSynTag[$antTagCourant])+1);
+                        }
+                        
+                    }
+                }
+            }
+        }
+
+        echo "encodage<br>";
+        // Destination du fichier à modifier si jamais (ou ajouter un paramètres)
+        file_put_contents('./data/dicoSynTag.json',json_encode($dicoSynTag,JSON_PRETTY_PRINT));//JSON_UNESCAPED_UNICODE));
+        echo "encodage terminé<br><br>";
+
+        return $dicoSynTag;
+    }
+
+    //retirerAntonymes($CORPUS_TAG);
 
     // Pour tout fusionner
     //file_put_contents('./data/dicoSynTagTmp2.json',json_encode(fusionnerBienCorpus('dicoSynTagSyn','dicoSynTagTrg'),JSON_PRETTY_PRINT));

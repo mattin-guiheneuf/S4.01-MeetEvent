@@ -115,9 +115,6 @@
     "exp\u00e9rience": [
         "exp\u00e9rience"
     ],
-    "test": [
-        "test"
-    ],
     "d\u00e9veloppement": [
         "d\u00e9veloppement"
     ],
@@ -148,9 +145,6 @@
     ],
     "c\u00e9l\u00e9bration": [
         "c\u00e9l\u00e9bration"
-    ],
-    "changement": [
-        "changement"
     ],
     "imagination": [
         "imagination"
@@ -546,8 +540,7 @@
         "travail"
     ],
     "courir": [
-        "travail",
-        "test"
+        "travail"
     ],
     "aller": [
         "travail"
@@ -861,51 +854,6 @@
     "traverser": [
         "exp\u00e9rience"
     ],
-    "v\u00e9rifier": [
-        "test"
-    ],
-    "mod\u00e8le": [
-        "test"
-    ],
-    "\u00e9cran": [
-        "test"
-    ],
-    "proc\u00e8s": [
-        "test"
-    ],
-    "pilote": [
-        "test"
-    ],
-    "prouver": [
-        "test"
-    ],
-    "essai": [
-        "test"
-    ],
-    "essayer": [
-        "test"
-    ],
-    "examiner": [
-        "test"
-    ],
-    "questionnaire": [
-        "test"
-    ],
-    "examen": [
-        "test"
-    ],
-    "exp\u00e9rimental": [
-        "test"
-    ],
-    "test psychom\u00e9trique": [
-        "test"
-    ],
-    "test mental": [
-        "test"
-    ],
-    "tests mentaux": [
-        "test"
-    ],
     "\u00e9volution": [
         "d\u00e9veloppement"
     ],
@@ -1001,39 +949,6 @@
     ],
     "festivit\u00e9": [
         "c\u00e9l\u00e9bration"
-    ],
-    "\u00e9change": [
-        "changement"
-    ],
-    "changer": [
-        "changement"
-    ],
-    "transfert": [
-        "changement"
-    ],
-    "modifier": [
-        "changement"
-    ],
-    "navette": [
-        "changement"
-    ],
-    "vari\u00e9t\u00e9": [
-        "changement"
-    ],
-    "convertir": [
-        "changement"
-    ],
-    "varier": [
-        "changement"
-    ],
-    "modification": [
-        "changement"
-    ],
-    "alt\u00e9ration": [
-        "changement"
-    ],
-    "approfondir": [
-        "changement"
     ],
     "vision": [
         "imagination"
