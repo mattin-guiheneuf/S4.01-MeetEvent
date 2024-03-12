@@ -18,7 +18,7 @@ if($connexion->connect_errno){
 */
 
 
-// Pour Clément
+/*// Pour Clément
 $bdname = 'cmourgue_bd';
 $host = 'lakartxela.iutbayonne.univ-pau.fr';
 $username = 'cmourgue_bd';
