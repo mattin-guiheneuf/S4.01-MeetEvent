@@ -188,9 +188,9 @@ if (isset($_SESSION['user_id'])) {
         <!-- Contenu principal -->
         <div class="container_footer">
             <div style="display:flex;justify-content:space-evenly;align-items:center;">
-              <img src="img/MeetEvent_Logo_blanc.png" alt="logo" width="auto" height="100w">
+              <img src="img/MeetEvent_Logo_blanc.png" alt="logo" style="width:10vw !important;">
               <div class="footer-section navigation">
-                  <h2 style="font-weight:bold;color:#ffffff">Navigation</h2>
+                  <h2 style="font-weight:bold;color:#ffffff;font-size:3vw !important;">Navigation</h2>
                   <ul style="color:#ababab">
                       <li><a href="index.php">Page d'accueil</a></li>
                       <li><a href="pageSuggestion.php">Page de recherche d'événement</li>

@@ -128,10 +128,11 @@ if (!isset($_SESSION['user_id'])) {
             <div class="container-btn">
                 <input type="hidden" class="modalRecupEvent" value="">
                 <button class="btn_modal" style="color:white;background-color:#6040fe;" onclick="supprimerEvent()">Oui, je supprime</button>
-                <button class="btn_modal" style="color:#6040fe;background-color:white;border:2px solid #6040fe;" onclick="document.getElementById('myModalForQuit').style.display = 'none'">Non</button>
+                <button class="btn_modal" style="color:#6040fe;background-color:white;border:2px solid #6040fe;" onclick="document.getElementById('myModalForSup').style.display = 'none'">Non</button>
             </div>
         </div>
     </div>
+
 
     <footer class="event-footer">
         <!-- Barre supérieure -->
@@ -282,13 +283,11 @@ if (!isset($_SESSION['user_id'])) {
                     html += '</div>';
                 } else {
                     html += '<div class="les_boutons">';
-                    html += '<a href="#" class="btn_quit" id="openModalBtn" onclick="openModalSup(' + results[i].idEvenement + ')">SUPPRIMER</a>';
-                    html += '<a href="#" class="btn_modif">MODIFIER</a>';
-                    html += '<a href="#" class="btn_qrcode">SCANNER<img src="" alt=""></a>';
+                    html += '<a class="btn_quit" id="openModalBtn" onclick="openModalSup(' + results[i].idEvenement + ')">SUPPRIMER</a>';
+                    html += '<a href="modifEvent.php" class="btn_modif">MODIFIER</a>';
                     html += '</div>';
                 }
 
-                html += '<div class="categorie">' + results[i].libCat + '</div>';
                 html += '</div>';
                 html += '<div class="part2">';
                 html += '<div class="titre_event">' + results[i].nom + '</div>';
@@ -376,7 +375,6 @@ if (!isset($_SESSION['user_id'])) {
         console.log(tokenEvent);
         qrImage.src = 'generate_qr.php?userId=' + userId + '&eventId=' + eventId + '&tokenUser=' + tokenUser + '&tokenEvent=' + tokenEvent;
     }
-
     // Fonction à exécuter lorsque le bouton est cliqué pour ouvrir la modal
     function openModalQuit(idEvenement) {
         var modal = document.getElementById("myModalForQuit");
@@ -479,6 +477,45 @@ if (!isset($_SESSION['user_id'])) {
             document.body.classList.remove('fullscreen-nav-active');
         });
     });
+</script>
+
+<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#scanButton').click(function () {
+            $('#videoContainer').toggle();
+            if ($('#videoContainer').is(':visible')) {
+                startScan();
+            } else {
+                stopScan();
+            }
+        });
+    });
+
+    function startScan() {
+        var scanner = new Instascan.Scanner({ video: document.getElementById('video') });
+        scanner.addListener('scan', function (content) {
+            alert('QR code scanné : ' + content);
+            stopScan();
+        });
+        Instascan.Camera.getCameras().then(function (cameras) {
+            if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+            } else {
+                alert('Aucune caméra trouvée');
+                stopScan();
+            }
+        }).catch(function (e) {
+            console.error(e);
+            stopScan();
+        });
+    }
+
+    function stopScan() {
+        $('#videoContainer').hide();
+        Instascan.stop();
+    }
 </script>
 
 </html>
