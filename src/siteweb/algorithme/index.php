@@ -7,11 +7,12 @@ if (!isset($_SESSION['user_id'])) {
 }
 echo $_SESSION["user_id"];
 
-if($_POST['event'] == 1){
-    $isEvent == true;
+if(!isset($_POST['event'])){
+    $isEvent = false;
 }else{
-
+    $isEvent = true;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +85,7 @@ if($_POST['event'] == 1){
 </head>
 
 <body>
-    <h1>Tester l'intégration de l'agorithme</h1>
+    <!-- <h1>Tester l'intégration de l'agorithme</h1> -->
     <hr>
     <!-- <h2>Simuler la suggestion d'événement</h2> -->
     <!-- Formulaire avec champ pour saisir l'ID de l'utilisateur -->
@@ -94,11 +95,10 @@ if($_POST['event'] == 1){
         <button type="submit" name="action" value="afficherRecommandations">Afficher les événements recommandés</button>
     </form> -->
     <!-- <hr> -->
+    <?php if(!$isEvent):?>
     <h2>Ajouter la description de l'utilisateur</h2>
     <!-- Formulaire avec champ pour saisir l'inscription d'un utilisateur -->
-    <?php if(isset($_SESSION["user_id"]))
-    {
-    echo '<form action="CreationTag.php" method="post">
+    <form action="CreationTag.php" method="post">
     
         <label for="mot">Mot :</label>
         <input type="text" id="mot" name="mot">
@@ -108,30 +108,12 @@ if($_POST['event'] == 1){
         <input type="hidden" id="motsListeInput" name="motsListe" value="">
     
         <button type="submit" name="action" value="ajouterDescriptionUtilisateur">Ajouter la description</button>
-    </form>';
-    }?>
-    <hr>
+    </form>
+    <!-- <hr> -->
+    <?php else:?>
     <h2>Créer un Evenement</h2>
     <!-- Formulaire avec champ pour saisir l'inscription d'un utilisateur -->
-    <?php //if(isset($_SESSION["event_id"])){
-    echo '<form action="CreationTag.php" method="post">
-            <label for="titre">Titre :</label>
-            <input type="text" id="titre" name="titre">
-
-            <label for="date">Date :</label>
-            <input type="text" id="date" name="date">
-
-            <label for="heure">Heure :</label>
-            <input type="text" id="heure" name="heure">
-
-            <label for="lieu">Lieu :</label>
-            <input type="text" id="lieu" name="lieu">
-
-            <label for="motEvenement">Mot :</label>
-            <input type="text" id="motEvenement" name="motEvenement">
-            <button type="button" onclick="ajouterMotEvenement()">Ajouter</button>
-            <div id="listeMotsEvenement"></div>
-    <?php if(isset($_SESSION["event_id"])){
+    <?php 
     echo `<form action="CreationTag.php" method="post">
         <input type="hidden" id="titre" name="titre" value="`.$_POST["titre"].`">
         <input type="hidden" id="date" name="date" value="`.$_POST["date"].`>
@@ -147,10 +129,10 @@ if($_POST['event'] == 1){
 
             <input type="hidden" id="motsListeEvenementInput" name="motsListeEvenement" value="">
 
-            <button type="submit" name="action" value="creerEvenement">Création d\'un événement</button>
-        </form>';
-    //}
+        <button type="submit" name="action" value="creerEvenement">Création d'un événement</button>
+    </form>`;
     ?>
+    <?php endif;?>
 
 	<?php 
         // Récupération du dicoMotsFr pour la saisieVerif des mots
