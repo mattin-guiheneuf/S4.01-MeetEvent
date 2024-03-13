@@ -114,15 +114,7 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
 
         $stmt->bind_param("ssss", $_POST["pseudo"], $_POST["email"], $passwd, $token);
         if ($stmt->execute()) {
-            /* session_start(); */
-            session_regenerate_id();
-            $sql = sprintf("SELECT idUtilisateur FROM Utilisateur WHERE adrMail = '%s'", $mysqli->real_escape_string($_POST["email"]));
-
-            $result = $mysqli->query($sql);
-
-            $user = $result->fetch_assoc();
-            $_SESSION["user_id"] = $user["idUtilisateur"];
-                    
+                                
             //header("Location: ./algorithme/index.php");
             /* echo '<script>window.location = "algorithme/index.php";</script>';
             exit; */
@@ -173,6 +165,8 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
             } else{
                 echo "Veuillez vérifier votre adresse mail sur ". $_POST['email'];
             }
+
+
         } else {
             if ($mysqli->errno === 80) {
                 die("Pseudo déjà utilisé");
