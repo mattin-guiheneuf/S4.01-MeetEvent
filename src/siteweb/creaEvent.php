@@ -18,7 +18,7 @@
         <div class="obligatoire">
             <h3>* champs obligatoires</h3>
         </div>
-        <form method="POST" action="/algorithme/index.php" >
+        <form method="POST" action="algorithme/index.php" >
             <input type="hidden" name="event" value=1>
             <div class="partGauche">
                 <!-- Titre -->
