@@ -154,9 +154,10 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
             </html>
             ';
 
-            $headers =  "From: contact.meetevent@gmail.com" . "\r\n" .
-                        "Content-type: text/html; charset=utf-8" . "\r\n" .
-                        "Reply-To: " . $_POST["email"] . "\r\n" .
+            $headers =  "MIME-Version:1.0"."\r\n" .
+                        "From: contact.meetevent@gmail.com" . "\r\n" .
+                        "Content-type: text/html; charset=ISO-8859-1" . "\r\n" .
+                        "Reply-To: contact.meetevent@gmail.com" . "\r\n" .
                         "X-Mailer: PHP/" . phpversion();
             $mail_sent = mail($to, $subject, $message, $headers);
 
