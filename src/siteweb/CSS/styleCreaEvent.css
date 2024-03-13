@@ -1,291 +1,153 @@
 /* Zoning de la page dans la zone hero définie dans le global.css */
 .contenuFormCrea {
   grid-column: 2/12;
-
-  /* Zoning */
-  grid-template: 
-    "titre" 50px
-    "mentionOblig" 10px
-    "formulaire" 1fr;
-  padding: 0;
-  margin: 0;
 }
 
 .titre {
   /* Positionnement */
   grid-area: titre;
   text-align: center;
-  width: 100%;  
-  padding: 0;
-  margin: 0;
-  font-size: 25px;
+  width: 100%;
+  /* font-size: 25px; */
+  font-size: 2.5vw;
   height: auto;
+  padding:1vw 0;
 }
 
-/* .titre h1{
-  margin:0;
-} */
+.starOblig{
+  font-weight: bold;
+  color: red;
+}
 
 .obligatoire {
   /* Positionnement */
-  grid-area: mentionOblig;
-  padding: 0;
-  margin: 0;
   text-align: left;
   color: red;
   width: 100%;
   height: auto;
 }
 
-.formulaire {
+form {
   /* Positionnement */
-  grid-area: formulaire;
-  padding: 0;
-  margin: 0;
-  display: grid;
   width: 100%;
-  height: auto;
-
-  /* Découpage */
-  grid-gap: 30px;
-  grid-template-columns: 1fr 20px 1fr;
-  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* gap: 20px; */
+  gap: 2vw;
 }
 
-/* Différentes parties dans le .formulaire */
-.gauche {
-  /* Positionnement */
-  grid-column: 1;
-
-  /* Zoning */
-  display: grid;
-  grid-gap: 15px;
-  grid-template-rows: 2fr 3fr 4fr 3fr 2fr;
+.partGauche, .partDroite{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* gap: 20px;
+  max-width: 540px; */
+  gap: 2vw;
+  max-width: 100%;
 }
 
-.separateur{
-  grid-column: 2;
-  margin-left: 9px;
-  margin-right: 9px;
-  /* background-color: black; */
-}
-
-.droite {
-  /* Positionnement */
-  grid-column: 3;
-
-  /* Zoning */
-  display: grid;
-  grid-gap: 25px;
-  grid-template-rows: 4fr 2fr 3fr 2fr;
-}
-
-
-/* Éléments */
 input{
-  background-color: #dedede;
-  border-radius: 20px;
-  border: 0;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  font-size: 18px;
-  letter-spacing: 0;
-  padding-left: 10%;
-  padding-right: 5%;
+  /* padding : 10px 25px;
+  border-radius: 10px;
+  font-size: 19.3px; */
+  padding : 1vw 2.5vw;
+  border-radius: 1vw;
+  font-size: 1.93vw;
+  background-color: #dcdcdc;
+  border: none;
+  outline: none;
+  width: 100%;
 }
 
 input::placeholder{
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  color: #00000052;
-  font-size: 18px;
-  letter-spacing: 0;
-  line-height: normal;
+  color: #8d8d8d;
 }
 
-/* input[type=radio]{
-  background-color: #dedede;
-  border: 0;
-  padding-left: 10%;
-} */
-
-.starOblig {
-  color: red;
-  grid-row: 1;
+.inputDateHeure{
+  display: flex;
+  flex-direction: column;
 }
 
-label{
-  font-family: "Inter-Regular", Helvetica;
-}
-
-
-/* Partie gauche */
-.inputTitre {
-  /* Positionnement */
-  grid-row: 1;
-
-  /* Zoning */
-  display: grid;
-  grid-template-rows: 1fr 3fr;
-}
-
-.inputDateHeure {
-  /* Positionnement */
-  grid-row: 2;
-
-  /* Zoning */
-  display: grid;
-  grid-template-rows: 1fr 2fr;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 10px;
-}
-
-.inputLieu {
-  /* Positionnement */
-  grid-row: 3;
-
-  /* Zoning */
-  display: grid;
-  grid-template-rows: 1fr 2fr 2fr;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
-}
-
-.inputType {
-  /* Positionnement */
-  grid-row: 4;
-
-  /* Zoning */
-  display: grid;
-  grid-template-rows: 1fr 2fr;
-  grid-row-gap: 5px;
+.inputs{
+  display: flex;
+  /* gap: 20px; */
+  gap: 2vw;
+  width: 100%;
 }
 
 .radiobox{
-  /* Positionnement */
-  grid-row: 2;
-
-  /* Zoning */
-  display: grid;
-  grid-template-rows: 1fr 2fr 1fr 1fr 1fr 2fr 1fr;
-  grid-template-columns: 1fr 5fr;
-  grid-column-gap: 5px;
+  display: flex;
+  flex-direction: row;
 }
 
-/* ou en découpant .radiobox en
-
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 5fr;
-  grid-column-gap: 5px;
-  grid-row-gap: 5px;
-
-.radiobox label {
-  margin-top: 1.5%;
-} */
-
-.inputNbParticip {
-  /* Positionnement */
-  grid-row: 5;
-
-  /* Zoning */
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(3,1fr);
-  grid-column-gap: 5px;
+.radiobox label{
+  font-size: 1.93vw;
 }
 
-/* Partie droite */
-.inputPhotos{
-  /* Positionnement */
-  grid-row: 1;
-
-  /* Zoning */
-  display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
-  grid-template-rows: 2fr 1fr 2fr;
-
-  /* Attributs */
-  background-color: #dedede;
-  border-radius: 20px;
-  border: 0;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  font-size: 22px;
+.radiobox input{
+  /* width: 25px; */
+  width: 2.5vw;
 }
 
-.inputPhotos input{
-  /* Placement */
-  grid-row: 1/-1;
-  grid-column: 1/-1;
-
-  /* Attributs */
-  height: 100%;
-  width: 100;
-  opacity: 0;
-  cursor: pointer;
+label{
+  /* font-size: 25px; */
+  font-size: 2.5vw;
 }
 
-.inputParticip{
-  /* Positionnement */
-  grid-row: 2;
-
-  /* Zoning */
-  display: grid;
-  grid-template-rows: 1fr 2fr;
-  grid-gap: 10px;
-}
-
-.inputMsgInvit{
-  /* Positionnement */
-  grid-row: 3;
-
-  /* Zoning */
-  display: grid;
-  grid-template-rows: 1fr 4fr;
-  grid-gap: 10px;
-}
-
-.btnFin{
-  /* Positionnement */
-  grid-row: 4;
-
-  /* Zoning */
-  display: grid;
-  grid-template-columns: 1fr 4fr 1fr 1fr 4fr 1fr;
-  grid-template-rows: 1fr 3fr;
-}
-
-.btnFin .btnAnnuler{
-  /* Positionnement */
-  grid-row: 2;
-  grid-column: 2;
-
-  /* Attributs */
-  border: 3px solid #6040fe;
+.btnAnnuler{
+  border: 0.1vw solid #6040fe;
+  padding: 1vw 2.5vw;
   color: #6040fe;
-  background-color: #ffffff00;
-  text-align: center;
-  cursor: pointer;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  font-size: 22px;
-  border-radius: 20px;
+  border-radius: 2vw;
+  font-size: 1.5vw;
+  font-weight: bold;
 }
 
-.btnFin .btnCreer{
-  /* Positionnement */
-  grid-row: 2;
-  grid-column: 5;
-
-  /* Attributs */
-  border: 3px solid #6040fe;
-  color: white;
+.btnCreer{
+  border: 0.1vw solid #6040fe;
+  padding: 1vw 2.5vw;
   background-color: #6040fe;
-  text-align: center;
-  cursor: pointer;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  font-size: 22px;
-  border-radius: 20px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 2vw;
+  font-size: 1.5vw;
+}
+
+
+/* Ajouter une taille de police maximale pour les grands écrans */
+@media screen and (min-width: 900px) {
+  .partGauche, .partDroite{
+    gap: 20px;
+    max-width: 540px;
+  }
+  .titre {
+    font-size: 25px;
+  }
+  form {
+    gap: 20px;
+  }
+  input{
+    padding : 10px 25px;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+  .inputs{
+    gap: 20px;
+  }
+  .radiobox input{
+    width: 25px;
+  }
+  .radiobox label{
+    font-size: 15px;
+  }
+  label{
+    font-size: 20px;
+  }
+  .btnCreer,.btnAnnuler{
+    border: 1px solid #6040fe;
+    padding: 10px 25px;
+    border-radius: 20px;
+  }
 }

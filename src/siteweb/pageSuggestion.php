@@ -46,7 +46,7 @@ if (!isset($_SESSION['user_id'])) {
                 <a class="navbar-brand" href="index.php">
                     <img src="img/MeetEvent_Logo_blanc.png" alt="Bootstrap" width="50" height="40">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="outline: 1px solid white;">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -407,7 +407,6 @@ if (!isset($_SESSION['user_id'])) {
                         html += '<button id="openModalBtn" onclick="openModal(' + results[i].idEvenement + ')" class="btn_join">REJOINDRE</button>';
                     }
 
-                    html += '<div class="categorie">' + results[i].libCat + '</div>';
                     html += '</div>';
                     html += '<div class="part2">';
                     html += '<div class="titre_event">' + results[i].nom + '</div>';

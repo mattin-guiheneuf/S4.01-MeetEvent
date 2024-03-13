@@ -1,82 +1,154 @@
+<?php
+session_start();
+// Vérifiez si l'utilisateur est connecté en vérifiant la présence de ses informations d'identification dans la session
+if (isset($_SESSION['user_id'])) {
+  $conn = require "../gestionBD/database.php";
+  // L'utilisateur est connecté
+  $event_id = $_GET['event_id'];
+  $query = "SELECT * FROM Evenement WHERE idEvenement = $event_id";
+
+  $result = $conn->query($query);
+  $row = $result->fetch_assoc();
+  $titre = $row["nom"];
+  $date = $row["dateEvent"];
+  $heure = $row["heure"];
+  $adresseArray = explode(',', $row["adresse"]); // Divise la chaîne en un tableau
+  $cp = explode(' ', $adresseArray[1])[1];
+  $ville = explode(' ', $adresseArray[1])[2]; // Récupère le dernier élément du tableau (censé être la ville)
+  // Si vous voulez séparer les mots de la ville
+  //$ville = implode(' ', str_split($ville));  
+  $adresse = explode(',', $row["adresse"])[0];
+  $typeEvent = $row["statut"];
+  $nbMaxPersonne = $row["effMax"];
+  $photo = $row["chemImages"];
+  $participants = '';
+  $message = '';
+
+  $conn->close();
+}else{
+  // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
+  header("Location: connexion.php");
+  exit; // Assurez-vous de terminer le script après la redirection
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="CSS/global.css" />
-    <link rel="stylesheet" href="CSS/styleCreaEvent.css" />
-	<title>ME - Modifier un évènement</title>
-  </head>
-  <body>
-    <!-- Barre de Navigation -->
-    <div class="nav-bar">
-      <div class="logo-mtvnt">LOGO</div>
-      <div class="contact" href="#">Contact</div>
-      <i class="connexion" style="font-size: 28px;"></i>
-    </div>
-    <!-- Contenu principal -->
-    <div class="hero">
-        <div class="contenuFormCrea">
-          <div class="titre">
-            <h1>Modification d'un évènement</h1>
-          </div>
-          <div class="obligatoire">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="CSS/global.css" />
+  <link rel="stylesheet" href="CSS/styleCreaEvent.css" />
+  <title>ME - Modifier un évènement</title>
+</head>
+
+<body>
+  <!-- Contenu principal -->
+  <div class="hero">
+     <div class="contenuFormCrea">
+        <div class="titre">
+            <h1>Modification de l'évènement</h1>
+        </div>
+        <div class="obligatoire">
             <h3>* champs obligatoires</h3>
-          </div>
-          <div class="formulaire">
-            <div class="gauche">
-              <div class="inputTitre">
-                <label style="grid-row: 1;"><b>Titre</b> <span class="starOblig">*</span></label>
-                <input style="grid-row: 2;" type="text" placeholder="Nom de l'évènement">
-              </div>
-              <div class="inputDateHeure">
-                <label style="grid-row: 1; grid-column: 1/-1;"><b>Date et heure</b> <span class="starOblig">*</span></label>
-                <input style="grid-row: 2; grid-column: 1;" type="date" placeholder="Date (jj/mm/aaaa)">
-                <input style="grid-row: 2; grid-column: 2;" type="time" placeholder="Heure (hh:mm)">
-              </div>
-              <div class="inputLieu">
-                <label style="grid-row: 1; grid-column: 1/-1;"><b>Lieu</b> <span class="starOblig">*</span></label>
-                <input style="grid-row: 2; grid-column: 1; padding-left: 20%;" type="text" placeholder="Ville">
-                <input style="grid-row: 2; grid-column: 2; padding-left: 20%;" type="number" placeholder="Code postale" min="01000" max="100000" step="10"><!-- ??? -->
-                <input style="grid-row: 3; grid-column: 1/-1;" type="text" placeholder="Adresse">
-              </div>
-              <div class="inputType">
-                <label style="grid-row: 1; grid-column: 1/-1;"><b>Type d'évènement</b> <span class="starOblig">*</span></label>
-                <div class="radiobox">
-                  <input style="grid-row: 1/4; grid-column: 1;" type="radio" id="typePublic" value="public" name="type">
-                  <label style="grid-row: 2; grid-column: 2;" for="typePublic">Évènement public (accessible par tous)</label>
-                  <input style="grid-row: 5/8; grid-column: 1;" type="radio" id="typePrive" value="prive" name="type">
-                  <label style="grid-row: 6; grid-column: 2;" for="typePrive">Évènement privé</label>
+        </div>
+        <form action="" method="POST">
+            <div class="partGauche">
+                <!-- Titre -->
+                <div class="inputTitre">
+                    <label><b>Titre</b><span class="starOblig">*</span></label><br>
+                    <div class="inputs"><input type="text" placeholder="Nom de l'évènement" value="<?php echo $titre?>" required></div>
                 </div>
-              </div>
-              <div class="inputNbParticip">
-                <label style="grid-row: 2; grid-column: 1;"><b>Nombre de participants maximum</b></label>
-                <input style="grid-row: 1/-1; grid-column: 2;" type="number" placeholder="Nombre" min="1" max="100000" step="1">
-              </div>
+                <!-- Date et Heure -->
+                <div class="inputDateHeure">
+                    <label><b>Date et heure</b> <span class="starOblig">*</span></label>
+                    <div class="inputs">
+                        <input type="date" placeholder="Date (jj/mm/aaaa)" value="<?php echo $date?>" required>
+                        <input type="time" placeholder="Heure (hh:mm)" value="<?php echo $heure?>" required>
+                    </div>
+                </div>
+                <!-- Lieu -->
+                <div class="inputLieu">
+                    <label><b>Lieu</b> <span class="starOblig">*</span></label>
+                    <div class="inputs">
+                        <input type="text" placeholder="Ville" value="<?php echo $ville?>" required>
+                        <input type="number" placeholder="Code postale" min="01000" max="100000" step="10" value="<?php echo $cp?>" required><!-- ??? -->
+                        <input type="text" placeholder="Adresse" value="<?php echo $adresse?>" required>
+                    </div>
+                </div>
+                <!-- Type d'événement -->
+                <div class="inputType">
+                    <label><b>Type d'évènement</b> <span class="starOblig">*</span></label>
+                    <div class="inputs">
+                        <div class="radiobox">
+                            <input type="radio" id="typePublic" value="public" name="type" checked>
+                            <label for="typePublic">Évènement public (accessible par tous)</label>
+                        </div>
+                        <div class="radiobox">
+                            <?php if($typeEvent==0):?>
+                            <input type="radio" id="typePrive" value="prive" name="type" checked>
+                            <?php else :?>
+                            <input type="radio" id="typePrive" value="prive" name="type">
+                            <?php endif;?>
+                            <label for="typePrive">Évènement privé</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Nombre de participant -->
+                <div class="inputNbParticip">
+                    <label><b>Nombre de participants maximum</b></label>
+                    <div class="inputs"><input type="number" placeholder="Nombre" min="1" max="100000" step="1" value="<?php echo $nbMaxPersonne?>"></div>
+                </div>
             </div>
-            <div class="separateur"></div>
-            <div class="droite">
-              <div class="inputPhotos">
-                <label style="grid-row: 2; grid-column: 2; text-align: center;"><b>+ Ajouter jusqu'à 3 photos</b></label>
-                <input type="file" accept="image/png, image/jpeg">
-              </div>
-              <div class="inputParticip">
-                <label style="grid-row: 1;"><b>Participants</b></label>
-                <input style="grid-row: 2;" type="email" placeholder="participant1@mail.com, participant2@mail.com, ...">
-              </div>
-              <div class="inputMsgInvit">
-                <label style="grid-row: 1;"><b>Message personnalisé d'invitation</b></label>
-                <input style="grid-row: 2;" type="text" placeholder="Hey ! Je t'invite à mon évènement ! ...">
-              </div>
-              <div class="btnFin">
-                <button class="btnAnnuler">Annuler</button>
-                <button class="btnCreer">Créer</button>
-              </div>
+            <div class="partDroite">
+                <!-- Photos -->
+                <div class="inputPhotos">
+                    <label><b>+ Ajoutez une photo</b></label>
+                    <div class="inputs">
+                        <input type="file" id="inputPhoto" name="photo" accept="image/png, image/jpeg" onchange="afficherImage(this)">
+                    </div>
+                    <img id="imagePreview" src="<?php echo $photo ?>" alt="Aperçu de l'image" style="max-width: 200px;max-height: 200px;">
+                </div>
+                <!-- Participants -->
+                <div class="inputParticip">
+                    <label><b>Participants</b></label>
+                    <div class="inputs"><input type="email" placeholder="participant1@mail.com, participant2@mail.com, ..."></div>
+                </div>
+                <!-- Message de d'invitation -->
+                <div class="inputMsgInvit">
+                    <label><b>Message personnalisé d'invitation</b></label>
+                    <div class="inputs"><input type="text" placeholder="Hey ! Je t'invite à mon évènement ! ..." value="<?php echo $message?>"></div>
+                </div>
+                <!-- Btn d'actions -->
+                <div class="btnFin">
+                    <button class="btnAnnuler" onclick="window.location.href='MesEvent.php'">Annuler</button>
+                    <button type="submit" class="btnCreer">Modifier</button>
+                </div>
             </div>
-          </div>
+        </form>
       </div>
-    </div>
-    <!-- <footer> -->
-      <!-- Le footer -->
-    <!-- </footer> -->
-  </body>
+  </div>
+</body>
+<script>
+    function afficherImage(input) {
+        var imagePreview = document.getElementById('imagePreview');
+        
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            imagePreview.src = "<?php echo $photo ?>"; // Image par défaut depuis la base de données
+            imagePreview.style.display = 'block';
+        }
+    }
+</script>
+
 </html>

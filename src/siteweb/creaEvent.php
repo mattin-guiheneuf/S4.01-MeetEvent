@@ -1,82 +1,92 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="CSS/global.css" />
-    <link rel="stylesheet" href="CSS/styleCreaEvent.css" />
-	<title>ME - Créer un évènement</title>
-  </head>
-  <body>
-    <!-- Barre de Navigation -->
-    <div class="nav-bar">
-      <div class="logo-mtvnt">LOGO</div>
-      <div class="contact" href="#">Contact</div>
-      <i class="connexion" style="font-size: 28px;"></i>
-    </div>
-    <!-- Contenu principal -->
-    <div class="hero">
-        <div class="contenuFormCrea">
-          <div class="titre">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="CSS/global.css" />
+  <link rel="stylesheet" href="CSS/styleCreaEvent.css" />
+  <title>ME - Créer un évènement</title>
+</head>
+
+<body>
+  <!-- Contenu principal -->
+  <div class="hero">
+     <div class="contenuFormCrea">
+        <div class="titre">
             <h1>Création d'un évènement</h1>
-          </div>
-          <div class="obligatoire">
+        </div>
+        <div class="obligatoire">
             <h3>* champs obligatoires</h3>
-          </div>
-          <form class="formulaire" action="/algorithme/CreationTag.php">
-            <div class="gauche">
-              <div class="inputTitre">
-                <label style="grid-row: 1;"><b>Titre</b> <span class="starOblig">*</span></label>
-                <input style="grid-row: 2;" type="text" placeholder="Nom de l'évènement">
-              </div>
-              <div class="inputDateHeure">
-                <label style="grid-row: 1; grid-column: 1/-1;"><b>Date et heure</b> <span class="starOblig">*</span></label>
-                <input style="grid-row: 2; grid-column: 1;" type="date" placeholder="Date (jj/mm/aaaa)">
-                <input style="grid-row: 2; grid-column: 2;" type="time" placeholder="Heure (hh:mm)">
-              </div>
-              <div class="inputLieu">
-                <label style="grid-row: 1; grid-column: 1/-1;"><b>Lieu</b> <span class="starOblig">*</span></label>
-                <input style="grid-row: 2; grid-column: 1; padding-left: 20%;" type="text" placeholder="Ville">
-                <input style="grid-row: 2; grid-column: 2; padding-left: 20%;" type="number" placeholder="Code postale" min="01000" max="100000" step="10"><!-- ??? -->
-                <input style="grid-row: 3; grid-column: 1/-1;" type="text" placeholder="Adresse">
-              </div>
-              <div class="inputType">
-                <label style="grid-row: 1; grid-column: 1/-1;"><b>Type d'évènement</b> <span class="starOblig">*</span></label>
-                <div class="radiobox">
-                  <input style="grid-row: 1/4; grid-column: 1;" type="radio" id="typePublic" value="public" name="type">
-                  <label style="grid-row: 2; grid-column: 2;" for="typePublic">Évènement public (accessible par tous)</label>
-                  <input style="grid-row: 5/8; grid-column: 1;" type="radio" id="typePrive" value="prive" name="type">
-                  <label style="grid-row: 6; grid-column: 2;" for="typePrive">Évènement privé</label>
+        </div>
+        <form>
+            <div class="partGauche">
+                <!-- Titre -->
+                <div class="inputTitre">
+                    <label for="titre"><b>Titre</b><span class="starOblig">*</span></label><br>
+                    <div class="inputs"><input type="text" name="titre" id="titre" placeholder="Nom de l'évènement" required></div>
                 </div>
-              </div>
-              <div class="inputNbParticip">
-                <label style="grid-row: 2; grid-column: 1;"><b>Nombre de participants maximum</b></label>
-                <input style="grid-row: 1/-1; grid-column: 2;" type="number" placeholder="Nombre" min="1" max="100000" step="1">
-              </div>
+                <!-- Date et Heure -->
+                <div class="inputDateHeure">
+                    <label for="date"><b>Date et heure</b> <span class="starOblig">*</span></label>
+                    <div class="inputs">
+                        <input type="date" name="date" id="date" placeholder="Date (jj/mm/aaaa)" required>
+                        <input type="time" name="heure" id="heure" placeholder="Heure (hh:mm)" required>
+                    </div>
+                </div>
+                <!-- Lieu -->
+                <div class="inputLieu">
+                    <label for="ville"><b>Lieu</b> <span class="starOblig">*</span></label>
+                    <div class="inputs">
+                        <input type="text" name="ville" id="ville" placeholder="Ville">
+                        <input type="number" name="cp" id="cp" placeholder="Code postale" min="01000" max="100000" step="10"><!-- ??? -->
+                        <input type="text" name="adresse" id="adresse" placeholder="Adresse">
+                    </div>
+                </div>
+                <!-- Type d'événement -->
+                <div class="inputType">
+                    <label><b>Type d'évènement</b> <span class="starOblig">*</span></label>
+                    <div class="inputs">
+                        <div class="radiobox">
+                            <input type="radio" id="typePublic" value="public" name="type">
+                            <label for="typePublic">Évènement public (accessible par tous)</label>
+                        </div>
+                        <div class="radiobox">
+                            <input type="radio" id="typePrive" value="prive" name="type">
+                            <label for="typePrive">Évènement privé</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Nombre de participant -->
+                <div class="inputNbParticip">
+                    <label for="nbParticip"><b>Nombre de participants maximum</b></label>
+                    <div class="inputs"><input type="number" name="nbParticip" id="nbParticip" placeholder="Nombre" min="1" max="100000" step="1"></div>
+                </div>
             </div>
-            <div class="separateur"></div>
-            <div class="droite">
-              <div class="inputPhotos">
-                <label style="grid-row: 2; grid-column: 2; text-align: center;"><b>+ Ajouter jusqu'à 3 photos</b></label>
-                <input type="file" accept="image/png, image/jpeg">
-              </div>
-              <div class="inputParticip">
-                <label style="grid-row: 1;"><b>Participants</b></label>
-                <input style="grid-row: 2;" type="email" placeholder="participant1@mail.com, participant2@mail.com, ...">
-              </div>
-              <div class="inputMsgInvit">
-                <label style="grid-row: 1;"><b>Message personnalisé d'invitation</b></label>
-                <input style="grid-row: 2;" type="text" placeholder="Hey ! Je t'invite à mon évènement ! ...">
-              </div>
-              <div class="btnFin">
-                <button class="btnAnnuler">Annuler</button>
-                <button class="btnCreer">Créer</button>
-              </div>
+            <div class="partDroite">
+                <!-- Photos -->
+                <div class="inputPhotos">
+                    <label for="photo"><b>+ Ajoutez une photo</b></label>
+                    <div class="inputs"><input name="photo" id="photo" type="file" accept="image/png, image/jpeg"></div>
+                </div>
+                <!-- Participants -->
+                <div class="inputParticip">
+                    <label for="participants"><b>Participants</b></label>
+                    <div class="inputs"><input type="email" name="participants" id="participants" placeholder="participant1@mail.com, participant2@mail.com, ..."></div>
+                </div>
+                <!-- Message de d'invitation -->
+                <div class="inputMsgInvit">
+                    <label for="mess_invit"><b>Message personnalisé d'invitation</b></label>
+                    <div class="inputs"><input type="text" name="mess_invit" id="mess_invit" placeholder="Hey ! Je t'invite à mon évènement ! ..."></div>
+                </div>
+                <!-- Btn d'actions -->
+                <div class="btnFin">
+                    <button class="btnAnnuler" onclick="window.location.href='MesEvent.php'">Annuler</button>
+                    <button type="submit" class="btnCreer">Créer</button>
+                </div>
             </div>
-          </form>
+        </form>
       </div>
-    </div>
-    <!-- <footer> -->
-      <!-- Le footer -->
-    <!-- </footer> -->
-  </body>
+  </div>
+</body>
+
 </html>
