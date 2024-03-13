@@ -6,6 +6,12 @@ if (!isset($_SESSION['user_id'])) {
     exit; // Assurez-vous de terminer le script après la redirection
 }
 echo $_SESSION["user_id"];
+
+if($_POST['event'] == 1){
+    $isEvent == true;
+}else{
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -90,7 +96,8 @@ echo $_SESSION["user_id"];
     <!-- <hr> -->
     <h2>Ajouter la description de l'utilisateur</h2>
     <!-- Formulaire avec champ pour saisir l'inscription d'un utilisateur -->
-    <?php if(isset($_SESSION["user_id"])){
+    <?php if(isset($_SESSION["user_id"]))
+    {
     echo '<form action="CreationTag.php" method="post">
     
         <label for="mot">Mot :</label>
@@ -124,6 +131,19 @@ echo $_SESSION["user_id"];
             <input type="text" id="motEvenement" name="motEvenement">
             <button type="button" onclick="ajouterMotEvenement()">Ajouter</button>
             <div id="listeMotsEvenement"></div>
+    <?php if(isset($_SESSION["event_id"])){
+    echo `<form action="CreationTag.php" method="post">
+        <input type="hidden" id="titre" name="titre" value="`.$_POST["titre"].`">
+        <input type="hidden" id="date" name="date" value="`.$_POST["date"].`>
+        <input type="hidden" id="heure" name="heure" value="`.$_POST["heure"].`>
+        <input type="hidden" id="ville" name="ville" value="`.$_POST["ville"].`>
+        <input type="hidden" id="cp" name="cp" value="`.$_POST["cp"].`>
+        <input type="hidden" id="adresse" name="adresse" value="`.$_POST["adresse"].`>
+        
+        <label for="motEvenement">Mot :</label>
+        <input type="text" id="motEvenement" name="motEvenement">
+        <button type="button" onclick="ajouterMotEvenement()">Ajouter</button>
+        <div id="listeMotsEvenement"></div>
 
             <input type="hidden" id="motsListeEvenementInput" name="motsListeEvenement" value="">
 
