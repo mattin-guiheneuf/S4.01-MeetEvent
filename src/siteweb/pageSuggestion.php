@@ -270,6 +270,7 @@ if (!isset($_SESSION['user_id'])) {
                     // Traitement du résultat ici
                     var response = response.split("<br>");
                     response.pop();
+                    console.log(<?php echo $_SESSION['user_id']?>);
                     console.log(response); // Affiche le résultat dans la console
                     suggestEvent(response);
                 },
