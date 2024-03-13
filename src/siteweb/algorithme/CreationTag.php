@@ -212,8 +212,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $nbParticip = $_POST['nbParticip'];
                 $photo = $_POST['photo'];
-                if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
-                    $original_filename = $_FILES['photo']['name'];
+
+                if (isset($_FILES['photo']['tmp_name'])) {
+                    $original_filename = $_FILES['photo']['tmp_name'];
     
                     // Récupération de l'extension du fichier
                     $file_extension = pathinfo($original_filename, PATHINFO_EXTENSION);
