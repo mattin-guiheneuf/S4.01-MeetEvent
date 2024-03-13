@@ -114,23 +114,28 @@ if(!isset($_POST['event'])){
     <h2>Créer un Evenement</h2>
     <!-- Formulaire avec champ pour saisir l'inscription d'un utilisateur -->
     <?php 
-    echo `<form action="CreationTag.php" method="post">
-        <input type="hidden" id="titre" name="titre" value="`.$_POST["titre"].`">
-        <input type="hidden" id="date" name="date" value="`.$_POST["date"].`>
-        <input type="hidden" id="heure" name="heure" value="`.$_POST["heure"].`>
-        <input type="hidden" id="ville" name="ville" value="`.$_POST["ville"].`>
-        <input type="hidden" id="cp" name="cp" value="`.$_POST["cp"].`>
-        <input type="hidden" id="adresse" name="adresse" value="`.$_POST["adresse"].`>
+    echo '<form action="CreationTag.php" method="post">
+        <input type="hidden" id="titre" name="titre" value="'.$_POST["titre"].'">
+        <input type="hidden" id="date" name="date" value="'.$_POST["date"].'">
+        <input type="hidden" id="heure" name="heure" value="'.$_POST["heure"].'">
+        <input type="hidden" id="ville" name="ville" value="'.$_POST["ville"].'">
+        <input type="hidden" id="cp" name="cp" value="'.$_POST["cp"].'">
+        <input type="hidden" id="adresse" name="adresse" value="'.$_POST["adresse"].'">
+        <input type="hidden" id="type" name="type" value="'.$_POST["type"].'">
+        <input type="hidden" id="nbParticip" name="nbParticip" value="'.$_POST["nbParticip"].'">
+        <input type="hidden" id="photo" name="photo" value="'.$_POST["photo"].'">
+        <input type="hidden" id="participants" name="participants" value="'.$_POST["participants"].'">
+        <input type="hidden" id="mess_invit" name="mess_invit" value="'.$_POST["mess_invit"].'">
         
         <label for="motEvenement">Mot :</label>
         <input type="text" id="motEvenement" name="motEvenement">
         <button type="button" onclick="ajouterMotEvenement()">Ajouter</button>
         <div id="listeMotsEvenement"></div>
 
-            <input type="hidden" id="motsListeEvenementInput" name="motsListeEvenement" value="">
+        <input type="hidden" id="motsListeEvenementInput" name="motsListeEvenement" value="">
 
-        <button type="submit" name="action" value="creerEvenement">Création d'un événement</button>
-    </form>`;
+        <button type="submit" name="action" value="creerEvenement">Création d\'un événement</button>
+    </form>';
     ?>
     <?php endif;?>
 

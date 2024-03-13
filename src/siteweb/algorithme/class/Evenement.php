@@ -207,7 +207,7 @@ class Evenement {
         $listeTag = array(); // Le résultat de la fonction avec la liste des tags
 
         // TRAITEMENTS
-        foreach ($listeMot as $motCourant) { // Pour chaque mot de la liste
+        foreach ($lsteMot as $motCourant) { // Pour chaque mot de la liste
             // Vérif mot en double
             if (array_key_exists($motCourant, $dicoMotToTag)) { // Si le mot est déjà présent dans le dico
                 continue; // équivalent de pass

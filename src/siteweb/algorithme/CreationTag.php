@@ -171,6 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Exécution de la requête
                 $prep_reqIdEvent = $connexion->prepare($req_idEvent);
                 if ($prep_reqIdEvent) {
+                    
                     $prep_reqIdEvent->execute();
                     $res_reqIdEvent = $prep_reqIdEvent->get_result();
 
@@ -211,22 +212,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $type == 'public' ? $statut = 0 : $statut = 1;
 
                 $nbParticip = $_POST['nbParticip'];
-                $photo = $_POST['photo'];
+               /* $photo = $_POST['photo'];
+                if (isset($_FILES['photo']) && is_uploaded_file($_FILES['photo']['tmp_name'])) {
+                    $original_filename = $_FILES['photo']['name'];
 
-                if (isset($_FILES['photo']['tmp_name'])) {
-                    $original_filename = $_FILES['photo']['tmp_name'];
-    
                     // Récupération de l'extension du fichier
                     $file_extension = pathinfo($original_filename, PATHINFO_EXTENSION);
-                
+                    
                     // Emplacement de destination pour l'image avec le nouveau nom
                     $destination = "../img/";
-                    $new_filename = $titre . $id_event . '.' . $file_extension;
+                    $new_filename = $titre_event . $id_event . '.' . $file_extension;
                     $destination_path = $destination . $new_filename;
 
-                    move_uploaded_file($_FILES['photo']['tmp_name'], $destination_path);
-                    $chemImages = "/img/". $new_filename;
-                }
+                    if (move_uploaded_file($_FILES['photo']['tmp_name'], $destination_path)) {
+                        $chemImages = "/img/" . $new_filename;
+                    } else {
+                        echo "Une erreur s'est produite lors du téléchargement du fichier.";
+                    }
+                }  */
 
                 $participants = $_POST['participants'];
                 $mess_invit = $_POST['mess_invit'];
@@ -238,60 +241,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $motsListe = isset($_POST['motsListeEvenement']) ? json_decode($_POST['motsListeEvenement']) : [];
 
                 //on crée ajout l'utilisateur dans la BD
+                //id
                 $nvl_event->setId($id_event);
+                //titre
                 $nvl_event->setTitre($titre);
-                $nvl_event->setDate($date);
-                $nvl_event->setHeure($heure);
-                $nvl_event->setLieu($adresseEvent);
-                //Création liste de mot objet
+                //description
                 $listeMot_objet = array();
                 foreach($motsListe as $motX){
                     $listeMot_objet[]= new Mot($motX);
                 }
                 $nvl_event->setMots($listeMot_objet);           
                 $nvl_event->definirDescription($dicoSynTag);
-                
-                $id_event = $nvl_event->getId();
-                $titre_event = $nvl_event->getTitre();
-                $req_insertEvnt = "INSERT INTO evenement (idEvenement, nom, dateEvent, effMax,
-                                   statut, heure, adresse, chemImages, idCategorie, idOrganisateur) VALUES (?,?,?,?,?,?,?,?,?,?)"; // Correction à apporter sur la requête car pas possible d'insérer sans Catégorie ni Organisateur 
-                $res_insertEvnt = $connexion->prepare($req_insertEvnt);
-                $res_insertEvnt->bind_param("issiisssii", $id_event, $titre_event, $date, $nbParticip, $statut,
-                                 $heure, $adresseEvent, $chemImages, 1, $idOrganisateur);
-
-                
-                //On attributs les mots de l'évènement
-
-                /*| -------------------------------- |*/
-                /*| Mettre a jour la base de données |*/
-                /*| -------------------------------- |*/
-                /*| Mettre a jour la description |*/
-
-                // Variables pour les nouvelles données de l'utilisateur
                 $description_event = $nvl_event->getMots();
-
                 $mots_str ="";
                 foreach ($description_event as $id_mot) {
                     $mots_str .=  $id_mot->getLibelle() . " "; 
                 }
+                //date
+                $nvl_event->setDate($date);
+                //heure
+                $nvl_event->setHeure($heure);
+                //lieu
+                $nvl_event->setLieu($adresseEvent);
 
-                // Requête SQL pour mettre à jour la description de l'utilisateur
-                $req_majDescEvent = "UPDATE evenement SET description = ? WHERE idEvenement = ?";
-                $res_updtDescEvent = $connexion->prepare($req_majDescEvent);
-                $res_updtDescEvent->bind_param("si", $mots_str, $id_event);
+                /* ATTRIBUTION POUR LA REQUETE */
+                //id
+                $id_event = $nvl_event->getId();
+                //titre
+                $titre_event = $nvl_event->getTitre();
+                //description
+                $description_event = $mots_str;
+                //token
+                $token = password_hash(uniqid(rand(), true), PASSWORD_DEFAULT);
+                //prix
+                $prix =0.00;
+                //catégorie
+                $idCategorie = 1;
+                //image
+                $chemImages = " ";
 
+                $req_insertEvnt = "INSERT INTO evenement (idEvenement, nom, description, dateEvent, effMax, statut,prix, heure, adresse, chemImages, token, idCategorie, idOrganisateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                $res_insertEvnt = $connexion->prepare($req_insertEvnt);
+                $res_insertEvnt->bind_param("isssiiissssii", $id_event, $titre_event, $description_event, $date, $nbParticip, $statut,$prix, $heure, $adresseEvent, $chemImages, $token, $idCategorie, $idOrganisateur);
+                $res_insertEvnt->execute();
                 
-                // Exécution de la requête
-                if ($res_updtDescEvent->execute()) {
-                    echo "Description mise à jour avec succès.";
-                } else {
-                    echo "Erreur lors de la mise à jour de la description ";
-                }
+                $lienQR = 'lienQRCode';
+                $participe = 0;
+                /* INSERTION dans participer de la relation qui vient d'etre créée */
+                $req_insertDsParticiper = "INSERT INTO participer VALUES ( ?, ?, ?, ?)";
+
+                $req_insertDsParticiper = $connexion->prepare($req_insertDsParticiper);
+                $req_insertDsParticiper->bind_param("iiss", $id_event, $idOrganisateur,$lienQR,$participe);
+                $req_insertDsParticiper->execute();
 
                 /*| Mettre a jour les tags |*/
                 // Fonction pour récupérer l'ID d'un tag à partir de son libellé
                 function getTagId($conn, $tag) {
-                    $req_idTag = "SELECT idTag FROM Tag WHERE libelle = ?";
+                    $sql = "SELECT idTag FROM Tag WHERE libelle = ?";
                     $res_idTag = $conn->prepare($sql);
                     $res_idTag->bind_param("s", $tag);
                     $res_idTag->execute();
