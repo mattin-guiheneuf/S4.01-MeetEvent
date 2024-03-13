@@ -137,7 +137,7 @@ if(!isset($_POST['event'])){
         <button type="submit" name="action" value="creerEvenement">Création d\'un événement</button>
     </form>';
     ?>
-    <?php endif;?>
+    <!-- <?php endif;?> -->
 
 	<?php 
         // Récupération du dicoMotsFr pour la saisieVerif des mots

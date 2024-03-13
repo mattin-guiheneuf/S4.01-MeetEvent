@@ -311,6 +311,7 @@ if (!isset($_SESSION['user_id'])) {
                     listeEvent: listeEvent
                 },
                 success: function(response) {
+                    console.log(response)
                     displaySearchResults(response);
                 },
                 error: function(xhr, status, error) {

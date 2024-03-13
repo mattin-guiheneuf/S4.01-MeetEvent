@@ -33,8 +33,8 @@ if(isset($_POST['eventName']) or isset($_POST['eventDate']) or isset($_POST['eve
             FROM Evenement e 
             JOIN Categorie c ON e.idCategorie = c.idCategorie 
             JOIN Utilisateur u ON e.idOrganisateur = u.idUtilisateur 
-            JOIN Participer p ON e.idEvenement = p.idEvenement 
-            WHERE u.idUtilisateur != $userConnected";
+            LEFT JOIN Participer p ON e.idEvenement = p.idEvenement
+            WHERE e.idOrganisateur != $userConnected AND e.statut = 1";
 
     // Ajouter les conditions à la requête en fonction des paramètres fournis
     if ($eventName != '') {
@@ -50,7 +50,7 @@ if(isset($_POST['eventName']) or isset($_POST['eventDate']) or isset($_POST['eve
         $sql .= " AND e.statut LIKE '$eventCity'";
     }
     //Ajouter le group by pour récupérer le nb de participant
-    $sql .= " GROUP BY p.idEvenement";
+    $sql .= " GROUP BY e.idEvenement";
 
     // Exécuter la requête SQL
     $result = $connexion->query($sql);
@@ -95,8 +95,8 @@ if(isset($_POST['listeEvent'])){
                 FROM Evenement e 
                 JOIN Categorie c ON e.idCategorie = c.idCategorie 
                 JOIN Utilisateur u ON e.idOrganisateur = u.idUtilisateur 
-                JOIN Participer p ON e.idEvenement = p.idEvenement 
-                WHERE e.idEvenement = $eventId AND u.idUtilisateur != $userConnected
+                LEFT JOIN Participer p ON e.idEvenement = p.idEvenement 
+                WHERE e.idEvenement = $eventId AND e.idOrganisateur != $userConnected
                 GROUP BY p.idEvenement";
         // Exécuter la requête SQL
         $result = $connexion->query($sql);
