@@ -116,18 +116,18 @@ if(!isset($_POST['event'])){
     <?php 
     echo `<form action="CreationTag.php" method="post">
         <input type="hidden" id="titre" name="titre" value="`.$_POST["titre"].`">
-        <input type="hidden" id="date" name="date" value="`.$_POST["date"].`>
-        <input type="hidden" id="heure" name="heure" value="`.$_POST["heure"].`>
-        <input type="hidden" id="ville" name="ville" value="`.$_POST["ville"].`>
-        <input type="hidden" id="cp" name="cp" value="`.$_POST["cp"].`>
-        <input type="hidden" id="adresse" name="adresse" value="`.$_POST["adresse"].`>
+        <input type="hidden" id="date" name="date" value="`.$_POST["date"].`">
+        <input type="hidden" id="heure" name="heure" value="`.$_POST["heure"].`">
+        <input type="hidden" id="ville" name="ville" value="`.$_POST["ville"].`">
+        <input type="hidden" id="cp" name="cp" value="`.$_POST["cp"].`">
+        <input type="hidden" id="adresse" name="adresse" value="`.$_POST["adresse"].`">
         
         <label for="motEvenement">Mot :</label>
         <input type="text" id="motEvenement" name="motEvenement">
         <button type="button" onclick="ajouterMotEvenement()">Ajouter</button>
         <div id="listeMotsEvenement"></div>
 
-        <input type="hidden" id="motsListeEvenementInput" name="motsListeEvenement" value="">
+        <input type="text" id="motsListeEvenementInput" name="motsListeEvenement" value="">
 
         <button type="submit" name="action" value="creerEvenement">Création d'un événement</button>
     </form>`;
