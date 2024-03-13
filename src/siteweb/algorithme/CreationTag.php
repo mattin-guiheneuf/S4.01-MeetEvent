@@ -286,14 +286,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $res_insertEvnt->bind_param("isssiiissssii", $id_event, $titre_event, $description_event, $date, $nbParticip, $statut,$prix, $heure, $adresseEvent, $chemImages, $token, $idCategorie, $idOrganisateur);
                 $res_insertEvnt->execute();
                 
-                $lienQR = 'lienQRCode';
-                $participe = 0;
-                /* INSERTION dans participer de la relation qui vient d'etre créée */
-                $req_insertDsParticiper = "INSERT INTO participer VALUES ( ?, ?, ?, ?)";
-
-                $req_insertDsParticiper = $connexion->prepare($req_insertDsParticiper);
-                $req_insertDsParticiper->bind_param("iiss", $id_event, $idOrganisateur,$lienQR,$participe);
-                $req_insertDsParticiper->execute();
 
                 /*| Mettre a jour les tags |*/
                 // Fonction pour récupérer l'ID d'un tag à partir de son libellé
