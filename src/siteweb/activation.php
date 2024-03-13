@@ -18,7 +18,7 @@ if (isset($_GET['token'])) {
         $user = $result->fetch_assoc();
         $_SESSION["user_id"] = $user["idUtilisateur"];
         
-        exit;
+        echo "<script>window.location.href='pageSuggestion.php'</script>";
     }
     
     /* echo "Votre compte a été activé avec succès!"; */
