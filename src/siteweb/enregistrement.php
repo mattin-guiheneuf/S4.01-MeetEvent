@@ -149,7 +149,7 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
             <p>Bienvenue <span style="color:#6040fe;">'. $_POST['pseudo'] .'</span>,</p>
             <p>Nous sommes heureux que vous puissiez participer à l\'aventure MeetEvent.</p>
             <p>Pour explorer MeetEvent App, cliquez sur le bouton ci-dessous pour activer votre compte :</p>
-            <a href="http://localhost/testSitME/S4.01-MeetEvent/src/siteweb/activation.php?token=' . $token . '"><button>Activer mon compte</button></a>
+            <a href="https://meetevent.alwaysdata.net/activation.php?token=' . $token . '&email='. $_POST['pseudo'] .'"><button>Activer mon compte</button></a>
             </body>
             </html>
             ';
