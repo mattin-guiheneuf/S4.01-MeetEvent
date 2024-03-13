@@ -188,6 +188,11 @@ a.nav-link_MesEvent:hover{
     color: black;
 }
 
+.event-footer a {
+    text-decoration: none;
+    color: #ababab;
+}
+
 .footer-top {
     width: 100%;
     display: flex;
@@ -201,7 +206,7 @@ a.nav-link_MesEvent:hover{
     color: #fff;
 }
 
-.item{
+.item_footer{
     display:flex;
     /* gap:10px; */
     gap:1vw;
@@ -261,10 +266,11 @@ a.nav-link_MesEvent:hover{
     text-align: center;
     /* padding: 10px 0; */
     padding: 1vw 0;
-    color:#ffffff
+    color:#ffffff;
+    font-size: 1vw;
 }
 
-form{
+.form_newsletter{
     /* border: 1px solid #ffffff;
     border-radius: 20px;
     padding-left: 25px; */
@@ -279,11 +285,12 @@ form{
     background-color: #ffffff;
 }
 
-input, button{
+.form_newsletter input,.form_newsletter button{
     border: none;
+    outline: none;
 }
 
-button{
+.form_newsletter button{
     /* padding: 10px 25px; */
     padding: 1vw 2.5vw;
     color: #fff;
@@ -293,14 +300,14 @@ button{
     font-size: 1.5vw !important;
 }
 
-input{
+.form_newsletter input{
     /* padding-right: 15px;
     font-size: 15px; */
     padding-right: 1.5vw;
     font-size: 1.5vw !important;
 }
 
-input::placeholder{
+.form_newsletter input::placeholder{
     font-size: 1.5vw;
 }
 
