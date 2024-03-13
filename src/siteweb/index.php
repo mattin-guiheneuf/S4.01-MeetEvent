@@ -1,5 +1,5 @@
 <?php
-
+//include_once "../gestionBD/creation_et_peuplement.php";
 
 session_start();
 // Vérifiez si l'utilisateur est connecté en vérifiant la présence de ses informations d'identification dans la session

@@ -15,7 +15,7 @@ $tokenEvent = $_GET['tokenEvent'];
 
 // Concaténer les données pour former le contenu du QR code
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : "Unknown"; // Si l'utilisateur n'est pas connecté, afficher "Unknown"
-$qr_content = "localhost/testSitME/S4.01-MeetEvent/src/siteweb/verifQRCode.php?userId=$userId&eventId=$eventId&tokenUser=$tokenUser&tokenEvent=$tokenEvent";
+$qr_content = "https://meetevent.alwaysdata.net/verifQRCode.php?userId=$userId&eventId=$eventId&tokenUser=$tokenUser&tokenEvent=$tokenEvent";
 
 // Générer l'URL de l'API QR Code de Google
 $api_url = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" . urlencode($qr_content);

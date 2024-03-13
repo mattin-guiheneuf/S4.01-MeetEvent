@@ -199,9 +199,9 @@ class Evenement {
 
         // VARIABLES
         $listeMots = $this->getMots();
-        $listeMot = array();
+        $lsteMot = array();
         foreach($listeMots as $mot){
-            array_push($listeMot,$mot->getLibelle());
+            array_push($lsteMot,$mot->getLibelle());
         }
         $dicoMotToTag = array(); // Le résultat de la fonction avec les étapes par lesquelles on passe pour arriver aux tags
         $listeTag = array(); // Le résultat de la fonction avec la liste des tags
@@ -280,10 +280,11 @@ class Evenement {
 
         // Maj donnes.json
         // Lire le contenu JSON depuis le fichier
+        /*         
         $contenuJSON = file_get_contents('./data/donnees.json');
         $donnees = json_decode($contenuJSON, true);
         $donnees['evenements'][$this->getId()-1]['tags'] = $realListeTag;
-        file_put_contents('./data/donnees.json', json_encode($donnees, JSON_PRETTY_PRINT));
+        file_put_contents('./data/donnees.json', json_encode($donnees, JSON_PRETTY_PRINT)); */
 
         // Renvoyer
         return array($dicoMotToTag, $realListeTag);
@@ -303,8 +304,8 @@ class Evenement {
         //Ajout des données dans le json-------------------------
         // Mise à jour des données
         // Lire le contenu JSON depuis le fichier
-        $contenuJSON = file_get_contents('./data/donnees.json');
-        $donnees = json_decode($contenuJSON, true);
+        //$contenuJSON = file_get_contents('./data/donnees.json');
+        //$donnees = json_decode($contenuJSON, true);
 
         // Nouvel utilisateur à ajouter
         $nouvelEvent = array(
@@ -319,10 +320,10 @@ class Evenement {
         //$donnees['utilisateurs'][$this->getId() - 1]['mots'] = $motsLib;
         
         // Ajouter le nouvel utilisateur à la liste des utilisateurs existants
-        $donnees['evenements'][] = $nouvelEvent;
+        //$donnees['evenements'][] = $nouvelEvent;
         
         // Écrire les données mises à jour dans le fichier JSON
-        file_put_contents('./data/donnees.json', json_encode($donnees, JSON_PRETTY_PRINT));
+        //file_put_contents('./data/donnees.json', json_encode($donnees, JSON_PRETTY_PRINT));
 
 
         $this->definirTags($dicoSynTag);

@@ -4,8 +4,10 @@
     Description : Création de la connection vers la base de données
  */
 
-//Pour YANNIS
+
+/*Pour YANNIS
 $bdname = 'projetme';
+>>>>>>> master
 $host = 'localhost';
 $username = 'root';
 $password = '';
@@ -15,11 +17,11 @@ $connexion = new mysqli(hostname : $host, username : $username, password : $pass
 if($connexion->connect_errno){
     die("Connection error:" . $connexion->connect_error);
 } 
+ */
 
 
-
-// Pour Clément
-/* $bdname = 'cmourgue_bd';
+/*// Pour Clément
+$bdname = 'cmourgue_bd';
 $host = 'lakartxela.iutbayonne.univ-pau.fr';
 $username = 'cmourgue_bd';
 $password = 'cmourgue_bd';
@@ -47,18 +49,20 @@ if($connexion->connect_errno){
 
 
 // Pour Mattin
-/*$bdname = 'mguiheneuf_bd';
-$host = 'lakartxela.iutbayonne.univ-pau.fr';
-$username = 'mguiheneuf_bd';
-$password = 'mguiheneuf_bd';
+/*
+$bdname = 'bd_meetevent';
+$host = 'localhost';
+$username = 'root';
+$password = '';
 
 $connexion = new mysqli($host, $username, $password, $bdname); // or die ...
 
 if($connexion->connect_errno){
     die("Connection error : " . $connexion->connect_error);
-}*/
+}
+*/
 
-/* $bdname = 'meetevent_bd';
+$bdname = 'meetevent_bd';
 $host = 'mysql-meetevent.alwaysdata.net';
 $username = 'meetevent_staff';
 $password = 'grp12YMCD!!';
@@ -67,7 +71,7 @@ $connexion = new mysqli(hostname : $host, username : $username, password : $pass
 
 if($connexion->connect_errno){
     die("Connection error:" . $connexion->connect_error);
-}  */
+}
 
 return $connexion;
 

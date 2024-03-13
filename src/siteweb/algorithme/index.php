@@ -8,9 +8,9 @@ if (!isset($_SESSION['user_id'])) {
 echo $_SESSION["user_id"];
 
 if(!isset($_POST['event'])){
-    $isEvent == false;
+    $isEvent = false;
 }else{
-    $isEvent == true;
+    $isEvent = true;
 }
 
 ?>
@@ -127,7 +127,7 @@ if(!isset($_POST['event'])){
         <button type="button" onclick="ajouterMotEvenement()">Ajouter</button>
         <div id="listeMotsEvenement"></div>
 
-        <input type="text" id="motsListeEvenementInput" name="motsListeEvenement" value="">
+            <input type="text" id="motsListeEvenementInput" name="motsListeEvenement" value="">
 
         <button type="submit" name="action" value="creerEvenement">Création d'un événement</button>
     </form>`;
