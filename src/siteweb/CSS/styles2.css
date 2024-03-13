@@ -98,6 +98,11 @@ body{
     outline: none;
 }
 
+#passwordStrength{
+    /* font-size: 10px; */
+    font-size: 1vw !important;
+}
+
 .form-container{
     position: absolute;
     top: 0;
@@ -237,6 +242,11 @@ p.error{
     /* font-size: 32px; */
 }
 
+.sign-up input{
+    /* padding: 15px 25px; */
+    padding: 1.5vw 2.5vw !important;
+}
+
 /* Ajouter une taille de police maximale pour les grands écrans */
 @media screen and (min-width: 600px) {
     .container{
@@ -265,6 +275,12 @@ p.error{
         padding: 20px 25px;
         font-size: 15px;
         border-radius: 20px;
+    }
+    .sign-up input{
+        padding: 15px 25px !important;
+    }
+    #passwordStrength{
+        font-size: 10px !important;
     }
     .form-container h1{
         font-size: 30px;

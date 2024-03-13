@@ -164,8 +164,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <span><input type="text" placeholder="Ville" name="ville" value="<?= htmlspecialchars( $_POST["ville"] ?? "") ?>"></span>
                     <span><input type="text" placeholder="Code Postal" name="cp" value="<?= htmlspecialchars( $_POST["cp"] ?? "") ?>"></span>
                 </div>
-                <input type="password" placeholder="Mot de passe" name="mdp" value="<?= htmlspecialchars( $_POST["mdp"] ?? "") ?>">
-                
+                <input type="password" placeholder="Mot de passe" name="mdp" id="passwordInput" value="<?= htmlspecialchars( $_POST["mdp"] ?? "") ?>">
+                <!-- Etat du mdp -->
+                <div id="passwordStrength" style="font-size: 16px; display: flex; align-items: center; gap: 10px;">
+                    <div id="lengthIndicator">
+                        <span><i id="lengthIcon" class="fas fa-minus" style="color: gray;"></i></span>
+                        <span>8 caractères</span>
+                    </div>
+                    <div id="numberIndicator">
+                        <span><i id="numberIcon" class="fas fa-minus" style="color: gray;"></i></span>
+                        <span>1 chiffre</span>
+                    </div>
+                </div>
+
                 <button type="submit">Je m'inscris</button>
             </form>
         </div>
@@ -215,5 +226,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         });
 
     </script>
+
+<script>
+    const passwordInput = document.getElementById('passwordInput');
+    const lengthIndicator = document.getElementById('lengthIndicator');
+    const numberIndicator = document.getElementById('numberIndicator');
+    const lengthIcon = document.getElementById('lengthIcon');
+    const numberIcon = document.getElementById('numberIcon');
+
+    passwordInput.addEventListener('input', function() {
+        const password = passwordInput.value;
+
+        // Vérifie si le mot de passe a une longueur d'au moins 8 caractères
+        const hasMinLength = password.length >= 8;
+        // Vérifie si le mot de passe contient au moins un chiffre
+        const hasNumber = /\d/.test(password);
+
+        // Met à jour les styles et les icônes des indicateurs en fonction de la validité du mot de passe
+        lengthIndicator.style.color = hasMinLength ? 'green' : 'red';
+        lengthIcon.className = hasMinLength ? 'fas fa-check' : 'fas fa-times';
+        lengthIcon.style.color = hasMinLength ? 'green' : 'red';
+
+        numberIndicator.style.color = hasNumber ? 'green' : 'red';
+        numberIcon.className = hasNumber ? 'fas fa-check' : 'fas fa-times';
+        numberIcon.style.color = hasNumber ? 'green' : 'red';
+    });
+</script>
+
 </body>
 </html>
