@@ -16,6 +16,20 @@ if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_tok
     die('Erreur CSRF : jeton CSRF invalide');
 }
 
+/*////////////////////////////////////////////
+    Génération code de vérification email
+/////////////////////////////////////////// */
+
+function generate_activation_token() {
+    // Génération d'un token aléatoire sécurisé
+    return bin2hex(random_bytes(32)); // Utilisez une longueur de token adaptée à vos besoins
+}
+
+// Générer un token d'activation lors de l'inscription
+$activation_token = generate_activation_token();
+
+
+
 if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss"]) || isset($_POST["ville"]) || isset($_POST["cp"]) || isset($_POST["mdp"])) {
 
     function validate($data)
@@ -110,8 +124,55 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
             $_SESSION["user_id"] = $user["idUtilisateur"];
                     
             //header("Location: ./algorithme/index.php");
-            echo '<script>window.location = "algorithme/index.php";</script>';
-            exit;
+            /* echo '<script>window.location = "algorithme/index.php";</script>';
+            exit; */
+            $to = $_POST['email'];
+            $subject = 'Activation de votre compte';
+            $message = '
+            <html>
+            <head>
+            <title>Activation de votre compte</title>
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+            <style>
+            *{
+            font-family: \'Poppins\';
+            text-align: center;
+            }
+            button{
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            border: 1px solid #6040fe;
+            background-color: #6040fe;
+            color: #fff;
+            }
+            p{
+            text-align: left;
+            }
+            </style>
+            </head>
+            <body>
+            <img src="" alt="">
+            <h1 style="color:#6040fe; ">Vous inscription est sur le point de se finaliser !</h1>
+            <p>Bienvenue <span style="color:#6040fe;">'. $_POST['pseudo'] .'</span>,
+            <p>Nous sommes heureux que tu puisse participer à l\'aventure MeetEvent.</p>
+            <p>Pour explorez MeetEvent App, cliquez sur le bouton ci-dessous pour activer votre compte :</p>
+            <a href="http://localhost/testSitME/S4.01-MeetEvent/src/siteweb/activation.php?token=' . $activation_token . '"><button>Activer mon compte</button></a>
+            </body>
+            </html>
+            ';
+
+            $headers = 'From: contact.meetevent@gmail.com' . "\r\n" .
+                'Content-type: text/html; charset=utf-8';
+
+            $mail_sent = mail($to, $subject, $message, $headers);
+
+            if (!$mail_sent) {
+                echo "Erreur lors de l'envoi de l'email d'activation. Veuillez réessayer.";
+                exit();
+            } else{
+                echo "Veuillez vérifier votre adresse mail sur ". $_POST['email'];
+            }
         } else {
             if ($mysqli->errno === 80) {
                 die("Pseudo déjà utilisé");

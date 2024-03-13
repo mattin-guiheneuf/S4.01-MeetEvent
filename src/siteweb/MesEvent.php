@@ -284,7 +284,7 @@ if (!isset($_SESSION['user_id'])) {
                 } else {
                     html += '<div class="les_boutons">';
                     html += '<a class="btn_quit" id="openModalBtn" onclick="openModalSup(' + results[i].idEvenement + ')">SUPPRIMER</a>';
-                    html += '<a href="modifEvent.php" class="btn_modif">MODIFIER</a>';
+                    html += '<a class="btn_modif" onclick="window.location.href=\'modifEvent.php?event_id=' + results[i].idEvenement + '\'">MODIFIER</a>';
                     html += '</div>';
                 }
 
