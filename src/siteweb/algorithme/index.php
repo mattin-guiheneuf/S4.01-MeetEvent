@@ -5,7 +5,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ../connexion.php");
     exit; // Assurez-vous de terminer le script après la redirection
 }
-echo $_SESSION["user_id"];
+//echo $_SESSION["user_id"];
 
 if(!isset($_POST['event'])){
     $isEvent = false;
@@ -22,7 +22,7 @@ if(!isset($_POST['event'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Test PHP</title>
+    <title>Recommandations</title>
 
     <!--
         Nom du fichier : index.html
@@ -40,6 +40,11 @@ if(!isset($_POST['event'])){
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
         }
 
         h1 {
@@ -47,13 +52,14 @@ if(!isset($_POST['event'])){
         }
 
         form {
-            margin: 20px;
+            width: 100%;
             display: inline-block;
         }
 
         button {
-            background-color: #4CAF50;
+            background-color: #6040fe;
             color: white;
+            font-weight: bold;
             padding: 10px 20px;
             font-size: 16px;
             border: none;
@@ -64,7 +70,7 @@ if(!isset($_POST['event'])){
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #4d34cc;
         }
 
         h2 {
@@ -77,17 +83,50 @@ if(!isset($_POST['event'])){
         }
 
         input {
-            width: 100%;
+            /* width: 100%; */
             padding: 8px;
             margin-bottom: 15px;
             box-sizing: border-box;
+        }
+        /* Ajout de styles pour les éléments désactivés */
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        /* Style pour les boutons de suppression */
+        .btn-delete {
+            background-color: #f00;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: 4px 8px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        #listeMots, #listeMotsEvenement{
+            display: flex;
+            flex-wrap: wrap;
+            padding-left: 80px;
+            padding-right: 80px;
+            column-gap: 50px;
+            justify-content: center;
+        }
+        #listeMots button,#listeMotsEvenement button{
+            margin: 10px 20px;
+        }
+        #listeMots button:hover,#listeMotsEvenement button:hover{
+            background-color:#b72e2e;
+        }
+        h3{
+            font-size: 15px;
+            color: #8d8d8d;
         }
     </style>
 </head>
 
 <body>
     <!-- <h1>Tester l'intégration de l'agorithme</h1> -->
-    <hr>
+    <!-- <hr> -->
     <!-- <h2>Simuler la suggestion d'événement</h2> -->
     <!-- Formulaire avec champ pour saisir l'ID de l'utilisateur -->
     <!-- <form action="main.php" method="post">
@@ -97,50 +136,47 @@ if(!isset($_POST['event'])){
     </form> -->
     <!-- <hr> -->
     <?php if(!$isEvent):?>
-    <h2>Ajouter la description de l'utilisateur</h2>
+    <h2>Choisis tes centres d'intérêts</h2>
+    <h3>Obtient de meilleures Recommandations</h3>
     <!-- Formulaire avec champ pour saisir l'inscription d'un utilisateur -->
     <form action="CreationTag.php" method="post">
-    
         <label for="mot">Mot :</label>
-        <input type="text" id="mot" name="mot" list="tagsRecherches" oninput="rechercherMots()">
+        <input type="text" id="mot" name="mot" list="tagsRecherches" oninput="rechercherMots()" onkeypress="ajouterMotOnEnter(event)">
         <datalist id="tagsRecherches"></datalist>
 
-        <button type="button" onclick="ajouterMot()">Ajouter le mot à la liste</button>
+        <!-- Suppression du bouton "Ajouter le mot à la liste" -->
         <div id="listeMots"></div>
-    
+
+        <!-- Ajout d'un champ caché pour stocker les mots -->
         <input type="hidden" id="motsListeInput" name="motsListe" value="">
-    
-        <button type="submit" name="action" value="ajouterDescriptionUtilisateur">Ajouter la description</button>
+
+        <!-- Ajout de l'attribut "disabled" sur le bouton de soumission -->
+        <button type="submit" name="action" value="ajouterDescriptionUtilisateur" id="submitBtn" disabled>Ajouter la description</button>
     </form>
     <!-- <hr> -->
     <?php else:?>
     <h2>Créer un Evenement</h2>
     <!-- Formulaire avec champ pour saisir l'inscription d'un utilisateur -->
-    <?php 
-    echo '<form action="CreationTag.php" method="post">
-        <input type="hidden" id="titre" name="titre" value="'.$_POST["titre"].'">
-        <input type="hidden" id="date" name="date" value="'.$_POST["date"].'">
-        <input type="hidden" id="heure" name="heure" value="'.$_POST["heure"].'">
-        <input type="hidden" id="ville" name="ville" value="'.$_POST["ville"].'">
-        <input type="hidden" id="cp" name="cp" value="'.$_POST["cp"].'">
-        <input type="hidden" id="adresse" name="adresse" value="'.$_POST["adresse"].'">
-        <input type="hidden" id="type" name="type" value="'.$_POST["type"].'">
-        <input type="hidden" id="nbParticip" name="nbParticip" value="'.$_POST["nbParticip"].'">
-        <input type="hidden" id="photo" name="photo" value="'.$_POST["photo"].'">
-        <input type="hidden" id="participants" name="participants" value="'.$_POST["participants"].'">
-        <input type="hidden" id="mess_invit" name="mess_invit" value="'.$_POST["mess_invit"].'">
+    <form action="CreationTag.php" method="post">
+        <input type="hidden" id="titre" name="titre" value="<?php echo $_POST["titre"]; ?>">
+        <input type="hidden" id="date" name="date" value="<?php echo $_POST["date"]; ?>">
+        <input type="hidden" id="heure" name="heure" value="<?php echo $_POST["heure"]; ?>">
+        <input type="hidden" id="ville" name="ville" value="<?php echo $_POST["ville"]; ?>">
+        <input type="hidden" id="cp" name="cp" value="<?php echo $_POST["cp"]; ?>">
+        <input type="hidden" id="adresse" name="adresse" value="<?php echo $_POST["adresse"]; ?>">
+        <input type="hidden" id="type" name="type" value="<?php echo $_POST["type"]; ?>">
+        <input type="hidden" id="nbParticip" name="nbParticip" value="<?php echo $_POST["nbParticip"]; ?>">
+        <input type="hidden" id="photo" name="photo" value="<?php echo $_POST["photo"]; ?>">
+        <input type="hidden" id="participants" name="participants" value="<?php echo $_POST["participants"]; ?>">
+        <input type="hidden" id="mess_invit" name="mess_invit" value="<?php echo $_POST["mess_invit"]; ?>">
         
         <label for="motEvenement">Mot :</label>
-        <input type="text" id="motEvenement" name="motEvenement">
-        <button type="button" onclick="ajouterMotEvenement()">Ajouter</button>
+        <input type="text" id="motEvenement" name="motEvenement" oninput="rechercherMots()" onkeypress="ajouterMotEvenementOnEnter(event)">
         <div id="listeMotsEvenement"></div>
-
         <input type="hidden" id="motsListeEvenementInput" name="motsListeEvenement" value="">
-
-        <button type="submit" name="action" value="creerEvenement">Création d\'un événement</button>
-    </form>';
-    ?>
-    <!-- <?php endif;?> -->
+        <button type="submit" name="action" value="creerEvenement" id="submitBtn" disabled>Création d'un événement</button>
+    </form>
+    <?php endif;?>
 
 	<?php 
         // Récupération du dicoMotsFr pour la saisieVerif des mots
@@ -239,7 +275,120 @@ if(!isset($_POST['event'])){
             });
         }
     </script>
+<script>
+        
 
+        function ajouterMotOnEnter(event) {
+            // Vérifier si la touche appuyée est "Entrée"
+            if (event.keyCode === 13) {
+                event.preventDefault(); // Empêcher le comportement par défaut de la touche "Entrée"
+
+                // Récupérer la valeur du champ de saisie de mot
+                var motSaisi = document.getElementById('mot').value.trim().toLowerCase();
+
+                // Vérifier si le champ est vide ou si le mot est invalide
+                if (motSaisi === '' || !saisieVerif(motSaisi)) {
+                    alert('Veuillez saisir un mot valide.');
+                    return;
+                }
+
+                // Ajouter le mot à la liste
+                motsListe.push(motSaisi);
+
+                // Afficher la liste de mots
+                afficherListeMotsUser();
+
+                // Effacer le champ après ajout
+                document.getElementById('mot').value = '';
+
+                // Activer le bouton de soumission s'il y a des mots dans la liste
+                if (motsListe.length > 0) {
+                    document.getElementById('submitBtn').disabled = false;
+                }
+            }
+        }
+
+        function supprimerMot(index) {
+            motsListe.splice(index, 1); // Supprimer le mot du tableau
+            afficherListeMotsUser(); // Mettre à jour l'affichage
+        }
+
+        function afficherListeMotsUser() {
+            var listeMotsDiv = document.getElementById('listeMots');
+            listeMotsDiv.innerHTML = ''; // Effacer le contenu existant
+
+            for (var i = 0; i < motsListe.length; i++) {
+                var motDiv = document.createElement('div');
+                motDiv.textContent = motsListe[i];
+
+                // Bouton de suppression
+                var btnDelete = document.createElement('button');
+                btnDelete.textContent = '×'; // Afficher une croix
+                btnDelete.classList.add('btn-delete'); // Ajouter une classe CSS
+                btnDelete.setAttribute('onclick', 'supprimerMot(' + i + ')'); // Appeler la fonction de suppression
+
+                motDiv.appendChild(btnDelete); // Ajouter le bouton à côté du mot
+
+                listeMotsDiv.appendChild(motDiv); // Ajouter le mot à la liste
+            }
+
+            // Mettre à jour la valeur de l'input caché avec la liste de mots
+            document.getElementById("motsListeInput").value = JSON.stringify(motsListe);
+
+            // Désactiver le bouton de soumission si aucun mot n'est saisi
+            if (motsListe.length === 0) {
+                document.getElementById('submitBtn').disabled = true;
+            }
+        }
+        /* Pour un événement */
+        function ajouterMotEvenementOnEnter(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault(); // Empêcher le comportement par défaut de la touche "Entrée"
+                var motSaisi = document.getElementById('motEvenement').value.trim();
+                if (motSaisi === '' || !saisieVerif(motSaisi)) {
+                    alert('Veuillez saisir un mot valide.');
+                    return;
+                }
+                motsListeEvenement.push(motSaisi);
+                afficherListeMotsEvent();
+                document.getElementById('motEvenement').value = ''; // Effacer le champ après ajout
+
+                // Activer le bouton de soumission s'il y a des mots dans la liste
+                if (motsListeEvenement.length > 0) {
+                    document.getElementById('submitBtn').disabled = false;
+                }
+            }
+        }
+
+        function supprimerMotEvenement(index) {
+            motsListeEvenement.splice(index, 1); // Supprimer le mot du tableau
+            afficherListeMotsEvent(); // Mettre à jour l'affichage
+        }
+
+        function afficherListeMotsEvent() {
+            var listeMotsDiv = document.getElementById('listeMotsEvenement');
+            listeMotsDiv.innerHTML = '';
+            for (var i = 0; i < motsListeEvenement.length; i++) {
+                var motDiv = document.createElement('div');
+                motDiv.textContent = motsListeEvenement[i];
+
+                // Bouton de suppression
+                var btnDelete = document.createElement('button');
+                btnDelete.textContent = '×'; // Afficher une croix
+                btnDelete.classList.add('btn-delete'); // Ajouter une classe CSS
+                btnDelete.setAttribute('onclick', 'supprimerMotEvenement(' + i + ')'); // Appeler la fonction de suppression
+
+                motDiv.appendChild(btnDelete); // Ajouter le bouton à côté du mot
+
+                listeMotsDiv.appendChild(motDiv); // Ajouter le mot à la liste
+            }
+            document.getElementById('motsListeEvenementInput').value = JSON.stringify(motsListeEvenement);
+            // Désactiver le bouton de soumission si aucun mot n'est saisi
+            if (motsListe.length === 0) {
+                document.getElementById('submitBtn').disabled = true;
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -376,6 +376,7 @@ if (!isset($_SESSION['user_id'])) {
                     eventCity: eventCity
                 },
                 success: function(response) {
+                    console.log(response)
                     displaySearchResults(response);
                 },
                 error: function(xhr, status, error) {
@@ -390,60 +391,61 @@ if (!isset($_SESSION['user_id'])) {
             /*             searchResultsDiv.innerHTML = ""; // Effacer les résultats précédents
              */
             if (results.length > 0) {
-                // Construction de la structure HTML pour afficher les résultats
-                html = "";
-                for (var i = 0; i < results.length; i++) {
+                    // Construction de la structure HTML pour afficher les résultats
+                    html = "";
+                    for (var i = 0; i < results.length; i++) {
 
 
-                    html += '<div class="event">';
-                    html += '<div class="part1" style="background-image:url(\'' + results[i].chemImages + '\');">';
-                    /* if(results[i].idEvenement == results2[0].idEvenement){
-                        html += '<a href="#" class="btn_join" style="border-color:green;color:green;display:flex;gap:5px;align-items:center;">ADMIS <img src="img/verifier (3).png" width="15px" height="15px"/> </a>';
-                    }else{
-                        html += '<a href="#" class="btn_join">REJOINDRE</a>';
-                    } */
-                    console.log(results[i].est_deja_admis + " " + results[i].nom);
-                    if (results[i].est_deja_admis == 1) {
-                        html += '<a href="#" class="btn_join" style="border-color:green;color:green;display:flex;gap:5px;align-items:center;">ADMIS <img src="img/verifier (3).png" width="15px" height="15px"/> </a>';
-                    } else {
-                        html += '<button id="openModalBtn" onclick="openModal(' + results[i].idEvenement + ')" class="btn_join">REJOINDRE</button>';
+                        html += '<div class="event">';
+                        html += '<div class="part1" style="background-image:url(\'' + results[i].chemImages + '\');">';
+                        /* if(results[i].idEvenement == results2[0].idEvenement){
+                            html += '<a href="#" class="btn_join" style="border-color:green;color:green;display:flex;gap:5px;align-items:center;">ADMIS <img src="img/verifier (3).png" width="15px" height="15px"/> </a>';
+                        }else{
+                            html += '<a href="#" class="btn_join">REJOINDRE</a>';
+                        } */
+                        console.log(results[i].est_deja_admis + " " + results[i].nom);
+                        if (results[i].est_deja_admis == 1) {
+                            html += '<a href="#" class="btn_join" style="border-color:green;color:green;display:flex;gap:5px;align-items:center;">ADMIS <img src="img/verifier (3).png" width="15px" height="15px"/> </a>';
+                        } else {
+                            html += '<button id="openModalBtn" onclick="openModal(' + results[i].idEvenement + ')" class="btn_join">REJOINDRE</button>';
+                        }
+
+                        html += '</div>';
+                        html += '<div class="part2">';
+                        html += '<div class="titre_event">' + results[i].nom + '</div>';
+                        html += '<div style="display:flex;align-items:center;gap:10px">';
+                        html += '<i class="fi fi-sr-marker localisation_logo" style="font-size: 1.5vw;"></i>';
+                        html += '<div onclick="window.open(\'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(results[i].adresse) + '\', \'_blank\')" style="cursor:pointer;" class="adresse">' + results[i].adresse + '</div>';
+                        html += '</div>';
+                        html += '<div class="modalite">';
+                        html += '<div class="calendrier">';
+                        html += '<i class="fi fi-sr-invite-alt" style="font-size: 2.8vw"></i>';
+                        html += '<div class="infos">';
+                        html += '<div  style="font-weight:bold;">Calendrier</div>';
+                        html += '<div class="txt_infos" onclick="openGoogleCalendar(\'' + formatDate(results[i].dateEvent) + ' ' + results[i].heure + '\')" style="cursor:pointer;">' + formatDate(results[i].dateEvent) + ' - ' + results[i].heure + '</div>';
+                        html += '</div> ';
+                        html += '</div>';
+                        html += '<div class="places">';
+                        html += '<i class="fi fi-sr-users" style="font-size: 2.8vw;"></i>';
+                        html += '<div class="infos">';
+                        html += '<div style="font-weight:bold;">Places restantes</div>';
+                        html += '<div class="txt_infos">' + results[i].nbPlaces + '</div>';
+                        html += '</div> ';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div> ';
+                        html += '<hr style="width:70%;margin:0 15%;">';
+                        html += '<div class="part3">';
+                        html += '<img src="' + results[i].chemImage + '" alt="icone utilisateur" class="icon"/>';
+                        html += '<div class="infos_createur">';
+                        html += '<div class="crea" style="font-weight:bold;">Créateur</div>';
+                        html += '<div class="nom_crea">' + results[i].nom_organisateur + " " + results[i].prenom_organisateur + '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
                     }
-
-                    html += '</div>';
-                    html += '<div class="part2">';
-                    html += '<div class="titre_event">' + results[i].nom + '</div>';
-                    html += '<div style="display:flex;align-items:center;gap:10px">';
-                    html += '<i class="fi fi-sr-marker localisation_logo" style="font-size: 1.5vw;"></i>';
-                    html += '<div onclick="window.open(\'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(results[i].adresse) + '\', \'_blank\')" style="cursor:pointer;" class="adresse">' + results[i].adresse + '</div>';
-                    html += '</div>';
-                    html += '<div class="modalite">';
-                    html += '<div class="calendrier">';
-                    html += '<i class="fi fi-sr-invite-alt" style="font-size: 2.8vw"></i>';
-                    html += '<div class="infos">';
-                    html += '<div  style="font-weight:bold;">Calendrier</div>';
-                    html += '<div class="txt_infos" onclick="openGoogleCalendar(\'' + formatDate(results[i].dateEvent) + ' ' + results[i].heure + '\')" style="cursor:pointer;">' + formatDate(results[i].dateEvent) + ' - ' + results[i].heure + '</div>';
-                    html += '</div> ';
-                    html += '</div>';
-                    html += '<div class="places">';
-                    html += '<i class="fi fi-sr-users" style="font-size: 2.8vw;"></i>';
-                    html += '<div class="infos">';
-                    html += '<div style="font-weight:bold;">Places restantes</div>';
-                    html += '<div class="txt_infos">' + results[i].nbPlaces + '</div>';
-                    html += '</div> ';
-                    html += '</div>';
-                    html += '</div>';
-                    html += '</div> ';
-                    html += '<hr style="width:70%;margin:0 15%;">';
-                    html += '<div class="part3">';
-                    html += '<img src="' + results[i].chemImage + '" alt="icone utilisateur" class="icon"/>';
-                    html += '<div class="infos_createur">';
-                    html += '<div class="crea" style="font-weight:bold;">Créateur</div>';
-                    html += '<div class="nom_crea">' + results[i].nom_organisateur + " " + results[i].prenom_organisateur + '</div>';
-                    html += '</div>';
-                    html += '</div>';
-                    html += '</div>';
-                }
-                searchResultsDiv.innerHTML = html;
+                    searchResultsDiv.innerHTML = html;
+                
 
             } else {
                 searchResultsDiv.innerHTML = "Aucun résultat trouvé.";
