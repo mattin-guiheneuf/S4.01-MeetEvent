@@ -127,36 +127,37 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
             <style>
             *{
-            font-family: \'Poppins\';
-            text-align: center;
+                font-family: \'Poppins\';
+                text-align: center;
             }
             button{
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            border: 1px solid #6040fe;
-            background-color: #6040fe;
-            color: #fff;
+                padding: 10px 20px;
+                border-radius: 20px;
+                font-weight: bold;
+                border: 1px solid #6040fe;
+                background-color: #6040fe;
+                color: #fff;
             }
             p{
-            text-align: left;
+                text-align: left;
             }
             </style>
             </head>
             <body>
             <img src="" alt="">
-            <h1 style="color:#6040fe; ">Vous inscription est sur le point de se finaliser !</h1>
-            <p>Bienvenue <span style="color:#6040fe;">'. $_POST['pseudo'] .'</span>,
-            <p>Nous sommes heureux que tu puisse participer à l\'aventure MeetEvent.</p>
-            <p>Pour explorez MeetEvent App, cliquez sur le bouton ci-dessous pour activer votre compte :</p>
-            <a href="http://localhost/testSitME/S4.01-MeetEvent/src/siteweb/activation.php?token=' . $activation_token . '"><button>Activer mon compte</button></a>
+            <h1 style="color:#6040fe; ">Votre inscription est sur le point de se finaliser !</h1>
+            <p>Bienvenue <span style="color:#6040fe;">'. $_POST['pseudo'] .'</span>,</p>
+            <p>Nous sommes heureux que vous puissiez participer à l\'aventure MeetEvent.</p>
+            <p>Pour explorer MeetEvent App, cliquez sur le bouton ci-dessous pour activer votre compte :</p>
+            <a href="http://localhost/testSitME/S4.01-MeetEvent/src/siteweb/activation.php?token=' . $token . '"><button>Activer mon compte</button></a>
             </body>
             </html>
             ';
 
-            $headers =  "From: contact.meetevent@gmail.com" . "\r\n" .
-                        "Content-type: text/html; charset=utf-8" . "\r\n" .
-                        "Reply-To: " . $_POST["email"] . "\r\n" .
+            $headers =  "MIME-Version:1.0"."\r\n" .
+                        "From: contact.meetevent@gmail.com" . "\r\n" .
+                        "Content-type: text/html; charset=ISO-8859-1" . "\r\n" .
+                        "Reply-To: contact.meetevent@gmail.com" . "\r\n" .
                         "X-Mailer: PHP/" . phpversion();
             $mail_sent = mail($to, $subject, $message, $headers);
 
