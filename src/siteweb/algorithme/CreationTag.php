@@ -326,10 +326,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "Erreur lors de la mise à jour des tags ";
                 }
 
-
-                //header("Location: ../pageSuggestion.php");
-				echo '<script>window.location = "../pageSuggestion.php";</script>'; //page correspondante ?
-                */
+				echo '<script>window.location = "../MesEvent.php";</script>'; 
                 break;
             default:
                 // Action non reconnue

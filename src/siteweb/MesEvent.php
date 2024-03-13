@@ -77,7 +77,7 @@ if (!isset($_SESSION['user_id'])) {
                 <button class="btn-consulter">
                     CONSULTEZ VOS EVENEMENTS
                 </button>
-                <button class="btn-creation">
+                <button class="btn-creation" href="creaEvent.php">
                     CREEZ VOTRE EVENEMENT
                 </button>
             </div>
