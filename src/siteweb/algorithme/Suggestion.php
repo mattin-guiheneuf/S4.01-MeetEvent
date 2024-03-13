@@ -3,7 +3,7 @@ session_start();
 // Vérifiez si l'utilisateur est connecté en vérifiant la présence de ses informations d'identification dans la session
 if (!isset($_SESSION['user_id'])) {
     // L'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
-    header("Location: connexion.php");
+    header("Location: ../connexion.php");
     exit; // Assurez-vous de terminer le script après la redirection
 }
 /**

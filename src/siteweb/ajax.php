@@ -83,8 +83,8 @@ if(isset($_POST['eventName']) or isset($_POST['eventDate']) or isset($_POST['eve
 
 if(isset($_POST['listeEvent'])){
     // Récupérer les données envoyées par AJAX et les valider
-    $listeEvent = isset($_POST['listeEvent']) ? $_POST['listeEvent'] : '';
-
+    $listeEvent = isset($_POST['listeEvent']) ? $_POST['listeEvent'] : [1,2,3,4,5];
+    //$userConnected = 14;
     // Initialiser un tableau pour stocker les résultats
     $results = [];
 
