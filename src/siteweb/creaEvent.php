@@ -25,16 +25,16 @@
           <form class="formulaire" action="/algorithme/CreationTag.php" method="POST">
             <div class="gauche">
               <div class="inputTitre">
-                <label style="grid-row: 1;"><b>Titre</b> <span class="starOblig">*</span></label>
-                <input style="grid-row: 2;" type="text" placeholder="Nom de l'évènement" name="titre">
+                <label style="grid-row: 1;" for="titre"><b>Titre</b> <span class="starOblig">*</span></label>
+                <input style="grid-row: 2;" type="text" placeholder="Nom de l'évènement" id="titre" name="titre">
               </div>
               <div class="inputDateHeure">
-                <label style="grid-row: 1; grid-column: 1/-1;"><b>Date et heure</b> <span class="starOblig">*</span></label>
-                <input style="grid-row: 2; grid-column: 1;" type="date" placeholder="Date (jj/mm/aaaa)" name="date">
-                <input style="grid-row: 2; grid-column: 2;" type="time" placeholder="Heure (hh:mm)" name="heure">
+                <label style="grid-row: 1; grid-column: 1/-1;" for="date"><b>Date et heure</b> <span class="starOblig">*</span></label>
+                <input style="grid-row: 2; grid-column: 1;" type="date" placeholder="Date (jj/mm/aaaa)" id="date" name="date">
+                <input style="grid-row: 2; grid-column: 2;" type="time" placeholder="Heure (hh:mm)" id="heure" name="heure">
               </div>
               <div class="inputLieu">
-                <label style="grid-row: 1; grid-column: 1/-1;"><b>Lieu</b> <span class="starOblig">*</span></label>
+                <label style="grid-row: 1; grid-column: 1/-1;" for="ville"><b>Lieu</b> <span class="starOblig">*</span></label>
                 <input style="grid-row: 2; grid-column: 1; padding-left: 20%;" type="text" placeholder="Ville" name="ville">
                 <input style="grid-row: 2; grid-column: 2; padding-left: 20%;" type="number" placeholder="Code postale" min="01000" max="100000" step="10" name="cp">
                 <input style="grid-row: 3; grid-column: 1/-1;" type="text" placeholder="Adresse" name="adresse">
@@ -49,15 +49,15 @@
                 </div>
               </div>
               <div class="inputNbParticip">
-                <label style="grid-row: 2; grid-column: 1;"><b>Nombre de participants maximum</b></label>
-                <input style="grid-row: 1/-1; grid-column: 2;" type="number" placeholder="Nombre" min="1" max="100000" step="1" name="nbParticip">
+                <label style="grid-row: 2; grid-column: 1;" for="nbParticip"><b>Nombre de participants maximum</b></label>
+                <input style="grid-row: 1/-1; grid-column: 2;" type="number" placeholder="Nombre" min="1" max="100000" step="1" id="nbParticip" name="nbParticip">
               </div>
             </div>
             <div class="separateur"></div>
             <div class="droite">
               <div class="inputPhotos">
-                <label style="grid-row: 2; grid-column: 2; text-align: center;"><b>+ Ajouter jusqu'à 3 photos</b></label>
-                <input type="file" accept="image/png, image/jpeg" name="photos">
+                <label style="grid-row: 2; grid-column: 2; text-align: center;" for="photo"><b>+ Ajouter jusqu'à 3 photos</b></label>
+                <input type="file" accept="image/png, image/jpeg" id="photo" name="photo">
               </div>
               <div class="inputParticip">
                 <label style="grid-row: 1;"><b>Participants</b></label>
