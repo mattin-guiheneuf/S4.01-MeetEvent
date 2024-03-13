@@ -22,8 +22,13 @@
             echo json_encode(array('error' => 'Erreur lors de l\'exécution de la requête SQL.'));
             exit;
         }
-
-        // Fermeture de la connexion à la base de données
-        $connexion->close();
     }
+
+    // Fermeture de la connexion à la base de données
+    $connexion->close();
+    // Convertir les résultats en format JSON
+    $json_results = json_encode($mots);
+
+    // Renvoyer le JSON en tant que réponse à la requête AJAX
+    echo $json_results;
 ?>
