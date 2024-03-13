@@ -101,7 +101,9 @@ if(!isset($_POST['event'])){
     <form action="CreationTag.php" method="post">
     
         <label for="mot">Mot :</label>
-        <input type="text" id="mot" name="mot">
+        <input type="text" id="mot" name="mot" list="tagsRecherches" oninput="rechercherMots()">
+        <datalist id="tagsRecherches"></datalist>
+
         <button type="button" onclick="ajouterMot()">Ajouter le mot à la liste</button>
         <div id="listeMots"></div>
     
@@ -205,6 +207,35 @@ if(!isset($_POST['event'])){
             }
 
             document.getElementById('motsListeEvenementInput').value = JSON.stringify(motsListeEvenement);
+        }
+
+        function rechercherMots() {
+            var lettre = document.getElementById("mot").value;
+            // Requête AJAX vers le serveur pour récupérer les événements correspondants à la recherche
+            $.ajax({
+                type: 'POST',
+                url: 'get_Tags.php',
+                dataType: 'json',
+                data: {
+                    lettre: lettre
+                },
+                success: function(response) {
+                    afficherOptions(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erreur lors de la requête AJAX:', error);
+                }
+            });
+        }
+
+        function afficherOptions(mots) {
+            var optionsDatalist = document.getElementById('tagsRecherches');
+            optionsDatalist.innerHTML = ''; 
+            mots.forEach(function(mot) {
+                var option = document.createElement('option');
+                option.value = mot.libelle;
+                optionsDatalist.appendChild(option);
+            });
         }
     </script>
 
