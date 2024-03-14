@@ -77,7 +77,7 @@
                 <!-- Message de d'invitation -->
                 <div class="inputMsgInvit">
                     <label for="mess_invit"><b>Message personnalisé d'invitation</b></label>
-                    <div class="inputs"><input type="text" name="mess_invit" id="mess_invit" placeholder="Hey ! Je t'invite à mon évènement ! ..."></div>
+                    <div class="inputs"><input type="text" name="mess_invit" id="mess_invit" placeholder="Salut, je t'invite à mon évènement !"></div>
                 </div>
                 <!-- Btn d'actions -->
                 <div class="btnFin">
