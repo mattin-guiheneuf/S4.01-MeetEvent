@@ -166,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 /* A FAIRE */
             case 'creerEvenement':
                 // Requête pour récupérer la valeur de idEvenement
-                $req_idEvent = "SELECT idEvenement FROM evenement ORDER BY idEvenement DESC LIMIT 1";
+                $req_idEvent = "SELECT idEvenement FROM Evenement ORDER BY idEvenement DESC LIMIT 1";
 
                 // Exécution de la requête
                 $prep_reqIdEvent = $connexion->prepare($req_idEvent);
@@ -278,12 +278,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 //catégorie
                 $idCategorie = 1;
                 //image
-                $chemImages = " ";
+                $chemImages = "./img/imagerugby.jpg";
 
-                $req_insertEvnt = "INSERT INTO evenement (idEvenement, nom, description, dateEvent, effMax, statut,prix, heure, adresse, chemImages, token, idCategorie, idOrganisateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $req_insertEvnt = "INSERT INTO Evenement (idEvenement, nom, description, dateEvent, effMax, statut, prix, heure, adresse, chemImages, token, idCategorie, idOrganisateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 $res_insertEvnt = $connexion->prepare($req_insertEvnt);
-                $res_insertEvnt->bind_param("isssiiissssii", $id_event, $titre_event, $description_event, $date, $nbParticip, $statut,$prix, $heure, $adresseEvent, $chemImages, $token, $idCategorie, $idOrganisateur);
+                $res_insertEvnt->bind_param("isssiiissssii", $id_event, $titre_event, $description_event, $date, $nbParticip, $statut, $prix, $heure, $adresseEvent, $chemImages, $token, $idCategorie, $idOrganisateur);
                 $res_insertEvnt->execute();
                 
 

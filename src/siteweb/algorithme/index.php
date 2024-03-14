@@ -22,7 +22,7 @@ if(!isset($_POST['event'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Recommandations</title>
+    <title>Recommandation</title>
 
     <!--
         Nom du fichier : index.html
@@ -247,7 +247,7 @@ if(!isset($_POST['event'])){
         }
 
         function rechercherMots() {
-            var lettre = document.getElementById("mot").value;
+            var lettre = document.getElementById('mot').value;
             // Requête AJAX vers le serveur pour récupérer les événements correspondants à la recherche
             $.ajax({
                 type: 'POST',

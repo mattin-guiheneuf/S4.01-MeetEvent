@@ -91,7 +91,7 @@ if(isset($_POST['listeEvent'])){
     // Pour chaque événement dans la liste
     foreach ($listeEvent as $eventId) {
         // Construire la requête SQL paramétrée en fonction des critères de recherche fournis
-        $sql = "SELECT e.*, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces, (SELECT CASE WHEN COUNT(*)>0 THEN 1 ELSE 0 END from participer where idUtilisateur=$userConnected AND idEvenement = $eventId AND participationAnnulee = 0) as est_deja_admis
+        $sql = "SELECT e.*, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces, (SELECT CASE WHEN COUNT(*)>0 THEN 1 ELSE 0 END from Participer where idUtilisateur=$userConnected AND idEvenement = $eventId AND participationAnnulee = 0) as est_deja_admis
                 FROM Evenement e 
                 JOIN Categorie c ON e.idCategorie = c.idCategorie 
                 JOIN Utilisateur u ON e.idOrganisateur = u.idUtilisateur 
