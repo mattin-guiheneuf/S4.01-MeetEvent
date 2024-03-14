@@ -123,9 +123,9 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
 
             $user = $result->fetch_assoc();
             $_SESSION["user_id"] = $user["idUtilisateur"];
-            echo '<script>window.location = "algorithme/index.php";</script>';
-            exit;
-            /* $to = $_POST['email'];
+            /* echo '<script>window.location = "algorithme/index.php";</script>';
+            exit; */
+            $to = $_POST['email'];
             $subject = 'Activation de votre compte';
             $message = '
             <html>
@@ -173,7 +173,7 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
                 exit();
             } else{
                 echo "<div style='display:flex;justify-content:center;margin-top:3%;'><div style='font-size:3vw;font-weight:bold;'>Veuillez vérifier votre adresse mail sur ". $_POST['email']."</div></div>";
-            } */
+            }
 
 
         } else {
