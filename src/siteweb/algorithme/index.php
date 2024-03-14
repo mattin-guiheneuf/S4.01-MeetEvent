@@ -91,6 +91,8 @@ if(!isset($_POST['event'])){
 
         h2 {
             color: #6040fe;
+            margin-top: 0;
+            margin-bottom: 0;
         }
 
         label {
@@ -136,6 +138,8 @@ if(!isset($_POST['event'])){
         h3{
             font-size: 15px;
             color: #8d8d8d;
+            margin-bottom: 4%;
+            
         }
     </style>
 </head>
