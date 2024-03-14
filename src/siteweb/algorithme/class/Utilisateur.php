@@ -284,34 +284,22 @@ class Utilisateur {
      * @return array
      */
     public function creerListeSuggest() {
+    
         // Récupérer tous les événements avec leurs pourcentages
         $reco = $this->getRecommandation()->getSuggestion();
-    
+
         // Trier les événements par pourcentage par ordre décroissant
         usort($reco, function ($a, $b) {
             return $b['pourcentage'] <=> $a['pourcentage'];
         });
-    
-        // Déterminer quels événements recommander
-        $evenementsARecommander = [];
-        foreach ($reco as $paire) {
-            $evenementId = $paire['evenement'];
-            $pourcentage = $paire['pourcentage'];
-    
-            // Filtrer les événements avec une similarité >= 0.7
-            if ($pourcentage >= 0.4) {
-                $evenementsARecommander[] = $evenementId;
-            }
-        }
-    
-        // Si le nombre d'événements recommandés est inférieur à 5, prendre les 5 premiers basés sur le pourcentage
-        if (count($evenementsARecommander) < 5) {
-            for ($i = 0; $i < 5 && $i < count($reco); $i++) {
-                $evenementsARecommander[] = $reco[$i]['evenement'];
-            }
-        }
-    
-        return $evenementsARecommander;
+
+        // Récupérer les 5 premiers événements avec les pourcentages les plus élevés
+        $evenementsARecommander = array_slice($reco, 0, 5);
+
+        // Extraire les identifiants d'événement de la liste
+        $evenementsIds = array_column($evenementsARecommander, 'evenement');
+
+        return $evenementsIds;
     }
 
     /**

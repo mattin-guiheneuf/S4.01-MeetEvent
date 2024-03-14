@@ -77,7 +77,7 @@ if (isset($_SESSION['user_id'])) {
 
       <p class="accroche1">
         <span>L’application événementielle qui </span>
-        <span style="color: #6040fe;">facilite la création d’événements personnalisés</span>
+        <span style="color: #6040fe;">facilite la gestion d’événements personnalisés</span>
       </p>
 
       <p class="facilite-la-cr">
