@@ -117,7 +117,7 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
                                 
             //header("Location: ./algorithme/index.php");
             session_regenerate_id();
-            $sql = sprintf("SELECT idUtilisateur FROM Utilisateur WHERE adrMail = '%s'", $mysqli->real_escape_string($_POST["email"]));
+            $sql = sprintf("SELECT idUtilisateur FROM Utilisateur WHERE adrMail = '%s'", $mysqli->real_escape_string($_GET["email"]));
 
             $result = $mysqli->query($sql);
 
