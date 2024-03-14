@@ -172,7 +172,7 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
                 echo "Erreur lors de l'envoi de l'email d'activation. Veuillez réessayer.";
                 exit();
             } else{
-                echo "Veuillez vérifier votre adresse mail sur ". $_POST['email'];
+                echo "<div style='display:flex;justify-content:center;margin-top:3%;'><div style='font-size:3vw;font-weight:bold;'>Veuillez vérifier votre adresse mail sur ". $_POST['email']."</div></div>";
             } */
 
 

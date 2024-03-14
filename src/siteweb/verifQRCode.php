@@ -44,7 +44,7 @@ $conn->close();
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 3em;
+            font-size: 3vw;
             font-family: "Poppins-Regular", Helvetica;
             font-weight: bold;
         }
@@ -52,7 +52,7 @@ $conn->close();
             display: flex;
             flex-direction: row;
             align-items: center;
-            gap: 20px;
+            gap: 2vw;
         }
     </style>
 </head>
@@ -61,14 +61,14 @@ $conn->close();
 <?php if ($affichage === "reussi"): ?>
     <div class="icon-container">
         <div >
-            <i class="fas fa-check-circle" style="color: green;"></i>
+            <i class="fas fa-check-circle" style="color: green;font-size:3vw;"></i>
         </div>
         <p>Vérification réussie</p>
     </div>
 <?php elseif ($affichage === "erreur"): ?>
     <div class="icon-container">
         <div >
-            <i class="fas fa-times-circle" style="color: red;"></i>
+            <i class="fas fa-times-circle" style="color: red;font-size:3vw;"></i>
         </div>
         <p>Vérification erreur <!-- : paramètres invalides --></p>
     </div>
