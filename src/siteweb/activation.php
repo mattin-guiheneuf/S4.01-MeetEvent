@@ -23,5 +23,5 @@ if (isset($_GET['token'])) {
     
     /* echo "Votre compte a été activé avec succès!"; */
 } else {
-    echo "Token d'activation manquant.";
+    echo "<script>console.log('Token d'activation manquant.')</script>";
 }
