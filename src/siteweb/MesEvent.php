@@ -278,13 +278,13 @@ if (!isset($_SESSION['user_id'])) {
                 } */
                 if (nb == 1) {
                     html += '<div class="les_boutons">';
+                    html += '<a class="btn_qrcode" onclick="openQRModal(\'' + results[i].user_id + '\',\'' + results[i].event_id + '\',\'' + results[i].token_user + '\',\'' + results[i].token_event + '\')">QRCODE <i class="fas fa-qrcode" style="color: #6040fe;"></i></a>';
                     html += '<a class="btn_quit" id="openModalBtn" onclick="openModalQuit(' + results[i].idEvenement + ')">QUITTER</a>';
-                    html += '<a class="btn_qrcode" onclick="openQRModal(\'' + results[i].user_id + '\',\'' + results[i].event_id + '\',\'' + results[i].token_user + '\',\'' + results[i].token_event + '\')">QRCODE</a><img src="" alt="">';
                     html += '</div>';
                 } else {
                     html += '<div class="les_boutons">';
-                    html += '<a class="btn_quit" id="openModalBtn" onclick="openModalSup(' + results[i].idEvenement + ')">SUPPRIMER</a>';
                     html += '<a class="btn_modif" onclick="window.location.href=\'modifEvent.php?event_id=' + results[i].idEvenement + '\'">MODIFIER</a>';
+                    html += '<a class="btn_quit" id="openModalBtn" onclick="openModalSup(' + results[i].idEvenement + ')">SUPPRIMER</a>';
                     html += '</div>';
                 }
 

@@ -91,7 +91,7 @@ if(isset($_POST['listeEvent'])){
     // Pour chaque événement dans la liste
     foreach ($listeEvent as $eventId) {
         // Construire la requête SQL paramétrée en fonction des critères de recherche fournis
-        $sql = "SELECT e.*, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces, (SELECT CASE WHEN COUNT(*)>0 THEN 1 ELSE 0 END from participer where idUtilisateur=$userConnected AND idEvenement = $eventId AND participationAnnulee = 0) as est_deja_admis
+        $sql = "SELECT e.*, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces, (SELECT CASE WHEN COUNT(*)>0 THEN 1 ELSE 0 END from Participer where idUtilisateur=$userConnected AND idEvenement = $eventId AND participationAnnulee = 0) as est_deja_admis
                 FROM Evenement e 
                 JOIN Categorie c ON e.idCategorie = c.idCategorie 
                 JOIN Utilisateur u ON e.idOrganisateur = u.idUtilisateur 
@@ -170,7 +170,7 @@ if(isset($_POST['eventSelected'])){
         // Récupérer les données envoyées par AJAX et les valider
         $eventSelected = isset($_POST['eventSelected']) ? $_POST['eventSelected'] : '';
 
-        $sql_evenement = "DELETE FROM evenement WHERE idEvenement = $eventSelected";
+        $sql_evenement = "DELETE FROM Evenement WHERE idEvenement = $eventSelected";
 
         if ($connexion->query($sql_evenement) === TRUE) {
             echo "Événement supprimé avec succès";
@@ -179,7 +179,16 @@ if(isset($_POST['eventSelected'])){
         }
 
         // Suppression des relations dans la table participer
-        $sql_participer = "DELETE FROM participer WHERE idEvenement = $eventSelected";
+        $sql_participer = "DELETE FROM Participer WHERE idEvenement = $eventSelected";
+
+        if ($connexion->query($sql_participer) === TRUE) {
+            echo "Relations supprimées avec succès";
+        } else {
+            echo "Erreur lors de la suppression des relations : " . $connexion->error;
+        }
+
+        // Suppression des relations dans la table qualifier
+        $sql_participer = "DELETE FROM Qualifier WHERE idEvenement = $eventSelected";
 
         if ($connexion->query($sql_participer) === TRUE) {
             echo "Relations supprimées avec succès";

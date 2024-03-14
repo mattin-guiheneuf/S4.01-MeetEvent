@@ -405,7 +405,7 @@ if (!isset($_SESSION['user_id'])) {
                         } */
                         console.log(results[i].est_deja_admis + " " + results[i].nom);
                         if (results[i].est_deja_admis == 1) {
-                            html += '<a href="#" class="btn_join" style="border-color:green;color:green;display:flex;gap:5px;align-items:center;">ADMIS <img src="img/verifier (3).png" width="15px" height="15px"/> </a>';
+                            html += '<a href="mesEvent.php" class="btn_join" style="border-color:green;color:green;display:flex;gap:5px;align-items:center;">ADMIS <img src="img/verifier (3).png" width="15px" height="15px"/> </a>';
                         } else {
                             html += '<button id="openModalBtn" onclick="openModal(' + results[i].idEvenement + ')" class="btn_join">REJOINDRE</button>';
                         }

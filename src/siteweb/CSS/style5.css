@@ -211,7 +211,10 @@
     font-size: 2vw;
     border-radius: 20vw;
     cursor: pointer;
- 
+}
+
+.fa-qrcode{
+    font-size: 2vw;
 }
 
 .btn_quit{
@@ -346,6 +349,9 @@
     .btn_qrcode {
         font-size: 15px; /* Taille de la police maximale pour les grands écrans */
         padding: 10px 35px;
+    }
+    .fa-qrcode{
+        font-size: 15px;
     }
     .btn_quit {
         font-size: 15px; /* Taille de la police maximale pour les grands écrans */

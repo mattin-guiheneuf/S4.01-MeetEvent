@@ -74,7 +74,7 @@ if(!isset($_POST['event'])){
         }
 
         h2 {
-            color: #45a049;
+            color: #6040fe;
         }
 
         label {
@@ -155,7 +155,8 @@ if(!isset($_POST['event'])){
     </form>
     <!-- <hr> -->
     <?php else:?>
-    <h2>Créer un Evenement</h2>
+    <h2>Qualifie ton événement</h2>
+    <h3>Aide nous à recommander ton événement</h3>
     <!-- Formulaire avec champ pour saisir l'inscription d'un utilisateur -->
     <form action="CreationTag.php" method="post">
         <input type="hidden" id="titre" name="titre" value="<?php echo $_POST["titre"]; ?>">
