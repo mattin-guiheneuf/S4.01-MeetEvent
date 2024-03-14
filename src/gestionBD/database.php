@@ -6,6 +6,7 @@
 
 
 //Pour YANNIS
+/*
 $bdname = 'projetme';
 $host = 'localhost';
 $username = 'root';
@@ -16,7 +17,7 @@ $connexion = new mysqli(hostname : $host, username : $username, password : $pass
 if($connexion->connect_errno){
     die("Connection error:" . $connexion->connect_error);
 } 
-
+*/
 
 
 /*// Pour Clément
@@ -64,7 +65,7 @@ if($connexion->connect_errno){
 
 // Connexion BD AlwaysData
 
-/* $bdname = 'meetevent_bd';
+$bdname = 'meetevent_bd';
 $host = 'mysql-meetevent.alwaysdata.net';
 $username = 'meetevent_staff';
 $password = 'grp12YMCD!!';
@@ -75,7 +76,7 @@ if($connexion->connect_errno){
     die("Connection error:" . $connexion->connect_error);
 }
 
-return $connexion; */
+return $connexion;
 
 
 /*
