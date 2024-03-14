@@ -142,9 +142,13 @@
     margin-top: 8%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 3%;
     font-size: 2.8vw;
+}
+
+.fi-sr-invite-alt,.fi-sr-users{
+    font-size: 4vw !important;
 }
 
 .txt_infos{
@@ -390,6 +394,9 @@
     }
     .modalite{
         font-size: 19px;
+    }
+    .fi-sr-invite-alt,.fi-sr-users{
+        font-size: 40px !important;
     }
     .txt_infos{
         font-size: 15px;

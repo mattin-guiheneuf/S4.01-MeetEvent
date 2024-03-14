@@ -11,6 +11,22 @@ if(!isset($_POST['event'])){
     $isEvent = false;
 }else{
     $isEvent = true;
+
+    // Vérifiez si une image a été téléchargée
+    if(isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+        // Chemin où vous souhaitez enregistrer le fichier téléchargé
+        $uploadDirectory = '../img/';
+
+        // Chemin complet du fichier téléchargé
+        $uploadFilePath = $uploadDirectory . basename($_FILES['photo']['name']);
+
+        // Déplacez le fichier téléchargé vers le répertoire souhaité
+        if (move_uploaded_file($_FILES['photo']['tmp_name'], $uploadFilePath)) {
+            echo "<script>console.log('Le fichier a été téléchargé avec succès.')</script>";
+        } else {
+            echo "<script>console.log('Une erreur s'est produite lors du téléchargement du fichier.')</script>";
+        }
+    }
 }
 
 ?>
@@ -167,7 +183,7 @@ if(!isset($_POST['event'])){
         <input type="hidden" id="adresse" name="adresse" value="<?php echo $_POST["adresse"]; ?>">
         <input type="hidden" id="type" name="type" value="<?php echo $_POST["type"]; ?>">
         <input type="hidden" id="nbParticip" name="nbParticip" value="<?php echo $_POST["nbParticip"]; ?>">
-        <input type="hidden" id="photo" name="photo" value="<?php echo $_POST["photo"]; ?>">
+        <input type="hidden" id="photo" name="photo" value="<?php echo $_FILES['photo']['name'] ?>">
         <input type="hidden" id="participants" name="participants" value="<?php echo $_POST["participants"]; ?>">
         <input type="hidden" id="mess_invit" name="mess_invit" value="<?php echo $_POST["mess_invit"]; ?>">
         

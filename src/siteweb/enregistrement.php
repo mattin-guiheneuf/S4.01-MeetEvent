@@ -100,7 +100,7 @@ if (isset($_POST["email"]) || isset($_POST["pseudo"]) || isset($_POST["dateNaiss
         
         $mysqli = require "../gestionBD/database.php";
         //Insérer dans la base de donnée
-        $sql = "INSERT INTO Utilisateur(nom, prenom, adrMail, trancheAge, description, situation, MotDePasse, token) VALUES (?,'Dupont', ?, '> 45', 'NULL', 'NULL',?,?)";
+        $sql = "INSERT INTO Utilisateur(nom, adrMail, trancheAge, description, situation, MotDePasse, token,chemImage) VALUES (?, ?, '> 45', 'NULL', 'NULL',?,?,'./img/photo-profil.jpg')";
 
         $stmt = $mysqli->stmt_init();
 

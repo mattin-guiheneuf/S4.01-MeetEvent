@@ -91,10 +91,11 @@ if(isset($_POST['listeEvent'])){
     // Pour chaque événement dans la liste
     foreach ($listeEvent as $eventId) {
         // Construire la requête SQL paramétrée en fonction des critères de recherche fournis
-        $sql = "SELECT e.*, u.nom as nom_organisateur, u.prenom as prenom_organisateur, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces, (SELECT CASE WHEN COUNT(*)>0 THEN 1 ELSE 0 END from Participer where idUtilisateur=$userConnected AND idEvenement = $eventId AND participationAnnulee = 0) as est_deja_admis
+        $sql = "SELECT e.*, u.nom as nom_organisateur, u.prenom as prenom_organisateur, x.chemImage as chemImage, c.libelle as libCat, e.effMax-COUNT(p.idUtilisateur) as nbPlaces, (SELECT CASE WHEN COUNT(*)>0 THEN 1 ELSE 0 END from Participer where idUtilisateur=$userConnected AND idEvenement = $eventId AND participationAnnulee = 0) as est_deja_admis
                 FROM Evenement e 
                 JOIN Categorie c ON e.idCategorie = c.idCategorie 
-                JOIN Utilisateur u ON e.idOrganisateur = u.idUtilisateur 
+                JOIN Utilisateur u ON e.idOrganisateur = u.idUtilisateur
+                JOIN Utilisateur x ON e.idOrganisateur = x.idUtilisateur 
                 LEFT JOIN Participer p ON e.idEvenement = p.idEvenement 
                 WHERE e.idEvenement = $eventId AND e.idOrganisateur != $userConnected
                 GROUP BY p.idEvenement";
@@ -141,18 +142,22 @@ if(isset($_POST['eventSelected'])){
             $sql_update = "UPDATE Participer SET participationAnnulee=0 WHERE idUtilisateur=$idUtilisateur AND idEvenement=$eventSelected";
             $result_update = $connexion->query($sql_update);
             
-            echo "Evenement rejoint avec succès";
+            echo "<script>console.log('Evenement rejoint avec succès')</script>";
         } else {
             // Si le couple n'existe pas, effectuer une insertion
             $sql_insert = "INSERT INTO Participer VALUES ($idUtilisateur, $eventSelected, 'lienQRCode', 0)";
             $result_insert = $connexion->query($sql_insert);
             
-            echo "Evenement rejoint avec succès";
+            echo "<script>console.log('Evenement rejoint avec succès')</script>";
         }
+
+        /* envoi mail */
+
+        /*  */
         // Fermer la connexion à la base de données
         $connexion->close();
         
-        echo "Evenement rejoins avec succès";
+        echo "<script>console.log('Evenement rejoins avec succès')</script>";
     }elseif($_POST['type']=="quitter"){
         // Récupérer les données envoyées par AJAX et les valider
         $eventSelected = isset($_POST['eventSelected']) ? $_POST['eventSelected'] : '';
@@ -165,7 +170,7 @@ if(isset($_POST['eventSelected'])){
         // Fermer la connexion à la base de données
         $connexion->close();
         
-        echo "Evenement quitter avec succès";
+        echo "<script>console.log('Evenement quitter avec succès')</script>";
     }else{
         // Récupérer les données envoyées par AJAX et les valider
         $eventSelected = isset($_POST['eventSelected']) ? $_POST['eventSelected'] : '';
@@ -173,33 +178,33 @@ if(isset($_POST['eventSelected'])){
         $sql_evenement = "DELETE FROM Evenement WHERE idEvenement = $eventSelected";
 
         if ($connexion->query($sql_evenement) === TRUE) {
-            echo "Événement supprimé avec succès";
+            echo "<script>console.log('Événement supprimé avec succès')</script>";
         } else {
-            echo "Erreur lors de la suppression de l'événement : " . $connexion->error;
+            echo "<script>console.log('Erreur lors de la suppression de l'événement : " . $connexion->error . "')</script>";
         }
 
         // Suppression des relations dans la table participer
         $sql_participer = "DELETE FROM Participer WHERE idEvenement = $eventSelected";
 
         if ($connexion->query($sql_participer) === TRUE) {
-            echo "Relations supprimées avec succès";
+            echo "<script>console.log('Relations supprimées avec succès')</script>";
         } else {
-            echo "Erreur lors de la suppression des relations : " . $connexion->error;
+            echo "<script>console.log('Erreur lors de la suppression des relations : " . $connexion->error ."')</script>";
         }
 
         // Suppression des relations dans la table qualifier
         $sql_participer = "DELETE FROM Qualifier WHERE idEvenement = $eventSelected";
 
         if ($connexion->query($sql_participer) === TRUE) {
-            echo "Relations supprimées avec succès";
+            echo "<script>console.log('Relations supprimées avec succès')</script>";
         } else {
-            echo "Erreur lors de la suppression des relations : " . $connexion->error;
+            echo "<script>console.log('Erreur lors de la suppression des relations : " . $connexion->error."')</script>";
         }
 
         // Fermeture de la connexion
         $connexion->close();
 
-        echo "Evenement et ses relations supprimés avec succès";
+        echo "<script>console.log('Evenement et ses relations supprimés avec succès')</script>";
     }
     
 }

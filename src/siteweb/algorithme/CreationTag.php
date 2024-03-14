@@ -112,9 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 // Exécution de la requête
                 if ($stmt->execute()) {
-                    echo "Description mise à jour avec succès.";
+                    echo "<script>console.log('Description mise à jour avec succès.')</script>";
                 } else {
-                    echo "Erreur lors de la mise à jour de la description ";
+                    echo "<script>console.log('Erreur lors de la mise à jour de la description ')</script>";
                 }
 
                 /*| Mettre a jour les tags |*/
@@ -151,9 +151,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Vérifier si les opérations se sont déroulées avec succès
                 if ($stmt_delete->affected_rows > 0 || $stmt_insert->affected_rows > 0) {
-                    echo "Tags mis à jour avec succès.";
+                    echo "<script>console.log('Tags mis à jour avec succès.')</script>";
                 } else {
-                    echo "Erreur lors de la mise à jour des tags ";
+                    echo "<script>console.log('Erreur lors de la mise à jour des tags')</script> ";
                 }
 
 
@@ -185,16 +185,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $id_event = $row['idEvenement'] + 1;
                         } else {
                             // Aucune ligne retournée, donc aucune valeur à récupérer
-                            echo "Aucun événement trouvé dans la base de données.";
+                            echo "<script>console.log('Aucun événement trouvé dans la base de données.')</script>";
                         }
                     } 
                     else {
                         // La requête a échoué
-                        echo "Erreur lors de l'exécution de la requête: " . $connexion->error;
+                        echo "<script>console.log('Erreur lors de l'exécution de la requête: " . $connexion->error ."')</script>";
                     }
                 }
                 else {
-                    echo "Erreur lors de la préparation de la requête: " . $connexion->error;
+                    echo "<script>console.log('Erreur lors de la préparation de la requête: " . $connexion->error."')</script>";
                 }
 
                 // Récupération et reféfinition des variables pour créer un événement
@@ -206,30 +206,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $ville = $_POST['ville'];
                 $cp = $_POST['cp'];
                 $adresse = $_POST['adresse'];
-                $adresseEvent = $adresse . ', ' . $cp . ' ' . $adresse;
+                $adresseEvent = $adresse . ', ' . $cp . ' ' . $ville;
 
                 $type = $_POST['type'];
-                $type == 'public' ? $statut = 0 : $statut = 1;
+                $type == 'public' ? $statut = 1 : $statut = 0;
 
                 $nbParticip = $_POST['nbParticip'];
-               /* $photo = $_POST['photo'];
-                if (isset($_FILES['photo']) && is_uploaded_file($_FILES['photo']['tmp_name'])) {
-                    $original_filename = $_FILES['photo']['name'];
+                // Vérifiez si le champ 'photo' a été envoyé via POST
+                if (isset($_POST['photo'])) {
+                    // Récupérez le chemin relatif de l'image depuis $_POST
+                    $chemin_relatif_image = "./img/" .$_POST['photo'];
 
-                    // Récupération de l'extension du fichier
-                    $file_extension = pathinfo($original_filename, PATHINFO_EXTENSION);
-                    
-                    // Emplacement de destination pour l'image avec le nouveau nom
-                    $destination = "../img/";
-                    $new_filename = $titre_event . $id_event . '.' . $file_extension;
-                    $destination_path = $destination . $new_filename;
-
-                    if (move_uploaded_file($_FILES['photo']['tmp_name'], $destination_path)) {
-                        $chemImages = "/img/" . $new_filename;
-                    } else {
-                        echo "Une erreur s'est produite lors du téléchargement du fichier.";
-                    }
-                }  */
+                    // Maintenant, vous pouvez utiliser $chemin_relatif_image comme vous le souhaitez, par exemple, pour l'insérer dans la base de données ou pour d'autres opérations.
+                    // Assurez-vous de valider et de sécuriser ce chemin avant de l'utiliser dans votre application.
+                } else {
+                    // Le champ 'photo' n'a pas été envoyé via POST
+                    echo "<script>console.log('Chemin relatif de l'image non trouvé.')</script>";
+                }
 
                 $participants = $_POST['participants'];
                 $mess_invit = $_POST['mess_invit'];
@@ -283,7 +276,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $req_insertEvnt = "INSERT INTO Evenement (idEvenement, nom, description, dateEvent, effMax, statut,prix, heure, adresse, chemImages, token, idCategorie, idOrganisateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 $res_insertEvnt = $connexion->prepare($req_insertEvnt);
-                $res_insertEvnt->bind_param("isssiiissssii", $id_event, $titre_event, $description_event, $date, $nbParticip, $statut, $prix, $heure, $adresseEvent, $chemImages, $token, $idCategorie, $idOrganisateur);
+                $res_insertEvnt->bind_param("isssiiissssii", $id_event, $titre_event, $description_event, $date, $nbParticip, $statut, $prix, $heure, $adresseEvent, $chemin_relatif_image, $token, $idCategorie, $idOrganisateur);
                 $res_insertEvnt->execute();
                 
 
@@ -321,9 +314,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Vérifier si les opérations se sont déroulées avec succès
                 if ($res_delQualif->affected_rows > 0 || $res_insertQualif->affected_rows > 0) {
-                    echo "Tags mis à jour avec succès.";
+                    echo "<script>console.log('Tags mis à jour avec succès.')</script>";
                 } else {
-                    echo "Erreur lors de la mise à jour des tags ";
+                    echo "<script>console.log('Erreur lors de la mise à jour des tags')</script> ";
                 }
 
 				echo '<script>window.location = "../MesEvent.php";</script>'; 
@@ -333,6 +326,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
         }
     } else {
-        echo "</br>ID de l'utilisateur inconnu.";
+        echo "<script>console.log('ID de l'utilisateur inconnu.')</script>";
     }
 }

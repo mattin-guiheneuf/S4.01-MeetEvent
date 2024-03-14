@@ -427,7 +427,9 @@ input{
     border: none;
     border-radius: 20px;
 }
-
+.fi-sr-invite-alt,.fi-sr-users{
+    font-size: 4vw !important;
+}
 
 
 
@@ -446,6 +448,9 @@ input{
     .btn_join {
         font-size: 15px; /* Taille de la police maximale pour les grands écrans */
         padding: 10px 35px;
+    }
+    .fi-sr-invite-alt,.fi-sr-users{
+        font-size: 40px !important;
     }
     .categorie{
         font-size: 15px; /* Taille de la police maximale pour les grands écrans */

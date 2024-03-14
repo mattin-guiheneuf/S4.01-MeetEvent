@@ -293,14 +293,14 @@ if (!isset($_SESSION['user_id'])) {
                 html += '<div class="titre_event">' + results[i].nom + '</div>';
                 html += '<div style="display:flex;align-items:center;gap:10px">';
                 html += '<i class="fi fi-sr-marker localisation_logo" style="font-size: 1.5vw;"></i>';
-                html += '<div onclick="window.open(\'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(results[i].adresse) + '\', \'_blank\')" style="cursor:pointer;">' + results[i].adresse + '</div>';
+                html += '<div onclick="window.open(\'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(results[i].adresse) + '\', \'_blank\')" style="cursor:pointer;"class="adresse">' + results[i].adresse + '</div>';
                 html += '</div>';
                 html += '<div class="modalite">';
                 html += '<div class="calendrier">';
                 html += '<i class="fi fi-sr-invite-alt" style="font-size: 2.8vw;"></i>';
                 html += '<div class="infos">';
                 html += '<div style="font-weight:bold;">Calendrier</div>';
-                html += '<div class="txt_infos" onclick="openGoogleCalendar(\'' + formatDate(results[i].dateEvent) + ' ' + results[i].heure + '\')" style="cursor:pointer;">' + formatDate(results[i].dateEvent) + ' - ' + results[i].heure + '</div>';
+                html += '<div class="txt_infos" onclick="openGoogleCalendar(\'' + formatDate(results[i].dateEvent) + ' ' + results[i].heure + '\')" style="cursor:pointer;" >' + formatDate(results[i].dateEvent) + ' - ' + results[i].heure + '</div>';
                 html += '</div> ';
                 html += '</div>';
                 html += '<div class="places">';
@@ -318,13 +318,13 @@ if (!isset($_SESSION['user_id'])) {
                     html += '<img src="' + results[i].chemImage + '" alt="icone utilisateur" class="icon"/>';
                     html += '<div class="infos_createur">';
                     html += '<div class="crea" style="font-weight:bold;">Créateur</div>';
-                    html += '<div class="nom_crea">' + results[i].nom_organisateur + " " + results[i].prenom_organisateur + '</div>';
+                    html += '<div class="nom_crea">' + results[i].nom_organisateur + '</div>';
                 } else {
                     html += '<div class="part3_cree">';
                     if (results[i].statut == 0) {
-                        html += '<p style="font-weight: bold;">Evenement privé</p>';
+                        html += '<p style="font-weight: bold;" class="crea">Evenement privé</p>';
                     } else {
-                        html += '<p style="font-weight: bold;">Evenement public</p>';
+                        html += '<p style="font-weight: bold;" class="crea">Evenement public</p>';
                     }
 
                 }
